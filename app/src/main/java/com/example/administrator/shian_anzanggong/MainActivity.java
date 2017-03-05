@@ -1,12 +1,10 @@
 package com.example.administrator.shian_anzanggong;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.shian_anzanggong.base.BaseActivity;
-import com.example.administrator.shian_anzanggong.base.BaseAppliction;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
