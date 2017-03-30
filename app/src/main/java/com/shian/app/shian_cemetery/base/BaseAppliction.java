@@ -1,4 +1,4 @@
-package com.example.administrator.shian_anzanggong.base;
+package com.shian.app.shian_cemetery.base;
 
 import android.app.Activity;
 import android.app.Application;

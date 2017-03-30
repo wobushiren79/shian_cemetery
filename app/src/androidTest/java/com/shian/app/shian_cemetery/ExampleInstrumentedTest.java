@@ -1,4 +1,4 @@
-package com.example.administrator.shian_anzanggong;
+package com.shian.app.shian_cemetery;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
