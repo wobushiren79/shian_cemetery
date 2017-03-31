@@ -10,12 +10,12 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
 
-public class MainActivity extends BaseActivity {
+public class TestActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
         String url = "http://192.168.0.72/shianapp/home/index/index";
         OkHttpUtils
                 .get()
@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.v("this","response:"+response+" id:"+id);
-                        Toast.makeText(MainActivity.this, "response:"+response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TestActivity.this, "response:"+response, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

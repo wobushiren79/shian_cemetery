@@ -18,16 +18,25 @@ public class SplashActivity extends BaseActivity {
         sleepActivity();
     }
 
+
     /**
      * 休眠3秒
      */
     private void sleepActivity() {
-        try {
-            Thread.sleep(SLEEPTIME);
-            jumpLogin();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(SLEEPTIME);
+                    jumpLogin();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+
     }
 
 
@@ -37,5 +46,6 @@ public class SplashActivity extends BaseActivity {
     private void jumpLogin() {
         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }

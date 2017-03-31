@@ -41,10 +41,26 @@
     <color name="zhy_line_2">#898989</color>
     <color name="zhy_line_3">#e4e4e4</color>
     <color name="zhy_line_4">#efefef</color>
-    <color name="cemetery_titlecolor">#f6c858</color>
+    <color name="zhy_line_5">#dde4e3</color>
+    <color name="zhy_line_6">#bfbfbf</color>
+    <color name="cemetery_titlecolor">#ffda76</color>
     <color name="gray_text">#767676</color>
     <color name="zhy_text_color_1">#48cfad</color>
     <color name="zhy_text_color_2">#c4c4c4</color>
+    <color name="zhy_text_color_3">#A4D5C9</color>
+    <color name="zhy_text_color_4">#FC8383</color>
+    <color name="zhy_text_color_5">#818181</color>
+    <color name="zhy_text_color_6">#67BEDB</color>
+    <color name="zhy_text_color_7">#FFDA76</color>
+    <color name="zhy_text_color_8">#A2A2A2</color>
+    <color name="zhy_text_color_9">#6d8780</color>
+    <color name="zhy_text_color_10">#ffa592</color>
+    <color name="zhy_text_color_11">#6e6e6e</color>
+    <color name="zhy_text_color_12">#929191</color>
+    <color name="zhy_title_color_1">#3baf92</color>
+    <color name="zhy_rb_check_1">#ededed</color>
+    <color name="zhy_rb_uncheck_1">#dedede</color>
+    <color name="zhy_backgroud_1">#F1F6F5</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>
     <color name="message_color">#ffccccff</color>

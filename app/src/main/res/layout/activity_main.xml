@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shian.app.shian_cemetery.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.shian.app.shian_cemetery.activity.MainActivity">
 
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/fl_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"></FrameLayout>
+
+    <com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout
+        android:paddingTop="@dimen/dimen_10dp"
+        android:background="@color/white"
+        android:id="@+id/main_change_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_96dp"></com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout>
+</LinearLayout>

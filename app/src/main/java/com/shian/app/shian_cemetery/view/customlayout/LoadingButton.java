@@ -41,6 +41,9 @@ public class LoadingButton   extends LinearLayout {
 
     }
 
+    /**
+     * 设置3种状态
+     */
     public void setComplete() {
         endAnim(mIVLoading);
         mIVLoading.setVisibility(GONE);
@@ -64,6 +67,10 @@ public class LoadingButton   extends LinearLayout {
 
     }
 
+    /**
+     * 开始动画
+     * @param view
+     */
     public void startAnim(View view) {
         rotateAnimation = new RotateAnimation(0, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setDuration(1000);
@@ -72,6 +79,10 @@ public class LoadingButton   extends LinearLayout {
         view.startAnimation(rotateAnimation);
     }
 
+    /**
+     * 结束动画
+     * @param view
+     */
     public void endAnim(View view) {
         if (rotateAnimation != null) {
             rotateAnimation.cancel();
