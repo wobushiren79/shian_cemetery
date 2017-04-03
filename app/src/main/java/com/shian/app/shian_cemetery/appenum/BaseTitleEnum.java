@@ -5,7 +5,8 @@ package com.shian.app.shian_cemetery.appenum;
  */
 
 public enum BaseTitleEnum {
-    NORMALTITLE(1);
+    NORMALTITLE(1),
+    TABTITLE(2);
 
     private int titleType;
 

@@ -4,13 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
-import com.shian.app.shian_cemetery.view.customlayout.LoadingButton;
+import com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton;
 
 /**
  * Created by Administrator on 2017/3/31.

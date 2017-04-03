@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.base.BaseActivity;
-import com.shian.app.shian_cemetery.view.customlayout.LoadingButton;
+import com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton;
 
 public class LoginActivity extends BaseActivity {
     LoadingButton mLoadingButton;

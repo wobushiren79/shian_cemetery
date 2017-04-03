@@ -128,11 +128,11 @@
             </LinearLayout>
 
 
-            <com.shian.app.shian_cemetery.view.customlayout.LoadingButton
+            <com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton
                 android:id="@+id/btn_login"
                 android:layout_width="@dimen/dimen_500dp"
                 android:layout_height="@dimen/dimen_80dp"
-                android:layout_gravity="center"></com.shian.app.shian_cemetery.view.customlayout.LoadingButton>
+                android:layout_gravity="center"></com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton>
 
 
             <TextView

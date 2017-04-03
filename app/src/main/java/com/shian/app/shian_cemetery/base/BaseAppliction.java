@@ -31,23 +31,22 @@ import okhttp3.OkHttpClient;
 public class BaseAppliction extends Application {
     private static BaseAppliction baseAppliction = null;
 
-    List<Activity> listActivity=new ArrayList<>();
+    List<Activity> listActivity = new ArrayList<>();
 
     public DisplayImageOptions options;
     public ImageLoaderConfiguration config;
+
     /**
      * acitivity关闭时候，删除activity列表中的activity对象
      */
-    public void removeActivity(Activity a)
-    {
+    public void removeActivity(Activity a) {
         listActivity.remove(a);
     }
 
     /**
      * 向activiy列表中添加对象
      */
-    public void addActivity(Activity a)
-    {
+    public void addActivity(Activity a) {
         listActivity.add(a);
     }
 
@@ -60,10 +59,11 @@ public class BaseAppliction extends Application {
 
     /**
      * 单例
+     *
      * @return
      */
-    public static BaseAppliction getApplication(){
-        if (baseAppliction == null){
+    public static BaseAppliction getApplication() {
+        if (baseAppliction == null) {
             baseAppliction = new BaseAppliction();
         }
         return baseAppliction;
@@ -127,7 +127,10 @@ public class BaseAppliction extends Application {
     /**
      * 退出APP
      */
-    public void exitAPP(){
+    public void exitAPP() {
+        for (int i = 0; i < listActivity.size(); i++) {
+            listActivity.get(i).finish();
+        }
         listActivity.clear();
     }
 }

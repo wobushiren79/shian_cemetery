@@ -3,13 +3,13 @@ package com.shian.app.shian_cemetery.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.view.View;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.MainChangeItemEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseFragment;
-import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
 
 public class MainActivity extends BaseActivity {
@@ -29,6 +29,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initData();
         initView();
     }
@@ -61,8 +62,16 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onClick(int itemId) {
             for (MainChangeItemEnum dataEnum : MainChangeData) {
-                if (dataEnum.getItemId() == itemId)
+                if (dataEnum.getItemId() == itemId) {
                     showFragment(dataEnum.getFragment());
+                    //设置标题内容
+                    if (dataEnum.getTitle().equals("订单")) {
+                        setTitle(dataEnum.getTitle(), BaseTitleEnum.TABTITLE.getTitleType());
+                    } else {
+                        setTitle(dataEnum.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
+                    }
+
+                }
             }
 
         }

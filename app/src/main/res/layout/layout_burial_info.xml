@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_506dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_366dp"
+        android:background="@drawable/zhy_burialinfo_title_back"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_132dp"
+            android:layout_height="@dimen/dimen_132dp"
+            android:layout_marginTop="@dimen/dimen_6dp">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_132dp"
+                android:layout_height="@dimen/dimen_132dp"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/zhy_personicon_circle" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/dimen_129dp"
+                android:layout_height="@dimen/dimen_129dp"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher"
+                app:riv_border_color="#ffffff"
+                app:riv_border_width="2dp"
+                app:riv_oval="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_32dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimen_18dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="姓名栏"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_18dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_24dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_burial_num"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_32dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_233dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/zhy_shadow_back" />
+
+    <LinearLayout
+        android:id="@+id/ll_burial_num"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_233dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:background="@drawable/zhy_button_state_item_white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:text="今日待安葬"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <TextView
+                android:id="@+id/tv_today_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:text="00"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_72dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen_48dp"
+            android:layout_marginTop="@dimen/dimen_48dp"
+            android:background="@color/zhy_text_color_2" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:text="本月待安葬"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <TextView
+                android:id="@+id/tv_month_wait_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:text="00"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_72dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen_48dp"
+            android:layout_marginTop="@dimen/dimen_48dp"
+            android:background="@color/zhy_text_color_2" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:text="本月已安葬"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <TextView
+                android:id="@+id/tv_month_ready_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:text="00"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_72dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
