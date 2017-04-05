@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity {
 //        mLoadingButton.setLoading();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**

@@ -32,4 +32,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'//gson
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'//imageloader
     compile 'com.makeramen:roundedimageview:2.2.1'//圆形头像
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"//侧滑item
+    compile 'com.android.support:recyclerview-v7:25.2.0'
 }

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
+import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.headlayout.NormalTitle;
 import com.shian.app.shian_cemetery.view.headlayout.TabTitle;
 
@@ -35,6 +36,7 @@ public class BaseActivity extends FragmentActivity {
         initView();
 
         ((BaseAppliction) getApplicationContext()).addActivity(this);
+        Utils.setWindowStatusBarColor(this,R.color.zhy_title_color_1);//设置状态栏颜色
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
     }
 
@@ -74,18 +76,35 @@ public class BaseActivity extends FragmentActivity {
                 (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         if (titleType == BaseTitleEnum.NORMALTITLE.getTitleType()) {
             //添加普通标题栏
-            NormalTitle normalTitle = new NormalTitle(BaseActivity.this);
-            normalTitle.setLayoutParams(layoutParams);
-            normalTitle.setTitle(titleName);
-            mRLHead.addView(normalTitle);
+            addNormalTitle(titleName, layoutParams);
         } else if (titleType == BaseTitleEnum.TABTITLE.getTitleType()) {
             //添加tab标题栏
-            TabTitle tabTitle = new TabTitle(BaseActivity.this);
-            tabTitle.setLayoutParams(layoutParams);
-            mRLHead.addView(tabTitle);
+            addTabTitle(layoutParams);
         } else {
 
         }
+    }
+
+    /**
+     * 添加tab标题
+     * @param layoutParams
+     */
+    private void addTabTitle(RelativeLayout.LayoutParams layoutParams) {
+        TabTitle tabTitle = new TabTitle(BaseActivity.this);
+        tabTitle.setLayoutParams(layoutParams);
+        mRLHead.addView(tabTitle);
+    }
+
+    /**
+     * 添加普通通标题
+     * @param titleName
+     * @param layoutParams
+     */
+    private void addNormalTitle(String titleName, RelativeLayout.LayoutParams layoutParams) {
+        NormalTitle normalTitle = new NormalTitle(BaseActivity.this);
+        normalTitle.setLayoutParams(layoutParams);
+        normalTitle.setTitle(titleName);
+        mRLHead.addView(normalTitle);
     }
 
     /**
@@ -94,6 +113,7 @@ public class BaseActivity extends FragmentActivity {
     public void setTitleVisible(int visible) {
         mRLHead.setVisibility(visible);
     }
+
 
     @Override
     protected void onDestroy() {

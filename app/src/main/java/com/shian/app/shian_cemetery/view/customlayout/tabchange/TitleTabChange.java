@@ -8,6 +8,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.tools.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class TitleTabChange extends LinearLayout {
     LinearLayout mLLContent;
 
     List<TabItem> listItems = new ArrayList<>();
+    TabCallBack callBack;
 
     public TitleTabChange(Context context) {
         this(context, null);
@@ -38,25 +40,34 @@ public class TitleTabChange extends LinearLayout {
         mLLContent = (LinearLayout) view.findViewById(R.id.ll_content);
     }
 
+    public void setCallBack(TabCallBack callBack) {
+        this.callBack = callBack;
+    }
+
     /**
      * 增加内容
+     *
      * @param title
      * @param textSize
      * @param checkColor
      * @param unCheckColor
      */
-    public void addTab(String title, float textSize, int checkColor, int unCheckColor) {
+    public void addTab(String title, int code, float textSize, int checkColor, int unCheckColor, int bottomColor) {
         final TabItem tabItem = new TabItem(getContext());
-        tabItem.setBottomColor(Color.WHITE);
+        tabItem.setCode(code);
+        tabItem.setBottomColor(bottomColor);
         tabItem.setTitleContent(title);
         tabItem.setTitleSize(textSize);
         tabItem.setTitleColor(checkColor, unCheckColor);
         tabItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (TabItem item : listItems) {
+                for (int i = 0; i < listItems.size(); i++) {
+                    TabItem item = listItems.get(i);
                     if (item == tabItem) {
                         item.changeState(true);
+                        if (callBack != null)
+                            callBack.TabChange(item.getCode(), item.getTitle());
                     } else {
                         item.changeState(false);
                     }
@@ -69,15 +80,23 @@ public class TitleTabChange extends LinearLayout {
 
     /**
      * 设置选中一项
-     * @param position
+     *
+     * @param code
      */
-    public void setNumber(int position) {
+    public void setCode(int code) {
         for (int i = 0; i < listItems.size(); i++) {
-            if (i == position) {
-                listItems.get(i).changeState(true);
+            TabItem tabItem = listItems.get(i);
+            if (tabItem.getCode() == code) {
+                tabItem.changeState(true);
+                if (callBack != null)
+                    callBack.TabChange(tabItem.getCode(), tabItem.getTitle());
             } else {
-                listItems.get(i).changeState(false);
+                tabItem.changeState(false);
             }
         }
+    }
+
+    public interface TabCallBack {
+        void TabChange(int code, String title);
     }
 }

@@ -70,7 +70,6 @@ public class MainActivity extends BaseActivity {
                     } else {
                         setTitle(dataEnum.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
                     }
-
                 }
             }
 
@@ -90,4 +89,6 @@ public class MainActivity extends BaseActivity {
         }
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
     }
+
+
 }

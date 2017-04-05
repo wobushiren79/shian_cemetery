@@ -5,14 +5,17 @@ package com.shian.app.shian_cemetery.appenum;
  */
 
 public enum BurialTabEnum {
-    WaitSettele("等待立碑"),
-    WaitBuried("等待下葬"),
-    BuriedOver("安葬结束");
+    WaitSettele("等待立碑", 1),
+    WaitBuried("等待下葬", 2),
+    BuriedOver("安葬结束", 3);
 
     private String title;
-    BurialTabEnum(String title) {
-    this.title=title;
-     }
+    private int code;
+
+    BurialTabEnum(String title, int code) {
+        this.title = title;
+        this.code=code;
+    }
 
     public String getTitle() {
         return title;
@@ -20,5 +23,13 @@ public enum BurialTabEnum {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

@@ -24,6 +24,7 @@ public class TabItem extends LinearLayout {
 
     int textCheckColor = Color.WHITE;
     int unTextCheckColor = Color.WHITE;
+    private int code;
 
     public TabItem(Context context) {
         this(context, null);
@@ -55,7 +56,7 @@ public class TabItem extends LinearLayout {
      * @param size
      */
     public void setTitleSize(float size) {
-        mTVTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+        mTVTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
     /**
@@ -92,4 +93,16 @@ public class TabItem extends LinearLayout {
         mTVTitle.setText(content);
     }
 
+
+    public String getTitle() {
+        return mTVTitle.getText().toString();
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
 }
