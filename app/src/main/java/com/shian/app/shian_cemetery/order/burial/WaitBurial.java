@@ -3,6 +3,7 @@ package com.shian.app.shian_cemetery.order.burial;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -60,13 +61,15 @@ public class WaitBurial extends LinearLayout {
         @Override
         public void TabChange(int code, String title) {
             mRLContent.removeAllViews();
+            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams
+                    (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             BurialListLayout listLayout = new BurialListLayout(getContext());
+            listLayout.setLayoutParams(layoutParams);
             if(code== OrderBurialDate.CUSTOM.getCode()){
                 listLayout.setSearch(true);
             }else{
                 listLayout.setSearch(false);
             }
-
             mRLContent.addView(listLayout);
         }
     };

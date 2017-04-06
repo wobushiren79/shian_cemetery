@@ -1,9 +1,18 @@
 package com.shian.app.shian_cemetery.tools;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Administrator on 2017/4/5.
@@ -25,5 +34,41 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void showDatePicker(Context context, final TextView textView) {
+        Calendar c = Calendar.getInstance();
+        final int[] yearTemp = {c.get(Calendar.YEAR)};
+        final int[] monthOfYearTemp = {c.get(Calendar.MONTH)};
+        final int[] dayOfMonthTemp = {c.get(Calendar.DAY_OF_MONTH)};
+        DatePicker datePicker = new DatePicker(context);
+        datePicker.init(yearTemp[0], monthOfYearTemp[0], dayOfMonthTemp[0], new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                yearTemp[0] = year;
+                monthOfYearTemp[0] = monthOfYear;
+                dayOfMonthTemp[0] = dayOfMonth;
+            }
+        });
+        AlertDialog dialog = new AlertDialog
+                .Builder(context)
+                .setTitle("选择日期")
+                .setView(datePicker)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText(yearTemp[0] + "年" + (monthOfYearTemp[0] + 1) + "月" + dayOfMonthTemp[0] + "日");
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .create();
+        dialog.show();
+        return;
     }
 }

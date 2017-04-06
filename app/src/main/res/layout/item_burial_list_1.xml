@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="@dimen/dimen_300dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingTop="@dimen/dimen_5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_settele"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/zhy_button_corner_state_1"
+            android:gravity="center"
+            android:text="立碑"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <TextView
+            android:id="@+id/tv_burial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/zhy_text_color_1"
+            android:gravity="center"
+            android:text="安葬"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dimen_0dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/zhy_shadow_back_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:background="@drawable/zhy_button_state_item_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_16dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_location_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/dimen_32dp" />
+
+                        <TextView
+                            android:id="@+id/tv_location_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/dimen_32dp" />
+
+                        <TextView
+
+                            android:id="@+id/tv_location_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/zhy_text_color_1"
+                            android:textSize="@dimen/dimen_32dp" />
+
+                        <TextView
+                            android:id="@+id/tv_location_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/zhy_text_color_1"
+                            android:textSize="@dimen/dimen_32dp" />
+
+                        <TextView
+                            android:id="@+id/tv_settele_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/dimen_32dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_26dp"
+                            android:layout_height="@dimen/dimen_26dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/zhy_burial_list_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_name_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/zhy_text_color_13"
+                            android:textSize="@dimen/dimen_28dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_24dp"
+                    android:layout_height="@dimen/dimen_24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/dimen_16dp"
+                    android:src="@drawable/zhy_icon_more" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</com.daimajia.swipe.SwipeLayout>

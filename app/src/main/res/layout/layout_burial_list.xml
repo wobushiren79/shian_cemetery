@@ -4,12 +4,52 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/ll_search"
+    <RelativeLayout
+        android:id="@+id/rl_search"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_66dp"
-        android:background="@color/red"
-        android:orientation="horizontal"></LinearLayout>
+        android:layout_height="@dimen/dimen_88dp"
+
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:background="@drawable/zhy_shadow_back_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:background="@drawable/zhy_button_state_item_green_white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_seach_time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="选择查找日期"
+                android:paddingLeft="@dimen/dimen_16dp"
+                android:paddingRight="@dimen/dimen_16dp"
+                android:textColor="@color/dimgray"
+                android:textColorHint="@color/zhy_text_color_2"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_41dp"
+                android:layout_height="@dimen/dimen_41dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:src="@drawable/zhy_icon_seach" />
+        </LinearLayout>
+    </RelativeLayout>
 
 
     <android.support.v7.widget.RecyclerView

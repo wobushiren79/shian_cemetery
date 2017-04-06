@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DataReadAttr">
+        <attr name="titleName" format="string" />
+        <attr name="hintContent" format="string" />
+        <attr name="isShowHint" format="boolean" />
+    </declare-styleable>
+</resources>

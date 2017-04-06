@@ -43,8 +43,9 @@
             android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.burial.BurialActivity" />
+        <activity android:name=".activity.burial.SetteleActivity"></activity>
     </application>
 
 </manifest>

@@ -43,6 +43,7 @@
     <color name="zhy_line_4">#efefef</color>
     <color name="zhy_line_5">#dde4e3</color>
     <color name="zhy_line_6">#bfbfbf</color>
+    <color name="zhy_line_7">#d4d4d4</color>
     <color name="cemetery_titlecolor">#ffda76</color>
     <color name="gray_text">#767676</color>
     <color name="zhy_text_color_1">#48cfad</color>
@@ -57,6 +58,10 @@
     <color name="zhy_text_color_10">#ffa592</color>
     <color name="zhy_text_color_11">#6e6e6e</color>
     <color name="zhy_text_color_12">#929191</color>
+    <color name="zhy_text_color_13">#BDBCBC</color>
+    <color name="zhy_text_color_14">#66dfd2</color>
+    <color name="zhy_text_color_15">#5e8078</color>
+    <color name="zhy_text_color_16">#959595</color>
     <color name="zhy_title_color_1">#3baf92</color>
     <color name="zhy_rb_check_1">#ededed</color>
     <color name="zhy_rb_uncheck_1">#dedede</color>
