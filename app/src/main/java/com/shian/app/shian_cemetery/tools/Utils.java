@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import com.yongchun.library.view.ImageSelectorActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,6 +39,12 @@ public class Utils {
         }
     }
 
+    /**
+     * 时间选择
+     *
+     * @param context
+     * @param textView
+     */
     public static void showDatePicker(Context context, final TextView textView) {
         Calendar c = Calendar.getInstance();
         final int[] yearTemp = {c.get(Calendar.YEAR)};
@@ -71,4 +80,5 @@ public class Utils {
         dialog.show();
         return;
     }
+
 }

@@ -1,6 +1,10 @@
 package com.shian.app.shian_cemetery.base;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -17,6 +21,9 @@ import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.headlayout.BackNormalTitle;
 import com.shian.app.shian_cemetery.view.headlayout.NormalTitle;
 import com.shian.app.shian_cemetery.view.headlayout.TabTitle;
+import com.yongchun.library.view.ImageSelectorActivity;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2017/3/1.
@@ -28,6 +35,9 @@ public class BaseActivity extends FragmentActivity {
 
     FrameLayout mFLContent;
     RelativeLayout mRLHead;
+
+    private OnPhotoPickerListener mOnPhotoPickerListener;
+    private static final int PICK_PHOTO = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +139,48 @@ public class BaseActivity extends FragmentActivity {
         mRLHead.setVisibility(visible);
     }
 
+    /**
+     * 照片选择
+     */
+    public void showPhotoPicker() {
+//		Intent intent = new Intent(this, PhotoPickerActivity.class);
+//		intent.putExtra(PhotoPickerActivity.EXTRA_SHOW_CAMERA, true);
+//		intent.putExtra(PhotoPickerActivity.EXTRA_SELECT_MODE,
+//				PhotoPickerActivity.MODE_SINGLE);
+//		intent.putExtra(PhotoPickerActivity.EXTRA_MAX_MUN, 1);
+//		startActivityForResult(intent, PICK_PHOTO);
+        Intent intent = new Intent(this, ImageSelectorActivity.class);
+        intent.putExtra(ImageSelectorActivity.EXTRA_MAX_SELECT_NUM, 1);
+        intent.putExtra(ImageSelectorActivity.EXTRA_SELECT_MODE, 2);
+        intent.putExtra(ImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+        intent.putExtra(ImageSelectorActivity.EXTRA_ENABLE_PREVIEW, true);
+        intent.putExtra(ImageSelectorActivity.EXTRA_ENABLE_CROP, false);
+        startActivityForResult(intent, PICK_PHOTO);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_PHOTO) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> result = data
+                        .getStringArrayListExtra(ImageSelectorActivity.REQUEST_OUTPUT);
+                if (mOnPhotoPickerListener != null) {
+                    mOnPhotoPickerListener.onPhoto(result);
+                }
+            }
+        }
+    }
+
+
+    public void setOnPhotoPickerListener(OnPhotoPickerListener listener) {
+        mOnPhotoPickerListener = listener;
+    }
+
+    public interface OnPhotoPickerListener {
+        public void onPhoto(ArrayList<String> paths);
+    }
 
     @Override
     protected void onDestroy() {

@@ -33,6 +33,7 @@ public class BaseHttpParams {
      * @return
      */
     public Map<String, String> getMapParams() {
+
         Class<? extends BaseHttpParams> clazz = this.getClass();
         Class<? extends Object> superclass = clazz.getSuperclass();
 
@@ -60,7 +61,18 @@ public class BaseHttpParams {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-
         return params;
     }
+
+    /**
+     * 套上Content
+     *
+     * @return
+     */
+    public String getContentJson() {
+        BaseRequestParams<BaseHttpParams> baseData = new BaseRequestParams<>();
+        baseData.setContent(this);
+        return baseData.getJsonParams();
+    }
+
 }

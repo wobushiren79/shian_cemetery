@@ -5,23 +5,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.provider.UserDictionary;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.shian.app.shian_cemetery.TestActivity;
+import com.google.gson.reflect.TypeToken;
 import com.shian.app.shian_cemetery.activity.LoginActivity;
-import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseAppliction;
+import com.shian.app.shian_cemetery.http.params.HpLoginParams;
+import com.shian.app.shian_cemetery.http.result.HrLoginResult;
+import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.cookie.CookieJarImpl;
-import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 import com.zhy.http.okhttp.request.RequestCall;
 
+import org.codehaus.jackson.JsonNode;
+
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,19 +50,31 @@ public class HttpRequestExecutor {
         header.put("Cookie", "sid=" + cookie);
     }
 
+    /**
+     * post请求
+     *
+     * @param context
+     * @param method
+     * @param data
+     * @param params
+     * @param responseHandler
+     * @param <T>
+     */
     public <T> void requestPost(final Context context,
-                               final String method,
-                               final Class<T> data,
-                               final BaseHttpParams params,
-                               final HttpResponseHandler<T> responseHandler) {
+                                final String method,
+                                final Class<T> data,
+                                final BaseHttpParams params,
+                                final HttpResponseHandler<T> responseHandler) {
         if (!isNetworkConnected(context)) {
             onErrorCallBack(responseHandler, "网络未连接", context);
             return;
         }
-        PostFormBuilder getBuilder = OkHttpUtils.post();
-        getBuilder.url(method);
+
+        PostStringBuilder getBuilder = OkHttpUtils.postString();
+        getBuilder.url(BaseURL.JAVA_URL + "/" + method);
         getBuilder.headers(header);
-        getBuilder.params(params.getMapParams());
+        getBuilder.content(params.getContentJson());
+
         RequestCall requestCall = getBuilder.build();
         requestCall.execute(new StringCallback() {
             @Override
@@ -85,6 +102,7 @@ public class HttpRequestExecutor {
             }
         });
     }
+
     /**
      * get请求
      *
@@ -195,23 +213,32 @@ public class HttpRequestExecutor {
      * @param responseHandler
      * @param <T>
      */
-    private <T> void dataToJson(Context context, String response, Class<T> data, HttpResponseHandler<T> responseHandler) {
+    private <T> void dataToJson(Context context, String response, final Class<T> data, HttpResponseHandler<T> responseHandler) {
         if (response != null) {
-            Gson gsonData = new Gson();
-            BaseRequestParams requestParams = gsonData.fromJson(response, BaseRequestParams.class);
-            String code = requestParams.getCode() + "";
-            String errorMsg = requestParams.getMessage() + "";
-            T content = data.cast(requestParams.getContent());
-            if ("1000".equals(code)) {
-                responseHandler.onSuccess(content);
-            } else if ("1009".equals(code)) {
-                if (context instanceof Activity) {
-                    BaseAppliction.getApplication().exitAPP();
+            try {
+                JsonNode node = ObjectMapperFactory.getInstance().readTree(new String(response));
+                String code = node.findValue("code").toString();
+                String errorMsg = node.findValue("message").toString();
+                if ("1000".equals(code)) {
+                    JsonNode jn = node.findValue("content");
+                    if (jn == null)
+                        responseHandler.onSuccess(null);
+                    else {
+                        T result = ObjectMapperFactory.getInstance().readValue(
+                                jn, data);
+                        responseHandler.onSuccess(result);
+                    }
+                } else if ("1009".equals(code)) {
+                    if (context instanceof Activity) {
+                        BaseAppliction.getApplication().exitAPP();
+                    }
+                    Intent in = new Intent(context, LoginActivity.class);
+                    context.startActivity(in);
+                } else {
+                    onErrorCallBack(responseHandler, errorMsg, context);
                 }
-                Intent in = new Intent(context, LoginActivity.class);
-                context.startActivity(in);
-            } else {
-                onErrorCallBack(responseHandler, errorMsg, context);
+            } catch (Exception e) {
+                onErrorCallBack(responseHandler, "", context);
             }
         }
     }

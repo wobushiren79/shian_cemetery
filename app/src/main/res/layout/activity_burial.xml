@@ -33,6 +33,18 @@
                 android:background="@color/zhy_line_7" />
 
             <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
+                android:id="@+id/tr_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                DataReadAttr:titleName="安葬时间"></com.shian.app.shian_cemetery.view.dataview.TextReadLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_line_7" />
+
+            <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
                 android:id="@+id/tr_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
