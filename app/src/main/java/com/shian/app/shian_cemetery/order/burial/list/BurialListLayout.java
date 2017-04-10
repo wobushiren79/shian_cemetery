@@ -1,25 +1,22 @@
 package com.shian.app.shian_cemetery.order.burial.list;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.adapter.BurialListAdapter;
-import com.shian.app.shian_cemetery.tools.LogUtils;
+import com.shian.app.shian_cemetery.adapter.baseadapter.BurialListPullAdapter;
 import com.shian.app.shian_cemetery.tools.Utils;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
  * Created by Administrator on 2017/4/5.
@@ -27,11 +24,12 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 public class BurialListLayout extends LinearLayout {
     View view;
-    RecyclerView mListView;
+    //    RecyclerView mListView;
+    //    BurialListAdapter mBurialListAdapter;
     RelativeLayout mRLSeach;
     TextView mTVSeachTime;
-    BurialListAdapter mBurialListAdapter;
-
+    BurialListPullAdapter mBurialListPullAdapter;
+    PullToRefreshListView mPullListView;
 
     boolean isShow = false;//是否显示搜索栏
 
@@ -47,7 +45,8 @@ public class BurialListLayout extends LinearLayout {
     }
 
     private void initView() {
-        mListView = (RecyclerView) view.findViewById(R.id.listview);
+//        mListView = (RecyclerView) view.findViewById(R.id.listview);
+        mPullListView = (PullToRefreshListView) view.findViewById(R.id.listview);
         mRLSeach = (RelativeLayout) view.findViewById(R.id.rl_search);
         mTVSeachTime = (TextView) view.findViewById(R.id.tv_seach_time);
 
@@ -55,17 +54,20 @@ public class BurialListLayout extends LinearLayout {
     }
 
     private void initData() {
-        mBurialListAdapter = new BurialListAdapter(getContext());
-        mListView.setAdapter(mBurialListAdapter);
-        mListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mListView.setOnScrollListener(onScrollListener);
+        mBurialListPullAdapter = new BurialListPullAdapter(getContext());
+        mPullListView.setAdapter(mBurialListPullAdapter);
+        mPullListView.setOnScrollListener(onScrollListener);
+//        mBurialListAdapter = new BurialListAdapter(getContext());
+//        mListView.setAdapter(mBurialListAdapter);
+//        mListView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        mListView.setOnScrollListener(onScrollListener);
     }
 
     OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             if (v == mRLSeach) {
-                Utils.showDatePicker(getContext(),mTVSeachTime);
+                Utils.showDatePicker(getContext(), mTVSeachTime);
             }
         }
     };
@@ -73,15 +75,14 @@ public class BurialListLayout extends LinearLayout {
     /**
      * 滑动监听
      */
-    RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+    AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener() {
         @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
             if (isShow) {
-                if (newState == SCROLL_STATE_IDLE) {
+                if (scrollState == SCROLL_STATE_IDLE) {
                     mRLSeach.setVisibility(VISIBLE);
                     mRLSeach.startAnimation(getInAnim());
-                } else if (newState == SCROLL_STATE_DRAGGING) {
+                } else if (scrollState == SCROLL_STATE_DRAGGING) {
                     mRLSeach.setVisibility(GONE);
 //                    mLLSeach.startAnimation(getOutAnim());
                 }
@@ -89,10 +90,31 @@ public class BurialListLayout extends LinearLayout {
         }
 
         @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
         }
     };
+//    RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+//        @Override
+//        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//            super.onScrollStateChanged(recyclerView, newState);
+//            if (isShow) {
+//                if (newState == SCROLL_STATE_IDLE) {
+//                    mRLSeach.setVisibility(VISIBLE);
+//                    mRLSeach.startAnimation(getInAnim());
+//                } else if (newState == SCROLL_STATE_DRAGGING) {
+//                    mRLSeach.setVisibility(GONE);
+////                    mLLSeach.startAnimation(getOutAnim());
+//                }
+//            }
+//        }
+//
+//        @Override
+//        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//            super.onScrolled(recyclerView, dx, dy);
+//        }
+//    };
+
 
     /**
      * 是否显示搜索栏

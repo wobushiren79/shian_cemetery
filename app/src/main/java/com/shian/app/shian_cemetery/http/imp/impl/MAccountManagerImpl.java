@@ -5,6 +5,8 @@ import android.content.Context;
 import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.MAccountManager;
+import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
+import com.shian.app.shian_cemetery.http.params.HpCetemeryRejectParams;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 
@@ -31,5 +33,18 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void loginCemetery(Context context, HpLoginParams params, HttpResponseHandler<HrLoginResult> handler) {
         excutor.requestPost(context, "doLogin/cemetery", HrLoginResult.class, params,handler);
+    }
+
+    @Override
+    public void acceptCemetery(Context context, HpCetemeryAcceptParams params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "marketing/talk/accept", Object.class, params,
+                handler);
+    }
+
+
+    @Override
+    public void rejectCemetery(Context context, HpCetemeryRejectParams params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "marketing/talk/reject", Object.class, params,
+                handler);
     }
 }

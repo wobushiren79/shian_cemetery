@@ -2,6 +2,7 @@ package com.shian.app.shian_cemetery.appenum;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.base.BaseFragment;
+import com.shian.app.shian_cemetery.fragment.CemeteryOrderFragment;
 import com.shian.app.shian_cemetery.fragment.FindFragment;
 import com.shian.app.shian_cemetery.fragment.HomeFragment;
 import com.shian.app.shian_cemetery.fragment.MyFragment;
@@ -16,7 +17,8 @@ public enum MainChangeItemEnum {
     MAIN("首页", R.drawable.ic_bar_home_press_2, R.drawable.ic_bar_home_default_2, 1, new HomeFragment()),
     ORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 2, new OrderFragment()),
     FIND("发现", R.drawable.ic_bar_find_press_2, R.drawable.ic_bar_find_default_2, 3, new FindFragment()),
-    MY("我", R.drawable.ic_bar_my_press_2, R.drawable.ic_bar_my_default_2, 4, new MyFragment());
+    MY("我", R.drawable.ic_bar_my_press_2, R.drawable.ic_bar_my_default_2, 4, new MyFragment()),
+    CEMETERYORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 5, new CemeteryOrderFragment());
 
     private String title;
     private int unCheckIconId;

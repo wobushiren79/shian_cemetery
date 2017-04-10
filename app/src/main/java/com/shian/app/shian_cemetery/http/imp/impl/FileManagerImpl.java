@@ -9,6 +9,7 @@ import com.shian.app.shian_cemetery.http.imp.FileManager;
 import com.shian.app.shian_cemetery.http.result.HrUploadFile;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.LogUtils;
+import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -43,6 +44,8 @@ public class FileManagerImpl implements FileManager {
     public void upLoadFile(final Context context, String fileName, String path,
                            final FileHttpResponseHandler<HrUploadFile> response) {
         File file = new File(path);
+        String session = SharePerfrenceUtils.getSessionShare(context);
+        setCookie(session);
         OkHttpUtils
                 .postFile()
                 .url(BaseURL.FILE_UPDATA)

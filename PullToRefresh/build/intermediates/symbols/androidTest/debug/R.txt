@@ -31,6 +31,7 @@ int drawable default_ptr_rotate 0x7f020001
 int drawable indicator_arrow 0x7f020002
 int drawable indicator_bg_bottom 0x7f020003
 int drawable indicator_bg_top 0x7f020004
+int drawable zhy_loading 0x7f020005
 int id both 0x7f070003
 int id disabled 0x7f070004
 int id fl_inner 0x7f07000c
@@ -42,14 +43,16 @@ int id pullFromEnd 0x7f070007
 int id pullFromStart 0x7f070008
 int id pullUpFromBottom 0x7f070009
 int id pull_to_refresh_image 0x7f07000d
+int id pull_to_refresh_image_other 0x7f07000f
 int id pull_to_refresh_progress 0x7f07000e
-int id pull_to_refresh_sub_text 0x7f070010
-int id pull_to_refresh_text 0x7f07000f
+int id pull_to_refresh_sub_text 0x7f070011
+int id pull_to_refresh_text 0x7f070010
 int id rotate 0x7f07000b
 int id scrollview 0x7f070001
 int id webview 0x7f070002
 int layout pull_to_refresh_header_horizontal 0x7f030000
-int layout pull_to_refresh_header_vertical 0x7f030001
+int layout pull_to_refresh_header_simple 0x7f030001
+int layout pull_to_refresh_header_vertical 0x7f030002
 int string pull_to_refresh_from_bottom_pull_label 0x7f050003
 int string pull_to_refresh_from_bottom_refreshing_label 0x7f050004
 int string pull_to_refresh_from_bottom_release_label 0x7f050005

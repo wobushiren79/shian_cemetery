@@ -3,6 +3,8 @@ package com.shian.app.shian_cemetery.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Administrator on 2017/4/7.
  */
@@ -18,26 +20,39 @@ public class SharePerfrenceUtils {
 
     /**
      * 保存sessionID
+     *
      * @param context
      * @param sessionId
      */
-    public static void setSessionShare(Context context,String sessionId){
-        SharedPreferences.Editor editor = context.getSharedPreferences(C_sShare_Login_F, -1).edit();
+    public static void setSessionShare(Context context, String sessionId) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
         editor.putString(C_sSession_Share, sessionId);
         editor.commit();
     }
 
     /**
+     * 获取sessionID
+     *
+     * @param context
+     */
+    public static String getSessionShare(Context context) {
+        SharedPreferences share = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
+        String sessionID = share.getString(C_sSession_Share, "");
+        return sessionID;
+    }
+
+    /**
      * 保存账号信息
-     * @param c
+     *
+     * @param context
      * @param username
      * @param password
      * @param isRemeber
      * @param isAuto
      */
-    public static void setLoginShare(Context c, String username,
+    public static void setLoginShare(Context context, String username,
                                      String password, boolean isRemeber, boolean isAuto) {
-        SharedPreferences.Editor editor = c.getSharedPreferences(C_sShare_Login_F, -1).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
         editor.putString(C_sShareLogin_username, username);
         editor.putString(C_sShareLogin_password, password);
         editor.putBoolean(C_sShareLogin_isRemeberPassword, isRemeber);
@@ -47,11 +62,12 @@ public class SharePerfrenceUtils {
 
     /**
      * 获取账号信息
+     *
      * @param content
      * @return
      */
     public static ShareLogin getLoginShare(Context content) {
-        SharedPreferences share = content.getSharedPreferences(C_sShare_Login_F, -1);
+        SharedPreferences share = content.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
         String username = share.getString(C_sShareLogin_username, "");
         String password = share.getString(C_sShareLogin_password, "");
         boolean isRember = share.getBoolean(C_sShareLogin_isRemeberPassword,

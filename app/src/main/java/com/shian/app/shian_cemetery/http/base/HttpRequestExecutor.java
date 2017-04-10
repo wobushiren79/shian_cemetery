@@ -16,6 +16,7 @@ import com.shian.app.shian_cemetery.http.params.HpLoginParams;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
+import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
@@ -69,7 +70,10 @@ public class HttpRequestExecutor {
             onErrorCallBack(responseHandler, "网络未连接", context);
             return;
         }
-
+        if (!method.contains("doLogin")) {
+            String session = SharePerfrenceUtils.getSessionShare(context);
+            setCookie(session);
+        }
         PostStringBuilder getBuilder = OkHttpUtils.postString();
         getBuilder.url(BaseURL.JAVA_URL + "/" + method);
         getBuilder.headers(header);

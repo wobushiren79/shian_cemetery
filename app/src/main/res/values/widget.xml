@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ListItemTitle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_marginLeft">@dimen/dimen_16dp</item>
+        <item name="android:textColor">@color/dimgray</item>
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ems">6</item>
+    </style>
+
+    <style name="ListItemContent" parent="@android:style/Widget.TextView">
+        <item name="android:layout_marginLeft">@dimen/dimen_16dp</item>
+        <item name="android:textColor">@color/zhy_text_color_9</item>
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="ListItemButton_1" parent="@android:style/Widget.TextView">
+        <item name="android:layout_marginLeft">@dimen/dimen_28dp</item>
+        <item name="android:layout_marginRight">@dimen/dimen_28dp</item>
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/zhy_button_state_5</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="ListItemButton_2" parent="@android:style/Widget.TextView">
+        <item name="android:layout_marginLeft">@dimen/dimen_28dp</item>
+        <item name="android:layout_marginRight">@dimen/dimen_28dp</item>
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:textColor">@color/zhy_text_color_1</item>
+        <item name="android:background">@drawable/zhy_button_state_2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+</resources>

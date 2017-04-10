@@ -6,5 +6,9 @@
     {
         "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_simple.xml",
+        "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_simple.xml"
     }
 ]

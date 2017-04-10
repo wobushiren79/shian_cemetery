@@ -19,9 +19,11 @@ public class MainActivity extends BaseActivity {
     MainChangeItemEnum[] MainChangeData = {
             MainChangeItemEnum.MAIN,
             MainChangeItemEnum.ORDER,
-            MainChangeItemEnum.FIND,
-            MainChangeItemEnum.MY
+//            MainChangeItemEnum.FIND,
+//            MainChangeItemEnum.MY,
+            MainChangeItemEnum.CEMETERYORDER
     };
+
     private FragmentManager mFragmentManager;
     private FragmentTransaction mTranscation;
 
@@ -37,7 +39,6 @@ public class MainActivity extends BaseActivity {
 
     private void initView() {
         mMainChangeLayout = (MainChangeLayout) findViewById(R.id.main_change_layout);
-
         mMainChangeLayout.setChangeCallBack(changeCallBack);
         setMianData();
     }
@@ -65,14 +66,13 @@ public class MainActivity extends BaseActivity {
                 if (dataEnum.getItemId() == itemId) {
                     showFragment(dataEnum.getFragment());
                     //设置标题内容
-                    if (dataEnum.getTitle().equals("订单")) {
+                    if (dataEnum.getItemId() == MainChangeItemEnum.ORDER.getItemId()) {
                         setTitle(dataEnum.getTitle(), BaseTitleEnum.TABTITLE.getTitleType());
                     } else {
                         setTitle(dataEnum.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
                     }
                 }
             }
-
         }
     };
 
