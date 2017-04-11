@@ -1,12 +1,12 @@
-package com.shian.app.shian_cemetery.view.dataview;
+package com.shian.app.shian_cemetery.view.dataview.burial;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.view.dataview.burial.BaseDataLayout;
 
 /**
  * Created by Administrator on 2017/4/6.

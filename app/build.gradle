@@ -30,6 +30,11 @@ android {
         exclude 'META-INF/LGPL2.1'
         exclude 'META-INF/ASL2.0'
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -55,7 +60,7 @@ dependencies {
     //jackson
     compile 'org.codehaus.jackson:jackson-core-asl:1.9.11'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
-
     compile project(':ImageSelector')
     compile project(':PullToRefresh')
+    compile project(':dateTimerSelector')
 }

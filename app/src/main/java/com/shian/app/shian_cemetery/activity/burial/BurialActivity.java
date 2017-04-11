@@ -9,7 +9,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.view.dialog.SignDialog;
-import com.shian.app.shian_cemetery.view.dataview.TextReadLayout;
+import com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout;
 
 public class BurialActivity extends BaseActivity {
 

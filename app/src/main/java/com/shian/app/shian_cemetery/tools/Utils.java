@@ -1,12 +1,18 @@
 package com.shian.app.shian_cemetery.tools;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
@@ -81,4 +87,35 @@ public class Utils {
         return;
     }
 
+
+    /**
+     * 打电话
+     * @param v
+     * @param phone
+     */
+    public static void call(final View v, final String phone) {
+        if (!TextUtils.isEmpty(phone)) {
+            v.setVisibility(View.VISIBLE);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View vv) {
+                    // TODO Auto-generated method stub
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
+                    if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    v.getContext().startActivity(intent);
+                }
+            });
+        } else {
+            v.setVisibility(View.GONE);
+        }
+    }
 }

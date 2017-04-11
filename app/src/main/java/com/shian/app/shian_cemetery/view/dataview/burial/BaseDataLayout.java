@@ -1,4 +1,4 @@
-package com.shian.app.shian_cemetery.view.dataview;
+package com.shian.app.shian_cemetery.view.dataview.burial;
 
 import android.content.Context;
 import android.content.res.TypedArray;

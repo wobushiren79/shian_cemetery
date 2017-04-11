@@ -1,12 +1,10 @@
-package com.shian.app.shian_cemetery.view.dataview;
+package com.shian.app.shian_cemetery.view.dataview.burial;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -16,8 +14,7 @@ import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.FileHttpResponseHandler;
 import com.shian.app.shian_cemetery.http.result.HrUploadFile;
 import com.shian.app.shian_cemetery.tools.LogUtils;
-import com.shian.app.shian_cemetery.tools.ToastUtils;
-import com.shian.app.shian_cemetery.tools.Utils;
+import com.shian.app.shian_cemetery.view.dataview.burial.BaseDataLayout;
 import com.yongchun.library.view.ImagePreviewActivity;
 
 import java.util.ArrayList;

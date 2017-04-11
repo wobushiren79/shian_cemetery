@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.graphics.Bitmap;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -16,6 +17,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.shian.app.shian_cemetery.common.local.LocationService;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class BaseAppliction extends Application {
 
     public DisplayImageOptions options;
     public ImageLoaderConfiguration config;
-
+    public LocationService locationService;
     /**
      * acitivity关闭时候，删除activity列表中的activity对象
      */
@@ -55,6 +57,18 @@ public class BaseAppliction extends Application {
         super.onCreate();
         initOkHttp();
         initImageLoader();
+        initMap();
+    }
+
+    /**
+     * 初始化地图
+     */
+    private void initMap() {
+        /***
+         * 初始化定位sdk，建议在Application中创建
+         */        //百度地图初始化
+        locationService = new LocationService(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     /**

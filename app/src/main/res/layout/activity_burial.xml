@@ -20,11 +20,11 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout
                 android:id="@+id/tr_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="墓穴位置"></com.shian.app.shian_cemetery.view.dataview.TextReadLayout>
+                DataReadAttr:titleName="墓穴位置"></com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -32,11 +32,11 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout
                 android:id="@+id/tr_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="安葬时间"></com.shian.app.shian_cemetery.view.dataview.TextReadLayout>
+                DataReadAttr:titleName="安葬时间"></com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,11 +44,11 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout
                 android:id="@+id/tr_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="使用者姓名"></com.shian.app.shian_cemetery.view.dataview.TextReadLayout>
+                DataReadAttr:titleName="使用者姓名"></com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -56,11 +56,11 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout
                 android:id="@+id/tr_graveid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="墓穴证编号"></com.shian.app.shian_cemetery.view.dataview.TextReadLayout>
+                DataReadAttr:titleName="墓穴证编号"></com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -68,11 +68,11 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.TextReadLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout
                 android:id="@+id/tr_burialcardid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="安葬卡编号"></com.shian.app.shian_cemetery.view.dataview.TextReadLayout>
+                DataReadAttr:titleName="安葬卡编号"></com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -80,10 +80,10 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.SpinnerLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="安葬率"></com.shian.app.shian_cemetery.view.dataview.SpinnerLayout>
+                DataReadAttr:titleName="安葬率"></com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -91,10 +91,10 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.SpinnerLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="落葬情况"></com.shian.app.shian_cemetery.view.dataview.SpinnerLayout>
+                DataReadAttr:titleName="落葬情况"></com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout>
 
 
             <TextView
@@ -103,10 +103,10 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.EditLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.EditLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="备注"></com.shian.app.shian_cemetery.view.dataview.EditLayout>
+                DataReadAttr:titleName="备注"></com.shian.app.shian_cemetery.view.dataview.burial.EditLayout>
 
             <TextView
                 android:layout_width="match_parent"

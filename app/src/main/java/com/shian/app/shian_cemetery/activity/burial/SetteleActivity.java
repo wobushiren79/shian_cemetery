@@ -5,7 +5,8 @@ import android.os.Bundle;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
-import com.shian.app.shian_cemetery.view.dataview.TextReadLayout;
+import com.shian.app.shian_cemetery.view.dataview.burial.EditLayout;
+import com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout;
 
 public class SetteleActivity extends BaseActivity {
 
@@ -15,6 +16,7 @@ public class SetteleActivity extends BaseActivity {
     TextReadLayout mTRBuildTime;
     TextReadLayout mTRBuildState;
 
+    EditLayout mTRRemark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class SetteleActivity extends BaseActivity {
         mTRBuildTime = (TextReadLayout) findViewById(R.id.tr_buildtime);
         mTRBuildState = (TextReadLayout) findViewById(R.id.tr_buildstate);
 
+        mTRRemark= (EditLayout) findViewById(R.id.tr_remark);
     }
 
     private void initData() {

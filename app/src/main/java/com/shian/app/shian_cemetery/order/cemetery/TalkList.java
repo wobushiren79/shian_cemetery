@@ -52,11 +52,10 @@ public class TalkList extends LinearLayout {
         mPullListView = (PullToRefreshListView) view.findViewById(R.id.pull_listview);
         mPullListView.setMode(PullToRefreshBase.Mode.BOTH);
         mPullListView.setOnRefreshListener(onRefreshListener2);
-
+        mPullListView.setOverScrollMode(OVER_SCROLL_NEVER);
         mAdapter = new CemeteryTalkListPullAdatper(getContext(), listData);
+        mAdapter.setCallBack(callBack);
         mPullListView.setAdapter(mAdapter);
-
-
     }
 
 
@@ -70,6 +69,16 @@ public class TalkList extends LinearLayout {
         }, 500);
     }
 
+    /**
+     * adapter响应
+     */
+    CemeteryTalkListPullAdatper.CallBack callBack = new CemeteryTalkListPullAdatper.CallBack() {
+        @Override
+        public void refresh() {
+            page = 1;
+            getData(true);
+        }
+    };
 
     /**
      * 上下拉刷新
@@ -108,6 +117,9 @@ public class TalkList extends LinearLayout {
                     listData.clear();
                     listData.addAll(result.getItems());
                 } else {
+                    if(result.getItems().size()==0){
+                        page--;
+                    }
                     listData.addAll(result.getItems());
                 }
 

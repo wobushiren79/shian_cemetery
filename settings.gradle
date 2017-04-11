@@ -1,2 +1,2 @@
-include ':app', ':ImageSelector'
+include ':app', ':ImageSelector', ':dateTimerSelector'
 include ':PullToRefresh'

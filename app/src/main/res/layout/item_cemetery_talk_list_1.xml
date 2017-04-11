@@ -53,6 +53,14 @@
                 style="@style/ListItemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/iv_phone"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:background="@drawable/ic_qt_phone" />
         </LinearLayout>
 
         <TextView
