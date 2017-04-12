@@ -7,9 +7,11 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryRejectParams;
+import com.shian.app.shian_cemetery.http.params.HpGetDictSelectParams;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
-import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkData;
+import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
+import com.shian.app.shian_cemetery.http.result.HrGetDictSelectData;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 
 /**
@@ -26,6 +28,16 @@ public interface MAccountManager extends HttpManager {
      */
     void loginCemetery(Context context, HpLoginParams params,
                        HttpResponseHandler<HrLoginResult> handler);
+
+    /**
+     * 字典查询
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getDictSelect(Context context, HpGetDictSelectParams params,
+                       HttpResponseHandler<HrGetDictSelectData> handler);
 
     /**
      * 公墓系统接单
@@ -62,5 +74,5 @@ public interface MAccountManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler);
+    public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkDataParams params, HttpResponseHandler<Object> handler);
 }

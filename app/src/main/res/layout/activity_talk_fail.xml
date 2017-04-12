@@ -127,17 +127,35 @@
                     android:layout_height="wrap_content"
                     DataReadAttr:titleName="交通工具"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+
                 <com.shian.app.shian_cemetery.view.dataview.cemetery.TimeSelectViewNormal
                     android:id="@+id/write_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     DataReadAttr:titleName="预约时间"></com.shian.app.shian_cemetery.view.dataview.cemetery.TimeSelectViewNormal>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+
                 <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
                     android:id="@+id/write_personnum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     DataReadAttr:titleName="人数"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
 
                 <com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal
                     android:id="@+id/write_meetlocation"
@@ -161,7 +179,6 @@
 
         <TextView
             android:id="@+id/tv_submit"
-            android:textSize="@dimen/dimen_32dp"
             android:layout_width="@dimen/dimen_688dp"
             android:layout_height="@dimen/dimen_80dp"
             android:layout_gravity="center"
@@ -170,7 +187,8 @@
             android:background="@drawable/zhy_button_state_5"
             android:gravity="center"
             android:text="结束洽谈"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
     </LinearLayout>
 
 

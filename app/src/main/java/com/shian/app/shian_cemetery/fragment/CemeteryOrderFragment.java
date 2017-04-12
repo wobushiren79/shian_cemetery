@@ -10,6 +10,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.pageradapter.CemeteryListViewPagerAdapter;
 import com.shian.app.shian_cemetery.appenum.CemeteryTabEnum;
 import com.shian.app.shian_cemetery.base.BaseFragment;
+import com.shian.app.shian_cemetery.order.cemetery.BaseCemeteryOrderList;
 import com.shian.app.shian_cemetery.order.cemetery.ServiceOverList;
 import com.shian.app.shian_cemetery.order.cemetery.TalkList;
 import com.shian.app.shian_cemetery.tools.LogUtils;
@@ -33,6 +34,10 @@ public class CemeteryOrderFragment extends BaseFragment {
             CemeteryTabEnum.SERVICEOVER
     };
 
+    List<BaseCemeteryOrderList> listView;
+    public static boolean isRefesh = false;
+    int mIndex = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_cemetery_order, null, false);
@@ -41,6 +46,13 @@ public class CemeteryOrderFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isRefesh && listView.size() > 0)
+            listView.get(mIndex).refesh();
+        isRefesh = false;
+    }
 
     private void initView() {
         mTitleTabChange = (TitleTabChange) view.findViewById(R.id.titletab);
@@ -75,6 +87,7 @@ public class CemeteryOrderFragment extends BaseFragment {
 
         @Override
         public void onPageSelected(int position) {
+            mIndex = position;
             mTitleTabChange.setCode(tabData[position].getCode());
         }
 
@@ -85,7 +98,7 @@ public class CemeteryOrderFragment extends BaseFragment {
     };
 
     private void initData() {
-        List<View> listView = new ArrayList<>();
+        listView = new ArrayList<>();
         for (int i = 0; i < tabData.length; i++) {
             CemeteryTabEnum data = tabData[i];
             mTitleTabChange.addTab(data.getTitle(),

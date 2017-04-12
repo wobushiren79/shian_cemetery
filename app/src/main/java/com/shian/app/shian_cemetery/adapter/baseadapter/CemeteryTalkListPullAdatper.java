@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.activity.cemetery.InfoDetailsActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkFailActivity;
+import com.shian.app.shian_cemetery.activity.cemetery.TalkSuccessActivity;
 import com.shian.app.shian_cemetery.appenum.CemeteryOrderStateEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -92,6 +94,12 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     break;
                 case 2:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_3, null);
+                    holder.tvAgentManName = (TextView) convertView.findViewById(R.id.tv_agentmanname);
+                    holder.tvAgentManPhone = (TextView) convertView.findViewById(R.id.tv_agentmanphone);
+                    holder.tvDeadManName = (TextView) convertView.findViewById(R.id.tv_deadmanname);
+                    holder.tvCemeteryName = (TextView) convertView.findViewById(R.id.tv_cemeteryname);
+                    holder.tvLocationName = (TextView) convertView.findViewById(R.id.tv_locationname);
+                    holder.tvDetails = (TextView) convertView.findViewById(R.id.tv_details);
                     break;
             }
 
@@ -109,13 +117,20 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (v == holder.tvAccept) {
+                    //接单
                     acceptedOrder(data);
                 } else if (v == holder.tvReject) {
+                    //拒单
                     rejectOrder(data);
                 } else if (v == holder.tvTalkFail) {
+                    //洽谈失败
                     talkFail(data);
                 } else if (v == holder.tvTalkSuccess) {
+                    //洽谈成功
                     talkSuccess(data);
+                } else if (v == holder.tvDetails) {
+                    //订单详情
+                    orderInfo(data);
                 }
             }
         };
@@ -147,6 +162,14 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 makePhone(holder.ivPhone, data);
                 break;
             case 2:
+
+                holder.tvAgentManName.setText(data.getAgentmanName());
+                holder.tvAgentManPhone.setText(data.getAgentmanMoblie());
+                holder.tvDeadManName.setText(data.getDeadmanName());
+                holder.tvCemeteryName.setText(data.getChoiceCemeteryName());
+                holder.tvLocationName.setText(data.getDetailsLocation());
+
+                holder.tvDetails.setOnClickListener(onClickListener);
                 break;
         }
         //-------------------------------------------------------------------------------------------
@@ -185,12 +208,20 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         TextView tvTraffic;
         TextView tvRemark;
 
+        TextView tvAgentManName;
+        TextView tvAgentManPhone;
+        TextView tvDeadManName;
+        TextView tvCemeteryName;
+        TextView tvLocationName;
+
+
         ImageView ivPhone;
 
         TextView tvAccept;
         TextView tvReject;
         TextView tvTalkSuccess;
         TextView tvTalkFail;
+        TextView tvDetails;
     }
 
     /**
@@ -275,7 +306,20 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
      * 洽谈成功
      */
     private void talkSuccess(CemeteryOrderModel model) {
+        Intent intent = new Intent(context, TalkSuccessActivity.class);
+        intent.putExtra(IntentName.INTENT_BESPEAKID, model.getBespeakId());
+        intent.putExtra(IntentName.INTENT_ORDERID, model.getOrderId());
+        intent.putExtra(IntentName.INTENT_CEMETERY_INFO_STEPS, model.getInfoStatus());
+        context.startActivity(intent);
+    }
 
+    /**
+     * 查看详情界面
+     * @param model
+     */
+    private void orderInfo(CemeteryOrderModel model) {
+        Intent intent = new Intent(context, InfoDetailsActivity.class);
+        context.startActivity(intent);
     }
 
     public interface CallBack {

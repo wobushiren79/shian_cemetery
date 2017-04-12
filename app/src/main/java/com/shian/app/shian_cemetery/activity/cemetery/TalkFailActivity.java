@@ -1,17 +1,23 @@
 package com.shian.app.shian_cemetery.activity.cemetery;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
+import com.shian.app.shian_cemetery.fragment.CemeteryOrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
+import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.staticdata.SelectData;
+import com.shian.app.shian_cemetery.staticdata.SelectDictCode;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal;
@@ -35,9 +41,11 @@ public class TalkFailActivity extends BaseActivity {
     EditTextViewNormal mWriteRemark;
 
     LinearLayout mLLOtherInfo;
+    TextView mTVSubmit;
 
     HrGetCemeteryTalkData resultData;
     long beSpeakId = -1;
+    long orderId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +75,34 @@ public class TalkFailActivity extends BaseActivity {
         mWriteRemark = (EditTextViewNormal) findViewById(R.id.write_remark);
 
         mLLOtherInfo = (LinearLayout) findViewById(R.id.ll_other_info);
+        mTVSubmit = (TextView) findViewById(R.id.tv_submit);
+
+        mTVSubmit.setOnClickListener(onClickListener);
+
+
+        mWriteResult.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
+            @Override
+            public void itemSelected(int position, String name) {
+                //预约二次洽谈
+                if (position == 0) {
+                    mLLOtherInfo.setVisibility(View.GONE);
+                } else {
+                    mLLOtherInfo.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void initData() {
         beSpeakId = getIntent().getLongExtra(IntentName.INTENT_BESPEAKID, -1);
+        orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
 
-        mWritePlanBuyType.initSpinner(SelectData.CEMETERY_TYPE);
-        mWriteDeadState1.initSpinner(SelectData.CEMETERY_STATE);
-        mWriteDeadState2.initSpinner(SelectData.CEMETERY_STATE);
-        mWriteRelation.initSpinner(SelectData.CEMETERY_RELATION);
+        mWritePlanBuyType.initSpinner(SelectDictCode.TOMB_TYPE);
+        mWriteDeadState1.initSpinner(SelectDictCode.DEAD_INFO_STATE);
+        mWriteDeadState2.initSpinner(SelectDictCode.DEAD_INFO_STATE);
+        mWriteRelation.initSpinner(SelectDictCode.MAN_RELATION);
         mWriteResult.initSpinner(SelectData.CEMETERY_RESULT);
-        mWriteTraffic.initSpinner(SelectData.CEMETERY_TRAFFICEWAY);
+        mWriteTraffic.initSpinner(SelectDictCode.CONSULT_TRAFFICWAY);
     }
 
     /**
@@ -106,6 +131,18 @@ public class TalkFailActivity extends BaseActivity {
     }
 
     /**
+     * 点击事件
+     */
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v == mTVSubmit) {
+                saveData();
+            }
+        }
+    };
+
+    /**
      * 设置数据
      */
     private void setData() {
@@ -129,6 +166,52 @@ public class TalkFailActivity extends BaseActivity {
             mWriteRemark.setData(resultData.getRemark());
         }
         mWriteResult.setData(resultData.getTalkResult());
+    }
+
+
+    /**
+     * 提交数据
+     */
+    private void saveData() {
+        HpSaveCemeteryTalkDataParams params = new HpSaveCemeteryTalkDataParams();
+        params.setBespeakId(beSpeakId);
+        params.setOrderedId(orderId);
+        params.setPlanBuyCemetery(mWritePlanBuyType.getData());
+        params.setPlanBuyMoney(mWritePlanBuyMoney.getData());
+        params.setUserOneState(mWriteDeadState1.getData());
+        params.setUserTwoState(mWriteDeadState2.getData());
+        params.setAshLocation(mWriteAslLocation.getData());
+        params.setRelation(mWriteRelation.getData());
+        params.setTalkPoint(mWriteTalkPoint.getData());
+        params.setTalkResult(mWriteResult.getSelectPosition());
+        if (mWriteResult.getSelectPosition() == 0) {
+
+        } else {
+            params.setOrderTime(mWriteMeetTime.getData());
+            params.setPersonNum(mWritePersonNum.getData());
+            params.setTrafficWay(mWriteTraffic.getData());
+            params.setOrderLocation(mWriteMeetLocation.getData());
+        }
+        params.setRemark(mWriteRemark.getData());
+
+        MHttpManagerFactory.getAccountManager().saveCemeteryTalkInfo(TalkFailActivity.this, params, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                CemeteryOrderFragment.isRefesh = true;
+                ToastUtils.showShortToast(TalkFailActivity.this, "提交数据成功");
+                finish();
+            }
+
+            @Override
+            public void onError(String message) {
+                ToastUtils.showShortToast(TalkFailActivity.this, "提交数据失败");
+            }
+        });
     }
 
 }

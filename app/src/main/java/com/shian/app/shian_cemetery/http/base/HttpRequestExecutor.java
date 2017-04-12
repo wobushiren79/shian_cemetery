@@ -18,6 +18,7 @@ import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.view.dialog.CustomDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
@@ -41,6 +42,7 @@ import okhttp3.Request;
 public class HttpRequestExecutor {
 
     Map<String, String> header = new HashMap<>();
+    CustomDialog dialog;
 
     public HttpRequestExecutor() {
         header.put("systemType", "2");
@@ -88,12 +90,18 @@ public class HttpRequestExecutor {
                     Log.e("tag", errorMessage);
                 }
                 onErrorCallBack(responseHandler, errorMessage, context);
+                if (dialog != null)
+                    dialog.cancel();
+                dialog = null;
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.i("tag", response);
                 dataToJson(context, response, data, responseHandler);
+                if (dialog != null)
+                    dialog.cancel();
+                dialog = null;
             }
 
 
@@ -105,6 +113,31 @@ public class HttpRequestExecutor {
                 }
             }
         });
+    }
+
+
+    /**
+     * POST请求
+     *
+     * @param context
+     * @param method
+     * @param data
+     * @param params
+     * @param responseHandler
+     * @param isShowDialog
+     * @param <T>
+     */
+    public <T> void requestPost(final Context context,
+                                final String method,
+                                final Class<T> data,
+                                final BaseHttpParams params,
+                                final HttpResponseHandler<T> responseHandler,
+                                final boolean isShowDialog) {
+        if (isShowDialog && dialog == null) {
+            dialog = new CustomDialog(context);
+            dialog.show();
+        }
+        requestPost(context, method, data, params, responseHandler);
     }
 
     /**

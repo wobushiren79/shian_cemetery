@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.appenum.OrderBurialDate;
+import com.shian.app.shian_cemetery.appenum.OrderBurialDateEnum;
 import com.shian.app.shian_cemetery.order.burial.list.BurialListLayout;
 import com.shian.app.shian_cemetery.view.customlayout.tabchange.TitleTabChange;
 
@@ -20,11 +20,11 @@ public class WaitBurial extends LinearLayout {
     View view;
     TitleTabChange mTitleTabChange;
     RelativeLayout mRLContent;
-    OrderBurialDate[] dateTitle = {
-            OrderBurialDate.TODAY,
-            OrderBurialDate.TOMORROW,
-            OrderBurialDate.THISMONTH,
-            OrderBurialDate.CUSTOM
+    OrderBurialDateEnum[] dateTitle = {
+            OrderBurialDateEnum.TODAY,
+            OrderBurialDateEnum.TOMORROW,
+            OrderBurialDateEnum.THISMONTH,
+            OrderBurialDateEnum.CUSTOM
     };
 
     public WaitBurial(Context context) {
@@ -45,7 +45,7 @@ public class WaitBurial extends LinearLayout {
 
     private void initData() {
         for (int i = 0; i < dateTitle.length; i++) {
-            OrderBurialDate data = dateTitle[i];
+            OrderBurialDateEnum data = dateTitle[i];
             mTitleTabChange.addTab(data.getDate(),
                     data.getCode(),
                     getResources().getDimensionPixelSize(R.dimen.dimen_32dp),
@@ -54,7 +54,7 @@ public class WaitBurial extends LinearLayout {
                     getResources().getColor(R.color.zhy_text_color_1));
             mTitleTabChange.setCallBack(tabCallBack);
         }
-        mTitleTabChange.setCode(OrderBurialDate.TODAY.getCode());
+        mTitleTabChange.setCode(OrderBurialDateEnum.TODAY.getCode());
     }
 
     TitleTabChange.TabCallBack tabCallBack = new TitleTabChange.TabCallBack() {
@@ -65,7 +65,7 @@ public class WaitBurial extends LinearLayout {
                     (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             BurialListLayout listLayout = new BurialListLayout(getContext());
             listLayout.setLayoutParams(layoutParams);
-            if(code== OrderBurialDate.CUSTOM.getCode()){
+            if(code== OrderBurialDateEnum.CUSTOM.getCode()){
                 listLayout.setSearch(true);
             }else{
                 listLayout.setSearch(false);

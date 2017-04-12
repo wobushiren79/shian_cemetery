@@ -26,7 +26,7 @@ import okhttp3.Request;
  * Created by Administrator on 2017/4/10.
  */
 
-public class TalkList extends LinearLayout {
+public class TalkList extends BaseCemeteryOrderList {
     View view;
 
     PullToRefreshListView mPullListView;
@@ -53,6 +53,7 @@ public class TalkList extends LinearLayout {
         mPullListView.setMode(PullToRefreshBase.Mode.BOTH);
         mPullListView.setOnRefreshListener(onRefreshListener2);
         mPullListView.setOverScrollMode(OVER_SCROLL_NEVER);
+
         mAdapter = new CemeteryTalkListPullAdatper(getContext(), listData);
         mAdapter.setCallBack(callBack);
         mPullListView.setAdapter(mAdapter);
@@ -117,7 +118,7 @@ public class TalkList extends LinearLayout {
                     listData.clear();
                     listData.addAll(result.getItems());
                 } else {
-                    if(result.getItems().size()==0){
+                    if (result.getItems().size() == 0) {
                         page--;
                     }
                     listData.addAll(result.getItems());
@@ -136,5 +137,9 @@ public class TalkList extends LinearLayout {
         });
     }
 
-
+    @Override
+    public void refesh() {
+        page = 1;
+        getData(true);
+    }
 }

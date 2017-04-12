@@ -103,7 +103,7 @@ public class LoginActivity extends BaseActivity {
         params.setPassword(mETPassWord.getText().toString());
         params.setUsername(mETUserName.getText().toString());
         params.setSystemType("2");
-//        params.setChannelId("1");
+//        params.setChannelId("0");
         MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
             @Override
             public void onStart(Request request, int id) {

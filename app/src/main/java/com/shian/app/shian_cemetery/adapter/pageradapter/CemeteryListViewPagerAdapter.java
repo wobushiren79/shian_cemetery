@@ -5,6 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shian.app.shian_cemetery.order.cemetery.BaseCemeteryOrderList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +16,9 @@ import java.util.List;
 
 public class CemeteryListViewPagerAdapter extends PagerAdapter {
     Context context;
-    List<View> views = new ArrayList<>();
+    List<BaseCemeteryOrderList> views = new ArrayList<>();
 
-    public CemeteryListViewPagerAdapter(Context context, List<View> views) {
+    public CemeteryListViewPagerAdapter(Context context, List<BaseCemeteryOrderList> views) {
         this.context = context;
         this.views = views;
     }

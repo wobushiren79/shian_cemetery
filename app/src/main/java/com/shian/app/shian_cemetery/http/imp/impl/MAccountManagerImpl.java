@@ -8,9 +8,11 @@ import com.shian.app.shian_cemetery.http.imp.MAccountManager;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryRejectParams;
+import com.shian.app.shian_cemetery.http.params.HpGetDictSelectParams;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
-import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkData;
+import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
+import com.shian.app.shian_cemetery.http.result.HrGetDictSelectData;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 
 /**
@@ -39,6 +41,11 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
+    public void getDictSelect(Context context, HpGetDictSelectParams params, HttpResponseHandler<HrGetDictSelectData> handler) {
+        excutor.requestPost(context, "marketing/dict/items/list", HrGetDictSelectData.class, params, handler, true);
+    }
+
+    @Override
     public void acceptCemetery(Context context, HpCetemeryAcceptParams params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/talk/accept", Object.class, params,
                 handler);
@@ -58,7 +65,7 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
-    public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler) {
+    public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkDataParams params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/talk/saveTalkPlan", Object.class, params,
                 handler);
     }

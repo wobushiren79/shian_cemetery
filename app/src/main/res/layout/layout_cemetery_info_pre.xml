@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:DataReadAttr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:id="@+id/write_ordernumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="订单编号"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal
+            android:id="@+id/write_tombtype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="墓型"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal
+            android:id="@+id/write_tombattr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="墓穴属性"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:id="@+id/write_planprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="挂牌价"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:id="@+id/write_dealprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="成交价"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal
+            android:id="@+id/write_payinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="支付情况"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="金额"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="公墓接待"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="赠送服务"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="自选附属服务"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="备注"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dimen_266dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginBottom="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_32dp"
+            android:background="@drawable/zhy_button_state_2"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <TextView
+            android:layout_width="@dimen/dimen_266dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginBottom="@dimen/dimen_32dp"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_32dp"
+            android:background="@drawable/zhy_button_state_5"
+            android:gravity="center"
+            android:text="填写逝者信息"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
+    </LinearLayout>
+
+</LinearLayout>
