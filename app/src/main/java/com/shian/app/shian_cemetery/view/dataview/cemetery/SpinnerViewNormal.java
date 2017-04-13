@@ -1,6 +1,7 @@
 package com.shian.app.shian_cemetery.view.dataview.cemetery;
 
 import android.content.Context;
+import android.opengl.Visibility;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
@@ -62,6 +63,7 @@ public class SpinnerViewNormal extends BaseWriteView {
 
     private void initData() {
         mTVTitleName.setText(titleName);
+        mTVTitleName.setEms(ems);
 //        mETInput.setInputType(inputType);
         if (isImportant) {
             mTVIsImportant.setVisibility(VISIBLE);
@@ -70,19 +72,6 @@ public class SpinnerViewNormal extends BaseWriteView {
         }
     }
 
-
-    /**
-     * 初始化数据
-     */
-    public void initSpinner(final String dictCode) {
-        mTVMask.setVisibility(VISIBLE);
-        mTVMask.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSelectData(dictCode);
-            }
-        });
-    }
 
     /**
      * 获取后台字典数据
@@ -120,6 +109,33 @@ public class SpinnerViewNormal extends BaseWriteView {
 
     /**
      * 初始化数据
+     */
+    public void initSpinner() {
+        mTVMask.setVisibility(VISIBLE);
+        mTVMask.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (spinnerCallBack != null)
+                    spinnerCallBack.check(SpinnerViewNormal.this);
+            }
+        });
+    }
+
+    /**
+     * 初始化数据
+     */
+    public void initSpinner(final String dictCode) {
+        mTVMask.setVisibility(VISIBLE);
+        mTVMask.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSelectData(dictCode);
+            }
+        });
+    }
+
+    /**
+     * 初始化数据
      *
      * @param arrayId
      */
@@ -134,7 +150,7 @@ public class SpinnerViewNormal extends BaseWriteView {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinnerCallBack != null) {
-                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString());
+                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString(), SpinnerViewNormal.this);
                 }
             }
 
@@ -159,7 +175,7 @@ public class SpinnerViewNormal extends BaseWriteView {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinnerCallBack != null) {
-                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString());
+                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString(), SpinnerViewNormal.this);
                 }
             }
 
@@ -168,6 +184,7 @@ public class SpinnerViewNormal extends BaseWriteView {
 
             }
         });
+        showSpinner();
         hasData = true;
     }
 
@@ -178,7 +195,7 @@ public class SpinnerViewNormal extends BaseWriteView {
      * @return
      */
     public String getData() {
-        if(province_adapter==null){
+        if (province_adapter == null) {
             return "";
         }
         return province_adapter.getItem(mSpinner.getSelectedItemPosition()).toString();
@@ -217,10 +234,51 @@ public class SpinnerViewNormal extends BaseWriteView {
         mSpinner.setSelection(position);
     }
 
+    public void clearData() {
+        province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, new String[]{});
+        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(province_adapter);
+        mSpinner.setSelection(0);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinnerCallBack != null) {
+                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString(), SpinnerViewNormal.this);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        hasData = false;
+        setMaskVis(VISIBLE);
+    }
+
+    /**
+     * 设置遮罩层
+     *
+     * @param state
+     */
+    public void setMaskVis(int state) {
+        mTVMask.setVisibility(state);
+    }
+
     /**
      * 监听
      */
     public interface SpinnerCallBack {
-        void itemSelected(int position, String name);
+        void itemSelected(int position, String name, SpinnerViewNormal viewNormal);
+
+        void check(SpinnerViewNormal view);
     }
+
+    /**
+     * 展示下拉
+     */
+    public void showSpinner(){
+        mSpinner.performClick();
+    }
+
 }

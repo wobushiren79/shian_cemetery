@@ -19,6 +19,7 @@ public abstract class BaseWriteView extends LinearLayout {
     protected boolean isImportant;
     protected boolean isLonger;
     protected int inputType;//1普通，2数字,14邮箱
+    protected int ems;
 
 
     public BaseWriteView(Context context) {
@@ -36,7 +37,9 @@ public abstract class BaseWriteView extends LinearLayout {
         isImportant = typedArray.getBoolean(R.styleable.DataReadAttr_isImportant, false);
         inputType = typedArray.getInt(R.styleable.DataReadAttr_inputType, InputType.TYPE_CLASS_TEXT);
         isLonger = typedArray.getBoolean(R.styleable.DataReadAttr_isLonger,false);
+        ems=typedArray.getInt(R.styleable.DataReadAttr_ems,7);
         typedArray.recycle();
+
     }
 
 

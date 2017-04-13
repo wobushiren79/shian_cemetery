@@ -5,6 +5,7 @@
         <attr name="hintContent" format="string" />
         <attr name="isShowHint" format="boolean" />
 
+        <attr name="ems" format="integer"/>
         <attr name="isImportant" format="boolean" />
         <attr name="inputType" format="integer" />
         <attr name="isLonger" format="boolean" />

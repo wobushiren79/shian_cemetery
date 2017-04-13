@@ -64,6 +64,17 @@ public class TalkSuccessActivity extends BaseActivity {
 
         }
         if (view != null) {
+            view.setCallBack(new BaseCemeteryInfo.CallBack() {
+                @Override
+                public void next(BaseCemeteryInfo view) {
+                    if (view == null) {
+                        finish();
+                    } else {
+                        addContent(view);
+                    }
+                }
+
+            });
             addContent(view);
         } else {
             setTitle("数据读取错误", BaseTitleEnum.BACKNORMALTITLE.getTitleType());

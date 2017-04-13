@@ -189,8 +189,9 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         CemeteryOrderModel data = listData.get(position);
         if (data.getBespeakStatus() == CemeteryOrderStateEnum.unProcess.getCode()) {
             return 0;
-        } else if (data.getBespeakStatus() == CemeteryOrderStateEnum.accepted.getCode() ||
-                data.getBespeakStatus() == CemeteryOrderStateEnum.talkFail.getCode()) {
+        } else if (data.getBespeakStatus() == CemeteryOrderStateEnum.accepted.getCode()
+                || data.getBespeakStatus() == CemeteryOrderStateEnum.talkFail.getCode()
+                || data.getBespeakStatus() == CemeteryOrderStateEnum.talkAgain.getCode()) {
             return 1;
         } else {
             return 2;
@@ -315,6 +316,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
 
     /**
      * 查看详情界面
+     *
      * @param model
      */
     private void orderInfo(CemeteryOrderModel model) {

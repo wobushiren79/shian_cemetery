@@ -6,14 +6,23 @@ import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.MAccountManager;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
+import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryRejectParams;
 import com.shian.app.shian_cemetery.http.params.HpGetDictSelectParams;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
+import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessContract;
+import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessAgentMan;
+import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessDeadMan;
+import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
+import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessContract;
+import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessAgentMan;
+import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessDeadMan;
 import com.shian.app.shian_cemetery.http.result.HrGetDictSelectData;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
+import com.shian.app.shian_cemetery.http.result.HrOrderIdResult;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -46,6 +55,12 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
+    public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler) {
+        excutor.requestPost(context, "marketing/cemetery/structure/list", HrGetCemeteryStructure.class, params,
+                handler, true);
+    }
+
+    @Override
     public void acceptCemetery(Context context, HpCetemeryAcceptParams params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/talk/accept", Object.class, params,
                 handler);
@@ -67,6 +82,42 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkDataParams params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/talk/saveTalkPlan", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getCemeteryTalkSuccessContract(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessContract> handler) {
+        excutor.requestPost(context, "marketing/order/buycemetery/get", HrGetCemeteryTalkSuccessContract.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveCemeteryTalkSuccessContract(Context context, HpSaveCemeteryTalkSuccessContract params, HttpResponseHandler<HrOrderIdResult> handler) {
+        excutor.requestPost(context, "marketing/order/buycemetery/save/or/update", HrOrderIdResult.class, params,
+                handler);
+    }
+
+    @Override
+    public void getCemeteryTalkSuccessDeadMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan> handler) {
+        excutor.requestPost(context, "marketing/order/deadinfo/get", HrGetCemeteryTalkSuccessDeadMan.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveCemeteryTalkSuccessDeadMan(Context context, HpSaveCemeteryTalkSuccessDeadMan params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "marketing/order/deadinfo/save/or/update", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getCemeteryTalkSuccessAgentMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessAgentMan> handler) {
+        excutor.requestPost(context, "marketing/order/agentinfo/get", HrGetCemeteryTalkSuccessAgentMan.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "marketing/order/agentinfo/save/or/update", Object.class, params,
                 handler);
     }
 }

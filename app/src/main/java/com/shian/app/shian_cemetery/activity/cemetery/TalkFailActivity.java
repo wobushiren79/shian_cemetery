@@ -81,14 +81,20 @@ public class TalkFailActivity extends BaseActivity {
 
 
         mWriteResult.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
+
             @Override
-            public void itemSelected(int position, String name) {
+            public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
                 //预约二次洽谈
                 if (position == 0) {
                     mLLOtherInfo.setVisibility(View.GONE);
                 } else {
                     mLLOtherInfo.setVisibility(View.VISIBLE);
                 }
+            }
+
+            @Override
+            public void check(SpinnerViewNormal view) {
+
             }
         });
     }

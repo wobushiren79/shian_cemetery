@@ -11,15 +11,16 @@ import android.widget.LinearLayout;
 
 public abstract class BaseCemeteryInfo extends LinearLayout {
     long orderId = -1;
-    long bespeakId = -1;
+    long beSpeakId = -1;
     View view;
     CallBack callBack;
 
-    public BaseCemeteryInfo(Context context, long orderId, long bespeakId, int layoutId) {
+    public BaseCemeteryInfo(Context context, long orderId, long beSpeakId, int layoutId) {
         super(context);
         this.orderId = orderId;
-        this.bespeakId = bespeakId;
+        this.beSpeakId = beSpeakId;
         view = View.inflate(context, layoutId, this);
+        
         initView();
         initData();
         getData();
@@ -50,8 +51,6 @@ public abstract class BaseCemeteryInfo extends LinearLayout {
     abstract void initData();
 
     public interface CallBack {
-        void next();
-
-        void back();
+        void next(BaseCemeteryInfo view);
     }
 }
