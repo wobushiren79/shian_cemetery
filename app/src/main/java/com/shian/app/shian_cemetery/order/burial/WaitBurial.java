@@ -63,7 +63,9 @@ public class WaitBurial extends LinearLayout {
             mRLContent.removeAllViews();
             RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
             BurialListLayout listLayout = new BurialListLayout(getContext());
+
             listLayout.setLayoutParams(layoutParams);
             if(code== OrderBurialDateEnum.CUSTOM.getCode()){
                 listLayout.setSearch(true);

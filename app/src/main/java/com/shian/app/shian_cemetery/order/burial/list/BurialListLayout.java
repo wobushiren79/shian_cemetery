@@ -14,7 +14,13 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.baseadapter.BurialListPullAdapter;
+import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
+import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
+import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
+import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
 import com.shian.app.shian_cemetery.tools.Utils;
+
+import okhttp3.Request;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 
@@ -42,6 +48,7 @@ public class BurialListLayout extends LinearLayout {
         view = View.inflate(context, R.layout.layout_burial_list, this);
         initView();
         initData();
+        getData();
     }
 
     private void initView() {
@@ -157,4 +164,30 @@ public class BurialListLayout extends LinearLayout {
         return translateAnimation;
     }
 
+    /**
+     * 获取数据
+     */
+    private void getData() {
+        HpBurialDataListParams params = new HpBurialDataListParams();
+        params.setBuryStatus(0);
+        params.setStoneStatus(0);
+        params.setDateType(0);
+        params.setDate("2017-04-13 15:27:51");
+        MHttpManagerFactory.getAccountManager().getBurialDataList(getContext(), params, new HttpResponseHandler<HrGetBurialListData>() {
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetBurialListData result) {
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+    }
 }

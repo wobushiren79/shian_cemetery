@@ -31,7 +31,7 @@
                 android:layout_height="@dimen/dimen_129dp"
                 android:layout_centerInParent="true"
                 android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/zhy_userinfo_icon"
                 app:riv_border_color="#ffffff"
                 app:riv_border_width="2dp"
                 app:riv_oval="true" />
@@ -50,7 +50,7 @@
                 android:layout_marginRight="@dimen/dimen_18dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="姓名栏"
+                android:text="姓名"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_32dp" />
 
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
-                android:text="00"
+                android:text="0"
                 android:textColor="@color/zhy_text_color_1"
                 android:textSize="@dimen/dimen_72dp" />
         </LinearLayout>
@@ -148,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
-                android:text="00"
+                android:text="0"
                 android:textColor="@color/zhy_text_color_1"
                 android:textSize="@dimen/dimen_72dp" />
         </LinearLayout>
@@ -180,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
-                android:text="00"
+                android:text="0"
                 android:textColor="@color/zhy_text_color_1"
                 android:textSize="@dimen/dimen_72dp" />
         </LinearLayout>

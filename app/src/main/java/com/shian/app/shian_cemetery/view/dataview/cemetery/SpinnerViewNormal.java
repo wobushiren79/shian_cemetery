@@ -30,7 +30,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     TextView mTVMask;
     Spinner mSpinner;
 
-    boolean hasData = false;
+    public boolean hasData = false;//是否有预加载数据
     private SpinnerCallBack spinnerCallBack;
     private ArrayAdapter<CharSequence> province_adapter;
 
@@ -96,7 +96,6 @@ public class SpinnerViewNormal extends BaseWriteView {
                     }
                     initSpinner(array);
                     mTVMask.setVisibility(GONE);
-                    hasData = true;
                 }
             }
 
@@ -142,23 +141,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     public void initSpinner(int arrayId) {
         province_adapter = ArrayAdapter.createFromResource(getContext(), arrayId,
                 R.layout.textview_spinner);
-        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinner.setAdapter(province_adapter);
-        mSpinner.setSelection(0);
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (spinnerCallBack != null) {
-                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString(), SpinnerViewNormal.this);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        hasData = true;
+        initString();
     }
 
     /**
@@ -168,10 +151,40 @@ public class SpinnerViewNormal extends BaseWriteView {
      */
     public void initSpinner(String[] array) {
         province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, array);
+        initString();
+        showSpinner();
+    }
+
+    /**
+     * 初始化数据
+     *
+     * @param array
+     */
+    public void initSpinner(String[] array, String data) {
+        province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, array);
+        initString();
+        this.hasData = true;
+        setData(data);
+    }
+
+    /**
+     * 清空数据
+     */
+    public void clearData() {
+        province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, new String[]{});
+        initString();
+        setMaskVis(VISIBLE);
+    }
+
+    /**
+     * 初始化spinner
+     */
+    private void initString() {
         province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(province_adapter);
         mSpinner.setSelection(0);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinnerCallBack != null) {
@@ -181,13 +194,9 @@ public class SpinnerViewNormal extends BaseWriteView {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-        showSpinner();
-        hasData = true;
     }
-
 
     /**
      * 获取数据
@@ -234,28 +243,6 @@ public class SpinnerViewNormal extends BaseWriteView {
         mSpinner.setSelection(position);
     }
 
-    public void clearData() {
-        province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, new String[]{});
-        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinner.setAdapter(province_adapter);
-        mSpinner.setSelection(0);
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (spinnerCallBack != null) {
-                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString(), SpinnerViewNormal.this);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        hasData = false;
-        setMaskVis(VISIBLE);
-    }
-
     /**
      * 设置遮罩层
      *
@@ -277,7 +264,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     /**
      * 展示下拉
      */
-    public void showSpinner(){
+    public void showSpinner() {
         mSpinner.performClick();
     }
 

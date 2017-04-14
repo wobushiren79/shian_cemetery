@@ -76,11 +76,12 @@ public class HttpRequestExecutor {
             String session = SharePerfrenceUtils.getSessionShare(context);
             setCookie(session);
         }
+
         PostStringBuilder getBuilder = OkHttpUtils.postString();
         getBuilder.url(BaseURL.JAVA_URL + "/" + method);
         getBuilder.headers(header);
         getBuilder.content(params.getContentJson());
-
+        Log.i("tag", BaseURL.JAVA_URL + "/" + method);
         RequestCall requestCall = getBuilder.build();
         requestCall.execute(new StringCallback() {
             @Override

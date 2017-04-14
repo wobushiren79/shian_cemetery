@@ -7,11 +7,7 @@ package com.shian.app.shian_cemetery.http.result;
 public class HrGetCemeteryTalkSuccessContract {
     private String orderNum;//订单编号
     private boolean saveCan;//售后是否提交过（true:提交过。false:没有提交过）
-    private String cemeteryName;//	公墓名称
-    private String garden;//苑
-    private String district;//区
-    private String platoon;//排
-    private String mark;//号
+
     private String cemeteryType;//墓型
     private String cemeteryProperties;//墓穴属性
     private String planSale;//	挂牌价
@@ -22,51 +18,17 @@ public class HrGetCemeteryTalkSuccessContract {
     private String freeService;//赠送服务
     private String choiceService;//自选服务
     private String remark;//备注
+
     private long cemeteryId;//	公墓名称 id
     private long tombId;//苑 id
     private long parkId;//	区 id
     private long rowNumber;//	排 id
     private long tombPositionId;//	号 id
 
-    public long getCemeteryId() {
-        return cemeteryId;
-    }
-
-    public void setCemeteryId(long cemeteryId) {
-        this.cemeteryId = cemeteryId;
-    }
-
-    public long getTombId() {
-        return tombId;
-    }
-
-    public void setTombId(long tombId) {
-        this.tombId = tombId;
-    }
-
-    public long getParkId() {
-        return parkId;
-    }
-
-    public void setParkId(long parkId) {
-        this.parkId = parkId;
-    }
-
-    public long getRowNumber() {
-        return rowNumber;
-    }
-
-    public void setRowNumber(long rowNumber) {
-        this.rowNumber = rowNumber;
-    }
-
-    public long getTombPositionId() {
-        return tombPositionId;
-    }
-
-    public void setTombPositionId(long tombPositionId) {
-        this.tombPositionId = tombPositionId;
-    }
+    private String cemeteryName;    //		公墓名称
+    private String tombName;    //	墓园(苑)名称
+    private String parkName;    //	园区名称
+    private int num;//	墓位号
 
     public String getOrderNum() {
         return orderNum;
@@ -82,46 +44,6 @@ public class HrGetCemeteryTalkSuccessContract {
 
     public void setSaveCan(boolean saveCan) {
         this.saveCan = saveCan;
-    }
-
-    public String getCemeteryName() {
-        return cemeteryName;
-    }
-
-    public void setCemeteryName(String cemeteryName) {
-        this.cemeteryName = cemeteryName;
-    }
-
-    public String getGarden() {
-        return garden;
-    }
-
-    public void setGarden(String garden) {
-        this.garden = garden;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getPlatoon() {
-        return platoon;
-    }
-
-    public void setPlatoon(String platoon) {
-        this.platoon = platoon;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
     }
 
     public String getCemeteryType() {
@@ -202,5 +124,77 @@ public class HrGetCemeteryTalkSuccessContract {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public long getCemeteryId() {
+        return cemeteryId;
+    }
+
+    public void setCemeteryId(long cemeteryId) {
+        this.cemeteryId = cemeteryId;
+    }
+
+    public long getTombId() {
+        return tombId;
+    }
+
+    public void setTombId(long tombId) {
+        this.tombId = tombId;
+    }
+
+    public long getParkId() {
+        return parkId;
+    }
+
+    public void setParkId(long parkId) {
+        this.parkId = parkId;
+    }
+
+    public long getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(long rowNumber) {
+        this.rowNumber = rowNumber;
+    }
+
+    public long getTombPositionId() {
+        return tombPositionId;
+    }
+
+    public void setTombPositionId(long tombPositionId) {
+        this.tombPositionId = tombPositionId;
+    }
+
+    public String getCemeteryName() {
+        return cemeteryName;
+    }
+
+    public void setCemeteryName(String cemeteryName) {
+        this.cemeteryName = cemeteryName;
+    }
+
+    public String getTombName() {
+        return tombName;
+    }
+
+    public void setTombName(String tombName) {
+        this.tombName = tombName;
+    }
+
+    public String getParkName() {
+        return parkName;
+    }
+
+    public void setParkName(String parkName) {
+        this.parkName = parkName;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

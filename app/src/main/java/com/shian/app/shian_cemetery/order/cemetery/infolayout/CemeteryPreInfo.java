@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.activity.cemetery.TalkSuccessActivity;
+import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.CemeteryLocationEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -59,7 +61,29 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
 
                     @Override
                     public void onSuccess(HrGetCemeteryTalkSuccessContract result) {
-
+                        mWriteLocationDetails.setData(result);
+                        if (result.getOrderNum() != null)
+                            mWriteOrderNumber.setData(result.getOrderNum());
+                        if (result.getCemeteryType() != null)
+                            mWriteTombType.setData(result.getCemeteryType());
+                        if (result.getCemeteryProperties() != null)
+                            mWriteTombAttr.setData(result.getCemeteryProperties());
+                        if (result.getPlanSale() != null)
+                            mWritePlanPrice.setData(result.getPlanSale());
+                        if (result.getSaleMoney() != null)
+                            mWriteDealPrice.setData(result.getSaleMoney());
+                        if (result.getPayState() != null)
+                            mWritePayInfo.setData(result.getPayState());
+                        if (result.getMoneyPay() != null)
+                            mWritePayMoney.setData(result.getMoneyPay());
+                        if (result.getCemeteryReceive() != null)
+                            mWriteCemeteryReception.setData(result.getCemeteryReceive());
+                        if (result.getFreeService() != null)
+                            mWriteFreeGift.setData(result.getFreeService());
+                        if (result.getChoiceService() != null)
+                            mWriteChoiceService.setData(result.getChoiceService());
+                        if (result.getRemark() != null)
+                            mWriteRemark.setData(result.getRemark());
                     }
 
                     @Override
@@ -78,6 +102,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         long locationAreaId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONAREA.getCode());
         long locationRowId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONROW.getCode());
         long locationNumId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONNUM.getCode());
+
         if (cemeteryNameId == -1) {
             ToastUtils.showShortToast(getContext(), "还没有选择公墓");
             return;
@@ -128,12 +153,13 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             @Override
             public void onSuccess(HrOrderIdResult result) {
                 if (callBack != null)
-                    callBack.next(new CemeteryDeadManInfo(getContext(), beSpeakId, result.getOrderId()));
+                    callBack.next(new CemeteryDeadManInfo(getContext(),result.getOrderId(), beSpeakId));
+                ToastUtils.showShortToast(getContext(), "提交成功");
             }
 
             @Override
             public void onError(String message) {
-
+                ToastUtils.showShortToast(getContext(), "提交失败");
             }
         });
     }
@@ -156,6 +182,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
         mTVSubmit = (TextView) view.findViewById(R.id.tv_submit);
 
+        mWritePlanPrice.setDisable(false);
         mTVSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +194,12 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             public void onClick(View v) {
                 if (callBack != null)
                     callBack.next(null);
+            }
+        });
+        mWriteLocationDetails.setCallBack(new SpinnerCemeteryLocation.CallBack() {
+            @Override
+            public void changePrice(String price) {
+                mWritePlanPrice.setData(price);
             }
         });
     }

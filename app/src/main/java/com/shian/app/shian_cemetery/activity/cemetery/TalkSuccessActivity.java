@@ -9,6 +9,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.CemeteryInfoStepsEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
+import com.shian.app.shian_cemetery.fragment.CemeteryOrderFragment;
 import com.shian.app.shian_cemetery.order.cemetery.infolayout.BaseCemeteryInfo;
 import com.shian.app.shian_cemetery.order.cemetery.infolayout.CemeteryAgentManInfo;
 import com.shian.app.shian_cemetery.order.cemetery.infolayout.CemeteryDeadManInfo;
@@ -63,23 +64,35 @@ public class TalkSuccessActivity extends BaseActivity {
         } else if (steps == CemeteryInfoStepsEnum.FILLAGENTMAN.getCode()) {
 
         }
+        setInfoCallBack(view);
+
+    }
+
+    private void setInfoCallBack(BaseCemeteryInfo view) {
         if (view != null) {
             view.setCallBack(new BaseCemeteryInfo.CallBack() {
                 @Override
                 public void next(BaseCemeteryInfo view) {
                     if (view == null) {
+                        CemeteryOrderFragment.isRefesh = true;
                         finish();
                     } else {
+                        if (CemeteryPreInfo.class.isInstance(view)) {
+                            setTitle("购墓信息", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+                        } else if (CemeteryDeadManInfo.class.isInstance(view)) {
+                            setTitle("逝者信息", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+                        } else if (CemeteryAgentManInfo.class.isInstance(view)) {
+                            setTitle("经办人信息", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+                        }
+                        setInfoCallBack(view);
                         addContent(view);
                     }
                 }
-
             });
             addContent(view);
         } else {
             setTitle("数据读取错误", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         }
-
     }
 
     /**

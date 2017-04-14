@@ -87,4 +87,12 @@ public class EditTextViewNormal extends BaseWriteView {
         return mETInput.getText().toString();
     }
 
+    /**
+     * 是否禁止点击
+     *
+     * @param isD
+     */
+    public void setDisable(boolean isD) {
+        mETInput.setEnabled(isD);
+    }
 }

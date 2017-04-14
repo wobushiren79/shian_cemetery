@@ -15,8 +15,12 @@ import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseAppliction;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.common.local.LocationService;
+import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
+import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
+
+import okhttp3.Request;
 
 public class MainActivity extends BaseActivity {
 
@@ -61,6 +65,22 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         locationService.unregisterListener(mListener); // 注销掉监听
         locationService.stop(); // 停止定位服务
+        MHttpManagerFactory.getAccountManager().loginOut(this, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -143,4 +163,5 @@ public class MainActivity extends BaseActivity {
         }
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
     }
+
 }

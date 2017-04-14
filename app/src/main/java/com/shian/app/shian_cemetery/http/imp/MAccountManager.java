@@ -2,8 +2,10 @@ package com.shian.app.shian_cemetery.http.imp;
 
 import android.content.Context;
 
+import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 import com.shian.app.shian_cemetery.http.base.HttpManager;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
+import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
@@ -14,6 +16,8 @@ import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessContract;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessAgentMan;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessDeadMan;
+import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
+import com.shian.app.shian_cemetery.http.result.HrGetBurialNumber;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessContract;
@@ -22,6 +26,7 @@ import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessDeadMan;
 import com.shian.app.shian_cemetery.http.result.HrGetDictSelectData;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 import com.shian.app.shian_cemetery.http.result.HrOrderIdResult;
+import com.shian.app.shian_cemetery.http.result.HrUserInfo;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -37,6 +42,24 @@ public interface MAccountManager extends HttpManager {
      */
     void loginCemetery(Context context, HpLoginParams params,
                        HttpResponseHandler<HrLoginResult> handler);
+
+    /**
+     * 退出登陆
+     *
+     * @param context
+     * @param handler
+     */
+    public void loginOut(Context context,
+                         HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取个人信息
+     *
+     * @param context
+     * @param handler
+     */
+    public void getUserInfo(Context context,
+                            HttpResponseHandler<HrUserInfo> handler);
 
     /**
      * 字典查询
@@ -121,4 +144,20 @@ public interface MAccountManager extends HttpManager {
      */
     void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler);
 
+    /**
+     * 获取安葬工订单数量
+     *
+     * @param context
+     * @param handler
+     */
+    void getBurialDataNumber(Context context, HttpResponseHandler<HrGetBurialNumber> handler);
+
+    /**
+     * 获取安葬工列表
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getBurialDataList(Context context, HpBurialDataListParams params, HttpResponseHandler<HrGetBurialListData> handler);
 }
