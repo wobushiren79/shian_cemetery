@@ -62,7 +62,7 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
                 if (result.getAgentmanPhone() != null)
                     mAgentManPhone.setData(result.getAgentmanPhone());
                 if (result.getRelation() != null)
-                    mRelation.setData(result.getRelation());
+                    mRelation.setDataDict(result.getRelation());
                 if (result.getAgentmanLocation() != null)
                     mAgentManLocation.setData(result.getAgentmanLocation());
                 if (result.getAgentmanCardId() != null)

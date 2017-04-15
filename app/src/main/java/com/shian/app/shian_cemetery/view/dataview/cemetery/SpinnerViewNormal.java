@@ -30,6 +30,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     TextView mTVMask;
     Spinner mSpinner;
 
+    private String dictCode;
     public boolean hasData = false;//是否有预加载数据
     private SpinnerCallBack spinnerCallBack;
     private ArrayAdapter<CharSequence> province_adapter;
@@ -78,7 +79,7 @@ public class SpinnerViewNormal extends BaseWriteView {
      *
      * @param dictCode
      */
-    private void getSelectData(String dictCode) {
+    private void getSelectData(String dictCode, final String isShowSpinnerData) {
         HpGetDictSelectParams params = new HpGetDictSelectParams();
         params.setDictCode(dictCode);
         MHttpManagerFactory.getAccountManager().getDictSelect(getContext(), params, new HttpResponseHandler<HrGetDictSelectData>() {
@@ -95,6 +96,11 @@ public class SpinnerViewNormal extends BaseWriteView {
                         array[i] = result.getItems().get(i).getText();
                     }
                     initSpinner(array);
+                    if (isShowSpinnerData != null) {
+                        setData(isShowSpinnerData);
+                    } else {
+                        showSpinner();
+                    }
                     mTVMask.setVisibility(GONE);
                 }
             }
@@ -105,6 +111,16 @@ public class SpinnerViewNormal extends BaseWriteView {
             }
         });
     }
+
+
+    /**
+     * 有数据时加载字典
+     */
+    public void setDataDict(String data) {
+        if (data != null && dictCode != null)
+            getSelectData(dictCode, data);
+    }
+
 
     /**
      * 初始化数据
@@ -124,11 +140,12 @@ public class SpinnerViewNormal extends BaseWriteView {
      * 初始化数据
      */
     public void initSpinner(final String dictCode) {
+        this.dictCode = dictCode;
         mTVMask.setVisibility(VISIBLE);
         mTVMask.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSelectData(dictCode);
+                getSelectData(dictCode, null);
             }
         });
     }
@@ -152,7 +169,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     public void initSpinner(String[] array) {
         province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, array);
         initString();
-        showSpinner();
+
     }
 
     /**
@@ -161,8 +178,11 @@ public class SpinnerViewNormal extends BaseWriteView {
      * @param array
      */
     public void initSpinner(String[] array, String data) {
-        province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, array);
-        initString();
+        initSpinner(array);
+        if (data == null) {
+            showSpinner();
+            return;
+        }
         this.hasData = true;
         setData(data);
     }

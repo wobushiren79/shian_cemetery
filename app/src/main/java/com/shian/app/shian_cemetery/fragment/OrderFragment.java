@@ -27,7 +27,7 @@ public class OrderFragment extends BaseFragment {
     LinearLayout mLLOrder;
 
     TitleTabChangeReceiver tabChangeReceiver;
-
+    public static boolean isRefesh = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_order, null, false);

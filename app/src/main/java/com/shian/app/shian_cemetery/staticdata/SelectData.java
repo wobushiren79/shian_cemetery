@@ -17,4 +17,7 @@ public class SelectData {
     public final static String[] CEMETERY_ATTRIBUTE = {"非寿墓", "预留寿位", "寿墓", "其它"};
     public final static String[] CEMETERY_PAYSTATE = {"定金", "全款"};
     public final static String[] CEMETERY_SEX = {"男", "女", "未知"};
+
+    public final static String[] BURIAL_ODDS = {"1","0.5"};
+    public final static String[] BURIAL_STATE= {"骨灰安葬", "衣冠", "其它"};
 }

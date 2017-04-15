@@ -33,7 +33,7 @@ public class BaseActivity extends FragmentActivity {
 
     public DisplayMetrics metrics = new DisplayMetrics();
 
-    FrameLayout mFLContent;
+    public FrameLayout mFLContent;
     RelativeLayout mRLHead;
 
     private OnPhotoPickerListener mOnPhotoPickerListener;

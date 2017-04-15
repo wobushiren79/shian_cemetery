@@ -13,7 +13,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.cemetery.InfoDetailsActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkFailActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkSuccessActivity;
-import com.shian.app.shian_cemetery.appenum.CemeteryOrderStateEnum;
+import com.shian.app.shian_cemetery.appenum.CemeteryBeSpeakStateEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.bean.CemeteryOrderModel;
@@ -187,11 +187,12 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
         CemeteryOrderModel data = listData.get(position);
-        if (data.getBespeakStatus() == CemeteryOrderStateEnum.unProcess.getCode()) {
+        if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unProcess.getCode()) {
             return 0;
-        } else if (data.getBespeakStatus() == CemeteryOrderStateEnum.accepted.getCode()
-                || data.getBespeakStatus() == CemeteryOrderStateEnum.talkFail.getCode()
-                || data.getBespeakStatus() == CemeteryOrderStateEnum.talkAgain.getCode()) {
+        } else if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.accepted.getCode()
+                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkFail.getCode()
+                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkAgain.getCode()
+                ||data.getBespeakStatus()==CemeteryBeSpeakStateEnum.talkSuccess.getCode()) {
             return 1;
         } else {
             return 2;

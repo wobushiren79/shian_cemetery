@@ -18,6 +18,7 @@ import com.shian.app.shian_cemetery.common.local.LocationService;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
 
 import okhttp3.Request;
@@ -164,4 +165,8 @@ public class MainActivity extends BaseActivity {
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

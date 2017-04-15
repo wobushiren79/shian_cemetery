@@ -82,6 +82,7 @@ public class HttpRequestExecutor {
         getBuilder.headers(header);
         getBuilder.content(params.getContentJson());
         Log.i("tag", BaseURL.JAVA_URL + "/" + method);
+        Log.e("tag", params.getContentJson());
         RequestCall requestCall = getBuilder.build();
         requestCall.execute(new StringCallback() {
             @Override
@@ -160,10 +161,16 @@ public class HttpRequestExecutor {
             onErrorCallBack(responseHandler, "网络未连接", context);
             return;
         }
+        if (!method.contains("doLogin")) {
+            String session = SharePerfrenceUtils.getSessionShare(context);
+            setCookie(session);
+        }
         GetBuilder getBuilder = OkHttpUtils.get();
-        getBuilder.url(method);
+        getBuilder.url(BaseURL.JAVA_URL + "/" + method);
         getBuilder.headers(header);
         getBuilder.params(params.getMapParams());
+        Log.i("tag", BaseURL.JAVA_URL + "/" + method);
+        Log.e("tag", params.getContentJson());
         RequestCall requestCall = getBuilder.build();
         requestCall.execute(new StringCallback() {
             @Override
@@ -173,12 +180,18 @@ public class HttpRequestExecutor {
                     Log.e("tag", errorMessage);
                 }
                 onErrorCallBack(responseHandler, errorMessage, context);
+                if (dialog != null)
+                    dialog.cancel();
+                dialog = null;
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.i("tag", response);
                 dataToJson(context, response, data, responseHandler);
+                if (dialog != null)
+                    dialog.cancel();
+                dialog = null;
             }
 
 
@@ -190,6 +203,19 @@ public class HttpRequestExecutor {
                 }
             }
         });
+    }
+
+    public <T> void requestGet(final Context context,
+                               final String method,
+                               final Class<T> data,
+                               final BaseHttpParams params,
+                               final HttpResponseHandler<T> responseHandler,
+                               final boolean isShowDialog) {
+        if (isShowDialog && dialog == null) {
+            dialog = new CustomDialog(context);
+            dialog.show();
+        }
+        requestGet(context, method, data, params, responseHandler);
     }
 
     /**

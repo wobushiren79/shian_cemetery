@@ -6,6 +6,7 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 import com.shian.app.shian_cemetery.http.base.HttpManager;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
+import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
@@ -16,6 +17,8 @@ import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessContract;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessAgentMan;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessDeadMan;
+import com.shian.app.shian_cemetery.http.params.HpSaveSetteleDataParams;
+import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialNumber;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
@@ -160,4 +163,15 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     void getBurialDataList(Context context, HpBurialDataListParams params, HttpResponseHandler<HrGetBurialListData> handler);
+
+    /**
+     * 获取安葬工订单详情
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getBurialDetails(Context context, HpBurialIdParams params, HttpResponseHandler<HrGetBurialDetails> handler);
+
+    void saveSetteleData(Context context, HpSaveSetteleDataParams params, HttpResponseHandler<Object> handler);
 }

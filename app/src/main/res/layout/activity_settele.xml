@@ -89,11 +89,16 @@
                 android:textColor="@color/dimgray"
                 android:textSize="@dimen/dimen_32dp" />
 
-            <com.shian.app.shian_cemetery.view.dataview.burial.PhotoUpDataLayout
+            <LinearLayout
+                android:id="@+id/ll_piccontent"
                 android:layout_width="@dimen/dimen_688dp"
-                android:layout_height="@dimen/dimen_300dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/dimen_32dp"></com.shian.app.shian_cemetery.view.dataview.burial.PhotoUpDataLayout>
+                android:layout_marginBottom="@dimen/dimen_32dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"

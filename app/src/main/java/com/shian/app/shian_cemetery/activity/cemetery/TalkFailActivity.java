@@ -153,15 +153,15 @@ public class TalkFailActivity extends BaseActivity {
      */
     private void setData() {
         if (resultData.getPlanBuyCemetery() != null)
-            mWritePlanBuyType.setData(resultData.getPlanBuyCemetery());
+            mWritePlanBuyType.setDataDict(resultData.getPlanBuyCemetery());
         if (resultData.getUserOneState() != null)
-            mWriteDeadState1.setData(resultData.getUserOneState());
+            mWriteDeadState1.setDataDict(resultData.getUserOneState());
         if (resultData.getUserTwoState() != null)
-            mWriteDeadState2.setData(resultData.getUserTwoState());
+            mWriteDeadState2.setDataDict(resultData.getUserTwoState());
         if (resultData.getRelation() != null)
-            mWriteRelation.setData(resultData.getRelation());
+            mWriteRelation.setDataDict(resultData.getRelation());
         if (resultData.getTrafficWay() != null)
-            mWriteTraffic.setData(resultData.getTrafficWay());
+            mWriteTraffic.setDataDict(resultData.getTrafficWay());
         if (resultData.getPersonNum() != null)
             mWritePersonNum.setData(resultData.getPersonNum());
         if (resultData.getOrderTime() != null)

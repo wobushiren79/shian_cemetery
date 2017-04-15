@@ -7,6 +7,7 @@ import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.MAccountManager;
 import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
+import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
@@ -17,6 +18,8 @@ import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessContract;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessAgentMan;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessDeadMan;
+import com.shian.app.shian_cemetery.http.params.HpSaveSetteleDataParams;
+import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialNumber;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
@@ -150,4 +153,18 @@ public class MAccountManagerImpl implements MAccountManager {
         excutor.requestPost(context, "marketing/bury/getOrderDetailList", HrGetBurialListData.class, params,
                 handler);
     }
+
+    @Override
+    public void getBurialDetails(Context context, HpBurialIdParams params, HttpResponseHandler<HrGetBurialDetails> handler) {
+        excutor.requestGet(context, "marketing/bury/getOrderDetail", HrGetBurialDetails.class, params,
+                handler,true);
+    }
+
+    @Override
+    public void saveSetteleData(Context context, HpSaveSetteleDataParams params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "marketing/bury/updateBuriedPic", Object.class, params,
+                handler,true);
+    }
+
+
 }

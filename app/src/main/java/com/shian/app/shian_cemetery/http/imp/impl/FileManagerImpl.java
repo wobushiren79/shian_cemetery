@@ -1,23 +1,33 @@
 package com.shian.app.shian_cemetery.http.imp.impl;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 
+import com.shian.app.shian_cemetery.activity.LoginActivity;
+import com.shian.app.shian_cemetery.base.BaseAppliction;
 import com.shian.app.shian_cemetery.http.base.FileHttpResponseHandler;
+import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.FileManager;
 import com.shian.app.shian_cemetery.http.result.HrUploadFile;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.LogUtils;
+import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.codehaus.jackson.JsonNode;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.MediaType;
 import okhttp3.Request;
 
 public class FileManagerImpl implements FileManager {
@@ -42,48 +52,119 @@ public class FileManagerImpl implements FileManager {
 
     @Override
     public void upLoadFile(final Context context, String fileName, String path,
-                           final FileHttpResponseHandler<HrUploadFile> response) {
+                           final FileHttpResponseHandler<HrUploadFile> responseHandler) {
         File file = new File(path);
         String session = SharePerfrenceUtils.getSessionShare(context);
         setCookie(session);
         OkHttpUtils
-                .postFile()
+                .post()
+                .addFile(fileName, fileName, file)
+                .addHeader("Cookie", "sid=" + session)
+                .addHeader("systemType", "2")
                 .url(BaseURL.FILE_UPDATA)
-                .file(file)
-                .headers(header)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onBefore(Request request, int id) {
                         super.onBefore(request, id);
-                        if (response != null) {
-                            response.onStart();
+                        if (responseHandler != null) {
+                            responseHandler.onStart();
                         }
                     }
 
                     @Override
                     public void inProgress(float progress, long total, int id) {
                         super.inProgress(progress, total, id);
-                        if (response != null) {
-                            response.onProgress(total, progress);
+                        if (responseHandler != null) {
+                            responseHandler.onProgress(total, progress);
                         }
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         LogUtils.logV(response);
+                        dataToJson(context, response, HrUploadFile.class, responseHandler);
                     }
 
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         String errorMessage = e.getMessage();
-                        Log.e("tag", errorMessage);
-                        if (response != null) {
-                            response.onError(errorMessage);
+                        Log.e("tag", errorMessage+"");
+                        if (responseHandler != null) {
+                            responseHandler.onError(errorMessage);
                         }
                     }
                 });
     }
 
+    /**
+     * 数据处理
+     *
+     * @param context
+     * @param response
+     * @param data
+     * @param responseHandler
+     * @param <T>
+     */
+    private <T> void dataToJson(Context context, String response, final Class<T> data, FileHttpResponseHandler<T> responseHandler) {
+        if (response != null) {
+            try {
+                JsonNode node = ObjectMapperFactory.getInstance().readTree(new String(response));
+                String code = node.findValue("code").toString();
+                String errorMsg = node.findValue("message").toString();
+                if ("1000".equals(code)) {
+                    JsonNode jn = node.findValue("content");
+                    if (jn == null)
+                        responseHandler.onSuccess(null);
+                    else {
+                        T result = ObjectMapperFactory.getInstance().readValue(
+                                jn, data);
+                        responseHandler.onSuccess(result);
+                    }
+                } else if ("1009".equals(code)) {
+                    if (context instanceof Activity) {
+                        BaseAppliction.getApplication().exitAPP();
+                    }
+                    Intent in = new Intent(context, LoginActivity.class);
+                    context.startActivity(in);
+                } else {
+                    onErrorCallBack(responseHandler, errorMsg, context);
+                }
+            } catch (Exception e) {
+                onErrorCallBack(responseHandler, "", context);
+            }
+        }
+    }
+
+    /**
+     * 异常回调
+     *
+     * @param response
+     * @param error
+     * @param context
+     */
+    private <T> void onErrorCallBack(FileHttpResponseHandler<T> response, String error,
+                                     Context context) {
+        if (response != null && ((context instanceof Activity) && !((Activity) context)
+                .isFinishing()) && error != null) {
+            if (showToast(context, error)) {
+                response.onError(error);
+            }
+        }
+    }
+
+    /**
+     * 错误提示
+     *
+     * @param ctx
+     * @param msg
+     * @return
+     */
+    private boolean showToast(Context ctx, String msg) {
+        boolean flag = true;
+        if (!"".equals(msg))
+            ToastUtils.showShortToast(ctx, msg);
+        return flag;
+    }
 }

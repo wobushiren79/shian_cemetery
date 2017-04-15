@@ -74,7 +74,12 @@ public class BurialInfoLayout extends LinearLayout {
 
             @Override
             public void onSuccess(HrGetBurialNumber result) {
-
+                Long beriedThisMonth=result.getBeriedThisMonth();
+                Long unberyThisMonth=result.getUnberyThisMonth();
+                Long unberyToday=result.getUnberyToday();
+                mTVTodayNum.setText(unberyToday+"");
+                mTVMonthWaitNum.setText(unberyThisMonth+"");
+                mTVMonthReadyNum.setText(beriedThisMonth+"");
             }
 
             @Override

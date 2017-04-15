@@ -81,7 +81,10 @@
                 android:background="@color/zhy_line_7" />
 
             <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
+                android:id="@+id/spinner_burialodds"
                 android:layout_width="match_parent"
+                DataReadAttr:hintContent="1表示墓穴不再合墓\n0.5表示墓穴会合墓"
+                DataReadAttr:isShowHint="true"
                 android:layout_height="wrap_content"
                 DataReadAttr:titleName="安葬率"></com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout>
 
@@ -92,6 +95,7 @@
                 android:background="@color/zhy_line_7" />
 
             <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
+                android:id="@+id/spinner_burialstate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 DataReadAttr:titleName="落葬情况"></com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout>

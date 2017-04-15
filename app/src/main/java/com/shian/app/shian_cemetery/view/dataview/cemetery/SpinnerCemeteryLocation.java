@@ -212,11 +212,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
                 for (int i = 0; i < result.getItems().size(); i++) {
                     data[i] = result.getItems().get(i).getName();
                 }
-                if (location == null) {
-                    spinnerViewNormal.initSpinner(data);
-                } else {
-                    spinnerViewNormal.initSpinner(data, location);
-                }
+                spinnerViewNormal.initSpinner(data, location);
                 spinnerViewNormal.setMaskVis(View.GONE);
             }
 

@@ -9,7 +9,22 @@ import java.util.List;
  */
 
 public class HrGetBurialListData {
-   private List<BurialListDataModel> list;
-   private int total;
+    private List<BurialListDataModel> list;
+    private int total;
 
+    public List<BurialListDataModel> getList() {
+        return list;
+    }
+
+    public void setList(List<BurialListDataModel> list) {
+        this.list = list;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }

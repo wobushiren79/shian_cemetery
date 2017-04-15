@@ -65,15 +65,15 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
                         if (result.getOrderNum() != null)
                             mWriteOrderNumber.setData(result.getOrderNum());
                         if (result.getCemeteryType() != null)
-                            mWriteTombType.setData(result.getCemeteryType());
+                            mWriteTombType.setDataDict(result.getCemeteryType());
                         if (result.getCemeteryProperties() != null)
-                            mWriteTombAttr.setData(result.getCemeteryProperties());
+                            mWriteTombAttr.setDataDict(result.getCemeteryProperties());
                         if (result.getPlanSale() != null)
                             mWritePlanPrice.setData(result.getPlanSale());
                         if (result.getSaleMoney() != null)
                             mWriteDealPrice.setData(result.getSaleMoney());
                         if (result.getPayState() != null)
-                            mWritePayInfo.setData(result.getPayState());
+                            mWritePayInfo.setDataDict(result.getPayState());
                         if (result.getMoneyPay() != null)
                             mWritePayMoney.setData(result.getMoneyPay());
                         if (result.getCemeteryReceive() != null)

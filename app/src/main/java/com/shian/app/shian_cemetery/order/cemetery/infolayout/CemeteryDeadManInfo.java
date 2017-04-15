@@ -73,13 +73,13 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
                 if (result.getDeadmanTwoAge() != null)
                     mUserAge2.setData(result.getDeadmanTwoAge());
                 if (result.getDeadmanOneSex() != null)
-                    mUserSex1.setData(result.getDeadmanOneSex());
+                    mUserSex1.setDataDict(result.getDeadmanOneSex());
                 if (result.getDeadmanTwoSex() != null)
-                    mUserSex2.setData(result.getDeadmanTwoSex());
+                    mUserSex2.setDataDict(result.getDeadmanTwoSex());
                 if (result.getDeadmanOneState() != null)
-                    mUserState1.setData(result.getDeadmanOneState());
+                    mUserState1.setDataDict(result.getDeadmanOneState());
                 if (result.getDeadmanTwoState() != null)
-                    mUserState2.setData(result.getDeadmanTwoState());
+                    mUserState2.setDataDict(result.getDeadmanTwoState());
                 if (result.getDeadmanOneCardId() != null)
                     mUserCardId1.setData(result.getDeadmanOneCardId());
                 if (result.getDeadmanTwoCardId() != null)
