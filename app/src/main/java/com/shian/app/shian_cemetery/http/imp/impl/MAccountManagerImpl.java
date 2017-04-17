@@ -14,6 +14,7 @@ import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryRejectParams;
 import com.shian.app.shian_cemetery.http.params.HpGetDictSelectParams;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
+import com.shian.app.shian_cemetery.http.params.HpSaveBurialDataParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkDataParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessContract;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessAgentMan;
@@ -164,6 +165,11 @@ public class MAccountManagerImpl implements MAccountManager {
     public void saveSetteleData(Context context, HpSaveSetteleDataParams params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/bury/updateBuriedPic", Object.class, params,
                 handler,true);
+    }
+
+    @Override
+    public void saveBurialData(Context context, HpSaveBurialDataParams params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context,"marketing/bury/updateSignFile", Object.class, params,handler,true);
     }
 
 

@@ -164,9 +164,4 @@ public class MainActivity extends BaseActivity {
         }
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
     }
-
-    @Override
-    public void onBackPressed() {
-
-    }
 }

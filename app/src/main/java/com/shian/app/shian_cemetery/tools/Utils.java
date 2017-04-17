@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -20,8 +21,15 @@ import android.widget.TextView;
 
 import com.yongchun.library.view.ImageSelectorActivity;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/4/5.
@@ -90,6 +98,7 @@ public class Utils {
 
     /**
      * 打电话
+     *
      * @param v
      * @param phone
      */
@@ -117,5 +126,40 @@ public class Utils {
         } else {
             v.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * 保存到sdcard
+     *
+     * @param b
+     * @return
+     */
+    public static String savePic(Bitmap b) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss",
+                Locale.US);
+        File outfile = new File("/sdcard/image");
+        // 如果文件不存在，则创建一个新文件
+        if (!outfile.isDirectory()) {
+            try {
+                outfile.mkdir();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        String fname = outfile + "/" + sdf.format(new Date()) + ".png";
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(fname);
+            if (null != fos) {
+                b.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                fos.flush();
+                fos.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fname;
     }
 }

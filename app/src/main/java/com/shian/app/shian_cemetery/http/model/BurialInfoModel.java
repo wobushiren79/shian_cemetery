@@ -1,4 +1,4 @@
-package com.shian.app.shian_cemetery.http.bean;
+package com.shian.app.shian_cemetery.http.model;
 
 /**
  * Created by Administrator on 2017/4/14.

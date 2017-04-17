@@ -8,12 +8,17 @@ import android.widget.LinearLayout;
  * Created by Administrator on 2017/4/5.
  */
 
-public class WaitSettele extends LinearLayout {
+public class WaitSettele extends BaseBurialTitleView {
     public WaitSettele(Context context) {
         super(context);
     }
 
     public WaitSettele(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    public void refesh() {
+
     }
 }

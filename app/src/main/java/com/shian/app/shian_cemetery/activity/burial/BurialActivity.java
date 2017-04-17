@@ -4,21 +4,30 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
+import com.shian.app.shian_cemetery.fragment.OrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
+import com.shian.app.shian_cemetery.http.base.FileHttpResponseHandler;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.bean.BurialDeadInfoModel;
-import com.shian.app.shian_cemetery.http.bean.BurialInfoModel;
-import com.shian.app.shian_cemetery.http.bean.BurialLocationModel;
+import com.shian.app.shian_cemetery.http.model.BurialDeadInfoModel;
+import com.shian.app.shian_cemetery.http.model.BurialInfoModel;
+import com.shian.app.shian_cemetery.http.model.BurialLocationModel;
 import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
+import com.shian.app.shian_cemetery.http.params.HpSaveBurialDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
+import com.shian.app.shian_cemetery.http.result.HrUploadFile;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.staticdata.SelectData;
 import com.shian.app.shian_cemetery.tools.TimeUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
+import com.shian.app.shian_cemetery.view.dataview.burial.EditLayout;
 import com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout;
+import com.shian.app.shian_cemetery.view.dialog.CustomDialog;
 import com.shian.app.shian_cemetery.view.dialog.SignDialog;
 import com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout;
 
@@ -33,22 +42,23 @@ public class BurialActivity extends BaseActivity {
     TextReadLayout mTRBurialTime;
     SpinnerLayout mSPBurialOdds;
     SpinnerLayout mSPBurialState;
-
+    EditLayout mETRemark;
 
     ImageView mIVSign;
-
+    TextView mTVSubmit;
     Bitmap bitmapName;//签名
     private BurialInfoModel buryInfo;//安葬信息
     private BurialDeadInfoModel deadInfo;//死者信息
     private BurialLocationModel tombPosition;//安葬墓位
-    long orderId = 1;
+    private String fileName = "signFile";
+    long orderId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_burial);
         setTitle("安葬", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
-        //        orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
+                orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
         initView();
         getData();
 
@@ -64,8 +74,11 @@ public class BurialActivity extends BaseActivity {
         mTRBurialTime = (TextReadLayout) findViewById(R.id.tr_time);
         mSPBurialOdds = (SpinnerLayout) findViewById(R.id.spinner_burialodds);
         mSPBurialState = (SpinnerLayout) findViewById(R.id.spinner_burialstate);
+        mETRemark = (EditLayout) findViewById(R.id.et_remark);
+        mTVSubmit = (TextView) findViewById(R.id.tv_submit);
 
         mIVSign.setOnClickListener(onClickListener);
+        mTVSubmit.setOnClickListener(onClickListener);
         mSPBurialOdds.initSpinner(SelectData.BURIAL_ODDS);
         mSPBurialState.initSpinner(SelectData.BURIAL_STATE);
     }
@@ -114,6 +127,8 @@ public class BurialActivity extends BaseActivity {
         public void onClick(View v) {
             if (v == mIVSign) {
                 signName();
+            } else if (v == mTVSubmit) {
+                saveData();
             }
         }
     };
@@ -164,6 +179,71 @@ public class BurialActivity extends BaseActivity {
      * 保存数据
      */
     private void saveData() {
+        if (bitmapName == null) {
+            ToastUtils.showShortToast(BurialActivity.this, "还没有签名");
+            return;
+        }
+        String path = Utils.savePic(bitmapName);
+        uploadFile(mIVSign, fileName, path);
+    }
 
+
+    private void uploadFile(final ImageView ib, final String fileName, String path) {
+        final CustomDialog dialog = new CustomDialog(BurialActivity.this);
+        MHttpManagerFactory.getFileManager().upLoadFile(BurialActivity.this, fileName, path,
+                new FileHttpResponseHandler<HrUploadFile>() {
+
+                    @Override
+                    public void onSuccess(HrUploadFile t) {
+                        String fileUrl = (String) t.getNameMap().get(fileName);
+                        dialog.cancel();
+                        saveBurialData(fileUrl);
+                    }
+
+                    @Override
+                    public void onStart() {
+                        dialog.show();
+                    }
+
+
+                    @Override
+                    public void onError(String message) {
+                        ToastUtils.showShortToast(BurialActivity.this, "上传签名图片失败");
+                        dialog.cancel();
+                    }
+
+                    @Override
+                    public void onProgress(long total, float progress) {
+
+                    }
+
+                });
+    }
+
+    private void saveBurialData(final String fileUrl) {
+        HpSaveBurialDataParams params = new HpSaveBurialDataParams();
+        params.setRemark(mETRemark.getData());
+        params.setOrderId(orderId);
+        params.setSignFileIds(fileUrl);
+        params.setBuryRate(mSPBurialOdds.getData());
+        params.setDetail(mSPBurialState.getData());
+        MHttpManagerFactory.getAccountManager().saveBurialData(BurialActivity.this, params, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                ToastUtils.showShortToast(BurialActivity.this, "提交数据成功");
+                OrderFragment.isRefesh = true;
+                finish();
+            }
+
+            @Override
+            public void onError(String message) {
+                ToastUtils.showShortToast(BurialActivity.this, "提交数据失败");
+            }
+        });
     }
 }

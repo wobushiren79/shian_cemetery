@@ -4,7 +4,7 @@ package com.shian.app.shian_cemetery.appenum;
  * Created by Administrator on 2017/4/5.
  */
 
-public enum OrderBurialDateEnum {
+public enum BurialOrderDateEnum {
 
     TODAY("今日", 1),
     TOMORROW("明日", 2),
@@ -14,7 +14,7 @@ public enum OrderBurialDateEnum {
     private String date;
     private int code;
 
-    OrderBurialDateEnum(String date, int code) {
+    BurialOrderDateEnum(String date, int code) {
         this.date = date;
         this.code=code;
     }

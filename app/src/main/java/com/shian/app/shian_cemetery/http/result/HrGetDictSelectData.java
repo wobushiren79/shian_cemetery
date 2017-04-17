@@ -1,6 +1,6 @@
 package com.shian.app.shian_cemetery.http.result;
 
-import com.shian.app.shian_cemetery.http.bean.DictSelectModel;
+import com.shian.app.shian_cemetery.http.model.DictSelectModel;
 
 import java.util.List;
 

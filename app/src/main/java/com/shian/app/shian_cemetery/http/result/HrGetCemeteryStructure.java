@@ -1,7 +1,7 @@
 package com.shian.app.shian_cemetery.http.result;
 
 
-import com.shian.app.shian_cemetery.http.bean.CemeteryStructureModel;
+import com.shian.app.shian_cemetery.http.model.CemeteryStructureModel;
 
 import java.util.List;
 

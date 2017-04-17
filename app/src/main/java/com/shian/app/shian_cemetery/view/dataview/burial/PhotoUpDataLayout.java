@@ -38,6 +38,7 @@ public class PhotoUpDataLayout extends BaseDataLayout {
     public boolean isFirstLoad = true;
     public boolean isLoading = false;
     public String fileUrl;
+    private String fileName = "photoName";
 
     public PhotoUpDataLayout(Context context) {
         this(context, null);
@@ -133,7 +134,7 @@ public class PhotoUpDataLayout extends BaseDataLayout {
             @Override
             public void onPhoto(ArrayList<String> paths) {
                 fileUrl = null;
-                uploadFile(mIVPic, "fileName", paths.get(0));
+                uploadFile(mIVPic, fileName, paths.get(0));
                 ImageLoader.getInstance().displayImage(
                         "file://" + paths.get(0), mIVPic);
                 mProgressBar.setVisibility(VISIBLE);

@@ -8,14 +8,10 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.CemeteryLocationEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.bean.CemeteryStructureModel;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessContract;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Request;
 

@@ -1,24 +1,32 @@
 package com.shian.app.shian_cemetery.order.burial.list;
 
 import android.content.Context;
-import android.util.AttributeSet;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshExpandableListView;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.baseadapter.BurialListPullAdapter;
+import com.shian.app.shian_cemetery.common.bean.BurialBuildDataBean;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
+import com.shian.app.shian_cemetery.tools.TimeUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
+
+import java.util.Calendar;
 
 import okhttp3.Request;
 
@@ -35,25 +43,50 @@ public class BurialListLayout extends LinearLayout {
     RelativeLayout mRLSeach;
     TextView mTVSeachTime;
     BurialListPullAdapter mBurialListPullAdapter;
-    PullToRefreshListView mPullListView;
+    PullToRefreshExpandableListView mPullListView;
 
     boolean isShow = false;//是否显示搜索栏
+    BurialBuildDataBean dataBean;
+    private int pageNum = 1;
+    private int pageSize = 10;
 
-    public BurialListLayout(Context context) {
-        this(context, null);
-    }
+    private int year;
+    private int month;
+    private int day;
 
-    public BurialListLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public BurialListLayout(Context context, BurialBuildDataBean dataBean) {
+        super(context);
+        this.dataBean = dataBean;
         view = View.inflate(context, R.layout.layout_burial_list, this);
         initView();
         initData();
-        getData();
+        setDate(Integer.valueOf(TimeUtils.getSystemTime("yyyy")),
+                Integer.valueOf(TimeUtils.getSystemTime("MM")),
+                Integer.valueOf(TimeUtils.getSystemTime("dd")));
+        setDate(dataBean.getYear(), dataBean.getMonth(), dataBean.getDay());
+        getData(true);
     }
+
+    /**
+     * 设置时间
+     *
+     * @param year
+     * @param month
+     * @param day
+     */
+    public void setDate(int year, int month, int day) {
+        if (year != -1)
+            this.year = year;
+        if (month != -1)
+            this.month = month;
+        if (day != -1)
+            this.day = day;
+    }
+
 
     private void initView() {
 //        mListView = (RecyclerView) view.findViewById(R.id.listview);
-        mPullListView = (PullToRefreshListView) view.findViewById(R.id.listview);
+        mPullListView = (PullToRefreshExpandableListView) view.findViewById(R.id.listview);
         mRLSeach = (RelativeLayout) view.findViewById(R.id.rl_search);
         mTVSeachTime = (TextView) view.findViewById(R.id.tv_seach_time);
 
@@ -62,22 +95,74 @@ public class BurialListLayout extends LinearLayout {
 
     private void initData() {
         mBurialListPullAdapter = new BurialListPullAdapter(getContext());
-        mPullListView.setAdapter(mBurialListPullAdapter);
+        mPullListView.getRefreshableView().setAdapter(mBurialListPullAdapter);
         mPullListView.setOnScrollListener(onScrollListener);
-//        mBurialListAdapter = new BurialListAdapter(getContext());
-//        mListView.setAdapter(mBurialListAdapter);
-//        mListView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        mListView.setOnScrollListener(onScrollListener);
+        mPullListView.setMode(PullToRefreshBase.Mode.BOTH);
+        mPullListView.setOnRefreshListener(onRefreshListener2);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPullListView.setRefreshing(true);
+                getData(true);
+            }
+        }, 500);
     }
 
     OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             if (v == mRLSeach) {
-                Utils.showDatePicker(getContext(), mTVSeachTime);
+                showDatePicker(getContext(), mTVSeachTime);
             }
         }
     };
+
+    /**
+     * 时间选择
+     *
+     * @param context
+     * @param textView
+     */
+    private void showDatePicker(Context context, final TextView textView) {
+        Calendar c = Calendar.getInstance();
+        final int[] yearTemp = {c.get(Calendar.YEAR)};
+        final int[] monthOfYearTemp = {c.get(Calendar.MONTH)};
+        final int[] dayOfMonthTemp = {c.get(Calendar.DAY_OF_MONTH)};
+        DatePicker datePicker = new DatePicker(context);
+        datePicker.init(yearTemp[0], monthOfYearTemp[0], dayOfMonthTemp[0], new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                yearTemp[0] = year;
+                monthOfYearTemp[0] = monthOfYear;
+                dayOfMonthTemp[0] = dayOfMonth;
+            }
+        });
+        AlertDialog dialog = new AlertDialog
+                .Builder(context)
+                .setTitle("选择日期")
+                .setView(datePicker)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText(yearTemp[0] + "年" + (monthOfYearTemp[0] + 1) + "月" + dayOfMonthTemp[0] + "日");
+                        year = yearTemp[0];
+                        month = (monthOfYearTemp[0] + 1);
+                        day = dayOfMonthTemp[0];
+                        getData(true);
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .create();
+        dialog.show();
+        return;
+    }
 
     /**
      * 滑动监听
@@ -101,26 +186,23 @@ public class BurialListLayout extends LinearLayout {
 
         }
     };
-//    RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
-//        @Override
-//        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//            super.onScrollStateChanged(recyclerView, newState);
-//            if (isShow) {
-//                if (newState == SCROLL_STATE_IDLE) {
-//                    mRLSeach.setVisibility(VISIBLE);
-//                    mRLSeach.startAnimation(getInAnim());
-//                } else if (newState == SCROLL_STATE_DRAGGING) {
-//                    mRLSeach.setVisibility(GONE);
-////                    mLLSeach.startAnimation(getOutAnim());
-//                }
-//            }
-//        }
-//
-//        @Override
-//        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//            super.onScrolled(recyclerView, dx, dy);
-//        }
-//    };
+
+    /**
+     * 上下拉刷新
+     */
+    PullToRefreshBase.OnRefreshListener2 onRefreshListener2 = new PullToRefreshBase.OnRefreshListener2() {
+        @Override
+        public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+            pageNum = 1;
+            getData(true);
+        }
+
+        @Override
+        public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+            pageNum++;
+            getData(false);
+        }
+    };
 
 
     /**
@@ -167,12 +249,14 @@ public class BurialListLayout extends LinearLayout {
     /**
      * 获取数据
      */
-    private void getData() {
+    private void getData(final boolean isNew) {
         HpBurialDataListParams params = new HpBurialDataListParams();
-        params.setBuryStatus(0);
-        params.setStoneStatus(0);
-        params.setDateType(0);
-        params.setDate("2017-04-13 15:27:51");
+        params.setBuryStatus(dataBean.getBurialType());
+        params.setStoneStatus(dataBean.getSetteleType());
+        params.setDateType(dataBean.getDateType());
+        params.setDate(year + "-" + month + "-" + day + " 00:00:00");
+        params.setPageNum(pageNum);
+        params.setPageSize(pageSize);
         MHttpManagerFactory.getAccountManager().getBurialDataList(getContext(), params, new HttpResponseHandler<HrGetBurialListData>() {
             @Override
             public void onStart(Request request, int id) {
@@ -181,12 +265,26 @@ public class BurialListLayout extends LinearLayout {
 
             @Override
             public void onSuccess(HrGetBurialListData result) {
-
+                mPullListView.onRefreshComplete();
+                if (isNew) {
+                    mBurialListPullAdapter.setData(result);
+                } else {
+                    if (result.getPages() < pageNum) {
+                        pageNum = result.getPageNum();
+                    } else {
+                        mBurialListPullAdapter.addData(result);
+                    }
+                }
+                //展开下拉
+                int groupCount = mBurialListPullAdapter.getGroupCount();
+                for (int i = 0; i < groupCount; i++) {
+                    mPullListView.getRefreshableView().expandGroup(i);
+                }
             }
 
             @Override
             public void onError(String message) {
-
+                mPullListView.onRefreshComplete();
             }
         });
     }

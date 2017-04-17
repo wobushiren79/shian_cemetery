@@ -12,9 +12,9 @@ import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.fragment.OrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.bean.BurialDeadInfoModel;
-import com.shian.app.shian_cemetery.http.bean.BurialInfoModel;
-import com.shian.app.shian_cemetery.http.bean.BurialLocationModel;
+import com.shian.app.shian_cemetery.http.model.BurialDeadInfoModel;
+import com.shian.app.shian_cemetery.http.model.BurialInfoModel;
+import com.shian.app.shian_cemetery.http.model.BurialLocationModel;
 import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveSetteleDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
@@ -45,7 +45,7 @@ public class SetteleActivity extends BaseActivity {
     private BurialDeadInfoModel deadInfo;//死者信息
     private BurialLocationModel tombPosition;//安葬墓位
 
-    long orderId = 1;
+    long orderId = -1;
 
     List<PhotoUpDataLayout> listPic = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class SetteleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settele);
         setTitle("立碑", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
-//        orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
+        orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
         initView();
         getData();
     }

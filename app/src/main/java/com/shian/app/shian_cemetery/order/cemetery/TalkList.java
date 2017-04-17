@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.baseadapter.CemeteryTalkListPullAdatper;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.bean.CemeteryOrderModel;
+import com.shian.app.shian_cemetery.http.model.CemeteryOrderModel;
 import com.shian.app.shian_cemetery.http.imp.impl.CemeteryOrderManagerImpl;
 import com.shian.app.shian_cemetery.http.params.HpGetOrderListParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryListData;
@@ -116,14 +115,14 @@ public class TalkList extends BaseCemeteryOrderList {
             public void onSuccess(HrGetCemeteryListData result) {
                 if (isNew) {
                     listData.clear();
-                    listData.addAll(result.getItems());
+                    listData.addAll(result.getList());
                 } else {
-                    if (result.getItems().size() == 0) {
-                        page--;
+                    if (result.getPages() < page) {
+                        page = result.getPages();
+                    } else {
+                        listData.addAll(result.getList());
                     }
-                    listData.addAll(result.getItems());
                 }
-
                 mAdapter.notifyDataSetChanged();
                 mPullListView.onRefreshComplete();
             }

@@ -108,6 +108,7 @@
                 android:background="@color/zhy_line_7" />
 
             <com.shian.app.shian_cemetery.view.dataview.burial.EditLayout
+                android:id="@+id/et_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 DataReadAttr:titleName="备注"></com.shian.app.shian_cemetery.view.dataview.burial.EditLayout>

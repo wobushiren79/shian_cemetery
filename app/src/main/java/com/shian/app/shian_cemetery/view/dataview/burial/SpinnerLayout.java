@@ -91,6 +91,12 @@ public class SpinnerLayout extends BaseDataLayout {
         });
     }
 
+    public String getData() {
+        if (province_adapter == null) {
+            return "";
+        }
+        return province_adapter.getItem(mSpinner.getSelectedItemPosition()).toString();
+    }
 
     /**
      * 监听

@@ -1,8 +1,8 @@
 package com.shian.app.shian_cemetery.http.result;
 
-import com.shian.app.shian_cemetery.http.bean.BurialDeadInfoModel;
-import com.shian.app.shian_cemetery.http.bean.BurialInfoModel;
-import com.shian.app.shian_cemetery.http.bean.BurialLocationModel;
+import com.shian.app.shian_cemetery.http.model.BurialDeadInfoModel;
+import com.shian.app.shian_cemetery.http.model.BurialInfoModel;
+import com.shian.app.shian_cemetery.http.model.BurialLocationModel;
 
 /**
  * Created by Administrator on 2017/4/15.

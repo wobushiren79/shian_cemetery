@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BurialTabEnum;
 import com.shian.app.shian_cemetery.base.BaseFragment;
+import com.shian.app.shian_cemetery.order.burial.BaseBurialTitleView;
 import com.shian.app.shian_cemetery.order.burial.BuriedOver;
 import com.shian.app.shian_cemetery.order.burial.WaitBurial;
 import com.shian.app.shian_cemetery.order.burial.WaitSettele;
@@ -28,15 +29,26 @@ public class OrderFragment extends BaseFragment {
 
     TitleTabChangeReceiver tabChangeReceiver;
     public static boolean isRefesh = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_order, null, false);
         initView();
         initData();
-        changeContent(new WaitBurial(getContext()));
+        changeContent(new WaitBurial(getContext(), 0, 0));
         return view;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isRefesh && mLLOrder.getChildAt(0) != null) {
+            BaseBurialTitleView burialTitleView = (BaseBurialTitleView) mLLOrder.getChildAt(0);
+            burialTitleView.refesh();
+        }
+        isRefesh = false;
+    }
 
     private void initView() {
         mLLOrder = (LinearLayout) view.findViewById(R.id.ll_order);
@@ -64,7 +76,7 @@ public class OrderFragment extends BaseFragment {
             if (code == BurialTabEnum.WaitSettele.getCode()) {
                 changeContent(new WaitSettele(getContext()));
             } else if (code == BurialTabEnum.WaitBuried.getCode()) {
-                changeContent(new WaitBurial(getContext()));
+                changeContent(new WaitBurial(getContext(), 0, 0));
             } else if (code == BurialTabEnum.BuriedOver.getCode()) {
                 changeContent(new BuriedOver(getContext()));
             }

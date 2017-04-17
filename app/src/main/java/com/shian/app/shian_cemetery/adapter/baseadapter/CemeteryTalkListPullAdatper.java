@@ -16,7 +16,7 @@ import com.shian.app.shian_cemetery.activity.cemetery.TalkSuccessActivity;
 import com.shian.app.shian_cemetery.appenum.CemeteryBeSpeakStateEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.bean.CemeteryOrderModel;
+import com.shian.app.shian_cemetery.http.model.CemeteryOrderModel;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
@@ -144,10 +144,20 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvMeetTime.setText(data.getPromiseTime());
                 holder.tvCemeteryLocation.setText(data.getPlanCemeteryLocation());
 
+                if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.undistributed.getCode()
+                        || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkFail.getCode()
+                        || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unassigned.getCode()) {
+                    holder.tvAccept.setVisibility(View.GONE);
+                    holder.tvReject.setVisibility(View.GONE);
+                } else {
+                    holder.tvAccept.setVisibility(View.VISIBLE);
+                    holder.tvReject.setVisibility(View.VISIBLE);
+                }
                 holder.tvAccept.setOnClickListener(onClickListener);
                 holder.tvReject.setOnClickListener(onClickListener);
                 makePhone(holder.ivPhone, data);
                 break;
+
             case 1:
                 holder.tvCustomerName.setText(data.getCustomerName());
                 holder.tvCustomerPhone.setText(data.getCustomerMobile());
@@ -187,18 +197,19 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
         CemeteryOrderModel data = listData.get(position);
-        if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unProcess.getCode()) {
+        if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.undistributed.getCode()
+                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkFail.getCode()
+                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unassigned.getCode()) {
+            return 0;
+        } else if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unProcess.getCode()) {
             return 0;
         } else if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.accepted.getCode()
-                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkFail.getCode()
                 || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkAgain.getCode()
-                ||data.getBespeakStatus()==CemeteryBeSpeakStateEnum.talkSuccess.getCode()) {
+                ) {
             return 1;
         } else {
             return 2;
         }
-
-
     }
 
     class ViewHolder {

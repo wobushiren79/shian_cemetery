@@ -1,7 +1,7 @@
 package com.shian.app.shian_cemetery.http.result;
 
 
-import com.shian.app.shian_cemetery.http.bean.CemeteryOrderModel;
+import com.shian.app.shian_cemetery.http.model.CemeteryOrderModel;
 
 import java.util.List;
 
@@ -10,13 +10,41 @@ import java.util.List;
  */
 
 public class HrGetCemeteryListData {
-    List<CemeteryOrderModel> items;
+    List<CemeteryOrderModel> list;
+    int pageNum;
+    int pageSize;
+    int pages;
 
-    public List<CemeteryOrderModel> getItems() {
-        return items;
+
+    public List<CemeteryOrderModel> getList() {
+        return list;
     }
 
-    public void setItems(List<CemeteryOrderModel> items) {
-        this.items = items;
+    public void setList(List<CemeteryOrderModel> list) {
+        this.list = list;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 }

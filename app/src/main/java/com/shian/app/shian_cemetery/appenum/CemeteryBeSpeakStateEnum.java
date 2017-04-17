@@ -1,18 +1,20 @@
 package com.shian.app.shian_cemetery.appenum;
 
 /**
- * 预约-状态，值：1未接单、2已接单、3洽谈失败（未购墓）、4洽谈成功（购墓）、5服务结束、6再次洽谈、7未分配、8未指派
+ * 预约-状态，值：1未分配、2未指派,3未接单、4已接单、5再次洽谈、、6洽谈失败（未购墓）、7洽谈成功（购墓）、8服务结束
  * Created by Administrator
  */
 public enum CemeteryBeSpeakStateEnum {
-    unProcess(1, "未接单"),
-    accepted(2, "已接单"),
-    talkFail(3, "洽谈失败（未购墓）"),
-    talkSuccess(4, "洽谈成功（购墓）"),
-    serviceOver(5, "服务结束"),
-    talkAgain(6, "再次洽谈"),
-    undistributed(7, "未分配"),
-    unassigned(8, "未指派");
+    undistributed(1, "未分配"),
+    unassigned(2, "未指派"),
+    unProcess(3, "未接单"),
+    accepted(4, "已接单"),
+    talkAgain(5, "再次洽谈"),
+    talkFail(6, "洽谈失败（未购墓）"),
+    talkSuccess(7, "洽谈成功（购墓）"),
+    serviceOver(8, "服务结束");
+
+
     private Integer code;
     private String text;
 

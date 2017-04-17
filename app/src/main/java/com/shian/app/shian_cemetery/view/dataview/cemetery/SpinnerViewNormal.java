@@ -1,7 +1,6 @@
 package com.shian.app.shian_cemetery.view.dataview.cemetery;
 
 import android.content.Context;
-import android.opengl.Visibility;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.bean.DictSelectModel;
 import com.shian.app.shian_cemetery.http.params.HpGetDictSelectParams;
 import com.shian.app.shian_cemetery.http.result.HrGetDictSelectData;
 

@@ -8,12 +8,17 @@ import android.widget.LinearLayout;
  * Created by Administrator on 2017/4/5.
  */
 
-public class BuriedOver extends LinearLayout {
+public class BuriedOver extends BaseBurialTitleView {
     public BuriedOver(Context context) {
         super(context);
     }
 
     public BuriedOver(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    public void refesh() {
+
     }
 }
