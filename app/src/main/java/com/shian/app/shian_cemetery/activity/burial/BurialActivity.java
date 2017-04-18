@@ -58,7 +58,7 @@ public class BurialActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_burial);
         setTitle("安葬", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
-                orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
+        orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
         initView();
         getData();
 
@@ -105,6 +105,8 @@ public class BurialActivity extends BaseActivity {
                 ToastUtils.showLongToast(BurialActivity.this, "此订单已被操作");
                 finish();
             }
+            mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
+            mTRBurialCardId.setData(buryInfo.getBuryCardNo());
         }
         if (deadInfo != null) {
             StringBuilder name = new StringBuilder();
@@ -114,12 +116,11 @@ public class BurialActivity extends BaseActivity {
             if (deadInfo.getDeadmanTwoName() != null && !deadInfo.getDeadmanTwoName().isEmpty()) {
                 name.append(" | " + deadInfo.getDeadmanTwoName());
             }
+
             mTRUserName.setData(name.toString());
         }
 
 
-        mTRGraveId.setData("测试");
-        mTRBurialCardId.setData("测试");
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

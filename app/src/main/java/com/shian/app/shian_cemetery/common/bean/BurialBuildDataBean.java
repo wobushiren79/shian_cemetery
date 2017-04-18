@@ -5,12 +5,30 @@ package com.shian.app.shian_cemetery.common.bean;
  */
 
 public class BurialBuildDataBean {
+    private  String statusType; // 状态查询类型 如010
     private int dateType;
     private int setteleType;
     private int burialType;
+    private int multyBurialType;
     private int year;
     private int month;
     private int day;
+
+    public String getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(String statusType) {
+        this.statusType = statusType;
+    }
+
+    public int getMultyBurialType() {
+        return multyBurialType;
+    }
+
+    public void setMultyBurialType(int multyBurialType) {
+        this.multyBurialType = multyBurialType;
+    }
 
     public int getYear() {
         return year;

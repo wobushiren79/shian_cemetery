@@ -11,6 +11,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shian.app.shian_cemetery.activity.LoginActivity;
+import com.shian.app.shian_cemetery.activity.SettingsActivity;
 import com.shian.app.shian_cemetery.base.BaseAppliction;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
@@ -293,11 +294,9 @@ public class HttpRequestExecutor {
                         responseHandler.onSuccess(result);
                     }
                 } else if ("1009".equals(code)) {
-                    if (context instanceof Activity) {
-                        BaseAppliction.getApplication().exitAPP();
-                    }
-                    Intent in = new Intent(context, LoginActivity.class);
-                    context.startActivity(in);
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
                 } else {
                     onErrorCallBack(responseHandler, errorMsg, context);
                 }

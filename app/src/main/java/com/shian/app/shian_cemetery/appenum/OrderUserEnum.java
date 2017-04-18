@@ -1,18 +1,18 @@
 package com.shian.app.shian_cemetery.appenum;
 
 /**
- * Created by Administrator on 2017/4/17.
+ * Created by Administrator on 2017/4/18.
  */
 
-public enum BurialDateType {
-    DAY(0, "天"),
-    MONTH(1, "月"),
-    YEAR(2, "年");
+public enum OrderUserEnum {
+    Burial(0, "安葬工"),
+    CemeterTalk(1, "公墓洽谈");
+
 
     private int code;
     private String name;
 
-    BurialDateType(int code, String name) {
+    OrderUserEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }

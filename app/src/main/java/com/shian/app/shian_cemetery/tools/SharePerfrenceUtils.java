@@ -16,6 +16,7 @@ public class SharePerfrenceUtils {
     private static final String C_sShareLogin_password = "share_password";
     private static final String C_sShareLogin_isAutoLogin = "share_isAutoLogin";
     private static final String C_sShareLogin_isRemeberPassword = "share_isRePassword";
+    private static final String C_sShareLogin_orderUser = "share_orderUser";
     private static final String C_sSession_Share = "share_session";
 
     /**
@@ -42,6 +43,18 @@ public class SharePerfrenceUtils {
     }
 
     /**
+     * 設置自動登陸狀態
+     *
+     * @param c
+     * @param isAuto
+     */
+    public static void setShareAutoLogin(Context c, boolean isAuto) {
+        SharedPreferences.Editor editor = c.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
+        editor.putBoolean(C_sShareLogin_isAutoLogin, isAuto);
+        editor.commit();
+    }
+
+    /**
      * 保存账号信息
      *
      * @param context
@@ -50,13 +63,13 @@ public class SharePerfrenceUtils {
      * @param isRemeber
      * @param isAuto
      */
-    public static void setLoginShare(Context context, String username,
-                                     String password, boolean isRemeber, boolean isAuto) {
+    public static void setLoginShare(Context context, String username, String password, boolean isRemeber, boolean isAuto, int orderUser) {
         SharedPreferences.Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
         editor.putString(C_sShareLogin_username, username);
         editor.putString(C_sShareLogin_password, password);
         editor.putBoolean(C_sShareLogin_isRemeberPassword, isRemeber);
         editor.putBoolean(C_sShareLogin_isAutoLogin, isAuto);
+        editor.putInt(C_sShareLogin_orderUser, orderUser);
         editor.commit();
     }
 
@@ -73,11 +86,13 @@ public class SharePerfrenceUtils {
         boolean isRember = share.getBoolean(C_sShareLogin_isRemeberPassword,
                 false);
         boolean isAuto = share.getBoolean(C_sShareLogin_isAutoLogin, false);
+        int orderUser = share.getInt(C_sShareLogin_orderUser, -1);
         ShareLogin loginS = new ShareLogin();
         loginS.setUsername(username);
         loginS.setPassword(password);
         loginS.setRemeberPassword(isRember);
         loginS.setAutoLogin(isAuto);
+        loginS.setOrderUser(orderUser);
         return loginS;
     }
 
@@ -86,6 +101,15 @@ public class SharePerfrenceUtils {
         private String password;
         private boolean isAutoLogin;
         private boolean isRemeberPassword;
+        private int orderUser;
+
+        public int getOrderUser() {
+            return orderUser;
+        }
+
+        public void setOrderUser(int orderUser) {
+            this.orderUser = orderUser;
+        }
 
         public String getUsername() {
             return username;

@@ -9,12 +9,18 @@ import android.widget.LinearLayout;
  */
 
 public abstract class BaseBurialTitleView extends LinearLayout {
-    public BaseBurialTitleView(Context context) {
-        super(context);
-    }
 
-    public BaseBurialTitleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    String statusType;
+    int setteleType;
+    int burialType;
+    int multyBurialType;
+
+    public BaseBurialTitleView(Context context, String statusType, int setteleType, int burialType, int multyBurialType) {
+        super(context);
+        this.setteleType = setteleType;
+        this.burialType = burialType;
+        this.multyBurialType = multyBurialType;
+        this.statusType = statusType;
     }
 
     public abstract void refesh();

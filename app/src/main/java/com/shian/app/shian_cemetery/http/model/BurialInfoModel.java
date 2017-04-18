@@ -10,6 +10,80 @@ public class BurialInfoModel {
     private String detail;//落葬详情
     private long stoneDatePre;//客户预计立碑日期
     private int stoneStatus;//立碑状态  0未立碑， 1已立碑
+    /**
+     * 墓穴证号
+     */
+    private String tombCertificateNo;
+    /**
+     * 墓穴证办理日期
+     */
+    private long tombCertificateHandleAt;
+    /**
+     * 安葬卡号
+     */
+    private String buryCardNo;
+
+    private int stoneCarveStatus; //碑文刊刻状态 值：0未刊刻、1已刊刻
+    private long stoneFileSetDate; //碑文填制日期
+    private long stoneFleFinishDate; //碑文完成刊刻日期
+    private String stoneRemark; //立碑备注
+
+
+    public String getBuryCardNo() {
+        return buryCardNo;
+    }
+
+    public void setBuryCardNo(String buryCardNo) {
+        this.buryCardNo = buryCardNo;
+    }
+
+    public int getStoneCarveStatus() {
+        return stoneCarveStatus;
+    }
+
+    public void setStoneCarveStatus(int stoneCarveStatus) {
+        this.stoneCarveStatus = stoneCarveStatus;
+    }
+
+    public String getTombCertificateNo() {
+        return tombCertificateNo;
+    }
+
+    public void setTombCertificateNo(String tombCertificateNo) {
+        this.tombCertificateNo = tombCertificateNo;
+    }
+
+    public long getTombCertificateHandleAt() {
+        return tombCertificateHandleAt;
+    }
+
+    public void setTombCertificateHandleAt(long tombCertificateHandleAt) {
+        this.tombCertificateHandleAt = tombCertificateHandleAt;
+    }
+
+    public long getStoneFileSetDate() {
+        return stoneFileSetDate;
+    }
+
+    public void setStoneFileSetDate(long stoneFileSetDate) {
+        this.stoneFileSetDate = stoneFileSetDate;
+    }
+
+    public long getStoneFleFinishDate() {
+        return stoneFleFinishDate;
+    }
+
+    public void setStoneFleFinishDate(long stoneFleFinishDate) {
+        this.stoneFleFinishDate = stoneFleFinishDate;
+    }
+
+    public String getStoneRemark() {
+        return stoneRemark;
+    }
+
+    public void setStoneRemark(String stoneRemark) {
+        this.stoneRemark = stoneRemark;
+    }
 
     public long getBuryDatePre() {
         return buryDatePre;

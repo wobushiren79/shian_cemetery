@@ -9,7 +9,7 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 public class HpSaveSetteleDataParams extends BaseHttpParams {
     private long orderId;
     private String buriedFileIds;
-    private String remark;
+    private String stoneRemark;
 
     public long getOrderId() {
         return orderId;
@@ -27,11 +27,11 @@ public class HpSaveSetteleDataParams extends BaseHttpParams {
         this.buriedFileIds = buriedFileIds;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getStoneRemark() {
+        return stoneRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setStoneRemark(String stoneRemark) {
+        this.stoneRemark = stoneRemark;
     }
 }

@@ -35,7 +35,7 @@ public class OrderFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_order, null, false);
         initView();
         initData();
-        changeContent(new WaitBurial(getContext(), 0, 0));
+        changeContent(new WaitBurial(getContext(), "010", 0, 0, 0));
         return view;
     }
 
@@ -74,11 +74,11 @@ public class OrderFragment extends BaseFragment {
         @Override
         public void orderFragmentTitleChange(int code, String name) {
             if (code == BurialTabEnum.WaitSettele.getCode()) {
-                changeContent(new WaitSettele(getContext()));
+                changeContent(new WaitSettele(getContext(), "100", 0, 0, 0));
             } else if (code == BurialTabEnum.WaitBuried.getCode()) {
-                changeContent(new WaitBurial(getContext(), 0, 0));
+                changeContent(new WaitBurial(getContext(), "010", 0, 0, 0));
             } else if (code == BurialTabEnum.BuriedOver.getCode()) {
-                changeContent(new BuriedOver(getContext()));
+                changeContent(new BuriedOver(getContext(), "010", 0, 1, 0));
             }
         }
     };

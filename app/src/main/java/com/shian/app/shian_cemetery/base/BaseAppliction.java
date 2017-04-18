@@ -145,6 +145,6 @@ public class BaseAppliction extends Application {
         for (int i = 0; i < listActivity.size(); i++) {
             listActivity.get(i).finish();
         }
-        listActivity.clear();
+//        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

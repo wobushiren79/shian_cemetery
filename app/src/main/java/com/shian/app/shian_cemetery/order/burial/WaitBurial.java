@@ -4,11 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.appenum.BurialDateType;
+import com.shian.app.shian_cemetery.appenum.BurialDateTypeEnum;
 import com.shian.app.shian_cemetery.appenum.BurialOrderDateEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialBuildDataBean;
 import com.shian.app.shian_cemetery.order.burial.list.BurialListLayout;
@@ -29,26 +28,22 @@ public class WaitBurial extends BaseBurialTitleView {
             BurialOrderDateEnum.THISMONTH,
             BurialOrderDateEnum.CUSTOM
     };
-    private int setteleType;
-    private int burialType;
 
 
-    public WaitBurial(Context context, int setteleType, int burialType) {
-        this(context, null);
-        this.setteleType = setteleType;
-        this.burialType = burialType;
-    }
-
-    public WaitBurial(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public WaitBurial(Context context, String statusType, int setteleType, int burialType, int multyBurialType) {
+        super(context, statusType, setteleType, burialType, multyBurialType);
         view = View.inflate(context, R.layout.layout_order_waitburial, this);
         initView();
         initData();
     }
 
+
     @Override
     public void refesh() {
-
+        if (mRLContent.getChildAt(0) != null) {
+            BurialListLayout listView = (BurialListLayout) mRLContent.getChildAt(0);
+            listView.refresh();
+        }
     }
 
     private void initView() {
@@ -73,31 +68,34 @@ public class WaitBurial extends BaseBurialTitleView {
     TitleTabChange.TabCallBack tabCallBack = new TitleTabChange.TabCallBack() {
         @Override
         public void TabChange(int code, String title) {
-            int dateType = BurialDateType.YEAR.getCode();
+            int dateType = BurialDateTypeEnum.YEAR.getCode();
             int year = -1;
             int month = -1;
             int day = -1;
             if (code == BurialOrderDateEnum.TODAY.getCode()) {
                 //今天
-                dateType = BurialDateType.DAY.getCode();
+                dateType = BurialDateTypeEnum.DAY.getCode();
             } else if (code == BurialOrderDateEnum.TOMORROW.getCode()) {
                 //明天
-                dateType = BurialDateType.DAY.getCode();
+                dateType = BurialDateTypeEnum.DAY.getCode();
                 year = Integer.valueOf(TimeUtils.getNextDay("yyyy"));
                 month = Integer.valueOf(TimeUtils.getNextDay("MM"));
                 day = Integer.valueOf(TimeUtils.getNextDay("dd"));
             } else if (code == BurialOrderDateEnum.THISMONTH.getCode()) {
                 //这个月
-                dateType = BurialDateType.MONTH.getCode();
+                dateType = BurialDateTypeEnum.MONTH.getCode();
             } else if (code == BurialOrderDateEnum.CUSTOM.getCode()) {
                 //自定义
-                dateType = BurialDateType.DAY.getCode();
+                dateType = BurialDateTypeEnum.DAY.getCode();
             }
             mRLContent.removeAllViews();
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
+
             BurialBuildDataBean dataBean = new BurialBuildDataBean();
+            dataBean.setStatusType(statusType);
+            dataBean.setMultyBurialType(multyBurialType);
             dataBean.setBurialType(burialType);
             dataBean.setSetteleType(setteleType);
             dataBean.setDateType(dateType);

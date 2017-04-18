@@ -118,17 +118,23 @@ public class SetteleActivity extends BaseActivity {
                 ToastUtils.showLongToast(SetteleActivity.this, "此订单已被操作");
                 finish();
             }
-
-            if (buryInfo.getBuryDatePre() != 0) {
-
-            }
             if (buryInfo.getStoneDatePre() != 0) {
                 mTRSetteleTime.setData(TimeUtils.formatTime(buryInfo.getStoneDatePre()));
             } else {
                 mTRSetteleTime.setData("无详细日期");
             }
-            mTRBuildTime.setData("test");
-            mTRBuildState.setData("test");
+            if (buryInfo.getStoneFileSetDate() != 0) {
+                mTRBuildTime.setData(TimeUtils.formatTime(buryInfo.getStoneFileSetDate()));
+            } else {
+                mTRBuildTime.setData("无详细日期");
+            }
+            if (buryInfo.getStoneCarveStatus() == 0) {
+                mTRBuildState.setData("未刊刻");
+            } else {
+                mTRBuildState.setData("已刊刻");
+            }
+
+
         }
         if (deadInfo != null) {
             StringBuilder name = new StringBuilder();
@@ -175,14 +181,19 @@ public class SetteleActivity extends BaseActivity {
     public void saveData() {
         //图片检测
         List<String> picUrls = new ArrayList<>();
+        boolean isLoading = false;
         for (PhotoUpDataLayout picView : listPic) {
             if (picView.isLoading) {
-                ToastUtils.showLongToast(SetteleActivity.this, "图片正在上传中，请稍等");
+                isLoading = true;
                 return;
             }
             if (picView.fileUrl != null) {
                 picUrls.add(picView.fileUrl);
             }
+        }
+        if (isLoading) {
+            ToastUtils.showLongToast(SetteleActivity.this, "图片正在上传中，请稍等");
+            return;
         }
         if (picUrls.size() == 0) {
             ToastUtils.showLongToast(SetteleActivity.this, "还没有上传图片");
@@ -199,7 +210,7 @@ public class SetteleActivity extends BaseActivity {
         HpSaveSetteleDataParams params = new HpSaveSetteleDataParams();
         params.setOrderId(orderId);
         params.setBuriedFileIds(picBuffer.toString());
-        params.setRemark(mTRRemark.getData());
+        params.setStoneRemark(mTRRemark.getData());
         MHttpManagerFactory.getAccountManager().saveSetteleData(SetteleActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart(Request request, int id) {

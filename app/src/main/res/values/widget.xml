@@ -36,4 +36,12 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
     </style>
+
+    <style name="orderlist_item_btn_textStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">#7b5237</item>
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/zhy_button_state_6</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 </resources>

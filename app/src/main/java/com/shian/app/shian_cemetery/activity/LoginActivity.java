@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
@@ -32,6 +35,10 @@ public class LoginActivity extends BaseActivity {
 
     TextView mTVPhoneLoading;
 
+    RadioGroup mRG;
+    RadioButton mRBBurial;
+    RadioButton mRBCemeteryTalk;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +55,9 @@ public class LoginActivity extends BaseActivity {
         mCBKeep = (CheckBox) findViewById(R.id.cb_login_re);
         mCBAuto = (CheckBox) findViewById(R.id.cb_login_auto);
         mTVPhoneLoading = (TextView) findViewById(R.id.btn_login_web);
+        mRBBurial = (RadioButton) findViewById(R.id.rb_state1);
+        mRBCemeteryTalk = (RadioButton) findViewById(R.id.rb_state2);
+        mRG = (RadioGroup) findViewById(R.id.rg);
 
         mLoadingButton.setOnClickListener(onClickListener);
         mTVPhoneLoading.setOnClickListener(onClickListener);
@@ -70,7 +80,6 @@ public class LoginActivity extends BaseActivity {
         public void onClick(View v) {
             if (v == mLoadingButton) {
                 checkInfo();
-
             } else if (v == mTVPhoneLoading) {
                 jumpPhoneLoading();
             }
@@ -115,7 +124,13 @@ public class LoginActivity extends BaseActivity {
                 AppData.UserLoginResult = result;
                 mLoadingButton.setComplete();
                 SharePerfrenceUtils.setSessionShare(LoginActivity.this, AppData.UserLoginResult.getSessionId());
-                SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, mCBKeep.isChecked(), mCBAuto.isChecked());
+                int orderUser = -1;
+                if (mRBBurial.isChecked()) {
+                    orderUser = OrderUserEnum.Burial.getCode();
+                } else if (mRBCemeteryTalk.isChecked()) {
+                    orderUser = OrderUserEnum.CemeterTalk.getCode();
+                }
+                SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, mCBKeep.isChecked(), mCBAuto.isChecked(), orderUser);
                 ToastUtils.showShortToast(getBaseContext(), "登陆成功");
                 jumpMain();
             }

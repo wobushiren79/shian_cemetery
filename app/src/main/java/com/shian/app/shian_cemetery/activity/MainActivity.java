@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +19,7 @@ import com.shian.app.shian_cemetery.common.local.LocationService;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
 
@@ -30,9 +32,10 @@ public class MainActivity extends BaseActivity {
     MainChangeItemEnum[] MainChangeData = {
             MainChangeItemEnum.MAIN,
             MainChangeItemEnum.ORDER,
+            MainChangeItemEnum.CEMETERYORDER,
 //            MainChangeItemEnum.FIND,
-//            MainChangeItemEnum.MY,
-            MainChangeItemEnum.CEMETERYORDER
+            MainChangeItemEnum.MY
+
     };
 
     private FragmentManager mFragmentManager;
@@ -164,4 +167,5 @@ public class MainActivity extends BaseActivity {
         }
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
     }
+
 }

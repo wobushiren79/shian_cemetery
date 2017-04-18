@@ -47,6 +47,8 @@ public class BurialListLayout extends LinearLayout {
 
     boolean isShow = false;//是否显示搜索栏
     BurialBuildDataBean dataBean;
+    CallBack callBack;
+
     private int pageNum = 1;
     private int pageSize = 10;
 
@@ -64,6 +66,19 @@ public class BurialListLayout extends LinearLayout {
                 Integer.valueOf(TimeUtils.getSystemTime("MM")),
                 Integer.valueOf(TimeUtils.getSystemTime("dd")));
         setDate(dataBean.getYear(), dataBean.getMonth(), dataBean.getDay());
+        getData(true);
+    }
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
+    }
+
+    /**
+     * 刷新
+     */
+    public void refresh() {
+        pageNum = 1;
+        mPullListView.setRefreshing(true);
         getData(true);
     }
 
@@ -103,6 +118,7 @@ public class BurialListLayout extends LinearLayout {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                pageNum = 1;
                 mPullListView.setRefreshing(true);
                 getData(true);
             }
@@ -251,8 +267,10 @@ public class BurialListLayout extends LinearLayout {
      */
     private void getData(final boolean isNew) {
         HpBurialDataListParams params = new HpBurialDataListParams();
-        params.setBuryStatus(dataBean.getBurialType());
+        params.setStatusType(dataBean.getStatusType());
         params.setStoneStatus(dataBean.getSetteleType());
+        params.setBuryStatus(dataBean.getBurialType());
+        params.setMultyBuryStatus(dataBean.getMultyBurialType());
         params.setDateType(dataBean.getDateType());
         params.setDate(year + "-" + month + "-" + day + " 00:00:00");
         params.setPageNum(pageNum);
@@ -287,5 +305,9 @@ public class BurialListLayout extends LinearLayout {
                 mPullListView.onRefreshComplete();
             }
         });
+    }
+
+    public interface CallBack {
+        void refesh();
     }
 }

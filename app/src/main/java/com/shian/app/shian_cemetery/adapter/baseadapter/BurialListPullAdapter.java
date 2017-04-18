@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.burial.BurialActivity;
 import com.shian.app.shian_cemetery.activity.burial.SetteleActivity;
+import com.shian.app.shian_cemetery.appenum.BurialStateEnum;
 import com.shian.app.shian_cemetery.appenum.SetteleStateEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialDateBean;
 import com.shian.app.shian_cemetery.http.model.BurialListDataModel;
@@ -39,6 +41,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
 
     /**
      * 重置数据
+     *
      * @param resultData
      */
     public void setData(HrGetBurialListData resultData) {
@@ -53,6 +56,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
 
     /**
      * 添加数据
+     *
      * @param result
      */
     public void addData(HrGetBurialListData result) {
@@ -168,6 +172,8 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             holder.tvLocation4 = (TextView) convertView.findViewById(R.id.tv_location_4);
             holder.tvSetteleState = (TextView) convertView.findViewById(R.id.tv_settele_state);
             holder.tvName1 = (TextView) convertView.findViewById(R.id.tv_name_1);
+            holder.llContentBack = (LinearLayout) convertView.findViewById(R.id.ll_contentback);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -210,10 +216,21 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         if (data.getBuryInfo().getStoneStatus() == SetteleStateEnum.NOT.getCode()) {
             holder.tvSetteleState.setText("(未安碑)");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_4));
+            holder.tvSettele.setVisibility(View.VISIBLE);
         } else {
             holder.tvSetteleState.setText("(已安碑)");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_6));
+            holder.tvSettele.setVisibility(View.GONE);
         }
+
+        if (data.getBuryInfo().getBuryStatus() == BurialStateEnum.NOT.getCode()) {
+            holder.tvBurial.setVisibility(View.VISIBLE);
+            holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_white);
+        } else {
+            holder.tvBurial.setVisibility(View.GONE);
+            holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
+        }
+
         StringBuilder deadManNames = new StringBuilder();
         if (data.getDeadInfo().getDeadmanOneName() != null && !data.getDeadInfo().getDeadmanOneName().isEmpty()) {
             deadManNames.append(data.getDeadInfo().getDeadmanOneName());
@@ -242,9 +259,12 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         TextView tvLocation4;
         TextView tvSetteleState;
         TextView tvName1;
+        LinearLayout llContentBack;
         //布局2控件------------------------
         TextView tvTime;
         TextView tvNum;
+
+
     }
 
 

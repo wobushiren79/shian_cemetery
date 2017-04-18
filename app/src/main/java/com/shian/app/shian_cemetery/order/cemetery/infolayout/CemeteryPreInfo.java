@@ -1,6 +1,7 @@
 package com.shian.app.shian_cemetery.order.cemetery.infolayout;
 
 import android.content.Context;
+import android.text.InputType;
 import android.view.View;
 import android.widget.TextView;
 
@@ -124,6 +125,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             return;
         }
 
+
         params.setBespeakId(beSpeakId);
         params.setOrderedId(orderId);
 
@@ -153,7 +155,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             @Override
             public void onSuccess(HrOrderIdResult result) {
                 if (callBack != null)
-                    callBack.next(new CemeteryDeadManInfo(getContext(),result.getOrderId(), beSpeakId));
+                    callBack.next(new CemeteryDeadManInfo(getContext(), result.getOrderId(), beSpeakId));
                 ToastUtils.showShortToast(getContext(), "提交成功");
             }
 
@@ -179,6 +181,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mWriteRemark = (EditTextViewNormal) view.findViewById(R.id.write_remark);
         mWriteLocationDetails = (SpinnerCemeteryLocation) view.findViewById(R.id.write_locationdetails);
 
+        mWriteDealPrice.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
         mTVSubmit = (TextView) view.findViewById(R.id.tv_submit);
 

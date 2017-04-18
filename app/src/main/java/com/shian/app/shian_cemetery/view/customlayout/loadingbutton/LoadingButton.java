@@ -16,7 +16,7 @@ import com.shian.app.shian_cemetery.R;
  * Created by Administrator on 2017/3/30.
  */
 
-public class LoadingButton   extends LinearLayout {
+public class LoadingButton extends LinearLayout {
     View view;
     ImageView mIVLoading;
     ImageView mIVComplete;
@@ -45,6 +45,7 @@ public class LoadingButton   extends LinearLayout {
      * 设置3种状态
      */
     public void setComplete() {
+        this.setEnabled(false);
         endAnim(mIVLoading);
         mIVLoading.setVisibility(GONE);
         mTVContent.setVisibility(GONE);
@@ -53,6 +54,7 @@ public class LoadingButton   extends LinearLayout {
     }
 
     public void setLoading() {
+        this.setEnabled(false);
         mIVLoading.setVisibility(VISIBLE);
         mIVComplete.setVisibility(GONE);
         mTVContent.setVisibility(GONE);
@@ -60,6 +62,7 @@ public class LoadingButton   extends LinearLayout {
     }
 
     public void setNormal() {
+        this.setEnabled(true);
         endAnim(mIVLoading);
         mIVLoading.setVisibility(GONE);
         mIVComplete.setVisibility(GONE);
@@ -69,6 +72,7 @@ public class LoadingButton   extends LinearLayout {
 
     /**
      * 开始动画
+     *
      * @param view
      */
     public void startAnim(View view) {
@@ -81,6 +85,7 @@ public class LoadingButton   extends LinearLayout {
 
     /**
      * 结束动画
+     *
      * @param view
      */
     public void endAnim(View view) {

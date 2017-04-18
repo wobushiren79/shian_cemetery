@@ -1,6 +1,7 @@
 package com.shian.app.shian_cemetery.view.dataview.cemetery;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
@@ -73,9 +74,13 @@ public class EditTextViewNormal extends BaseWriteView {
         return inputType;
     }
 
+
+    /**
+     * 设置输入类型
+     * @param inputType
+     */
     public void setInputType(int inputType) {
-        this.inputType = inputType;
-        initData();
+        mETInput.setInputType(inputType);
     }
 
     public void setData(String name) {
@@ -95,4 +100,6 @@ public class EditTextViewNormal extends BaseWriteView {
     public void setDisable(boolean isD) {
         mETInput.setEnabled(isD);
     }
+
+
 }
