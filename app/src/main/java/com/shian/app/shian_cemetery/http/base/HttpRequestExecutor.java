@@ -219,6 +219,69 @@ public class HttpRequestExecutor {
         requestGet(context, method, data, params, responseHandler);
     }
 
+
+    /**
+     * PHPget请求
+     *
+     * @param context
+     * @param method
+     * @param data
+     * @param params
+     * @param responseHandler
+     */
+    public <T> void requestPHPGet(final Context context,
+                                  final String method,
+                                  final Class<T> data,
+                                  final BaseHttpParams params,
+                                  final HttpResponseHandler<T> responseHandler, final boolean isShowDialog) {
+        if (!isNetworkConnected(context)) {
+            onErrorCallBack(responseHandler, "网络未连接", context);
+            return;
+        }
+        if (isShowDialog && dialog == null) {
+            dialog = new CustomDialog(context);
+            dialog.show();
+        }
+        GetBuilder getBuilder = OkHttpUtils.get();
+        getBuilder.url(BaseURL.PHPURL + "/" + method);
+        getBuilder.headers(header);
+        getBuilder.params(params.getMapParams());
+        Log.i("tag", BaseURL.PHPURL + "/" + method);
+        Log.e("tag", params.getContentJson());
+        RequestCall requestCall = getBuilder.build();
+        requestCall.execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                String errorMessage = e.getMessage();
+                if (errorMessage != null) {
+                    Log.e("tag", errorMessage);
+                }
+                onErrorCallBack(responseHandler, errorMessage, context);
+                if (dialog != null)
+                    dialog.cancel();
+                dialog = null;
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.i("tag", response);
+                dataToJson(context, response, data, responseHandler);
+                if (dialog != null)
+                    dialog.cancel();
+                dialog = null;
+            }
+
+
+            @Override
+            public void onBefore(Request request, int id) {
+                super.onBefore(request, id);
+                if (responseHandler != null) {
+                    responseHandler.onStart(request, id);
+                }
+            }
+        });
+    }
+
     /**
      * 判断是否有网络
      *

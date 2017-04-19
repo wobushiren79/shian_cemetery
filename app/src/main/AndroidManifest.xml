@@ -102,6 +102,18 @@
             android:name=".activity.SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.WebActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.php.NoticeListActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.php.AllAppActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"

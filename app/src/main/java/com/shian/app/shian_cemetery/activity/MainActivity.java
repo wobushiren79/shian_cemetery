@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
             MainChangeItemEnum.MAIN,
             MainChangeItemEnum.ORDER,
             MainChangeItemEnum.CEMETERYORDER,
-//            MainChangeItemEnum.FIND,
+            MainChangeItemEnum.FIND,
             MainChangeItemEnum.MY
 
     };
