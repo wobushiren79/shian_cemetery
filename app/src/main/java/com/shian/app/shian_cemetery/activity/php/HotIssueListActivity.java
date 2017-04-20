@@ -18,30 +18,30 @@ import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.phpmodel.DynamicItemsInfo;
-import com.shian.app.shian_cemetery.http.phpparams.HpDynamicGetParams;
-import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetDynamic;
+import com.shian.app.shian_cemetery.http.phpmodel.HotIssueData;
+import com.shian.app.shian_cemetery.http.phpparams.HpHelpGetParams;
+import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetHotIssue;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Request;
 
-public class NoticeListActivity extends BaseActivity {
+public class HotIssueListActivity extends BaseActivity {
+
 
     int page = 0;
     int pageNumber = 10;
     PullToRefreshListView mListView;
 
-    List<DynamicItemsInfo> data = new ArrayList<>();
+    List<HotIssueData> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_list);
-        setTitle("动态", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+        setTitle("热门问题",BaseTitleEnum.BACKNORMALTITLE.getTitleType());
 
         initView();
 
@@ -68,8 +68,8 @@ public class NoticeListActivity extends BaseActivity {
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(NoticeListActivity.this, WebActivity.class);
-            intent.putExtra("url", BaseURL.dynamicsPHPURL + "?id=" + data.get(position - 1).getId());
+            Intent intent = new Intent(HotIssueListActivity.this, WebActivity.class);
+            intent.putExtra("url", BaseURL.helpsPHPURL + "?id=" + data.get(position - 1).getId());
             startActivity(intent);
         }
     };
@@ -92,10 +92,10 @@ public class NoticeListActivity extends BaseActivity {
      * 获取数据
      */
     private void getData(final boolean isClean) {
-        HpDynamicGetParams params = new HpDynamicGetParams();
+        HpHelpGetParams params = new HpHelpGetParams();
         params.setNumber(pageNumber);
         params.setPagerNumber(page);
-        MHttpManagerFactory.getPHPManager().getDynamicInfo(NoticeListActivity.this, params, new HttpResponseHandler<PHPHrGetDynamic>() {
+        MHttpManagerFactory.getPHPManager().getHotIssue(HotIssueListActivity.this, params, new HttpResponseHandler<PHPHrGetHotIssue>() {
 
 
             @Override
@@ -104,7 +104,7 @@ public class NoticeListActivity extends BaseActivity {
             }
 
             @Override
-            public void onSuccess(PHPHrGetDynamic result) {
+            public void onSuccess(PHPHrGetHotIssue result) {
                 if (isClean) {
                     data.clear();
                 }
@@ -141,7 +141,7 @@ public class NoticeListActivity extends BaseActivity {
             ViewHolder holder;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = View.inflate(NoticeListActivity.this, R.layout.layout_message_items, null);
+                convertView = View.inflate(HotIssueListActivity.this, R.layout.layout_message_items, null);
                 holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
                 holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
                 holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
@@ -150,7 +150,7 @@ public class NoticeListActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            DynamicItemsInfo item = data.get(position);
+            HotIssueData item = data.get(position);
             holder.tvTitle.setText(item.getTitle());
             holder.tvTime.setText(item.getTime());
             holder.tvContent.setVisibility(View.GONE);

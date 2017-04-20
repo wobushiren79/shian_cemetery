@@ -13,6 +13,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.SettingsActivity;
+import com.shian.app.shian_cemetery.activity.php.CustomerHelpActivity;
+import com.shian.app.shian_cemetery.activity.php.IdeaFeedbackActivity;
+import com.shian.app.shian_cemetery.activity.php.MyCollectionActivity;
 import com.shian.app.shian_cemetery.appenum.UserCenterEnum;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
@@ -178,29 +181,29 @@ public class MyFragment extends BaseFragment {
      * 意见反馈
      */
     private void idea() {
-//        if (mHrUserInfo == null) {
-//            ToastUtils.showShortToast(getContext(), "数据异常，请重新登陆");
-//        } else {
-//            Intent intent = new Intent(getContext(), IdeaFeedbackActivity.class);
-//            intent.putExtra("UserInfo", new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});
-//            startActivity(intent);
-//        }
+        if (mHrUserInfo == null) {
+            ToastUtils.showShortToast(getContext(), "数据异常，请重新登陆");
+        } else {
+            Intent intent = new Intent(getContext(), IdeaFeedbackActivity.class);
+            intent.putExtra("UserInfo", new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});
+            startActivity(intent);
+        }
     }
 
     /**
      * 帮助
      */
     private void help() {
-//        Intent intent = new Intent(getContext(), CustomerHelpActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getContext(), CustomerHelpActivity.class);
+        startActivity(intent);
     }
 
     /**
      * 收藏
      */
     private void collection() {
-//        Intent intent = new Intent(getContext(), MyCollectionActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getContext(), MyCollectionActivity.class);
+        startActivity(intent);
     }
 
     /**

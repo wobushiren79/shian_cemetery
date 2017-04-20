@@ -8,6 +8,7 @@ import android.view.animation.TranslateAnimation;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.baseadapter.AllAppAdapter;
 import com.shian.app.shian_cemetery.appenum.APPEnum;
+import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.common.view.ScrollGridView;
 import com.shian.app.shian_cemetery.view.customlayout.mainadvertisement.MainAdvertisementLayout;
@@ -44,7 +45,7 @@ public class AllAppActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_app);
 
-        setTitle("全部应用");
+        setTitle("全部应用",BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         initView();
     }
 

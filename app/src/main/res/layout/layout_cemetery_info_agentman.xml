@@ -18,11 +18,23 @@
             android:layout_height="wrap_content"
             DataReadAttr:titleName="经办人姓名"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_agentmanphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="经办人电话"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal
             android:id="@+id/write_relation"
@@ -30,11 +42,23 @@
             android:layout_height="wrap_content"
             DataReadAttr:titleName="经办人与逝者关系"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
         <com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal
             android:id="@+id/write_agentmanlocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="经办人地址"></com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_agentmancardid"
@@ -42,11 +66,23 @@
             android:layout_height="wrap_content"
             DataReadAttr:titleName="经办人身份证"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_agentmanemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="经办人邮箱"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_remark"

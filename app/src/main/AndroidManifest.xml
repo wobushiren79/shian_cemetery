@@ -114,6 +114,22 @@
             android:name=".activity.php.AllAppActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.php.CustomerHelpActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.php.HotIssueListActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.php.IdeaFeedbackActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.php.MyCollectionActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
 
         <service
             android:name="com.baidu.location.f"

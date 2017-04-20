@@ -2,9 +2,13 @@ package com.shian.app.shian_cemetery.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -38,7 +42,6 @@ public class WebActivity extends BaseActivity {
 
     WebView mWebView;
     ProgressBar mPB;
-    String dir;
 
     boolean isCollection;
     String url = "";
@@ -50,13 +53,15 @@ public class WebActivity extends BaseActivity {
         setContentView(R.layout.activity_web);
         initView();
         openCollection();
-        dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
         webSettings.setGeolocationEnabled(true);
         webSettings.setDatabaseEnabled(true);
-        webSettings.setGeolocationDatabasePath(dir);
+        webSettings.setBlockNetworkImage(false);
+        webSettings.setBlockNetworkLoads(false);
+        webSettings.setGeolocationDatabasePath(getFilesDir().getPath());
         webSettings.setDomStorageEnabled(true);//允许DCOM
 
         url = getIntent().getStringExtra("url");
@@ -81,8 +86,18 @@ public class WebActivity extends BaseActivity {
                 mTVTitle.setText(title);
             }
 
-        });
 
+            @Override
+            public void onReceivedIcon(WebView view, Bitmap icon) {
+                super.onReceivedIcon(view, icon);
+            }
+
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, false);
+                super.onGeolocationPermissionsShowPrompt(origin, callback);
+            }
+        });
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
@@ -97,9 +112,8 @@ public class WebActivity extends BaseActivity {
                 return true;
             }
         });
-
-
     }
+
 
     /**
      * 是否要开启收藏功能
