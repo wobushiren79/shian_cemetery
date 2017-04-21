@@ -36,6 +36,7 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
     TextView mTVBack;
     TextView mTVNext;
 
+    LinearLayout mLLButton;
     public CemeteryAgentManInfo(Context context, long orderId, long bespeakId) {
         super(context, orderId, bespeakId, R.layout.layout_cemetery_info_agentman);
     }
@@ -127,7 +128,7 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
 
         mTVNext = (TextView) view.findViewById(R.id.tv_submit);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
-
+        mLLButton= (LinearLayout) view.findViewById(R.id.ll_button);
 
         mTVNext.setOnClickListener(new OnClickListener() {
             @Override
@@ -150,5 +151,7 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
         mRelation.initSpinner(SelectDictCode.MAN_RELATION);
     }
 
-
+    public void setShowMode() {
+        mLLButton.setVisibility(GONE);
+    }
 }

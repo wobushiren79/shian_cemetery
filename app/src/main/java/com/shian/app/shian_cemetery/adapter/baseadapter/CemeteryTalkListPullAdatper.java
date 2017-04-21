@@ -333,6 +333,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
      */
     private void orderInfo(CemeteryOrderModel model) {
         Intent intent = new Intent(context, InfoDetailsActivity.class);
+        intent.putExtra(IntentName.INTENT_BESPEAKID, model.getBespeakId());
+        intent.putExtra(IntentName.INTENT_ORDERID, model.getOrderId());
         context.startActivity(intent);
     }
 

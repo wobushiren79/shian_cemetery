@@ -3,6 +3,7 @@ package com.shian.app.shian_cemetery.order.cemetery.infolayout;
 import android.content.Context;
 import android.text.InputType;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
@@ -45,9 +46,12 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
     TextView mTVSubmit;
     TextView mTVBack;
 
+    LinearLayout mLLButton;
+
     public CemeteryPreInfo(Context context, long orderId, long bespeakId) {
         super(context, orderId, bespeakId, R.layout.layout_cemetery_info_pre);
     }
+
 
     @Override
     public void getData() {
@@ -184,7 +188,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mWriteDealPrice.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
         mTVSubmit = (TextView) view.findViewById(R.id.tv_submit);
-
+        mLLButton = (LinearLayout) findViewById(R.id.ll_button);
         mWritePlanPrice.setDisable(false);
         mTVSubmit.setOnClickListener(new OnClickListener() {
             @Override
@@ -214,5 +218,8 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mWritePayInfo.initSpinner(SelectDictCode.ORDER_PAY_PURPOSE);
     }
 
+    public void setShowMode() {
+        mLLButton.setVisibility(GONE);
+    }
 
 }

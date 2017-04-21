@@ -5,6 +5,8 @@
     android:background="@color/white"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/dimen_32dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingRight="@dimen/dimen_32dp">
 
     <TextView

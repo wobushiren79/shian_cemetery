@@ -26,6 +26,7 @@ public abstract class BaseCemeteryInfo extends LinearLayout {
         getData();
     }
 
+
     public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
     }

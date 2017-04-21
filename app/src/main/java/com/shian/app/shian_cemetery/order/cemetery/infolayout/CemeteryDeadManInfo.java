@@ -43,6 +43,8 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
     TextView mTVNext;
     TextView mTVBack;
 
+    LinearLayout mLLButton;
+
     public CemeteryDeadManInfo(Context context, long orderId, long bespeakId) {
         super(context, orderId, bespeakId, R.layout.layout_cemetery_info_deadman);
     }
@@ -158,6 +160,7 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
 
         mTVNext = (TextView) view.findViewById(R.id.tv_submit);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
+        mLLButton = (LinearLayout) view.findViewById(R.id.ll_button);
 
         mTVNext.setOnClickListener(new OnClickListener() {
             @Override
@@ -181,5 +184,9 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
         mUserSex2.initSpinner(SelectDictCode.PERSONNEL_SEX);
         mUserState1.initSpinner(SelectDictCode.DEAD_INFO_STATE);
         mUserState2.initSpinner(SelectDictCode.DEAD_INFO_STATE);
+    }
+
+    public void setShowMode() {
+        mLLButton.setVisibility(GONE);
     }
 }

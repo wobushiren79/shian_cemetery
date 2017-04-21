@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.shian.app.shian_cemetery.common.local.LocationService;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class BaseAppliction extends Application {
     public DisplayImageOptions options;
     public ImageLoaderConfiguration config;
     public LocationService locationService;
+
     /**
      * acitivity关闭时候，删除activity列表中的activity对象
      */
@@ -58,6 +60,7 @@ public class BaseAppliction extends Application {
         initOkHttp();
         initImageLoader();
         initMap();
+
     }
 
     /**
