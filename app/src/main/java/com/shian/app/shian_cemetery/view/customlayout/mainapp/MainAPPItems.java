@@ -168,6 +168,7 @@ public class MainAPPItems extends LinearLayout {
                     + "&maptype=soso" +//wgs baidu soso
                     "&lat=" + AppData.LOCAL_latitude
                     + "&lng=" + AppData.LOCAL_longitude
+
             );
         }
         getContext().startActivity(intent);
