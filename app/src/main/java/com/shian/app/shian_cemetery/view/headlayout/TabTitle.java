@@ -28,6 +28,7 @@ public class TabTitle extends LinearLayout {
             BurialTabEnum.BuriedOver
     };
 
+    CallBack callBack;
 
     public TabTitle(Context context) {
         this(context, null);
@@ -40,6 +41,9 @@ public class TabTitle extends LinearLayout {
         initData();
     }
 
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
+    }
 
     private void initData() {
         for (int i = 0; i < tabEna.length; i++) {
@@ -63,12 +67,18 @@ public class TabTitle extends LinearLayout {
     TitleTabChange.TabCallBack tabCallBack = new TitleTabChange.TabCallBack() {
         @Override
         public void TabChange(int code, String title) {
-            Intent intent = new Intent();
-            intent.setAction(ReceiverAction.TITLE_TAB_CHANGE_RECEIVER);
-            intent.putExtra(IntentName.INTENT_TITLE_TAB_CHANGE_RECEIVER_CODE, code);
-            intent.putExtra(IntentName.INTENT_TITLE_TAB_CHANGE_RECEIVER_NAME, title);
-            getContext().sendBroadcast(intent);
+//            Intent intent = new Intent();
+//            intent.setAction(ReceiverAction.TITLE_TAB_CHANGE_RECEIVER);
+//            intent.putExtra(IntentName.INTENT_TITLE_TAB_CHANGE_RECEIVER_CODE, code);
+//            intent.putExtra(IntentName.INTENT_TITLE_TAB_CHANGE_RECEIVER_NAME, title);
+//            getContext().sendBroadcast(intent);
+            if (callBack != null) {
+                callBack.tabChange(code, title);
+            }
         }
     };
 
+    public interface CallBack {
+        void tabChange(int code, String title);
+    }
 }

@@ -16,12 +16,20 @@ import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseAppliction;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.common.local.LocationService;
+import com.shian.app.shian_cemetery.fragment.CemeteryOrderFragment;
+import com.shian.app.shian_cemetery.fragment.FindFragment;
+import com.shian.app.shian_cemetery.fragment.HomeFragment;
+import com.shian.app.shian_cemetery.fragment.MyFragment;
+import com.shian.app.shian_cemetery.fragment.OrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
+
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import okhttp3.Request;
 
@@ -106,6 +114,7 @@ public class MainActivity extends BaseActivity {
         mTranscation.commit();
     }
 
+
     /**
      * 定位监听
      */
@@ -140,17 +149,24 @@ public class MainActivity extends BaseActivity {
     MainChangeLayout.MainChangeCallBack changeCallBack = new MainChangeLayout.MainChangeCallBack() {
         @Override
         public void onClick(int itemId) {
-            for (MainChangeItemEnum dataEnum : MainChangeData) {
-                if (dataEnum.getItemId() == itemId) {
-                    showFragment(dataEnum.getFragment());
-                    //设置标题内容
-                    if (dataEnum.getItemId() == MainChangeItemEnum.ORDER.getItemId()) {
-                        setTitle(dataEnum.getTitle(), BaseTitleEnum.TABTITLE.getTitleType());
-                    } else {
-                        setTitle(dataEnum.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
-                    }
-                }
+            BaseFragment baseFragment = null;
+            if (itemId == MainChangeItemEnum.CEMETERYORDER.getItemId()) {
+                baseFragment = new CemeteryOrderFragment();
+                setTitle(MainChangeItemEnum.CEMETERYORDER.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
+            } else if (itemId == MainChangeItemEnum.FIND.getItemId()) {
+                baseFragment = new FindFragment();
+                setTitle(MainChangeItemEnum.FIND.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
+            } else if (itemId == MainChangeItemEnum.MAIN.getItemId()) {
+                baseFragment = new HomeFragment();
+                setTitle(MainChangeItemEnum.MAIN.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
+            } else if (itemId == MainChangeItemEnum.MY.getItemId()) {
+                baseFragment = new MyFragment();
+                setTitle(MainChangeItemEnum.MY.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
+            } else if (itemId == MainChangeItemEnum.ORDER.getItemId()) {
+                baseFragment = new OrderFragment();
+                setTitle(MainChangeItemEnum.ORDER.getTitle(),0);
             }
+            showFragment(baseFragment);
         }
     };
 

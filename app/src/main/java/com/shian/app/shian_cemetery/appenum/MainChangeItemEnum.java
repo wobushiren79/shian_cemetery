@@ -14,33 +14,26 @@ import com.shian.app.shian_cemetery.fragment.OrderFragment;
 
 public enum MainChangeItemEnum {
 
-    MAIN("首页", R.drawable.ic_bar_home_press_2, R.drawable.ic_bar_home_default_2, 1, new HomeFragment()),
-    ORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 2, new OrderFragment()),
-    FIND("发现", R.drawable.ic_bar_find_press_2, R.drawable.ic_bar_find_default_2, 3, new FindFragment()),
-    MY("我", R.drawable.ic_bar_my_press_2, R.drawable.ic_bar_my_default_2, 4, new MyFragment()),
-    CEMETERYORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 5, new CemeteryOrderFragment());
+    MAIN("首页", R.drawable.ic_bar_home_press_2, R.drawable.ic_bar_home_default_2, 1),
+    ORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 2),
+    FIND("发现", R.drawable.ic_bar_find_press_2, R.drawable.ic_bar_find_default_2, 3),
+    MY("我", R.drawable.ic_bar_my_press_2, R.drawable.ic_bar_my_default_2, 4),
+    CEMETERYORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 5);
 
     private String title;
     private int unCheckIconId;
     private int checkIconId;
     private int itemId;
-    private BaseFragment fragment;
 
-    MainChangeItemEnum(String title, int unCheckIconId, int checkIconId, int itemId, BaseFragment fragment) {
+
+    MainChangeItemEnum(String title, int unCheckIconId, int checkIconId, int itemId) {
         this.title = title;
         this.unCheckIconId = unCheckIconId;
         this.checkIconId = checkIconId;
         this.itemId = itemId;
-        this.fragment = fragment;
+
     }
 
-    public BaseFragment getFragment() {
-        return fragment;
-    }
-
-    public void setFragment(BaseFragment fragment) {
-        this.fragment = fragment;
-    }
 
     public int getItemId() {
         return itemId;

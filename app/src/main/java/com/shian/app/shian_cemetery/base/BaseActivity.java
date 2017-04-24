@@ -93,7 +93,8 @@ public class BaseActivity extends FragmentActivity {
             addTabTitle(layoutParams);
         } else if (titleType == BaseTitleEnum.BACKNORMALTITLE.getTitleType()) {
             addBackTitle(titleName, layoutParams);
-
+        } else {
+            mRLHead.setVisibility(View.GONE);
         }
     }
 
