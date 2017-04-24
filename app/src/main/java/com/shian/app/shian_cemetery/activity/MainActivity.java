@@ -134,6 +134,7 @@ public class MainActivity extends BaseActivity {
                 AppData.LOCAL_ADDRESS = location.getAddress().address;
                 AppData.LOCAL_latitude = location.getLatitude();
                 AppData.LOCAL_longitude = location.getLongitude();
+
             }
         }
 
