@@ -1,5 +1,17 @@
 [
     {
+        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
+        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+    },
+    {
         "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
         "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
     },
@@ -14,5 +26,9 @@
     {
         "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
         "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+    },
+    {
+        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\zhy_loading.png",
+        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\zhy_loading.png"
     }
 ]
