@@ -13,4 +13,7 @@ public class IntentName {
     public static String INTENT_ORDERID = "INTENT_ORDERID";//传递orderId
 
     public static String INTENT_SETTING = "INTENT_SETTING";//设置界面
+
+    public static String INTENT_CODE = "INTENT_CODE";//设置code
+    public static String INTENT_TITLE = "INTENT_TITLE";//设置title
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.WebActivity;
 import com.shian.app.shian_cemetery.activity.php.HotIssueListActivity;
+import com.shian.app.shian_cemetery.appenum.HelpEnum;
 import com.shian.app.shian_cemetery.common.view.ScrollListView;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -23,6 +24,7 @@ import com.shian.app.shian_cemetery.http.phpmodel.HotIssueData;
 import com.shian.app.shian_cemetery.http.phpparams.HpHelpGetParams;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetHotIssue;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.view.customlayout.maindynamic.MainDynamic;
 
 import java.util.ArrayList;
@@ -120,6 +122,8 @@ public class HelpHotIssue extends LinearLayout {
         public void onClick(View v) {
             if (v == mIVMore) {
                 Intent intent = new Intent(getContext(), HotIssueListActivity.class);
+                intent.putExtra(IntentName.INTENT_TITLE, HelpEnum.ALL.getName());
+                intent.putExtra(IntentName.INTENT_CODE, HelpEnum.ALL.getCode());
                 getContext().startActivity(intent);
             }
         }

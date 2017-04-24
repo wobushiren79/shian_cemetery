@@ -8,6 +8,7 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 
 public class HpHelpGetParams extends BaseHttpParams {
 
+    private int type;
     private int number;
     private int pagerNumber;
 
@@ -25,5 +26,13 @@ public class HpHelpGetParams extends BaseHttpParams {
 
     public void setPagerNumber(int pagerNumber) {
         this.pagerNumber = pagerNumber;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

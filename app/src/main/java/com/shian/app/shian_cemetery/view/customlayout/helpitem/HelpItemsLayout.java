@@ -1,6 +1,7 @@
 package com.shian.app.shian_cemetery.view.customlayout.helpitem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.activity.php.HotIssueListActivity;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 
 /**
@@ -22,8 +25,8 @@ public class HelpItemsLayout extends LinearLayout {
     ImageView mIVIcon;
     TextView mTVContent;
 
-    String url;
-
+    int code;
+    String title;
     public HelpItemsLayout(Context context) {
         this(context, null);
     }
@@ -57,7 +60,10 @@ public class HelpItemsLayout extends LinearLayout {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-
+                        Intent intent = new Intent(getContext(), HotIssueListActivity.class);
+                        intent.putExtra(IntentName.INTENT_TITLE, title);
+                        intent.putExtra(IntentName.INTENT_CODE, code);
+                        getContext().startActivity(intent);
                     }
 
                     @Override
@@ -71,9 +77,10 @@ public class HelpItemsLayout extends LinearLayout {
         }
     };
 
-    public void setData(String content, int iconID, String url) {
+    public void setData(String title, int iconID, int code) {
         mIVIcon.setImageResource(iconID);
-        mTVContent.setText(content);
-        this.url = url;
+        mTVContent.setText(title);
+        this.code = code;
+        this.title = title;
     }
 }

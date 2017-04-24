@@ -22,6 +22,7 @@ import com.shian.app.shian_cemetery.http.phpmodel.HotIssueData;
 import com.shian.app.shian_cemetery.http.phpparams.HpHelpGetParams;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetHotIssue;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,8 @@ import java.util.List;
 import okhttp3.Request;
 
 public class HotIssueListActivity extends BaseActivity {
-
-
+    String title;
+    int code = 0;
     int page = 0;
     int pageNumber = 10;
     PullToRefreshListView mListView;
@@ -41,7 +42,11 @@ public class HotIssueListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_list);
-        setTitle("热门问题",BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+
+        setTitle("热门问题");
+        title = getIntent().getStringExtra(IntentName.INTENT_TITLE);
+        code = getIntent().getIntExtra(IntentName.INTENT_CODE, 0);
+        setTitle(title, BaseTitleEnum.BACKNORMALTITLE.getTitleType());
 
         initView();
 
@@ -93,6 +98,7 @@ public class HotIssueListActivity extends BaseActivity {
      */
     private void getData(final boolean isClean) {
         HpHelpGetParams params = new HpHelpGetParams();
+        params.setType(code);
         params.setNumber(pageNumber);
         params.setPagerNumber(page);
         MHttpManagerFactory.getPHPManager().getHotIssue(HotIssueListActivity.this, params, new HttpResponseHandler<PHPHrGetHotIssue>() {
