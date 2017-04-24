@@ -168,7 +168,6 @@ public class MainActivity extends BaseActivity {
                 setTitle(MainChangeItemEnum.ORDER.getTitle(),0);
             }
             showFragment(baseFragment);
-            String a="";
         }
     };
 
