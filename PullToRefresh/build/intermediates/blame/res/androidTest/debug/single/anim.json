@@ -1,9 +1,5 @@
 [
     {
-        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
-        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
-    },
-    {
         "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
         "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
@@ -12,20 +8,8 @@
         "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     },
     {
-        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
-        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
-    },
-    {
         "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
         "source": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
-    },
-    {
-        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
-        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
-    },
-    {
-        "merged": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
-        "source": "F:\\Android\\AndroidStudioProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
     },
     {
         "merged": "E:\\Android\\AndroidProjects\\shian_anzanggong\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
