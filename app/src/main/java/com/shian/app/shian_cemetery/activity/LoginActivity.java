@@ -111,7 +111,7 @@ public class LoginActivity extends BaseActivity {
         HpLoginParams params = new HpLoginParams();
         params.setPassword(mETPassWord.getText().toString());
         params.setUsername(mETUserName.getText().toString());
-        params.setSystemType("2");
+        params.setSystemType("0");
 //        params.setChannelId("0");
         MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
             @Override
@@ -128,7 +128,7 @@ public class LoginActivity extends BaseActivity {
                 if (mRBBurial.isChecked()) {
                     orderUser = OrderUserEnum.Burial.getCode();
                 } else if (mRBCemeteryTalk.isChecked()) {
-                    orderUser = OrderUserEnum.CemeterTalk.getCode();
+                    orderUser = OrderUserEnum.Cemetery.getCode();
                 }
                 SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, mCBKeep.isChecked(), mCBAuto.isChecked(), orderUser);
                 ToastUtils.showShortToast(getBaseContext(), "登陆成功");

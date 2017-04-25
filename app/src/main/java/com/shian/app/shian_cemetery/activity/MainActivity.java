@@ -10,8 +10,10 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.mapapi.SDKInitializer;
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.MainChangeItemEnum;
+import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseAppliction;
 import com.shian.app.shian_cemetery.base.BaseFragment;
@@ -25,9 +27,12 @@ import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
+import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -37,14 +42,6 @@ public class MainActivity extends BaseActivity {
 
     MainChangeLayout mMainChangeLayout;
 
-    MainChangeItemEnum[] MainChangeData = {
-            MainChangeItemEnum.MAIN,
-            MainChangeItemEnum.ORDER,
-            MainChangeItemEnum.CEMETERYORDER,
-            MainChangeItemEnum.FIND,
-            MainChangeItemEnum.MY
-
-    };
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction mTranscation;
@@ -165,9 +162,8 @@ public class MainActivity extends BaseActivity {
                 setTitle(MainChangeItemEnum.MY.getTitle(), BaseTitleEnum.NORMALTITLE.getTitleType());
             } else if (itemId == MainChangeItemEnum.ORDER.getItemId()) {
                 baseFragment = new OrderFragment();
-                setTitle(MainChangeItemEnum.ORDER.getTitle(),0);
+                setTitle(MainChangeItemEnum.ORDER.getTitle(), 0);
             }
-
             showFragment(baseFragment);
         }
     };
@@ -176,14 +172,60 @@ public class MainActivity extends BaseActivity {
      * 设置菜单数据
      */
     private void setMianData() {
-        for (int i = 0; i < MainChangeData.length; i++) {
-            mMainChangeLayout.addMainData
-                    (MainChangeData[i].getTitle(),
-                            MainChangeData[i].getUnCheckIconId(),
-                            MainChangeData[i].getCheckIconId(),
-                            MainChangeData[i].getItemId());
+        List<MainChangeItemEnum> mainChangeData = new ArrayList<>();
+
+        mainChangeData.add(MainChangeItemEnum.MAIN);
+
+        int orderUser = SharePerfrenceUtils.getOrderUser(this);
+
+        if (orderUser == OrderUserEnum.Burial.getCode() && checkPermition(OrderUserEnum.Burial.getCode())) {
+            mainChangeData.add(MainChangeItemEnum.ORDER);
+        } else if (orderUser == OrderUserEnum.Cemetery.getCode() && checkPermition(OrderUserEnum.Cemetery.getCode())) {
+            mainChangeData.add(MainChangeItemEnum.CEMETERYORDER);
         }
+
+        mainChangeData.add(MainChangeItemEnum.FIND);
+        mainChangeData.add(MainChangeItemEnum.MY);
+        for (int i = 0; i < mainChangeData.size(); i++) {
+            mMainChangeLayout.addMainData(
+                    mainChangeData.get(i).getTitle(),
+                    mainChangeData.get(i).getUnCheckIconId(),
+                    mainChangeData.get(i).getCheckIconId(),
+                    mainChangeData.get(i).getItemId());
+        }
+
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
+    }
+
+    /**
+     * 检测是否有相应权限
+     *
+     * @param orderUser
+     * @return
+     */
+    private boolean checkPermition(int orderUser) {
+        List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
+        boolean isPermition = false;
+        if (orderUser == OrderUserEnum.Burial.getCode()) {
+            for (String permition : listPermition) {
+                if (permition.equals(AppRolePermition.BURIERBUILD.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
+                if (permition.equals(AppRolePermition.BURIERBURYING.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
+            }
+        } else if (orderUser == OrderUserEnum.Cemetery.getCode()) {
+            for (String permition : listPermition) {
+                if (permition.equals(AppRolePermition.TALKER.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
+            }
+        }
+        return isPermition;
     }
 
 }

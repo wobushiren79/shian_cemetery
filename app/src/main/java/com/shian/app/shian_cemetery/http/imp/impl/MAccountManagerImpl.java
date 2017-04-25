@@ -55,7 +55,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void loginCemetery(Context context, HpLoginParams params, HttpResponseHandler<HrLoginResult> handler) {
-        excutor.requestPost(context, "doLogin/cemetery", HrLoginResult.class, params, handler);
+        excutor.requestPost(context, "doLogin/marketing", HrLoginResult.class, params, handler);
     }
 
     @Override

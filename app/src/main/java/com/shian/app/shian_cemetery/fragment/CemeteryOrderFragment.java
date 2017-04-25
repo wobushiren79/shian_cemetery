@@ -30,8 +30,8 @@ public class CemeteryOrderFragment extends BaseFragment {
     CemeteryListViewPagerAdapter mPagerAdapter;
 
     CemeteryTabEnum[] tabData = {
-            CemeteryTabEnum.TALKORDER,
-            CemeteryTabEnum.SERVICEOVER
+            CemeteryTabEnum.TALKORDER
+//            CemeteryTabEnum.SERVICEOVER
     };
 
     List<BaseCemeteryOrderList> listView;

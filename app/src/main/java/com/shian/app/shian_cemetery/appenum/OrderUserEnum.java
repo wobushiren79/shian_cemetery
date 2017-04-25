@@ -6,7 +6,7 @@ package com.shian.app.shian_cemetery.appenum;
 
 public enum OrderUserEnum {
     Burial(0, "安葬工"),
-    CemeterTalk(1, "公墓洽谈");
+    Cemetery(1, "公墓流程");
 
 
     private int code;

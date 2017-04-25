@@ -14,11 +14,13 @@ import com.daimajia.swipe.SwipeLayout;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.burial.BurialActivity;
 import com.shian.app.shian_cemetery.activity.burial.SetteleActivity;
+import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.BurialStateEnum;
 import com.shian.app.shian_cemetery.appenum.SetteleStateEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialDateBean;
 import com.shian.app.shian_cemetery.http.model.BurialListDataModel;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
+import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.TimeUtils;
 
@@ -71,7 +73,6 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
      */
     public void dealTime() {
         List<Integer> dayTemp = new ArrayList<>();
-
         for (BurialListDataModel data : listData) {
             int day = Integer.valueOf(TimeUtils.formatTime(data.getBuryInfo().getBuryDatePre(), "dd"));
             if (!dayTemp.contains(day)) {
@@ -213,24 +214,43 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         holder.tvLocation2.setText(data.getTombPosition().getParkName());
         holder.tvLocation3.setText(data.getTombPosition().getRow() + "排");
         holder.tvLocation4.setText(data.getTombPosition().getNum() + "号");
+        //立碑显示判定
         if (data.getBuryInfo().getStoneStatus() == SetteleStateEnum.NOT.getCode()) {
             holder.tvSetteleState.setText("(未安碑)");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_4));
             holder.tvSettele.setVisibility(View.VISIBLE);
+            holder.tvSettele.setTag(false);
         } else {
             holder.tvSetteleState.setText("(已安碑)");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_6));
             holder.tvSettele.setVisibility(View.GONE);
+            holder.tvSettele.setTag(true);
         }
-
+        //安葬显示判定
         if (data.getBuryInfo().getBuryStatus() == BurialStateEnum.NOT.getCode()) {
             holder.tvBurial.setVisibility(View.VISIBLE);
             holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_white);
+            holder.tvBurial.setTag(false);
         } else {
             holder.tvBurial.setVisibility(View.GONE);
             holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
+            holder.tvBurial.setTag(true);
         }
-
+        //权限显示判定
+        List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
+        for (String permition : listPermition) {
+            if (permition.equals(AppRolePermition.BURIERBUILD.getCode()) && !(Boolean) holder.tvSettele.getTag()) {
+                holder.tvSettele.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvSettele.setVisibility(View.GONE);
+            }
+            if (permition.equals(AppRolePermition.BURIERBURYING.getCode()) && !(Boolean) holder.tvBurial.getTag()) {
+                holder.tvBurial.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvBurial.setVisibility(View.GONE);
+            }
+        }
+        //名字设置
         StringBuilder deadManNames = new StringBuilder();
         if (data.getDeadInfo().getDeadmanOneName() != null && !data.getDeadInfo().getDeadmanOneName().isEmpty()) {
             deadManNames.append(data.getDeadInfo().getDeadmanOneName());

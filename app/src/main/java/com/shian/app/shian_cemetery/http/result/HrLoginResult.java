@@ -1,15 +1,23 @@
 package com.shian.app.shian_cemetery.http.result;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HrLoginResult {
     private String sessionId;
     private String lastAccessTime;
     private String startTimestamp;
     private ArrayList<Integer> roleIds;
-
+    private List<String> permitionCodes;
     private long userId;
 
+    public List<String> getPermitionCodes() {
+        return permitionCodes;
+    }
+
+    public void setPermitionCodes(List<String> permitionCodes) {
+        this.permitionCodes = permitionCodes;
+    }
 
     public long getUserId() {
         return userId;

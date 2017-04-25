@@ -73,6 +73,7 @@ public class SharePerfrenceUtils {
         editor.commit();
     }
 
+
     /**
      * 获取账号信息
      *
@@ -94,6 +95,18 @@ public class SharePerfrenceUtils {
         loginS.setAutoLogin(isAuto);
         loginS.setOrderUser(orderUser);
         return loginS;
+    }
+
+    /**
+     * 获取账号登陆模块
+     *
+     * @param content
+     * @return
+     */
+    public static int getOrderUser(Context content) {
+        SharedPreferences share = content.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
+        int orderUser = share.getInt(C_sShareLogin_orderUser, -1);
+        return orderUser;
     }
 
     public static class ShareLogin {
