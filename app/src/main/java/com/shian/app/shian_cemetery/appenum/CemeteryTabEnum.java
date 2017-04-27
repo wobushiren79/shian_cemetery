@@ -7,7 +7,8 @@ package com.shian.app.shian_cemetery.appenum;
 
 public enum CemeteryTabEnum {
     TALKORDER("洽谈", 1),
-    SERVICEOVER("服务结束", 2);
+    SERVICEOVER("服务结束", 2),
+    BUILD("新建", 3);
 
     private String title;
     private int code;

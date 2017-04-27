@@ -29,6 +29,7 @@ import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayout;
 
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initData();
         initView();
+        //检测更新
+        Utils.checkUpData(this, false);
     }
 
     @Override
@@ -219,6 +222,10 @@ public class MainActivity extends BaseActivity {
             }
         } else if (orderUser == OrderUserEnum.Cemetery.getCode()) {
             for (String permition : listPermition) {
+                if (permition.equals(AppRolePermition.ADVISOR.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
                 if (permition.equals(AppRolePermition.TALKER.getCode())) {
                     isPermition = true;
                     return true;

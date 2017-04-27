@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,10 +19,12 @@ import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.BurialStateEnum;
 import com.shian.app.shian_cemetery.appenum.SetteleStateEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialDateBean;
+import com.shian.app.shian_cemetery.common.local.Utils;
 import com.shian.app.shian_cemetery.http.model.BurialListDataModel;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
+import com.shian.app.shian_cemetery.tools.CheckUtils;
 import com.shian.app.shian_cemetery.tools.TimeUtils;
 
 import java.util.ArrayList;
@@ -174,7 +177,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             holder.tvSetteleState = (TextView) convertView.findViewById(R.id.tv_settele_state);
             holder.tvName1 = (TextView) convertView.findViewById(R.id.tv_name_1);
             holder.llContentBack = (LinearLayout) convertView.findViewById(R.id.ll_contentback);
-
+            holder.ivShadow = (ImageView) convertView.findViewById(R.id.iv_shadow);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -231,24 +234,32 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             holder.tvBurial.setVisibility(View.VISIBLE);
             holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_white);
             holder.tvBurial.setTag(false);
+            holder.ivShadow.setVisibility(View.VISIBLE);
         } else {
             holder.tvBurial.setVisibility(View.GONE);
             holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
             holder.tvBurial.setTag(true);
+            holder.ivShadow.setVisibility(View.GONE);
         }
         //权限显示判定
         List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
-        for (String permition : listPermition) {
-            if (permition.equals(AppRolePermition.BURIERBUILD.getCode()) && !(Boolean) holder.tvSettele.getTag()) {
+        if (CheckUtils.checkPermition(AppRolePermition.BURIERBUILD.getCode(), listPermition)) {
+            if (!(Boolean) holder.tvSettele.getTag()) {
                 holder.tvSettele.setVisibility(View.VISIBLE);
             } else {
                 holder.tvSettele.setVisibility(View.GONE);
             }
-            if (permition.equals(AppRolePermition.BURIERBURYING.getCode()) && !(Boolean) holder.tvBurial.getTag()) {
+        } else {
+            holder.tvSettele.setVisibility(View.GONE);
+        }
+        if (CheckUtils.checkPermition(AppRolePermition.BURIERBURYING.getCode(), listPermition)) {
+            if (!(Boolean) holder.tvBurial.getTag()) {
                 holder.tvBurial.setVisibility(View.VISIBLE);
             } else {
                 holder.tvBurial.setVisibility(View.GONE);
             }
+        } else {
+            holder.tvBurial.setVisibility(View.GONE);
         }
         //名字设置
         StringBuilder deadManNames = new StringBuilder();
@@ -280,6 +291,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         TextView tvSetteleState;
         TextView tvName1;
         LinearLayout llContentBack;
+        ImageView ivShadow;
         //布局2控件------------------------
         TextView tvTime;
         TextView tvNum;

@@ -164,7 +164,7 @@
                     android:button="@null"
                     android:drawableLeft="@drawable/zhy_login_rb_1"
                     android:drawablePadding="@dimen/dimen_10dp"
-                    android:text="公墓洽谈"
+                    android:text="公墓"
                     android:textColor="@color/zhy_text_color_2"
                     android:textSize="@dimen/dimen_24dp" />
             </RadioGroup>

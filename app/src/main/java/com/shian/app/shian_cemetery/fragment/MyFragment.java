@@ -172,7 +172,8 @@ public class MyFragment extends BaseFragment {
             } else if (v == mLLPlatform) {
 
             } else if (v == mLLVersion) {
-
+                //检测更新
+                Utils.checkUpData(getContext(), false);
             }
         }
     };

@@ -73,6 +73,11 @@ public class LoginActivity extends BaseActivity {
         if (shareLogin.isAutoLogin()) {
             mCBAuto.setChecked(true);
         }
+        if (shareLogin.getOrderUser() == OrderUserEnum.Burial.getCode()) {
+            mRBBurial.setChecked(true);
+        } else if (shareLogin.getOrderUser() == OrderUserEnum.Cemetery.getCode()) {
+            mRBCemeteryTalk.setChecked(true);
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -134,7 +139,6 @@ public class LoginActivity extends BaseActivity {
                 ToastUtils.showShortToast(getBaseContext(), "登陆成功");
                 jumpMain();
             }
-
 
             @Override
             public void onError(String message) {

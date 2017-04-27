@@ -6,10 +6,12 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.PHPManager;
+import com.shian.app.shian_cemetery.http.phpparams.HpGetVersion;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetAdvertisement;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetDynamic;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetHotIssue;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetSiftListData;
+import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetVersion;
 
 
 /**
@@ -64,6 +66,12 @@ public class PHPManagerImpl implements PHPManager {
     @Override
     public void setOpinion(Context context, BaseHttpParams params, HttpResponseHandler<Object> handler, boolean isDialog) {
         excutor.requestPHPGet(context, "Home/index/opinion", Object.class,
+                params, handler, isDialog);
+    }
+
+    @Override
+    public void getVersion(Context context, HpGetVersion params, HttpResponseHandler<PHPHrGetVersion> handler, boolean isDialog) {
+        excutor.requestPHPGet(context, "Home/index/edition", PHPHrGetVersion.class,
                 params, handler, isDialog);
     }
 

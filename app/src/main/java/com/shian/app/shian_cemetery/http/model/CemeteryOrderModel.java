@@ -27,6 +27,16 @@ public class CemeteryOrderModel {
     private long bespeakAssignId;//咨询指派ID
     private Integer isEditInfo;//是否可编辑（1:可以编辑 0：不可编辑 ）
 
+    private long cemeteryId;
+
+    public long getCemeteryId() {
+        return cemeteryId;
+    }
+
+    public void setCemeteryId(long cemeteryId) {
+        this.cemeteryId = cemeteryId;
+    }
+
     public long getOrderId() {
         return orderId;
     }

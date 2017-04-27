@@ -20,6 +20,16 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.shian.app.shian_cemetery.appenum.APPTypeEnum;
+import com.shian.app.shian_cemetery.appenum.UpDataImportantEnum;
+import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
+import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
+import com.shian.app.shian_cemetery.http.phpparams.HpGetVersion;
+import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetVersion;
+import com.shian.app.shian_cemetery.service.UpDataService;
+import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.view.dialog.TipsDialog;
 import com.yongchun.library.view.ImageSelectorActivity;
 
 import java.io.BufferedOutputStream;
@@ -31,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/4/5.
@@ -198,4 +210,67 @@ public class Utils {
             return -1;
         }
     }
+
+
+    /**
+     * 检测是否有更新 并执行下载
+     */
+    public static void checkUpData(final Context context, final boolean isToast) {
+        HpGetVersion params = new HpGetVersion();
+        params.setAppId(APPTypeEnum.CEMETERY.getCode());
+        MHttpManagerFactory.getPHPManager().getVersion(context, params, new HttpResponseHandler<PHPHrGetVersion>() {
+
+
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(final PHPHrGetVersion result) {
+                try {
+                    float versionOld = Utils.getVersionCode(context);
+                    float versionNew = Float.valueOf(result.getItems().get(0).getVersionNum());
+                    if (versionNew > versionOld) {
+                        TipsDialog dialog = new TipsDialog(context);
+                        dialog.setTop("新版本：" + result.getItems().get(0).getUpdataTitle());
+                        dialog.setTitle("" + result.getItems().get(0).getUpdataContent());
+                        dialog.setBottomButton("更新", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(context, UpDataService.class);
+                                intent.putExtra("updataUrl", BaseURL.PHPURL + result.getItems().get(0).getAppDownLoadUrl());
+                                context.startService(intent);
+                                dialog.cancel();
+                            }
+                        });
+                        if (Integer.valueOf(result.getItems().get(0).getIsImportant()) == UpDataImportantEnum.IMPORTANT.getCode()) {
+                            dialog.setCancelable(false);
+                        } else {
+                            dialog.setTopButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                        }
+                        dialog.show();
+                    } else {
+                        if (isToast) {
+                            ToastUtils.showShortToast(context, "当前已是最新版：" + versionNew);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ToastUtils.showShortToast(context, "版本号获取异常");
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        }, isToast);
+    }
+
 }

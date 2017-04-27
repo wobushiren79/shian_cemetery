@@ -5,10 +5,12 @@ import android.content.Context;
 import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 import com.shian.app.shian_cemetery.http.base.HttpManager;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
+import com.shian.app.shian_cemetery.http.phpparams.HpGetVersion;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetAdvertisement;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetDynamic;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetHotIssue;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetSiftListData;
+import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetVersion;
 
 
 /**
@@ -73,4 +75,12 @@ public interface PHPManager extends HttpManager {
      * @param handler
      */
     public void setOpinion(Context context, BaseHttpParams params, HttpResponseHandler<Object> handler, boolean isDialog);
+
+    /**
+     * 获取版本号
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getVersion(Context context, HpGetVersion params, HttpResponseHandler<PHPHrGetVersion> handler, boolean isDialog);
 }

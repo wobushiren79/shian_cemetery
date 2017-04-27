@@ -18,6 +18,7 @@ import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.model.CemeteryOrderModel;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
+import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
@@ -78,6 +79,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvAccept = (TextView) convertView.findViewById(R.id.tv_accept);
                     holder.tvReject = (TextView) convertView.findViewById(R.id.tv_reject);
                     holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
+                    holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
                     break;
                 case 1:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_2, null);
@@ -91,6 +93,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvTraffic = (TextView) convertView.findViewById(R.id.tv_traffic);
                     holder.tvRemark = (TextView) convertView.findViewById(R.id.tv_remark);
                     holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
+                    holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
                     break;
                 case 2:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_3, null);
@@ -100,6 +103,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvCemeteryName = (TextView) convertView.findViewById(R.id.tv_cemeteryname);
                     holder.tvLocationName = (TextView) convertView.findViewById(R.id.tv_locationname);
                     holder.tvDetails = (TextView) convertView.findViewById(R.id.tv_details);
+                    holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
+                    holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
                     break;
             }
 
@@ -135,7 +140,12 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
             }
         };
         //-------------------------------------------------------------------------------------------
-
+        /**
+         * 设置状态
+         */
+        if (holder.tvState != null)
+            setState(holder, data);
+        //-------------------------------------------------------------------------------------------
         switch (itemType) {
             case 0:
                 holder.tvCustomerName.setText(data.getCustomerName());
@@ -180,12 +190,36 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvLocationName.setText(data.getDetailsLocation());
 
                 holder.tvDetails.setOnClickListener(onClickListener);
+                makePhone(holder.ivPhone, data);
                 break;
         }
         //-------------------------------------------------------------------------------------------
 
 
         return convertView;
+    }
+
+    /**
+     * 设置状态
+     *
+     * @param holder
+     */
+    private void setState(ViewHolder holder, CemeteryOrderModel data) {
+        CemeteryBeSpeakStateEnum[] beSpeakState = {
+                CemeteryBeSpeakStateEnum.undistributed,
+                CemeteryBeSpeakStateEnum.unassigned,
+                CemeteryBeSpeakStateEnum.unProcess,
+                CemeteryBeSpeakStateEnum.accepted,
+                CemeteryBeSpeakStateEnum.talkFail,
+                CemeteryBeSpeakStateEnum.talkSuccess,
+                CemeteryBeSpeakStateEnum.serviceOver
+        };
+        for (CemeteryBeSpeakStateEnum state : beSpeakState) {
+            if (data.getBespeakStatus() == state.getCode()) {
+                holder.tvState.setText(state.getText());
+                return;
+            }
+        }
     }
 
 
@@ -227,7 +261,6 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         TextView tvCemeteryName;
         TextView tvLocationName;
 
-
         ImageView ivPhone;
 
         TextView tvAccept;
@@ -235,6 +268,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         TextView tvTalkSuccess;
         TextView tvTalkFail;
         TextView tvDetails;
+
+        TextView tvState;
     }
 
     /**
@@ -251,6 +286,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         HpCetemeryAcceptParams params = new HpCetemeryAcceptParams();
         params.setBespeakAssignId(model.getBespeakAssignId());
         params.setBespeakId(model.getBespeakId());
+        params.setCemeteryId(model.getCemeteryId());
+        params.setUserId(AppData.UserLoginResult.getUserId());
         MHttpManagerFactory.getAccountManager().acceptCemetery(context,
                 params, new HttpResponseHandler<Object>() {
 
