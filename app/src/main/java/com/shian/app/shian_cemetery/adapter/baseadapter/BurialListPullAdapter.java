@@ -199,7 +199,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SetteleActivity.class);
-                intent.putExtra(IntentName.INTENT_ORDERID, data.getId());
+                intent.putExtra(IntentName.INTENT_ORDERID, data.getOrder().getOrderId());
                 context.startActivity(intent);
             }
         });
@@ -208,7 +208,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, BurialActivity.class);
-                intent.putExtra(IntentName.INTENT_ORDERID, data.getId());
+                intent.putExtra(IntentName.INTENT_ORDERID, data.getOrder().getOrderId());
                 context.startActivity(intent);
             }
         });

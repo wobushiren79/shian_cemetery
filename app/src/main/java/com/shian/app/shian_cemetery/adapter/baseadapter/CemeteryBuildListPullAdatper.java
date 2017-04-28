@@ -29,15 +29,15 @@ import java.util.List;
 import okhttp3.Request;
 
 /**
- * Created by Administrator on 2017/4/10.
+ * Created by zm.
  */
 
-public class CemeteryTalkListPullAdatper extends BaseAdapter {
+public class CemeteryBuildListPullAdatper extends BaseAdapter {
     Context context;
     List<CemeteryOrderModel> listData = new ArrayList<>();
     CallBack callBack;
 
-    public CemeteryTalkListPullAdatper(Context context, List<CemeteryOrderModel> listData) {
+    public CemeteryBuildListPullAdatper(Context context, List<CemeteryOrderModel> listData) {
         this.context = context;
         this.listData = listData;
     }
@@ -63,11 +63,11 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
+        final CemeteryBuildListPullAdatper.ViewHolder holder;
         int itemType = getItemViewType(position);
         //-------------------------------------------------------------------------------------------
         if (convertView == null) {
-            holder = new ViewHolder();
+            holder = new CemeteryBuildListPullAdatper.ViewHolder();
             switch (itemType) {
                 case 0:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_1, null);
@@ -110,35 +110,10 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
 
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (CemeteryBuildListPullAdatper.ViewHolder) convertView.getTag();
         }
         //-------------------------------------------------------------------------------------------
         final CemeteryOrderModel data = listData.get(position);
-        //-------------------------------------------------------------------------------------------
-        /**
-         * 点击事件
-         */
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v == holder.tvAccept) {
-                    //接单
-                    acceptedOrder(data);
-                } else if (v == holder.tvReject) {
-                    //拒单
-                    rejectOrder(data);
-                } else if (v == holder.tvTalkFail) {
-                    //洽谈失败
-                    talkFail(data);
-                } else if (v == holder.tvTalkSuccess) {
-                    //洽谈成功
-                    talkSuccess(data);
-                } else if (v == holder.tvDetails) {
-                    //订单详情
-                    orderInfo(data);
-                }
-            }
-        };
         //-------------------------------------------------------------------------------------------
         /**
          * 设置状态
@@ -163,8 +138,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvAccept.setVisibility(View.VISIBLE);
                     holder.tvReject.setVisibility(View.VISIBLE);
                 }
-                holder.tvAccept.setOnClickListener(onClickListener);
-                holder.tvReject.setOnClickListener(onClickListener);
+                holder.tvAccept.setVisibility(View.GONE);
+                holder.tvReject.setVisibility(View.GONE);
                 makePhone(holder.ivPhone, data);
                 break;
 
@@ -177,8 +152,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvTraffic.setText(data.getTrafficWay());
                 holder.tvRemark.setText(data.getRemark());
 
-                holder.tvTalkSuccess.setOnClickListener(onClickListener);
-                holder.tvTalkFail.setOnClickListener(onClickListener);
+                holder.tvTalkSuccess.setVisibility(View.GONE);
+                holder.tvTalkFail.setVisibility(View.GONE);
                 makePhone(holder.ivPhone, data);
                 break;
             case 2:
@@ -188,7 +163,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvCemeteryName.setText(data.getChoiceCemeteryName());
                 holder.tvLocationName.setText(data.getDetailsLocation());
 
-                holder.tvDetails.setOnClickListener(onClickListener);
+                holder.tvDetails.setVisibility(View.GONE);
                 makePhone(holder.ivPhone, data);
                 break;
         }
@@ -238,12 +213,9 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
             return 0;
         } else if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.accepted.getCode()
                 || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkAgain.getCode()
-                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkSuccess.getCode()) {
-            if (data.getIsEditInfo() == 1) {
-                return 1;
-            } else {
-                return 2;
-            }
+                ||data.getBespeakStatus()==CemeteryBeSpeakStateEnum.talkSuccess.getCode()
+                ) {
+            return 1;
         } else {
             return 2;
         }
@@ -282,101 +254,6 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         Utils.call(v, model.getCustomerMobile());
     }
 
-    /**
-     * 接单
-     */
-    private void acceptedOrder(CemeteryOrderModel model) {
-        HpCetemeryAcceptParams params = new HpCetemeryAcceptParams();
-        params.setBespeakAssignId(model.getBespeakAssignId());
-        params.setBespeakId(model.getBespeakId());
-        params.setCemeteryId(model.getCemeteryId());
-        params.setUserId(AppData.UserLoginResult.getUserId());
-        MHttpManagerFactory.getAccountManager().acceptCemetery(context,
-                params, new HttpResponseHandler<Object>() {
-
-                    @Override
-                    public void onStart(Request request, int id) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        if (callBack != null)
-                            callBack.refresh();
-                        ToastUtils.showShortToast(context, "接单成功");
-                    }
-
-
-                    @Override
-                    public void onError(String message) {
-//                        ToastUtils.show(getContext(), "接单失败");
-                    }
-                });
-
-    }
-
-    /**
-     * 拒单
-     */
-    private void rejectOrder(CemeteryOrderModel model) {
-//        HpCetemeryRejectParams params = new HpCetemeryRejectParams();
-//        params.setBespeakId(model.getBespeakId());
-//        params.setBespeakAssignId(model.getBespeakAssignId());
-//        MHttpManagerFactory.getAccountManager().rejectCemetery(context,
-//                params, new HttpResponseHandler<Object>() {
-//
-//                    @Override
-//                    public void onStart(Request request, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Object result) {
-//                        if (callBack != null)
-//                        callBack.refresh();
-//                        ToastUtils.showShortToast(context, "拒单成功");
-//                    }
-//
-//
-//                    @Override
-//                    public void onError(String message) {
-////                      ToastUtils.show(getContext(), "拒单失败");
-//                    }
-//                });
-        ToastUtils.showShortToast(context, "拒单失败");
-    }
-
-    /**
-     * 洽谈失败
-     */
-    private void talkFail(CemeteryOrderModel model) {
-        Intent intent = new Intent(context, TalkFailActivity.class);
-        intent.putExtra(IntentName.INTENT_BESPEAKID, model.getBespeakId());
-        context.startActivity(intent);
-    }
-
-    /**
-     * 洽谈成功
-     */
-    private void talkSuccess(CemeteryOrderModel model) {
-        Intent intent = new Intent(context, TalkSuccessActivity.class);
-        intent.putExtra(IntentName.INTENT_BESPEAKID, model.getBespeakId());
-        intent.putExtra(IntentName.INTENT_ORDERID, model.getOrderId());
-        intent.putExtra(IntentName.INTENT_CEMETERY_INFO_STEPS, model.getInfoStatus());
-        context.startActivity(intent);
-    }
-
-    /**
-     * 查看详情界面
-     *
-     * @param model
-     */
-    private void orderInfo(CemeteryOrderModel model) {
-        Intent intent = new Intent(context, InfoDetailsActivity.class);
-        intent.putExtra(IntentName.INTENT_BESPEAKID, model.getBespeakId());
-        intent.putExtra(IntentName.INTENT_ORDERID, model.getOrderId());
-        context.startActivity(intent);
-    }
 
     public interface CallBack {
         void refresh();

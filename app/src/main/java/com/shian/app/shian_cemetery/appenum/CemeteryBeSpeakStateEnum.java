@@ -11,7 +11,7 @@ public enum CemeteryBeSpeakStateEnum {
     accepted(4, "已接单"),
     talkAgain(5, "再次洽谈"),
     talkFail(6, "洽谈失败（未购墓）"),
-    talkSuccess(7, "洽谈成功（购墓）"),
+     talkSuccess(7, "洽谈成功（购墓）"),
     serviceOver(8, "服务结束");
 
 

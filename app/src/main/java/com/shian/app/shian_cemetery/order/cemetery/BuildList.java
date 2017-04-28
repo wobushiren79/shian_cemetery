@@ -8,6 +8,7 @@ import android.view.View;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.adapter.baseadapter.CemeteryBuildListPullAdatper;
 import com.shian.app.shian_cemetery.adapter.baseadapter.CemeteryTalkListPullAdatper;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.impl.CemeteryOrderManagerImpl;
@@ -29,7 +30,7 @@ public class BuildList extends BaseCemeteryOrderList {
     View view;
 
     PullToRefreshListView mPullListView;
-    CemeteryTalkListPullAdatper mAdapter;
+    CemeteryBuildListPullAdatper mAdapter;
 
     int page = 1;
     int pageSize = 10;
@@ -53,7 +54,7 @@ public class BuildList extends BaseCemeteryOrderList {
         mPullListView.setOnRefreshListener(onRefreshListener2);
         mPullListView.setOverScrollMode(OVER_SCROLL_NEVER);
 
-        mAdapter = new CemeteryTalkListPullAdatper(getContext(), listData);
+        mAdapter = new CemeteryBuildListPullAdatper(getContext(), listData);
         mAdapter.setCallBack(callBack);
         mPullListView.setAdapter(mAdapter);
     }
@@ -72,7 +73,7 @@ public class BuildList extends BaseCemeteryOrderList {
     /**
      * adapter响应
      */
-    CemeteryTalkListPullAdatper.CallBack callBack = new CemeteryTalkListPullAdatper.CallBack() {
+    CemeteryBuildListPullAdatper.CallBack callBack = new CemeteryBuildListPullAdatper.CallBack() {
         @Override
         public void refresh() {
             page = 1;

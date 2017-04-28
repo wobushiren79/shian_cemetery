@@ -99,7 +99,7 @@
             android:id="@+id/write_paymoney"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            DataReadAttr:titleName="金额"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+            DataReadAttr:titleName="定金金额"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
             android:layout_width="match_parent"
@@ -111,7 +111,7 @@
             android:id="@+id/write_cemeteryreception"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            DataReadAttr:titleName="公墓接待"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+            DataReadAttr:titleName="公墓接待人"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
             android:layout_width="match_parent"

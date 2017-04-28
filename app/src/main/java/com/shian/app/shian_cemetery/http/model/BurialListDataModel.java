@@ -9,6 +9,15 @@ public class BurialListDataModel {
     private BurialInfoModel buryInfo;//安葬信息
     private BurialDeadInfoModel deadInfo;//死者信息
     private BurialLocationModel tombPosition;//安葬墓位
+    private BurialOrderModel order;
+
+    public BurialOrderModel getOrder() {
+        return order;
+    }
+
+    public void setOrder(BurialOrderModel order) {
+        this.order = order;
+    }
 
     public long getId() {
         return id;
