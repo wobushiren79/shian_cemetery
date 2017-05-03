@@ -13,6 +13,7 @@ import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.phpparams.HpIdeaFeedBackSaveParams;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 
 import okhttp3.Request;
@@ -30,7 +31,7 @@ public class IdeaFeedbackActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_feedback);
-        UserInfo = getIntent().getStringArrayExtra("UserInfo");
+        UserInfo = getIntent().getStringArrayExtra(IntentName.INTENT_FRAGMENT_USERINFO);
         setTitle("意见反馈",BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         initView();
     }

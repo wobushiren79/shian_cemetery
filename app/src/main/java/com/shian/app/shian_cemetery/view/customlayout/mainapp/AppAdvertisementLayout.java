@@ -21,6 +21,7 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.phpparams.HpAdvertisementGetParams;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetAdvertisement;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.view.customlayout.mainadvertisement.MainAdvertisementLayout;
 
 import okhttp3.Request;
@@ -120,7 +121,7 @@ public class AppAdvertisementLayout extends LinearLayout {
             } else if (v == mIVConent) {
                 if (result != null) {
                     Intent intent = new Intent(getContext(), WebActivity.class);
-                    intent.putExtra("url", result.getItems().get(0).getUrl());
+                    intent.putExtra(IntentName.INTENT_URL, result.getItems().get(0).getUrl());
                     getContext().startActivity(intent);
                 }
             }

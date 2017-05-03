@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 
 import com.baidu.location.BDLocation;
@@ -38,6 +39,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import okhttp3.Request;
+
+import static com.shian.app.shian_cemetery.tools.CheckUtils.checkPermition;
 
 public class MainActivity extends BaseActivity {
 
@@ -111,7 +114,7 @@ public class MainActivity extends BaseActivity {
             fragment = new BaseFragment();
         }
         mTranscation.replace(R.id.fl_fragment, fragment);
-        mTranscation.commit();
+        mTranscation.commitAllowingStateLoss();
     }
 
 
@@ -134,7 +137,6 @@ public class MainActivity extends BaseActivity {
                 AppData.LOCAL_ADDRESS = location.getAddress().address;
                 AppData.LOCAL_latitude = location.getLatitude();
                 AppData.LOCAL_longitude = location.getLongitude();
-
             }
         }
 
@@ -175,10 +177,9 @@ public class MainActivity extends BaseActivity {
      * 设置菜单数据
      */
     private void setMianData() {
+        mMainChangeLayout.clearData();
         List<MainChangeItemEnum> mainChangeData = new ArrayList<>();
-
         mainChangeData.add(MainChangeItemEnum.MAIN);
-
         int orderUser = SharePerfrenceUtils.getOrderUser(this);
 
         if (orderUser == OrderUserEnum.Burial.getCode() && checkPermition(OrderUserEnum.Burial.getCode())) {
@@ -196,43 +197,13 @@ public class MainActivity extends BaseActivity {
                     mainChangeData.get(i).getCheckIconId(),
                     mainChangeData.get(i).getItemId());
         }
-
         mMainChangeLayout.setState(MainChangeItemEnum.MAIN.getItemId(), true);
     }
 
-    /**
-     * 检测是否有相应权限
-     *
-     * @param orderUser
-     * @return
-     */
-    private boolean checkPermition(int orderUser) {
-        List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
-        boolean isPermition = false;
-        if (orderUser == OrderUserEnum.Burial.getCode()) {
-            for (String permition : listPermition) {
-                if (permition.equals(AppRolePermition.BURIERBUILD.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-                if (permition.equals(AppRolePermition.BURIERBURYING.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-            }
-        } else if (orderUser == OrderUserEnum.Cemetery.getCode()) {
-            for (String permition : listPermition) {
-                if (permition.equals(AppRolePermition.ADVISOR.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-                if (permition.equals(AppRolePermition.TALKER.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-            }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1001) {
+            setMianData();
         }
-        return isPermition;
     }
-
 }

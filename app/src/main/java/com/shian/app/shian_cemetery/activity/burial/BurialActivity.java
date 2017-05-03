@@ -38,7 +38,7 @@ public class BurialActivity extends BaseActivity {
     TextReadLayout mTRLocation;
     TextReadLayout mTRUserName;
     TextReadLayout mTRGraveId;
-    TextReadLayout mTRBurialCardId;
+    EditLayout mTRBurialCardId;
     TextReadLayout mTRBurialTime;
     SpinnerLayout mSPBurialOdds;
     SpinnerLayout mSPBurialState;
@@ -69,7 +69,7 @@ public class BurialActivity extends BaseActivity {
         mTRLocation = (TextReadLayout) findViewById(R.id.tr_location);
         mTRUserName = (TextReadLayout) findViewById(R.id.tr_username);
         mTRGraveId = (TextReadLayout) findViewById(R.id.tr_graveid);
-        mTRBurialCardId = (TextReadLayout) findViewById(R.id.tr_burialcardid);
+        mTRBurialCardId = (EditLayout) findViewById(R.id.tr_burialcardid);
         mIVSign = (ImageView) findViewById(R.id.iv_sign);
         mTRBurialTime = (TextReadLayout) findViewById(R.id.tr_time);
         mSPBurialOdds = (SpinnerLayout) findViewById(R.id.spinner_burialodds);
@@ -104,9 +104,15 @@ public class BurialActivity extends BaseActivity {
             if (buryInfo.getBuryStatus() == 1) {
                 ToastUtils.showLongToast(BurialActivity.this, "此订单已被操作");
                 finish();
+                return;
+            }
+            if (buryInfo.getBuryCardNo() == null || buryInfo.getBuryCardNo().equals("")) {
+                mTRBurialCardId.setState(true);
+            } else {
+                mTRBurialCardId.setData(buryInfo.getBuryCardNo());
+                mTRBurialCardId.setState(false);
             }
             mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
-            mTRBurialCardId.setData(buryInfo.getBuryCardNo());
         }
         if (deadInfo != null) {
             StringBuilder name = new StringBuilder();
@@ -184,6 +190,10 @@ public class BurialActivity extends BaseActivity {
             ToastUtils.showShortToast(BurialActivity.this, "还没有签名");
             return;
         }
+        if (mTRBurialCardId.getData().equals("")) {
+            ToastUtils.showShortToast(BurialActivity.this, "请填写安葬卡编号");
+            return;
+        }
         String path = Utils.savePic(bitmapName);
         uploadFile(mIVSign, fileName, path);
     }
@@ -228,6 +238,8 @@ public class BurialActivity extends BaseActivity {
         params.setSignFileIds(fileUrl);
         params.setBuryRate(mSPBurialOdds.getData());
         params.setDetail(mSPBurialState.getData());
+        if (mTRBurialCardId.getData().equals(""))
+            params.setBuryCardNo(mTRBurialCardId.getData());
         MHttpManagerFactory.getAccountManager().saveBurialData(BurialActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart(Request request, int id) {

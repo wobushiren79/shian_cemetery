@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.map.MapLocation;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 import java.util.List;
 
@@ -106,14 +107,14 @@ public class MapSelectViewNormal extends BaseWriteView {
      */
     private void mapCheck() {
         Intent intent = new Intent(getContext(), MapLocation.class);
-        intent.putExtra("numView", numView);
+        intent.putExtra(IntentName.INTENT_LOCATION_NUMVIEW, numView);
         getContext().startActivity(intent);
     }
 
     private BroadcastReceiver locationDataReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int num = intent.getIntExtra("numView", 0);
+            int num = intent.getIntExtra(IntentName.INTENT_LOCATION_NUMVIEW, 0);
             if (num == numView) {
                 String location = intent.getStringExtra("location");
                 mAutoTextView.setText(location);

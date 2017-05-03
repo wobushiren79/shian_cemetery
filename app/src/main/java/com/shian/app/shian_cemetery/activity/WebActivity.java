@@ -24,6 +24,7 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.phpmodel.SiftListData;
 import com.shian.app.shian_cemetery.http.phpparams.HpFindSaveParams;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 
 import okhttp3.Request;
@@ -64,7 +65,7 @@ public class WebActivity extends BaseActivity {
         webSettings.setGeolocationDatabasePath(getFilesDir().getPath());
         webSettings.setDomStorageEnabled(true);//允许DCOM
 
-        url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra(IntentName.INTENT_URL);
         mWebView.loadUrl(url);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override

@@ -23,6 +23,7 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.result.HrUserInfo;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
 
@@ -186,7 +187,7 @@ public class MyFragment extends BaseFragment {
             ToastUtils.showShortToast(getContext(), "数据异常，请重新登陆");
         } else {
             Intent intent = new Intent(getContext(), IdeaFeedbackActivity.class);
-            intent.putExtra("UserInfo", new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});
+            intent.putExtra(IntentName.INTENT_FRAGMENT_USERINFO, new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});
             startActivity(intent);
         }
     }
@@ -212,7 +213,6 @@ public class MyFragment extends BaseFragment {
      */
     private void setting() {
         Intent in = new Intent(getContext(), SettingsActivity.class);
-//        in.putExtra("state", mHrUserInfo.getAppStatus());
-        startActivity(in);
+        startActivityForResult(in,1001);
     }
 }

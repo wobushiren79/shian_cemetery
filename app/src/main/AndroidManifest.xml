@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:name=".base.BaseAppliction"
         android:allowBackup="true"
@@ -100,7 +101,7 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.WebActivity"
             android:configChanges="orientation|screenSize"
@@ -120,7 +121,7 @@
         <activity
             android:name=".activity.php.HotIssueListActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.php.IdeaFeedbackActivity"
             android:configChanges="orientation|screenSize"
@@ -128,7 +129,7 @@
         <activity
             android:name=".activity.php.MyCollectionActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.cemetery.MoreInfoDetailsActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -137,13 +138,19 @@
         <activity
             android:name=".activity.cemetery.BuildNewOrderActivity"
             android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.ChangeRoleActivity"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
 
-        <service android:name=".service.UpDataService"></service>
+        <service android:name=".service.UpDataService" />
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+
     </application>
 
 </manifest>

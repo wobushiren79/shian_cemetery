@@ -27,7 +27,7 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
     private String planSale;//挂牌价
     private String saleMoney;//成交价
     private String payState;//支付情况
-    private String moneyPay;//金额
+    private String moneyDeposit;//金额
     private String cemeteryReceive;//	公墓接待
     private String freeService;//赠送服务
     private String choiceService;//自选服务
@@ -186,12 +186,12 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
         this.payState = payState;
     }
 
-    public String getMoneyPay() {
-        return moneyPay;
+    public String getMoneyDeposit() {
+        return moneyDeposit;
     }
 
-    public void setMoneyPay(String moneyPay) {
-        this.moneyPay = moneyPay;
+    public void setMoneyDeposit(String moneyDeposit) {
+        this.moneyDeposit = moneyDeposit;
     }
 
     public String getCemeteryReceive() {

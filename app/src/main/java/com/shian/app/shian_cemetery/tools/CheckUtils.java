@@ -1,5 +1,9 @@
 package com.shian.app.shian_cemetery.tools;
 
+import com.shian.app.shian_cemetery.appenum.AppRolePermition;
+import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
+import com.shian.app.shian_cemetery.staticdata.AppData;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +54,42 @@ public class CheckUtils {
             if (data.equals(permition)) {
                 isPermition = true;
                 break;
+            }
+        }
+        return isPermition;
+    }
+
+
+    /**
+     * 检测是否有相应权限的模块
+     *
+     * @param orderUser
+     * @return
+     */
+    public static boolean checkPermition(int orderUser) {
+        List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
+        boolean isPermition = false;
+        if (orderUser == OrderUserEnum.Burial.getCode()) {
+            for (String permition : listPermition) {
+                if (permition.equals(AppRolePermition.BURIERBUILD.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
+                if (permition.equals(AppRolePermition.BURIERBURYING.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
+            }
+        } else if (orderUser == OrderUserEnum.Cemetery.getCode()) {
+            for (String permition : listPermition) {
+//                if (permition.equals(AppRolePermition.ADVISOR.getCode())) {
+//                    isPermition = true;
+//                    return true;
+//                }
+                if (permition.equals(AppRolePermition.TALKER.getCode())) {
+                    isPermition = true;
+                    return true;
+                }
             }
         }
         return isPermition;

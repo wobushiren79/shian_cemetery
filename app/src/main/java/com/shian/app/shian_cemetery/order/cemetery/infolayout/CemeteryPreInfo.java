@@ -128,6 +128,10 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             ToastUtils.showShortToast(getContext(), "还没有选择号");
             return;
         }
+        if (mWritePayMoney.getData().equals("")) {
+            ToastUtils.showShortToast(getContext(), "还没有输入商议定金");
+            return;
+        }
 
 
         params.setBespeakId(beSpeakId);
@@ -145,7 +149,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         params.setPlanSale(mWritePlanPrice.getData());
         params.setSaleMoney(mWriteDealPrice.getData());
 //        params.setPayState(mWritePayInfo.getData());
-        params.setMoneyPay(mWritePayMoney.getData());
+        params.setMoneyDeposit(mWritePayMoney.getData());
         params.setCemeteryReceive(mWriteCemeteryReception.getData());
         params.setFreeService(mWriteFreeGift.getData());
         params.setChoiceService(mWriteChoiceService.getData());
@@ -190,6 +194,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mTVSubmit = (TextView) view.findViewById(R.id.tv_submit);
         mLLButton = (LinearLayout) findViewById(R.id.ll_button);
         mWritePlanPrice.setDisable(false);
+        mWritePayMoney.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,7 +219,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
     @Override
     public void initData() {
         mWriteTombType.initSpinner(SelectDictCode.TOMB_TYPE);
-        mWriteTombAttr.initSpinner(SelectDictCode.TOMB_ATTRIBUTE);
+        mWriteTombAttr.initSpinner(SelectDictCode.TOMB_USE_PROPERTY);
         mWritePayInfo.initSpinner(SelectDictCode.ORDER_PAY_PURPOSE);
     }
 

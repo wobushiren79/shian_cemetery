@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
@@ -39,6 +42,8 @@ public class LoginActivity extends BaseActivity {
     RadioButton mRBBurial;
     RadioButton mRBCemeteryTalk;
 
+    RelativeLayout mRLContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,7 @@ public class LoginActivity extends BaseActivity {
 
         initView();
         initData();
+        startAnim();
     }
 
     private void initView() {
@@ -58,6 +64,7 @@ public class LoginActivity extends BaseActivity {
         mRBBurial = (RadioButton) findViewById(R.id.rb_state1);
         mRBCemeteryTalk = (RadioButton) findViewById(R.id.rb_state2);
         mRG = (RadioGroup) findViewById(R.id.rg);
+        mRLContent = (RelativeLayout) findViewById(R.id.rl_content);
 
         mLoadingButton.setOnClickListener(onClickListener);
         mTVPhoneLoading.setOnClickListener(onClickListener);
@@ -162,5 +169,17 @@ public class LoginActivity extends BaseActivity {
     private void jumpPhoneLoading() {
         Intent intent = new Intent(LoginActivity.this, LoginPhoneActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * 动画
+     */
+    private void startAnim() {
+        TranslateAnimation translateAnimation = new TranslateAnimation
+                (Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
+                        Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f);
+        translateAnimation.setDuration(1000);
+        mRLContent.setAnimation(translateAnimation);
+        translateAnimation.start();
     }
 }

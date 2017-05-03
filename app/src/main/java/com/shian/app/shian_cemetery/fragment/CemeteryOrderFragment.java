@@ -61,13 +61,13 @@ public class CemeteryOrderFragment extends BaseFragment {
      */
     private void initPermition() {
         //确认新建权限
-        if (!CheckUtils.checkPermition(AppRolePermition.ADVISOR.getCode(), AppData.UserLoginResult.getPermitionCodes())) {
-            mPopupButton.setVisibility(View.GONE);
-        } else {
-            mPopupButton.setVisibility(View.VISIBLE);
-            initPopupButton();
-            tabData.add(CemeteryTabEnum.BUILD);
-        }
+//        if (!CheckUtils.checkPermition(AppRolePermition.ADVISOR.getCode(), AppData.UserLoginResult.getPermitionCodes())) {
+//            mPopupButton.setVisibility(View.GONE);
+//        } else {
+//            mPopupButton.setVisibility(View.VISIBLE);
+//            initPopupButton();
+//            tabData.add(CemeteryTabEnum.BUILD);
+//        }
         //确认洽谈权限
         if (CheckUtils.checkPermition(AppRolePermition.TALKER.getCode(), AppData.UserLoginResult.getPermitionCodes()))
             tabData.add(CemeteryTabEnum.TALKORDER);

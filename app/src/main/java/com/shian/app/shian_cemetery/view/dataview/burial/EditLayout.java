@@ -32,7 +32,7 @@ public class EditLayout extends BaseDataLayout {
 
     private void initView() {
         mTVTitle = (TextView) view.findViewById(R.id.tv_title);
-        mETContent= (EditText) view.findViewById(R.id.et_content);
+        mETContent = (EditText) view.findViewById(R.id.et_content);
     }
 
     private void initData() {
@@ -41,5 +41,13 @@ public class EditLayout extends BaseDataLayout {
 
     public String getData() {
         return mETContent.getText().toString();
+    }
+
+    public void setData(String content) {
+        mETContent.setText(content);
+    }
+
+    public void setState(boolean isShow) {
+        mETContent.setEnabled(isShow);
     }
 }

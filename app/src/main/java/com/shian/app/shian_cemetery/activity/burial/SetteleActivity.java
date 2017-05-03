@@ -117,6 +117,7 @@ public class SetteleActivity extends BaseActivity {
             if (buryInfo.getStoneStatus() == 1) {
                 ToastUtils.showLongToast(SetteleActivity.this, "此订单已被操作");
                 finish();
+                return;
             }
             if (buryInfo.getStoneDatePre() != 0) {
                 mTRSetteleTime.setData(TimeUtils.formatTime(buryInfo.getStoneDatePre()));

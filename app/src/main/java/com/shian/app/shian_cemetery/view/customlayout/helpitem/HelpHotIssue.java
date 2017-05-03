@@ -112,7 +112,7 @@ public class HelpHotIssue extends LinearLayout {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getContext(), WebActivity.class);
-            intent.putExtra("url", BaseURL.helpsPHPURL + "?id=" + listData.get(position).getId());
+            intent.putExtra(IntentName.INTENT_URL, BaseURL.helpsPHPURL + "?id=" + listData.get(position).getId());
             getContext().startActivity(intent);
         }
     };

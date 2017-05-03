@@ -19,6 +19,7 @@ import com.shian.app.shian_cemetery.http.phpmodel.SiftListData;
 import com.shian.app.shian_cemetery.http.phpparams.HpFindSaveParams;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class FindAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("url", BaseURL.siftsPHPURL + "?id=" + data.getId());
+                intent.putExtra(IntentName.INTENT_URL, BaseURL.siftsPHPURL + "?id=" + data.getId());
                 intent.putExtra("isCollection", true);
                 intent.putExtra("shareData", data);
                 context.startActivity(intent);

@@ -12,6 +12,18 @@ public class HpSaveBurialDataParams extends BaseHttpParams {
     private String buryRate;//落葬率
     private String remark;//備註
     private String signFileIds;//簽名圖片
+    /**
+     * 安葬卡号
+     */
+    private String buryCardNo;
+
+    public String getBuryCardNo() {
+        return buryCardNo;
+    }
+
+    public void setBuryCardNo(String buryCardNo) {
+        this.buryCardNo = buryCardNo;
+    }
 
     public long getOrderId() {
         return orderId;

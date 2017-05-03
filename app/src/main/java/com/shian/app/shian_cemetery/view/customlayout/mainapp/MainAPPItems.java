@@ -20,6 +20,7 @@ import com.shian.app.shian_cemetery.activity.WebActivity;
 import com.shian.app.shian_cemetery.activity.php.AllAppActivity;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 import java.util.List;
 
@@ -148,7 +149,7 @@ public class MainAPPItems extends LinearLayout {
 //        i.setComponent(cn);
 //        getContext().startActivity(i);
         Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://m.laohuangli.net");
+        intent.putExtra(IntentName.INTENT_URL,"http://m.laohuangli.net");
         getContext().startActivity(intent);
     }
 
@@ -161,9 +162,9 @@ public class MainAPPItems extends LinearLayout {
     private void openWeb(int type) {
         Intent intent = new Intent(getContext(), WebActivity.class);
         if (type == 0) {
-            intent.putExtra("url", url);
+            intent.putExtra(IntentName.INTENT_URL, url);
         } else if (type == 1) {
-            intent.putExtra("url", url
+            intent.putExtra(IntentName.INTENT_URL, url
                     + "/?channel=" + BaseURL.DiDichannel
                     + "&maptype=soso" +//wgs baidu soso
                     "&lat=" + AppData.LOCAL_latitude
@@ -213,7 +214,7 @@ public class MainAPPItems extends LinearLayout {
 //            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
 //        }
         Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://m.amap.com/");
+        intent.putExtra(IntentName.INTENT_URL,"http://m.amap.com/");
         getContext().startActivity(intent);
 
     }

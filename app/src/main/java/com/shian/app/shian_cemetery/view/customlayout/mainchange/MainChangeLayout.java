@@ -92,10 +92,19 @@ public class MainChangeLayout extends LinearLayout {
     }
 
     /**
+     * 清除数据
+     */
+    public void clearData() {
+        mLLMain.removeAllViews();
+        listItem.clear();
+    }
+
+    /**
      * 事件监听
      */
     public interface MainChangeCallBack {
         void onClick(int itemId);
     }
+
 
 }

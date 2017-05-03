@@ -12,7 +12,7 @@
         android:layout_marginBottom="@dimen/dimen_52dp"
         android:layout_marginLeft="@dimen/dimen_32dp"
         android:layout_marginTop="@dimen/dimen_52dp"
-        android:ems="4"
+        android:ems="5"
         android:text=""
         android:textColor="@color/dimgray"
         android:textSize="@dimen/dimen_32dp" />

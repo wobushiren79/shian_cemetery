@@ -53,15 +53,13 @@
             android:id="@+id/write_tombattr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            DataReadAttr:titleName="墓穴属性"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
+            DataReadAttr:titleName="墓穴使用性质"></com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_1dp"
             android:layout_marginLeft="@dimen/dimen_32dp"
-            android:background="@color/zhy_line_3"
-            android:visibility="gone" />
+            android:background="@color/zhy_line_3" />
 
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_planprice"
@@ -99,7 +97,8 @@
             android:id="@+id/write_paymoney"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            DataReadAttr:titleName="定金金额"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="商议定金"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
             android:layout_width="match_parent"

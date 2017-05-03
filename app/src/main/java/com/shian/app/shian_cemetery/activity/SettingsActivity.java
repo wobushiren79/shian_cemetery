@@ -4,7 +4,10 @@ package com.shian.app.shian_cemetery.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
@@ -24,6 +27,8 @@ public class SettingsActivity extends BaseActivity {
 
     TextView mTVLoginOut;
 
+    LinearLayout mLLChange;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,9 @@ public class SettingsActivity extends BaseActivity {
 
     private void initView() {
         mTVLoginOut = (TextView) findViewById(R.id.tv_editorder);
+        mLLChange = (LinearLayout) findViewById(R.id.ll_change);
         mTVLoginOut.setOnClickListener(onClickListener);
+        mLLChange.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -42,9 +49,19 @@ public class SettingsActivity extends BaseActivity {
         public void onClick(View v) {
             if (v == mTVLoginOut) {
                 logout();
+            } else if (v == mLLChange) {
+                change();
             }
         }
     };
+
+    /**
+     * 改变账号状态
+     */
+    private void change() {
+        Intent intent = new Intent(this, ChangeRoleActivity.class);
+        startActivityForResult(intent, 1001);
+    }
 
 
     /**
@@ -54,7 +71,6 @@ public class SettingsActivity extends BaseActivity {
         TipsDialog mDialog = new TipsDialog(this);
         mDialog.setTitle("是否退出当前账户");
         mDialog.setTopButton("是", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MHttpManagerFactory.getAccountManager().loginOut(
@@ -91,5 +107,14 @@ public class SettingsActivity extends BaseActivity {
             }
         });
         mDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1001) {
+            Intent mIntent = new Intent();
+            setResult(1001, mIntent);
+            finish();
+        }
     }
 }

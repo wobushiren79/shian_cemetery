@@ -18,6 +18,7 @@ import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.FileHttpResponseHandler;
 import com.shian.app.shian_cemetery.http.result.HrUploadFile;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class PhotoUpDataLayout extends BaseDataLayout {
     private void showPic() {
         if (fileUrl != null) {
             Intent in = new Intent(getContext(), ImagePreviewActivity.class);
-            in.putExtra("url", BaseURL.OSSURL + fileUrl);
+            in.putExtra(IntentName.INTENT_URL, BaseURL.OSSURL + fileUrl);
             getContext().startActivity(in);
         }
     }

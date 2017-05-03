@@ -22,6 +22,7 @@ import com.shian.app.shian_cemetery.http.phpmodel.DynamicItemsInfo;
 import com.shian.app.shian_cemetery.http.phpparams.HpDynamicGetParams;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetDynamic;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class NoticeListActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(NoticeListActivity.this, WebActivity.class);
-            intent.putExtra("url", BaseURL.dynamicsPHPURL + "?id=" + data.get(position - 1).getId());
+            intent.putExtra(IntentName.INTENT_URL, BaseURL.dynamicsPHPURL + "?id=" + data.get(position - 1).getId());
             startActivity(intent);
         }
     };

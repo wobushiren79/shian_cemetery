@@ -109,6 +109,19 @@ public class SharePerfrenceUtils {
         return orderUser;
     }
 
+    /**
+     * 设置账号登陆模块
+     *
+     * @param content
+     * @return
+     */
+    public static void setOrderUser(Context content, int orderUser) {
+        SharedPreferences.Editor editor = content.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
+        editor.putInt(C_sShareLogin_orderUser, orderUser);
+        editor.commit();
+    }
+
+
     public static class ShareLogin {
         private String username;
         private String password;

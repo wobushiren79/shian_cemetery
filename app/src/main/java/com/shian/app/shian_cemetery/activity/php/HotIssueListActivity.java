@@ -74,7 +74,7 @@ public class HotIssueListActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(HotIssueListActivity.this, WebActivity.class);
-            intent.putExtra("url", BaseURL.helpsPHPURL + "?id=" + data.get(position - 1).getId());
+            intent.putExtra(IntentName.INTENT_URL, BaseURL.helpsPHPURL + "?id=" + data.get(position - 1).getId());
             startActivity(intent);
         }
     };

@@ -33,6 +33,7 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal;
 import com.shian.app.shian_cemetery.view.dialog.CustomDialog;
 
@@ -183,7 +184,7 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
      */
     public void check(View view) {
         Intent intent = new Intent(MapSelectViewNormal.THE_ACTION);
-        intent.putExtra("numView", numView);
+        intent.putExtra(IntentName.INTENT_LOCATION_NUMVIEW, numView);
         intent.putExtra("location", locationPoint);
         sendBroadcast(intent);
         finish();
