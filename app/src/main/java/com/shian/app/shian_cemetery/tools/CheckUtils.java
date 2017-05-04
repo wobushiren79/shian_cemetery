@@ -1,7 +1,16 @@
 package com.shian.app.shian_cemetery.tools;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
+
 import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
+import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 
 import java.util.List;
@@ -44,6 +53,7 @@ public class CheckUtils {
 
     /**
      * 检查权限
+     *
      * @param permition
      * @param permitionList
      * @return
@@ -94,4 +104,34 @@ public class CheckUtils {
         }
         return isPermition;
     }
+
+    /**
+     * 权限检测
+     */
+    public static boolean getPermissionToReadUserContacts(Context context, String[] permissions, String toastContent, int requestCode) {
+        /**
+         * 1)使用ContextCompat.chefkSelfPermission(),因为Context.permission
+         * 只在棒棒糖系统中使用
+         * 2）总是检查权限（即使权限被授予）因为用户可能会在设置中移除你的权限*/
+        boolean isPermission = true;
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                //权限为获取，检查用户是否被询问过并且拒绝了，如果是这样的话，给予更多
+                //解释
+                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission)) {
+                    //在界面上展示为什么需要读取联系人
+                    Toast.makeText(context, toastContent, Toast.LENGTH_SHORT).show();
+                }
+                //发起请求获得用户许可,可以在此请求多个权限
+                isPermission = false;
+            }
+        }
+        if (isPermission) {
+            return isPermission;
+        } else {
+            ActivityCompat.requestPermissions((Activity) context, permissions, requestCode);
+            return isPermission;
+        }
+    }
+
 }

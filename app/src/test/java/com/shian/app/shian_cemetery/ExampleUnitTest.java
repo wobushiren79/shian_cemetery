@@ -2,6 +2,9 @@ package com.shian.app.shian_cemetery;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +15,14 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        List<String> list = new ArrayList<>();
+        list.add("s");
+        list.add("g");
+        list.add("h");
+        String[] strings = list.toArray(new String[0]);
+        for (String d:strings) {
+            System.out.print(d);
+        }
+        System.out.print("len:"+strings.length);
     }
 }

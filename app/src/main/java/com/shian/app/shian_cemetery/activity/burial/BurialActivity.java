@@ -107,7 +107,8 @@ public class BurialActivity extends BaseActivity {
                 return;
             }
             if (buryInfo.getBuryCardNo() == null || buryInfo.getBuryCardNo().equals("")) {
-                mTRBurialCardId.setState(true);
+//                mTRBurialCardId.setState(true);
+                mTRBurialCardId.setState(false);
             } else {
                 mTRBurialCardId.setData(buryInfo.getBuryCardNo());
                 mTRBurialCardId.setState(false);
@@ -238,8 +239,8 @@ public class BurialActivity extends BaseActivity {
         params.setSignFileIds(fileUrl);
         params.setBuryRate(mSPBurialOdds.getData());
         params.setDetail(mSPBurialState.getData());
-        if (mTRBurialCardId.getData().equals(""))
-            params.setBuryCardNo(mTRBurialCardId.getData());
+//        if (mTRBurialCardId.getData().equals(""))
+//            params.setBuryCardNo(mTRBurialCardId.getData());
         MHttpManagerFactory.getAccountManager().saveBurialData(BurialActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart(Request request, int id) {

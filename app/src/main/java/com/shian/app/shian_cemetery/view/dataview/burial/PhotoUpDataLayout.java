@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.view.dataview.burial;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,10 +24,10 @@ import com.shian.app.shian_cemetery.staticdata.IntentName;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by Administrator on 2017/4/7.
  */
-
 public class PhotoUpDataLayout extends BaseDataLayout {
     View view;
 

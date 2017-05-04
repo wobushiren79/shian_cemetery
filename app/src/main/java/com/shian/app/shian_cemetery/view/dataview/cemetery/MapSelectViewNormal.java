@@ -14,9 +14,17 @@ import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.map.MapLocation;
+import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
+import com.shian.app.shian_cemetery.tools.CheckUtils;
 
 import java.util.List;
+import java.util.jar.Manifest;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 
 /**
@@ -31,7 +39,7 @@ public class MapSelectViewNormal extends BaseWriteView {
     ImageView mIVMapCheck;
 
     private ArrayAdapter<String> arrayAdapter;
-    private int numView=0;
+    private int numView = 0;
     public static String THE_ACTION = "MapLocationData";
 
     public MapSelectViewNormal(Context context) {
@@ -106,9 +114,16 @@ public class MapSelectViewNormal extends BaseWriteView {
      * 通过地图得到地址
      */
     private void mapCheck() {
-        Intent intent = new Intent(getContext(), MapLocation.class);
-        intent.putExtra(IntentName.INTENT_LOCATION_NUMVIEW, numView);
-        getContext().startActivity(intent);
+        boolean isPermission = CheckUtils.getPermissionToReadUserContacts
+                (getContext(),
+                        new String[]{ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE},
+                        "获取地址需要权限",
+                        BaseActivity.READ_LOCATION);
+        if (isPermission) {
+            Intent intent = new Intent(getContext(), MapLocation.class);
+            intent.putExtra(IntentName.INTENT_LOCATION_NUMVIEW, numView);
+            getContext().startActivity(intent);
+        }
     }
 
     private BroadcastReceiver locationDataReceiver = new BroadcastReceiver() {
@@ -122,7 +137,9 @@ public class MapSelectViewNormal extends BaseWriteView {
         }
     };
 
+
     public void setNumView(int numView) {
         this.numView = numView;
     }
 }
+

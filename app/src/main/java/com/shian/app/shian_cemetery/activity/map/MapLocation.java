@@ -55,7 +55,7 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_location);
-        numView = getIntent().getIntExtra("numView", 1);
+        numView = getIntent().getIntExtra(IntentName.INTENT_LOCATION_NUMVIEW, 1);
         init();
         //初始化控件
         initView();

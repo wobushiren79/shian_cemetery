@@ -1,11 +1,14 @@
 package com.shian.app.shian_cemetery.base;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -14,9 +17,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.activity.SplashActivity;
+import com.shian.app.shian_cemetery.activity.map.MapLocation;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
+import com.shian.app.shian_cemetery.tools.CheckUtils;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.headlayout.BackNormalTitle;
 import com.shian.app.shian_cemetery.view.headlayout.NormalTitle;
@@ -25,10 +34,10 @@ import com.yongchun.library.view.ImageSelectorActivity;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by Administrator on 2017/3/1.
  */
-
 public class BaseActivity extends FragmentActivity {
 
     public DisplayMetrics metrics = new DisplayMetrics();
@@ -38,6 +47,9 @@ public class BaseActivity extends FragmentActivity {
 
     private OnPhotoPickerListener mOnPhotoPickerListener;
     private static final int PICK_PHOTO = 101;
+    //定义权限请求返回CODE
+    public static final int READ_PHOTO = 1;
+    public static final int READ_LOCATION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,13 +162,13 @@ public class BaseActivity extends FragmentActivity {
 //				PhotoPickerActivity.MODE_SINGLE);
 //		intent.putExtra(PhotoPickerActivity.EXTRA_MAX_MUN, 1);
 //		startActivityForResult(intent, PICK_PHOTO);
-        Intent intent = new Intent(this, ImageSelectorActivity.class);
-        intent.putExtra(ImageSelectorActivity.EXTRA_MAX_SELECT_NUM, 1);
-        intent.putExtra(ImageSelectorActivity.EXTRA_SELECT_MODE, 2);
-        intent.putExtra(ImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
-        intent.putExtra(ImageSelectorActivity.EXTRA_ENABLE_PREVIEW, true);
-        intent.putExtra(ImageSelectorActivity.EXTRA_ENABLE_CROP, false);
-        startActivityForResult(intent, PICK_PHOTO);
+        boolean hasPermission = CheckUtils.getPermissionToReadUserContacts
+                (this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        "读取相册照片需要相应权限",
+                        READ_PHOTO);
+        if (hasPermission)
+            getPhoto();
     }
 
 
@@ -174,6 +186,39 @@ public class BaseActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        //获取照片
+        if (requestCode == READ_PHOTO) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getPhoto();
+            } else if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                ToastUtils.showShortToast(BaseActivity.this, "没有权限打开相册");
+            }
+        } else if (requestCode == READ_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ToastUtils.showShortToast(BaseActivity.this, "已获取权限请重新选择");
+            } else if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                ToastUtils.showShortToast(BaseActivity.this, "没有权限获取地址");
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+
+    /**
+     * 获取照片
+     */
+    private void getPhoto() {
+        Intent intent = new Intent(this, ImageSelectorActivity.class);
+        intent.putExtra(ImageSelectorActivity.EXTRA_MAX_SELECT_NUM, 1);
+        intent.putExtra(ImageSelectorActivity.EXTRA_SELECT_MODE, 2);
+        intent.putExtra(ImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
+        intent.putExtra(ImageSelectorActivity.EXTRA_ENABLE_PREVIEW, true);
+        intent.putExtra(ImageSelectorActivity.EXTRA_ENABLE_CROP, false);
+        startActivityForResult(intent, PICK_PHOTO);
+    }
 
     public void setOnPhotoPickerListener(OnPhotoPickerListener listener) {
         mOnPhotoPickerListener = listener;
