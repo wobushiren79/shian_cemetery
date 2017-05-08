@@ -71,16 +71,16 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
                             mWriteOrderNumber.setData(result.getOrderNum());
                         if (result.getCemeteryType() != null)
                             mWriteTombType.setDataDict(result.getCemeteryType());
-                        if (result.getCemeteryProperties() != null)
-                            mWriteTombAttr.setDataDict(result.getCemeteryProperties());
+                        if (result.getTombUseProperty() != null)
+                            mWriteTombAttr.setDataDict(result.getTombUseProperty());
                         if (result.getPlanSale() != null)
                             mWritePlanPrice.setData(result.getPlanSale());
                         if (result.getSaleMoney() != null)
                             mWriteDealPrice.setData(result.getSaleMoney());
                         if (result.getPayState() != null)
                             mWritePayInfo.setDataDict(result.getPayState());
-                        if (result.getMoneyPay() != null)
-                            mWritePayMoney.setData(result.getMoneyPay());
+                        if (result.getMoneyDeposit() != null)
+                            mWritePayMoney.setData(result.getMoneyDeposit());
                         if (result.getCemeteryReceive() != null)
                             mWriteCemeteryReception.setData(result.getCemeteryReceive());
                         if (result.getFreeService() != null)
@@ -145,7 +145,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
 
         params.setOrderNum(mWriteOrderNumber.getData());
         params.setCemeteryType(mWriteTombType.getData());
-        params.setCemeteryProperties(mWriteTombAttr.getData());
+        params.setTombUseProperty(mWriteTombAttr.getData());
         params.setPlanSale(mWritePlanPrice.getData());
         params.setSaleMoney(mWriteDealPrice.getData());
 //        params.setPayState(mWritePayInfo.getData());
@@ -212,6 +212,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             @Override
             public void changePrice(String price) {
                 mWritePlanPrice.setData(price);
+                mWriteDealPrice.setData(price);
             }
         });
     }

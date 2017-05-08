@@ -9,11 +9,11 @@ public class HrGetCemeteryTalkSuccessContract {
     private boolean saveCan;//售后是否提交过（true:提交过。false:没有提交过）
 
     private String cemeteryType;//墓型
-    private String cemeteryProperties;//墓穴属性
+    private String tombUseProperty ;//	墓穴属性
     private String planSale;//	挂牌价
     private String saleMoney;//成交价
     private String payState;//支付情况
-    private String moneyPay;//金额
+    private String moneyDeposit;//金额
     private String cemeteryReceive;//公墓接待
     private String freeService;//赠送服务
     private String choiceService;//自选服务
@@ -54,12 +54,12 @@ public class HrGetCemeteryTalkSuccessContract {
         this.cemeteryType = cemeteryType;
     }
 
-    public String getCemeteryProperties() {
-        return cemeteryProperties;
+    public String getTombUseProperty() {
+        return tombUseProperty;
     }
 
-    public void setCemeteryProperties(String cemeteryProperties) {
-        this.cemeteryProperties = cemeteryProperties;
+    public void setTombUseProperty(String tombUseProperty) {
+        this.tombUseProperty = tombUseProperty;
     }
 
     public String getPlanSale() {
@@ -86,12 +86,12 @@ public class HrGetCemeteryTalkSuccessContract {
         this.payState = payState;
     }
 
-    public String getMoneyPay() {
-        return moneyPay;
+    public String getMoneyDeposit() {
+        return moneyDeposit;
     }
 
-    public void setMoneyPay(String moneyPay) {
-        this.moneyPay = moneyPay;
+    public void setMoneyDeposit(String moneyDeposit) {
+        this.moneyDeposit = moneyDeposit;
     }
 
     public String getCemeteryReceive() {

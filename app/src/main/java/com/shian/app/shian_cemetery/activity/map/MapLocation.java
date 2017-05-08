@@ -48,7 +48,6 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
     PoiSearch poiSearch;
     String locationPoint = AppData.LOCAL_ADDRESS;
 
-
     int numView;
 
     @Override

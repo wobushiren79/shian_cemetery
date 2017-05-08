@@ -5,14 +5,10 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <com.shian.app.shian_cemetery.view.customlayout.burialinfo.BurialInfoLayout
-            android:id="@+id/burialinfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.shian.app.shian_cemetery.view.customlayout.burialinfo.BurialInfoLayout>
 
         <com.shian.app.shian_cemetery.view.customlayout.mainadvertisement.MainAdvertisementLayout
             android:id="@+id/mainadvertisement_layout"

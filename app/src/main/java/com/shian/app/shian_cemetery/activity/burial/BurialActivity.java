@@ -123,11 +123,8 @@ public class BurialActivity extends BaseActivity {
             if (deadInfo.getDeadmanTwoName() != null && !deadInfo.getDeadmanTwoName().isEmpty()) {
                 name.append(" | " + deadInfo.getDeadmanTwoName());
             }
-
             mTRUserName.setData(name.toString());
         }
-
-
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -192,8 +189,7 @@ public class BurialActivity extends BaseActivity {
             return;
         }
         if (mTRBurialCardId.getData().equals("")) {
-            ToastUtils.showShortToast(BurialActivity.this, "请填写安葬卡编号");
-            return;
+            ToastUtils.showShortToast(BurialActivity.this, "没有安葬卡编号，请联系财务");
         }
         String path = Utils.savePic(bitmapName);
         uploadFile(mIVSign, fileName, path);

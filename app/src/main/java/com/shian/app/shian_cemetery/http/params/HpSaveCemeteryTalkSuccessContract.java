@@ -23,11 +23,11 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
     private String mark;//墓位
     private long tombPositionId;//墓位id
     private String cemeteryType;//	墓型
-    private String cemeteryProperties;//	墓穴属性
+    private String tombUseProperty ;//	墓穴属性
     private String planSale;//挂牌价
     private String saleMoney;//成交价
     private String payState;//支付情况
-    private String moneyDeposit;//金额
+    private String moneyDeposit;//s金额
     private String cemeteryReceive;//	公墓接待
     private String freeService;//赠送服务
     private String choiceService;//自选服务
@@ -154,12 +154,12 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
         this.cemeteryType = cemeteryType;
     }
 
-    public String getCemeteryProperties() {
-        return cemeteryProperties;
+    public String getTombUseProperty() {
+        return tombUseProperty;
     }
 
-    public void setCemeteryProperties(String cemeteryProperties) {
-        this.cemeteryProperties = cemeteryProperties;
+    public void setTombUseProperty(String tombUseProperty) {
+        this.tombUseProperty = tombUseProperty;
     }
 
     public String getPlanSale() {
