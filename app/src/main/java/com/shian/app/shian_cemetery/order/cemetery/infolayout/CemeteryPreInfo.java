@@ -38,6 +38,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
     SpinnerViewNormal mWritePayInfo;
     EditTextViewNormal mWritePayMoney;
     EditTextViewNormal mWriteCemeteryReception;
+    EditTextViewNormal mWriteCemeterySales;
     EditTextViewNormal mWriteFreeGift;
     EditTextViewNormal mWriteChoiceService;
     EditTextViewNormal mWriteRemark;
@@ -89,6 +90,8 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
                             mWriteChoiceService.setData(result.getChoiceService());
                         if (result.getRemark() != null)
                             mWriteRemark.setData(result.getRemark());
+                        if (result.getCemeterySales() != null)
+                            mWriteCemeterySales.setData(result.getCemeterySales());
                     }
 
                     @Override
@@ -154,6 +157,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         params.setFreeService(mWriteFreeGift.getData());
         params.setChoiceService(mWriteChoiceService.getData());
         params.setRemark(mWriteRemark.getData());
+        params.setCemeterySales(mWriteCemeterySales.getData());
         MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessContract(getContext(), params, new HttpResponseHandler<HrOrderIdResult>() {
             @Override
             public void onStart(Request request, int id) {
@@ -184,6 +188,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mWritePayInfo = (SpinnerViewNormal) view.findViewById(R.id.write_payinfo);
         mWritePayMoney = (EditTextViewNormal) view.findViewById(R.id.write_paymoney);
         mWriteCemeteryReception = (EditTextViewNormal) view.findViewById(R.id.write_cemeteryreception);
+        mWriteCemeterySales = (EditTextViewNormal) view.findViewById(R.id.write_cemeterysales);
         mWriteFreeGift = (EditTextViewNormal) view.findViewById(R.id.write_freegift);
         mWriteChoiceService = (EditTextViewNormal) view.findViewById(R.id.write_choiceservice);
         mWriteRemark = (EditTextViewNormal) view.findViewById(R.id.write_remark);
@@ -222,6 +227,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mWriteTombType.initSpinner(SelectDictCode.TOMB_TYPE);
         mWriteTombAttr.initSpinner(SelectDictCode.TOMB_USE_PROPERTY);
         mWritePayInfo.initSpinner(SelectDictCode.ORDER_PAY_PURPOSE);
+        mWriteCemeteryReception.setDisable(false);
     }
 
     public void setShowMode() {

@@ -114,16 +114,26 @@ public class BurialActivity extends BaseActivity {
                 mTRBurialCardId.setState(false);
             }
             mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
+
+            String name = new String();
+            if (buryInfo.getIsMultiBurial() == 0) {
+                if (buryInfo.getBuryOneName() != null && !buryInfo.getBuryTwoName().isEmpty())
+                    name = buryInfo.getBuryOneName();
+            } else {
+                if (buryInfo.getBuryOneName() != null && !buryInfo.getBuryTwoName().isEmpty())
+                    name = buryInfo.getBuryOneName() + " | " + buryInfo.getBuryTwoName();
+            }
+            mTRUserName.setData(name);
         }
         if (deadInfo != null) {
-            StringBuilder name = new StringBuilder();
-            if (deadInfo.getDeadmanOneName() != null && !deadInfo.getDeadmanOneName().isEmpty()) {
-                name.append(deadInfo.getDeadmanOneName());
-            }
-            if (deadInfo.getDeadmanTwoName() != null && !deadInfo.getDeadmanTwoName().isEmpty()) {
-                name.append(" | " + deadInfo.getDeadmanTwoName());
-            }
-            mTRUserName.setData(name.toString());
+//            StringBuilder name = new StringBuilder();
+//            if (deadInfo.getDeadmanOneName() != null && !deadInfo.getDeadmanOneName().isEmpty()) {
+//                name.append(deadInfo.getDeadmanOneName());
+//            }
+//            if (deadInfo.getDeadmanTwoName() != null && !deadInfo.getDeadmanTwoName().isEmpty()) {
+//                name.append(" | " + deadInfo.getDeadmanTwoName());
+//            }
+//            mTRUserName.setData(name.toString());
         }
     }
 

@@ -9,7 +9,7 @@ public class HrGetCemeteryTalkSuccessContract {
     private boolean saveCan;//售后是否提交过（true:提交过。false:没有提交过）
 
     private String cemeteryType;//墓型
-    private String tombUseProperty ;//	墓穴属性
+    private String tombUseProperty;//	墓穴属性
     private String planSale;//	挂牌价
     private String saleMoney;//成交价
     private String payState;//支付情况
@@ -29,6 +29,15 @@ public class HrGetCemeteryTalkSuccessContract {
     private String tombName;    //	墓园(苑)名称
     private String parkName;    //	园区名称
     private int num;//	墓位号
+    private String cemeterySales;//	公墓业务员
+
+    public String getCemeterySales() {
+        return cemeterySales;
+    }
+
+    public void setCemeterySales(String cemeterySales) {
+        this.cemeterySales = cemeterySales;
+    }
 
     public String getOrderNum() {
         return orderNum;

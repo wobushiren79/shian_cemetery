@@ -111,6 +111,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="公墓接待人"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+        <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
+            android:id="@+id/write_cemeterysales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="公墓业务员"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
             android:layout_width="match_parent"

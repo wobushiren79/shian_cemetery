@@ -32,7 +32,15 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
     private String freeService;//赠送服务
     private String choiceService;//自选服务
     private String remark;//	备注
+    private String cemeterySales;//	公墓业务员
 
+    public String getCemeterySales() {
+        return cemeterySales;
+    }
+
+    public void setCemeterySales(String cemeterySales) {
+        this.cemeterySales = cemeterySales;
+    }
 
     public long getBespeakId() {
         return bespeakId;

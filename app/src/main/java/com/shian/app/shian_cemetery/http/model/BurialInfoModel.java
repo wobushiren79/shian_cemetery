@@ -10,6 +10,11 @@ public class BurialInfoModel {
     private String detail;//落葬详情
     private long stoneDatePre;//客户预计立碑日期
     private int stoneStatus;//立碑状态  0未立碑， 1已立碑
+    private String buryOneName;//安葬者1姓名
+    private String buryTwoName;//安葬者2姓名
+    private int isMultiBurial;//是否以后合葬(0否1是)
+
+
     /**
      * 墓穴证号
      */
@@ -28,6 +33,29 @@ public class BurialInfoModel {
     private long stoneFleFinishDate; //碑文完成刊刻日期
     private String stoneRemark; //立碑备注
 
+    public String getBuryOneName() {
+        return buryOneName;
+    }
+
+    public void setBuryOneName(String buryOneName) {
+        this.buryOneName = buryOneName;
+    }
+
+    public String getBuryTwoName() {
+        return buryTwoName;
+    }
+
+    public void setBuryTwoName(String buryTwoName) {
+        this.buryTwoName = buryTwoName;
+    }
+
+    public int getIsMultiBurial() {
+        return isMultiBurial;
+    }
+
+    public void setIsMultiBurial(int isMultiBurial) {
+        this.isMultiBurial = isMultiBurial;
+    }
 
     public String getBuryCardNo() {
         return buryCardNo;
