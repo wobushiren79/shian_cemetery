@@ -134,7 +134,7 @@
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="园区名称" />
+                android:text="墓穴位置" />
 
             <TextView
                 android:id="@+id/tv_locationname"

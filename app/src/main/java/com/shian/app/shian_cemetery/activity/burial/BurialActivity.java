@@ -113,7 +113,8 @@ public class BurialActivity extends BaseActivity {
                 mTRBurialCardId.setData(buryInfo.getBuryCardNo());
                 mTRBurialCardId.setState(false);
             }
-            mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
+            if (buryInfo.getTombCertificateNo() != null)
+                mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
 
             String name = new String();
             if (buryInfo.getIsMultiBurial() == 0) {
