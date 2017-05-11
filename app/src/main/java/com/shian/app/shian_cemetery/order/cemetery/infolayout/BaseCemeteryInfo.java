@@ -12,15 +12,17 @@ import android.widget.LinearLayout;
 public abstract class BaseCemeteryInfo extends LinearLayout {
     long orderId = -1;
     long beSpeakId = -1;
+    boolean isShowMode = false;
     View view;
     CallBack callBack;
 
-    public BaseCemeteryInfo(Context context, long orderId, long beSpeakId, int layoutId) {
+    public BaseCemeteryInfo(Context context, long orderId, long beSpeakId, int layoutId, boolean isShowMode) {
         super(context);
         this.orderId = orderId;
         this.beSpeakId = beSpeakId;
+        this.isShowMode = isShowMode;
         view = View.inflate(context, layoutId, this);
-        
+
         initView();
         initData();
         getData();

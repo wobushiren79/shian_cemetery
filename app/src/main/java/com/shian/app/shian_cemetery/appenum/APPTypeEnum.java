@@ -6,7 +6,7 @@ package com.shian.app.shian_cemetery.appenum;
 
 public enum APPTypeEnum {
     ADVISER(1, "殡仪"),
-    EXECUTOR(2, "顾问"),
+    EXECUTOR(2, "执行"),
     CEMETERY(3, "公墓");
 
     private int code;

@@ -37,8 +37,14 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
     TextView mTVNext;
 
     LinearLayout mLLButton;
+    CallBack thisCallBack;
+
     public CemeteryAgentManInfo(Context context, long orderId, long bespeakId) {
-        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_agentman);
+        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_agentman, false);
+    }
+
+    public void setThisCallBack(CallBack thisCallBack) {
+        this.thisCallBack = thisCallBack;
     }
 
     @Override
@@ -72,6 +78,8 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
                     mAgentManEmail.setData(result.getAgentmanEmail());
                 if (result.getRemark() != null)
                     mRemark.setData(result.getRemark());
+                if (thisCallBack != null)
+                    thisCallBack.initDataSuccess();
             }
 
             @Override
@@ -128,7 +136,7 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
 
         mTVNext = (TextView) view.findViewById(R.id.tv_submit);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
-        mLLButton= (LinearLayout) view.findViewById(R.id.ll_button);
+        mLLButton = (LinearLayout) view.findViewById(R.id.ll_button);
 
         mTVNext.setOnClickListener(new OnClickListener() {
             @Override
@@ -153,5 +161,9 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
 
     public void setShowMode() {
         mLLButton.setVisibility(GONE);
+    }
+
+    public interface CallBack {
+        void initDataSuccess();
     }
 }

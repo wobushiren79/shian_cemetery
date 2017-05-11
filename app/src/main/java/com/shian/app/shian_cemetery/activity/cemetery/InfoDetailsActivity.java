@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.activity.cemetery;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.health.PackageHealthStats;
@@ -41,10 +42,11 @@ public class InfoDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
+        AlertDialog alertDialog=new AlertDialog.Builder(this).create();
+
         mBTDetailes = (Button) findViewById(R.id.bt_detailes);
         mRLContent = (RelativeLayout) findViewById(R.id.rl_content);
-
-        cemeteryInfoView = new CemeteryPreInfo(InfoDetailsActivity.this, orderId, beSpeakId);
+        cemeteryInfoView = new CemeteryPreInfo(InfoDetailsActivity.this, orderId, beSpeakId,true);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         TextView mask = new TextView(InfoDetailsActivity.this);
         mask.setLayoutParams(layoutParams);
@@ -59,7 +61,6 @@ public class InfoDetailsActivity extends BaseActivity {
 
             }
         });
-        cemeteryInfoView.setShowMode();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

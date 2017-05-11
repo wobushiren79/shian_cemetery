@@ -49,10 +49,15 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
 
     LinearLayout mLLButton;
 
+
     public CemeteryPreInfo(Context context, long orderId, long bespeakId) {
-        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_pre);
+        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_pre, false);
     }
 
+    public CemeteryPreInfo(Context context, long orderId, long bespeakId, boolean isShowMode) {
+        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_pre, isShowMode);
+        setShowMode();
+    }
 
     @Override
     public void getData() {
@@ -67,7 +72,11 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
 
                     @Override
                     public void onSuccess(HrGetCemeteryTalkSuccessContract result) {
-                        mWriteLocationDetails.setData(result);
+                        if (isShowMode) {
+                            mWriteLocationDetails.setData(result, false);
+                        } else {
+                            mWriteLocationDetails.setData(result);
+                        }
                         if (result.getOrderNum() != null)
                             mWriteOrderNumber.setData(result.getOrderNum());
                         if (result.getCemeteryType() != null)
@@ -138,7 +147,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
 
 
         params.setBespeakId(beSpeakId);
-        params.setOrderedId(orderId);
+        params.setOrderId(orderId);
 
         params.setCemeteryId(cemeteryNameId);
         params.setTombId(locationGardenId);

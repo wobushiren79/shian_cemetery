@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.activity.cemetery;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class MoreInfoDetailsActivity extends BaseActivity {
 
     RelativeLayout mRLDeadMan;
     RelativeLayout mRLAgentMan;
+
     long beSpeakId;
     long orderId;
 
@@ -43,21 +45,26 @@ public class MoreInfoDetailsActivity extends BaseActivity {
     private void initView() {
         mRLDeadMan = (RelativeLayout) findViewById(R.id.rl_deadman);
         mRLAgentMan = (RelativeLayout) findViewById(R.id.rl_agentman);
+
         deadManInfoView = new CemeteryDeadManInfo(MoreInfoDetailsActivity.this, orderId, beSpeakId);
         agentManInfoView = new CemeteryAgentManInfo(MoreInfoDetailsActivity.this, orderId, beSpeakId);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        TextView mask1 = new TextView(MoreInfoDetailsActivity.this);
-        TextView mask2 = new TextView(MoreInfoDetailsActivity.this);
-//        deadManInfoView.setLayoutParams(layoutParams);
-//        agentManInfoView.setLayoutParams(layoutParams);
-        mask1.setLayoutParams(layoutParams);
-        mask2.setLayoutParams(layoutParams);
-        mRLAgentMan.addView(agentManInfoView);
-        mRLDeadMan.addView(deadManInfoView);
-        mRLDeadMan.addView(mask1);
-        mRLAgentMan.addView(mask2);
+        final TextView mask1 = new TextView(this);
+        final TextView mask2 = new TextView(this);
+        deadManInfoView.setThisCallBack(new CemeteryDeadManInfo.CallBack() {
+            @Override
+            public void initDataSuccess() {
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(deadManInfoView.getWidth(), deadManInfoView.getHeight());
+                mask1.setLayoutParams(layoutParams);
 
-
+            }
+        });
+        agentManInfoView.setThisCallBack(new CemeteryAgentManInfo.CallBack() {
+            @Override
+            public void initDataSuccess() {
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(agentManInfoView.getWidth(), agentManInfoView.getHeight());
+                mask2.setLayoutParams(layoutParams);
+            }
+        });
         mask1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +77,10 @@ public class MoreInfoDetailsActivity extends BaseActivity {
 
             }
         });
+        mRLAgentMan.addView(agentManInfoView);
+        mRLDeadMan.addView(deadManInfoView);
+        mRLAgentMan.addView(mask2);
+        mRLDeadMan.addView(mask1);
         deadManInfoView.setShowMode();
         agentManInfoView.setShowMode();
     }

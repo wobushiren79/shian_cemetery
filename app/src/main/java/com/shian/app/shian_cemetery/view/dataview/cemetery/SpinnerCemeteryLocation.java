@@ -266,17 +266,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
     }
 
     public void setData(HrGetCemeteryTalkSuccessContract data) {
-        if (data.getCemeteryName() == null)
-            return;
-        if (data.getTombName() == null)
-            return;
-        if (data.getParkName() == null)
-            return;
-        if (data.getRowNumber() == 0)
-            return;
-        if (data.getNum() == 0)
-            return;
-
+        if (checkData(data)) return;
 
         cemeteryId = data.getCemeteryId();
         gardenId = data.getTombId();
@@ -296,6 +286,36 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
         getDataInfo(CemeteryLocationEnum.LOCATIONROW.getCode(), areaId, -1, mWriteLocationRow);
         getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), rowId, areaId, mWriteLocationNum);
     }
+
+    public void setData(HrGetCemeteryTalkSuccessContract data, boolean isInit) {
+        if (checkData(data)) return;
+        cemeteryName = data.getCemeteryName();
+        gardenName = data.getTombName();
+        areaName = data.getParkName();
+        rowName = data.getRowNumber() + "";
+        numName = data.getNum() + "";
+
+        mWriteCemeteryName.initSpinner(new String[]{cemeteryName}, cemeteryName);
+        mWriteLocationGarden.initSpinner(new String[]{gardenName}, gardenName);
+        mWriteLocationArea.initSpinner(new String[]{areaName}, areaName);
+        mWriteLocationRow.initSpinner(new String[]{rowName}, rowName);
+        mWriteLocationNum.initSpinner(new String[]{numName}, numName);
+    }
+
+    private boolean checkData(HrGetCemeteryTalkSuccessContract data) {
+        if (data.getCemeteryName() == null)
+            return true;
+        if (data.getTombName() == null)
+            return true;
+        if (data.getParkName() == null)
+            return true;
+        if (data.getRowNumber() == 0)
+            return true;
+        if (data.getNum() == 0)
+            return true;
+        return false;
+    }
+
 
     public interface CallBack {
         void changePrice(String price);

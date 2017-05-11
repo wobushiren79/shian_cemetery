@@ -45,8 +45,14 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
 
     LinearLayout mLLButton;
 
+    CallBack thisCallBack;
+
     public CemeteryDeadManInfo(Context context, long orderId, long bespeakId) {
-        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_deadman);
+        super(context, orderId, bespeakId, R.layout.layout_cemetery_info_deadman, false);
+    }
+
+    public void setThisCallBack(CallBack thisCallBack) {
+        this.thisCallBack = thisCallBack;
     }
 
     @Override
@@ -92,6 +98,8 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
                     mUserDeadTime2.setData(result.getDeadmanTwoDeadTime());
                 if (result.getRemark() != null)
                     mRemark.setData(result.getRemark());
+                if (thisCallBack != null)
+                    thisCallBack.initDataSuccess();
             }
 
             @Override
@@ -188,5 +196,9 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
 
     public void setShowMode() {
         mLLButton.setVisibility(GONE);
+    }
+
+    public interface CallBack {
+        void initDataSuccess();
     }
 }

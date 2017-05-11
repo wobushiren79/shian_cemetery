@@ -9,7 +9,7 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 
 public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
     private long bespeakId;//咨询ID
-    private long orderedId;//订单ID
+    private long orderId;//订单ID
     private int saveType;//提交人的类型（1，洽谈人。2，售后。如果是售后，那么这个提交只能进行一次）
     private String orderNum;//订单编号
     private String cemeteryName;//公墓名称
@@ -50,12 +50,12 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
         this.bespeakId = bespeakId;
     }
 
-    public long getOrderedId() {
-        return orderedId;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrderedId(long orderedId) {
-        this.orderedId = orderedId;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public int getSaveType() {
