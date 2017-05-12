@@ -27,7 +27,7 @@ public class WaitSettele extends BaseBurialTitleView {
 
     private void initView() {
         mLLContent = (LinearLayout) view.findViewById(R.id.ll_content);
-        int dateType = BurialDateTypeEnum.DAY.getCode();
+        int dateType = BurialDateTypeEnum.MONTH.getCode();
         int year = -1;
         int month = -1;
         int day = -1;

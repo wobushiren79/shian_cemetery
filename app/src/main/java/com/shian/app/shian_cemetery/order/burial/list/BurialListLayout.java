@@ -18,6 +18,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshExpandableListView;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.baseadapter.BurialListPullAdapter;
+import com.shian.app.shian_cemetery.appenum.BurialDateTypeEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialBuildDataBean;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -165,6 +166,7 @@ public class BurialListLayout extends LinearLayout {
                         year = yearTemp[0];
                         month = (monthOfYearTemp[0] + 1);
                         day = dayOfMonthTemp[0];
+                        dataBean.setDateType(BurialDateTypeEnum.DAY.getCode());
                         getData(true);
                         dialog.cancel();
                     }

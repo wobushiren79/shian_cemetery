@@ -88,25 +88,25 @@ public class BurialInfoLayout extends LinearLayout {
             }
         });
 
-        MHttpManagerFactory.getAccountManager().getUserInfo(getContext(), new HttpResponseHandler<HrUserInfo>() {
-
-            @Override
-            public void onStart(Request request, int id) {
-
-            }
-
-            @Override
-            public void onSuccess(final HrUserInfo result) {
-                if (!result.getHeadImg().equals(""))
-                    ImageLoader.getInstance().displayImage(BaseURL.OSSURL + result.getHeadImg(), mIVIcon);
-                mTVName.setText(result.getName());
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
+//        MHttpManagerFactory.getAccountManager().getUserInfo(getContext(), new HttpResponseHandler<HrUserInfo>() {
+//
+//            @Override
+//            public void onStart(Request request, int id) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(final HrUserInfo result) {
+//                if (!result.getHeadImg().equals(""))
+//                    ImageLoader.getInstance().displayImage(BaseURL.OSSURL + result.getHeadImg(), mIVIcon);
+//                mTVName.setText(result.getName());
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//
+//            }
+//        });
 
     }
 

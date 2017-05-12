@@ -18,6 +18,7 @@ import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.model.CemeteryOrderModel;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
+import com.shian.app.shian_cemetery.http.params.HpCetemeryRejectParams;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
@@ -319,30 +320,30 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
      * 拒单
      */
     private void rejectOrder(CemeteryOrderModel model) {
-//        HpCetemeryRejectParams params = new HpCetemeryRejectParams();
-//        params.setBespeakId(model.getBespeakId());
-//        params.setBespeakAssignId(model.getBespeakAssignId());
-//        MHttpManagerFactory.getAccountManager().rejectCemetery(context,
-//                params, new HttpResponseHandler<Object>() {
-//
-//                    @Override
-//                    public void onStart(Request request, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Object result) {
-//                        if (callBack != null)
-//                        callBack.refresh();
-//                        ToastUtils.showShortToast(context, "拒单成功");
-//                    }
-//
-//
-//                    @Override
-//                    public void onError(String message) {
-////                      ToastUtils.show(getContext(), "拒单失败");
-//                    }
-//                });
+        HpCetemeryRejectParams params = new HpCetemeryRejectParams();
+        params.setBespeakId(model.getBespeakId());
+        params.setBespeakAssignId(model.getBespeakAssignId());
+        MHttpManagerFactory.getAccountManager().rejectCemetery(context,
+                params, new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Object result) {
+                        if (callBack != null)
+                        callBack.refresh();
+                        ToastUtils.showShortToast(context, "拒单成功");
+                    }
+
+
+                    @Override
+                    public void onError(String message) {
+                      ToastUtils.showShortToast(context, "拒单失败");
+                    }
+                });
         ToastUtils.showShortToast(context, "拒单失败");
     }
 
