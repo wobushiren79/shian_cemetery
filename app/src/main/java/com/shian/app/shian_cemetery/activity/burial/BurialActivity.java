@@ -38,7 +38,7 @@ public class BurialActivity extends BaseActivity {
     TextReadLayout mTRLocation;
     TextReadLayout mTRUserName;
     TextReadLayout mTRGraveId;
-    EditLayout mTRBurialCardId;
+    TextReadLayout mTRBurialCardId;
     TextReadLayout mTRBurialTime;
     SpinnerLayout mSPBurialOdds;
     SpinnerLayout mSPBurialState;
@@ -69,7 +69,7 @@ public class BurialActivity extends BaseActivity {
         mTRLocation = (TextReadLayout) findViewById(R.id.tr_location);
         mTRUserName = (TextReadLayout) findViewById(R.id.tr_username);
         mTRGraveId = (TextReadLayout) findViewById(R.id.tr_graveid);
-        mTRBurialCardId = (EditLayout) findViewById(R.id.tr_burialcardid);
+        mTRBurialCardId = (TextReadLayout) findViewById(R.id.tr_burialcardid);
         mIVSign = (ImageView) findViewById(R.id.iv_sign);
         mTRBurialTime = (TextReadLayout) findViewById(R.id.tr_time);
         mSPBurialOdds = (SpinnerLayout) findViewById(R.id.spinner_burialodds);
@@ -101,27 +101,26 @@ public class BurialActivity extends BaseActivity {
         if (buryInfo != null) {
             if (buryInfo.getBuryDatePre() != 0)
                 mTRBurialTime.setData(TimeUtils.formatTime(buryInfo.getBuryDatePre()));
+
             if (buryInfo.getBuryStatus() == 1) {
                 ToastUtils.showLongToast(BurialActivity.this, "此订单已被操作");
                 finish();
                 return;
             }
-            if (buryInfo.getBuryCardNo() == null || buryInfo.getBuryCardNo().equals("")) {
-//                mTRBurialCardId.setState(true);
-                mTRBurialCardId.setState(false);
-            } else {
+
+            if (buryInfo.getBuryCardNo() != null) {
                 mTRBurialCardId.setData(buryInfo.getBuryCardNo());
-                mTRBurialCardId.setState(false);
             }
+
             if (buryInfo.getTombCertificateNo() != null)
                 mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
 
             String name = new String();
             if (buryInfo.getIsMultiBurial() == 0) {
-                if (buryInfo.getBuryOneName() != null && !buryInfo.getBuryTwoName().isEmpty())
+                if (buryInfo.getBuryOneName() != null)
                     name = buryInfo.getBuryOneName();
             } else {
-                if (buryInfo.getBuryOneName() != null && !buryInfo.getBuryTwoName().isEmpty())
+                if (buryInfo.getBuryOneName() != null && buryInfo.getBuryTwoName() != null)
                     name = buryInfo.getBuryOneName() + " | " + buryInfo.getBuryTwoName();
             }
             mTRUserName.setData(name);

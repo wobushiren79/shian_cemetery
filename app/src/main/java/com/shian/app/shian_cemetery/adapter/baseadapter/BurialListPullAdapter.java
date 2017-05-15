@@ -263,11 +263,11 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         }
         //名字设置
         StringBuilder deadManNames = new StringBuilder();
-        if (data.getDeadInfo().getDeadmanOneName() != null && !data.getDeadInfo().getDeadmanOneName().isEmpty()) {
-            deadManNames.append(data.getDeadInfo().getDeadmanOneName());
+        if (data.getBuryInfo().getBuryOneName() != null) {
+            deadManNames.append(data.getBuryInfo().getBuryOneName());
         }
-        if (data.getDeadInfo().getDeadmanTwoName() != null && !data.getDeadInfo().getDeadmanTwoName().isEmpty()) {
-            deadManNames.append(" | " + data.getDeadInfo().getDeadmanTwoName());
+        if (data.getBuryInfo().getBuryTwoName() != null && !data.getBuryInfo().getBuryTwoName().isEmpty()) {
+            deadManNames.append(" | " + data.getBuryInfo().getBuryTwoName());
         }
         holder.tvName1.setText(deadManNames);
         return convertView;

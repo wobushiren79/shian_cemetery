@@ -69,11 +69,11 @@
                 android:background="@color/zhy_line_7" />
 
 
-            <com.shian.app.shian_cemetery.view.dataview.burial.EditLayout
+            <com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout
                 android:id="@+id/tr_burialcardid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:titleName="安葬卡编号"></com.shian.app.shian_cemetery.view.dataview.burial.EditLayout>
+                DataReadAttr:titleName="安葬卡编号"></com.shian.app.shian_cemetery.view.dataview.burial.TextReadLayout>
 
             <TextView
                 android:layout_width="match_parent"

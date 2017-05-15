@@ -20,6 +20,7 @@
             android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
         <com.shian.app.shian_cemetery.view.customlayout.popupbutton.PopupButton
+            android:visibility="gone"
             android:id="@+id/popupbutton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></com.shian.app.shian_cemetery.view.customlayout.popupbutton.PopupButton>

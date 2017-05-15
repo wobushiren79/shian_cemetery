@@ -42,4 +42,8 @@ public class TextReadLayout extends BaseDataLayout {
     public void setData(String content) {
         mTVContent.setText(content);
     }
+
+    public String getData() {
+        return mTVContent.getText().toString();
+    }
 }
