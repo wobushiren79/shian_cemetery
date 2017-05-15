@@ -134,18 +134,25 @@ public class SetteleActivity extends BaseActivity {
             } else {
                 mTRBuildState.setData("已刊刻");
             }
-
-
-        }
-        if (deadInfo != null) {
+            //姓名
             StringBuilder name = new StringBuilder();
-            if (deadInfo.getDeadmanOneName() != null && !deadInfo.getDeadmanOneName().isEmpty()) {
-                name.append(deadInfo.getDeadmanOneName());
+            if (buryInfo.getBuryOneName() != null) {
+                name.append(buryInfo.getBuryOneName());
             }
-            if (deadInfo.getDeadmanTwoName() != null && !deadInfo.getDeadmanTwoName().isEmpty()) {
-                name.append(" | " + deadInfo.getDeadmanTwoName());
+            if (buryInfo.getBuryTwoName() != null) {
+                name.append(buryInfo.getBuryTwoName());
             }
             mTRUserName.setData(name.toString());
+        }
+        if (deadInfo != null) {
+//            StringBuilder name = new StringBuilder();
+//            if (deadInfo.getDeadmanOneName() != null && !deadInfo.getDeadmanOneName().isEmpty()) {
+//                name.append(deadInfo.getDeadmanOneName());
+//            }
+//            if (deadInfo.getDeadmanTwoName() != null && !deadInfo.getDeadmanTwoName().isEmpty()) {
+//                name.append(" | " + deadInfo.getDeadmanTwoName());
+//            }
+//            mTRUserName.setData(name.toString());
         }
     }
 
