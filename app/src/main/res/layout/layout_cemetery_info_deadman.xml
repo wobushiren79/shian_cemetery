@@ -15,7 +15,8 @@
             android:id="@+id/write_username_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            DataReadAttr:titleName="使用者1姓名"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
+            DataReadAttr:titleName="使用者1姓名"
+            DataReadAttr:isImportant="true"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
             android:layout_width="match_parent"

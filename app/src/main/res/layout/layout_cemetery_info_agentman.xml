@@ -16,6 +16,7 @@
             android:id="@+id/write_agentmanname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
             DataReadAttr:titleName="经办人姓名"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
@@ -28,6 +29,7 @@
             android:id="@+id/write_agentmanphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
             DataReadAttr:titleName="经办人电话"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView

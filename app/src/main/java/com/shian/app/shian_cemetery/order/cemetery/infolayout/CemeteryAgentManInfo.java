@@ -13,7 +13,9 @@ import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveCemeteryTalkSuccessAgentMan;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessAgentMan;
 import com.shian.app.shian_cemetery.staticdata.SelectDictCode;
+import com.shian.app.shian_cemetery.tools.CheckUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal;
@@ -91,6 +93,18 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
 
     @Override
     public void saveData() {
+        if (mAgentManName.getData().equals("")) {
+            ToastUtils.showShortToast(getContext(), "经办人姓名不能为空");
+            return;
+        }
+        if (mAgentManPhone.getData().equals("")) {
+            ToastUtils.showShortToast(getContext(), "经办人电话不能为空");
+            return;
+        }
+        if (!CheckUtils.isPhoneNumber(mAgentManPhone.getData())) {
+            ToastUtils.showShortToast(getContext(), "经办人电话格式不对");
+            return;
+        }
         HpSaveCemeteryTalkSuccessAgentMan params = new HpSaveCemeteryTalkSuccessAgentMan();
         params.setBespeakId(beSpeakId);
 //        params.setSaveType(changeState);

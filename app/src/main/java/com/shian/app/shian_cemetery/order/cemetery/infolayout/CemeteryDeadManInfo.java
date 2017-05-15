@@ -111,6 +111,10 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
 
     @Override
     public void saveData() {
+        if (mUserName1.getData().equals("")) {
+            ToastUtils.showShortToast(getContext(), "使用者1不能为空");
+            return;
+        }
         HpSaveCemeteryTalkSuccessDeadMan params = new HpSaveCemeteryTalkSuccessDeadMan();
         params.setBespeakId(beSpeakId);
         params.setOrderId(orderId);
