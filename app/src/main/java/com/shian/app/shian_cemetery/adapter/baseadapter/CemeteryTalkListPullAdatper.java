@@ -344,7 +344,6 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                       ToastUtils.showShortToast(context, "拒单失败");
                     }
                 });
-        ToastUtils.showShortToast(context, "拒单失败");
     }
 
     /**
