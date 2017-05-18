@@ -29,6 +29,26 @@ public class CemeteryOrderModel {
 
     private long cemeteryId;
 
+    private String sourceClassText;//来源类别
+
+    private String salesConsultant;//购墓顾问
+
+    public String getSourceClassText() {
+        return sourceClassText;
+    }
+
+    public void setSourceClassText(String sourceClassText) {
+        this.sourceClassText = sourceClassText;
+    }
+
+    public String getSalesConsultant() {
+        return salesConsultant;
+    }
+
+    public void setSalesConsultant(String salesConsultant) {
+        this.salesConsultant = salesConsultant;
+    }
+
     public long getCemeteryId() {
         return cemeteryId;
     }

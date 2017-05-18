@@ -81,6 +81,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvReject = (TextView) convertView.findViewById(R.id.tv_reject);
                     holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
                     holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
+                    holder.tvSource = (TextView) convertView.findViewById(R.id.tv_source);
+                    holder.tvSalesConsultant = (TextView) convertView.findViewById(R.id.tv_cemeteryconsultant);
                     break;
                 case 1:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_2, null);
@@ -95,6 +97,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvRemark = (TextView) convertView.findViewById(R.id.tv_remark);
                     holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
                     holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
+                    holder.tvSource = (TextView) convertView.findViewById(R.id.tv_source);
+                    holder.tvSalesConsultant = (TextView) convertView.findViewById(R.id.tv_cemeteryconsultant);
                     break;
                 case 2:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_3, null);
@@ -106,6 +110,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvDetails = (TextView) convertView.findViewById(R.id.tv_details);
                     holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
                     holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
+                    holder.tvSource = (TextView) convertView.findViewById(R.id.tv_source);
+                    holder.tvSalesConsultant = (TextView) convertView.findViewById(R.id.tv_cemeteryconsultant);
                     break;
             }
 
@@ -154,7 +160,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvCustomerLocation.setText(data.getCustomerLocation());
                 holder.tvMeetTime.setText(data.getPromiseTime());
                 holder.tvCemeteryLocation.setText(data.getPlanCemeteryLocation());
-
+                holder.tvSource.setText(data.getSourceClassText());
+                holder.tvSalesConsultant.setText(data.getSalesConsultant());
                 if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.undistributed.getCode()
                         || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkFail.getCode()
                         || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unassigned.getCode()) {
@@ -177,7 +184,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvCemeteryLocation.setText(data.getPlanCemeteryLocation());
                 holder.tvTraffic.setText(data.getTrafficWay());
                 holder.tvRemark.setText(data.getRemark());
-
+                holder.tvSource.setText(data.getSourceClassText());
+                holder.tvSalesConsultant.setText(data.getSalesConsultant());
                 holder.tvTalkSuccess.setOnClickListener(onClickListener);
                 holder.tvTalkFail.setOnClickListener(onClickListener);
                 makePhone(holder.ivPhone, data);
@@ -188,7 +196,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvDeadManName.setText(data.getDeadmanName());
                 holder.tvCemeteryName.setText(data.getChoiceCemeteryName());
                 holder.tvLocationName.setText(data.getDetailsLocation());
-
+                holder.tvSource.setText(data.getSourceClassText());
+                holder.tvSalesConsultant.setText(data.getSalesConsultant());
                 holder.tvDetails.setOnClickListener(onClickListener);
                 makePhone(holder.ivPhone, data);
                 break;
@@ -239,7 +248,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
             return 0;
         } else if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.accepted.getCode()
                 || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkAgain.getCode()
-                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkSuccess.getCode()) {
+                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.talkSuccess.getCode()
+                || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.ready.getCode()) {
             if (data.getIsEditInfo() == 1) {
                 return 1;
             } else {
@@ -258,7 +268,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         TextView tvCemeteryLocation;
         TextView tvTraffic;
         TextView tvRemark;
-
+        TextView tvSource;
+        TextView tvSalesConsultant;
         TextView tvAgentManName;
         TextView tvAgentManPhone;
         TextView tvDeadManName;
@@ -334,14 +345,14 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     @Override
                     public void onSuccess(Object result) {
                         if (callBack != null)
-                        callBack.refresh();
+                            callBack.refresh();
                         ToastUtils.showShortToast(context, "拒单成功");
                     }
 
 
                     @Override
                     public void onError(String message) {
-                      ToastUtils.showShortToast(context, "拒单失败");
+                        ToastUtils.showShortToast(context, "拒单失败");
                     }
                 });
     }

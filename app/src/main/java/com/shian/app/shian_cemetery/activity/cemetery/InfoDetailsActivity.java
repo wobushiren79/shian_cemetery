@@ -42,15 +42,16 @@ public class InfoDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
-        AlertDialog alertDialog=new AlertDialog.Builder(this).create();
 
         mBTDetailes = (Button) findViewById(R.id.bt_detailes);
         mRLContent = (RelativeLayout) findViewById(R.id.rl_content);
         cemeteryInfoView = new CemeteryPreInfo(InfoDetailsActivity.this, orderId, beSpeakId,true);
+
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         TextView mask = new TextView(InfoDetailsActivity.this);
         mask.setLayoutParams(layoutParams);
         cemeteryInfoView.setLayoutParams(layoutParams);
+
         mRLContent.addView(cemeteryInfoView);
         mRLContent.addView(mask);
         mBTDetailes.setOnClickListener(onClickListener);

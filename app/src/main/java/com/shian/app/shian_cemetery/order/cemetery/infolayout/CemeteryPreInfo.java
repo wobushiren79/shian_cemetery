@@ -101,6 +101,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
                             mWriteRemark.setData(result.getRemark());
                         if (result.getCemeterySales() != null)
                             mWriteCemeterySales.setData(result.getCemeterySales());
+
                     }
 
                     @Override
@@ -208,6 +209,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mTVSubmit = (TextView) view.findViewById(R.id.tv_submit);
         mLLButton = (LinearLayout) findViewById(R.id.ll_button);
         mWritePlanPrice.setDisable(false);
+        mWriteCemeterySales.setDisable(false);
         mWritePayMoney.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVSubmit.setOnClickListener(new OnClickListener() {
             @Override
