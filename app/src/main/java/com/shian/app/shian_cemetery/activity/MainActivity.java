@@ -4,19 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
+import android.view.KeyEvent;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.mapapi.SDKInitializer;
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.MainChangeItemEnum;
 import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
-import com.shian.app.shian_cemetery.base.BaseAppliction;
+import com.shian.app.shian_cemetery.base.BaseApplication;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.common.local.LocationService;
 import com.shian.app.shian_cemetery.fragment.CemeteryOrderFragment;
@@ -27,7 +24,6 @@ import com.shian.app.shian_cemetery.fragment.OrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.staticdata.AppData;
-import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
@@ -35,8 +31,6 @@ import com.shian.app.shian_cemetery.view.customlayout.mainchange.MainChangeLayou
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import okhttp3.Request;
 
@@ -65,7 +59,7 @@ public class MainActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         // -----------location config ------------
-        locationService = ((BaseAppliction) getApplication()).locationService;
+        locationService = ((BaseApplication) getApplication()).locationService;
         // 获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
         locationService.registerListener(mListener);
         // 注册监听
@@ -205,5 +199,27 @@ public class MainActivity extends BaseActivity {
         if (resultCode == 1001) {
             setMianData();
         }
+    }
+
+    private long firstTime = 0;
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                long secondTime = System.currentTimeMillis();
+                if (secondTime - firstTime > 2000) {
+                    //如果两次按键时间间隔大于2秒，则不退出
+                    ToastUtils.showShortToast(this, "再按一次退出程序");
+                    firstTime = secondTime;//更新firstTime
+                    return true;
+                } else {
+                    //两次按键小于2秒时，退出应用
+                    System.exit(0);
+                }
+                break;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

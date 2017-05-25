@@ -77,7 +77,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
     public void dealTime() {
         List<Integer> dayTemp = new ArrayList<>();
         for (BurialListDataModel data : listData) {
-            int day = Integer.valueOf(TimeUtils.formatTime(data.getBuryInfo().getBuryDatePre(), "dd"));
+            int day = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "dd"));
             if (!dayTemp.contains(day)) {
                 dayTemp.add(day);
             }
@@ -87,8 +87,8 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             List<BurialListDataModel> orderTemp = new ArrayList<>();
             int month = 0;
             for (BurialListDataModel data : listData) {
-                int dayC = Integer.valueOf(TimeUtils.formatTime(data.getBuryInfo().getBuryDatePre(), "dd"));
-                month = Integer.valueOf(TimeUtils.formatTime(data.getBuryInfo().getBuryDatePre(), "MM"));
+                int dayC = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "dd"));
+                month = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "MM"));
                 if (dayF == dayC) {
                     dayListTemp.add(dayC);
                     orderTemp.add(data);
@@ -200,6 +200,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, SetteleActivity.class);
                 intent.putExtra(IntentName.INTENT_ORDERID, data.getOrder().getOrderId());
+                intent.putExtra(IntentName.INTENT_BURYRECORDID, data.getBuryRecord().getBuryRecordId());
                 context.startActivity(intent);
             }
         });
@@ -209,6 +210,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, BurialActivity.class);
                 intent.putExtra(IntentName.INTENT_ORDERID, data.getOrder().getOrderId());
+                intent.putExtra(IntentName.INTENT_BURYRECORDID, data.getBuryRecord().getBuryRecordId());
                 context.startActivity(intent);
             }
         });
@@ -218,7 +220,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         holder.tvLocation3.setText(data.getTombPosition().getRow() + "排");
         holder.tvLocation4.setText(data.getTombPosition().getNum() + "号");
         //立碑显示判定
-        if (data.getBuryInfo().getStoneStatus() == SetteleStateEnum.NOT.getCode()) {
+        if (data.getBuryRecord().getBuryInfo().getStoneStatus() == SetteleStateEnum.NOT.getCode()) {
             holder.tvSetteleState.setText("(未安碑)");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_4));
             holder.tvSettele.setVisibility(View.VISIBLE);
@@ -230,7 +232,7 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             holder.tvSettele.setTag(true);
         }
         //安葬显示判定
-        if (data.getBuryInfo().getBuryStatus() == BurialStateEnum.NOT.getCode()) {
+        if (data.getBuryRecord().getBuryStatus() == BurialStateEnum.NOT.getCode()) {
             holder.tvBurial.setVisibility(View.VISIBLE);
             holder.llContentBack.setBackgroundResource(R.drawable.zhy_button_state_item_white);
             holder.tvBurial.setTag(false);
@@ -263,11 +265,8 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         }
         //名字设置
         StringBuilder deadManNames = new StringBuilder();
-        if (data.getBuryInfo().getBuryOneName() != null) {
-            deadManNames.append(data.getBuryInfo().getBuryOneName());
-        }
-        if (data.getBuryInfo().getBuryTwoName() != null && !data.getBuryInfo().getBuryTwoName().isEmpty()) {
-            deadManNames.append(" | " + data.getBuryInfo().getBuryTwoName());
+        if (data.getBuryRecord().getBuryName() != null) {
+            deadManNames.append(data.getBuryRecord().getBuryName());
         }
         holder.tvName1.setText(deadManNames);
         return convertView;

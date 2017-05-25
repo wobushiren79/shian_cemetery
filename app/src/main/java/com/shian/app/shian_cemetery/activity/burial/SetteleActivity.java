@@ -15,6 +15,7 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.model.BurialDeadInfoModel;
 import com.shian.app.shian_cemetery.http.model.BurialInfoModel;
 import com.shian.app.shian_cemetery.http.model.BurialLocationModel;
+import com.shian.app.shian_cemetery.http.model.BurialRecord;
 import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveSetteleDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
@@ -41,12 +42,12 @@ public class SetteleActivity extends BaseActivity {
     EditLayout mTRRemark;
     LinearLayout mLLPicContent;
 
-    private BurialInfoModel buryInfo;//安葬信息
+    private BurialRecord burialRecord;//安葬信息
     private BurialDeadInfoModel deadInfo;//死者信息
     private BurialLocationModel tombPosition;//安葬墓位
 
+    long buryRecordId = -1;
     long orderId = -1;
-
     List<PhotoUpDataLayout> listPic = new ArrayList<>();
 
     @Override
@@ -55,6 +56,7 @@ public class SetteleActivity extends BaseActivity {
         setContentView(R.layout.activity_settele);
         setTitle("立碑", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
+        buryRecordId = getIntent().getLongExtra(IntentName.INTENT_BURYRECORDID, -1);
         initView();
         getData();
     }
@@ -113,34 +115,31 @@ public class SetteleActivity extends BaseActivity {
             location.append(numName);
             mTRLocation.setData(location.toString());
         }
-        if (buryInfo != null) {
-            if (buryInfo.getStoneStatus() == 1) {
+        if (burialRecord != null) {
+            if (burialRecord.getBuryInfo().getStoneStatus() == 1) {
                 ToastUtils.showLongToast(SetteleActivity.this, "此订单已被操作");
                 finish();
                 return;
             }
-            if (buryInfo.getStoneDatePre() != 0) {
-                mTRSetteleTime.setData(TimeUtils.formatTime(buryInfo.getStoneDatePre()));
+            if (burialRecord.getBuryInfo().getStoneDatePre() != 0) {
+                mTRSetteleTime.setData(TimeUtils.formatTime(burialRecord.getBuryInfo().getStoneDatePre()));
             } else {
                 mTRSetteleTime.setData("无详细日期");
             }
-            if (buryInfo.getStoneFileSetDate() != 0) {
-                mTRBuildTime.setData(TimeUtils.formatTime(buryInfo.getStoneFileSetDate()));
+            if (burialRecord.getStoneFileSetDate() != 0) {
+                mTRBuildTime.setData(TimeUtils.formatTime(burialRecord.getStoneFileSetDate()));
             } else {
                 mTRBuildTime.setData("无详细日期");
             }
-            if (buryInfo.getStoneCarveStatus() == 0) {
+            if (burialRecord.getStoneCarveStatus() == 0) {
                 mTRBuildState.setData("未刊刻");
             } else {
                 mTRBuildState.setData("已刊刻");
             }
             //姓名
             StringBuilder name = new StringBuilder();
-            if (buryInfo.getBuryOneName() != null) {
-                name.append(buryInfo.getBuryOneName());
-            }
-            if (buryInfo.getBuryTwoName() != null) {
-                name.append(buryInfo.getBuryTwoName());
+            if (burialRecord.getBuryName() != null) {
+                name.append(burialRecord.getBuryName());
             }
             mTRUserName.setData(name.toString());
         }
@@ -161,7 +160,7 @@ public class SetteleActivity extends BaseActivity {
      */
     private void getData() {
         HpBurialIdParams params = new HpBurialIdParams();
-        params.setContent(orderId);
+        params.setContent(buryRecordId);
         MHttpManagerFactory.getAccountManager().getBurialDetails(this, params, new HttpResponseHandler<HrGetBurialDetails>() {
             @Override
             public void onStart(Request request, int id) {
@@ -170,7 +169,7 @@ public class SetteleActivity extends BaseActivity {
 
             @Override
             public void onSuccess(HrGetBurialDetails result) {
-                buryInfo = result.getBuryInfo();
+                burialRecord = result.getBuryRecord();
                 deadInfo = result.getDeadInfo();
                 tombPosition = result.getTombPosition();
                 initData();
@@ -216,8 +215,9 @@ public class SetteleActivity extends BaseActivity {
             picBuffer.append(picUrls.get(i));
         }
         HpSaveSetteleDataParams params = new HpSaveSetteleDataParams();
+
         params.setOrderId(orderId);
-        params.setBuriedFileIds(picBuffer.toString());
+        params.setStonePicIds(picBuffer.toString());
         params.setStoneRemark(mTRRemark.getData());
         MHttpManagerFactory.getAccountManager().saveSetteleData(SetteleActivity.this, params, new HttpResponseHandler<Object>() {
             @Override

@@ -11,6 +11,7 @@ public class IntentName {
     public static String INTENT_CEMETERY_INFO_STEPS = "INTENT_CEMETERY_INFO_STEPS";//洽谈成功数据填写步奏
     public static String INTENT_BESPEAKID = "INTENT_BESPEAKID";//传递bespeakId
     public static String INTENT_ORDERID = "INTENT_ORDERID";//传递orderId
+    public static String INTENT_BURYRECORDID = "INTENT_BURYRECORDID";//传递buryRecordId
 
     public static String INTENT_SETTING = "INTENT_SETTING";//设置界面
 

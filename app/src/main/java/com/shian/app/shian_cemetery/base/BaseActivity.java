@@ -2,11 +2,8 @@ package com.shian.app.shian_cemetery.base;
 
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -17,13 +14,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.activity.SplashActivity;
-import com.shian.app.shian_cemetery.activity.map.MapLocation;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
-import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.CheckUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
@@ -58,7 +51,7 @@ public class BaseActivity extends FragmentActivity {
         super.setContentView(R.layout.activity_base);
         initView();
 
-        ((BaseAppliction) getApplicationContext()).addActivity(this);
+        ((BaseApplication) getApplicationContext()).addActivity(this);
         Utils.setWindowStatusBarColor(this, R.color.zhy_title_color_1);//设置状态栏颜色
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
     }
@@ -231,6 +224,6 @@ public class BaseActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ((BaseAppliction) getApplicationContext()).removeActivity(this);
+        ((BaseApplication) getApplicationContext()).removeActivity(this);
     }
 }

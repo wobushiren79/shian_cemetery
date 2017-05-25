@@ -4,20 +4,15 @@ package com.shian.app.shian_cemetery.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.activity.burial.SetteleActivity;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
-import com.shian.app.shian_cemetery.base.BaseAppliction;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.view.dialog.TipsDialog;
 

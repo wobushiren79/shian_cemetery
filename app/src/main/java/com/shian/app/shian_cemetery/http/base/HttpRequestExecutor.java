@@ -5,16 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.provider.UserDictionary;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.shian.app.shian_cemetery.activity.LoginActivity;
-import com.shian.app.shian_cemetery.activity.SettingsActivity;
-import com.shian.app.shian_cemetery.base.BaseAppliction;
-import com.shian.app.shian_cemetery.http.params.HpLoginParams;
-import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
@@ -22,14 +15,12 @@ import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.dialog.CustomDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
-import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
 
 import org.codehaus.jackson.JsonNode;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 

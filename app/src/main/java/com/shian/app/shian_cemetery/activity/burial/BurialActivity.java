@@ -16,6 +16,7 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.model.BurialDeadInfoModel;
 import com.shian.app.shian_cemetery.http.model.BurialInfoModel;
 import com.shian.app.shian_cemetery.http.model.BurialLocationModel;
+import com.shian.app.shian_cemetery.http.model.BurialRecord;
 import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
 import com.shian.app.shian_cemetery.http.params.HpSaveBurialDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
@@ -47,10 +48,11 @@ public class BurialActivity extends BaseActivity {
     ImageView mIVSign;
     TextView mTVSubmit;
     Bitmap bitmapName;//签名
-    private BurialInfoModel buryInfo;//安葬信息
+    private BurialRecord burialRecord;//安葬信息
     private BurialDeadInfoModel deadInfo;//死者信息
     private BurialLocationModel tombPosition;//安葬墓位
     private String fileName = "signFile";
+    long buryRecordId = -1;
     long orderId = -1;
 
     @Override
@@ -59,6 +61,7 @@ public class BurialActivity extends BaseActivity {
         setContentView(R.layout.activity_burial);
         setTitle("安葬", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
+        buryRecordId = getIntent().getLongExtra(IntentName.INTENT_BURYRECORDID, -1);
         initView();
         getData();
 
@@ -98,30 +101,30 @@ public class BurialActivity extends BaseActivity {
             location.append(numName);
             mTRLocation.setData(location.toString());
         }
-        if (buryInfo != null) {
-            if (buryInfo.getBuryDatePre() != 0)
-                mTRBurialTime.setData(TimeUtils.formatTime(buryInfo.getBuryDatePre()));
+        if (burialRecord != null) {
+            if (burialRecord.getBuryDatePre() != 0)
+                mTRBurialTime.setData(TimeUtils.formatTime(burialRecord.getBuryDatePre()));
 
-            if (buryInfo.getBuryStatus() == 1) {
+            if (burialRecord.getBuryStatus() == 1) {
                 ToastUtils.showLongToast(BurialActivity.this, "此订单已被操作");
                 finish();
                 return;
             }
 
-            if (buryInfo.getBuryCardNo() != null) {
-                mTRBurialCardId.setData(buryInfo.getBuryCardNo());
+            if (burialRecord.getBuryCardNo() != null) {
+                mTRBurialCardId.setData(burialRecord.getBuryCardNo());
             }
 
-            if (buryInfo.getTombCertificateNo() != null)
-                mTRGraveId.setData(buryInfo.getTombCertificateNo() + "");
+            if (burialRecord.getBuryInfo().getTombCertificateNo() != null)
+                mTRGraveId.setData(burialRecord.getBuryInfo().getTombCertificateNo() + "");
 
             String name = new String();
-            if (buryInfo.getIsMultiBurial() == 0) {
-                if (buryInfo.getBuryOneName() != null)
-                    name = buryInfo.getBuryOneName();
+            if (burialRecord.getBuryInfo().getIsMultiBurial() == 0) {
+                if (burialRecord.getBuryName() != null)
+                    name = burialRecord.getBuryName();
             } else {
-                if (buryInfo.getBuryOneName() != null && buryInfo.getBuryTwoName() != null)
-                    name = buryInfo.getBuryOneName() + " | " + buryInfo.getBuryTwoName();
+                if (burialRecord.getBuryName() != null && burialRecord.getBuryName() != null)
+                    name = burialRecord.getBuryName();
             }
             mTRUserName.setData(name);
         }
@@ -168,7 +171,7 @@ public class BurialActivity extends BaseActivity {
      */
     private void getData() {
         HpBurialIdParams params = new HpBurialIdParams();
-        params.setContent(orderId);
+        params.setContent(buryRecordId);
         MHttpManagerFactory.getAccountManager().getBurialDetails(this, params, new HttpResponseHandler<HrGetBurialDetails>() {
             @Override
             public void onStart(Request request, int id) {
@@ -177,7 +180,7 @@ public class BurialActivity extends BaseActivity {
 
             @Override
             public void onSuccess(HrGetBurialDetails result) {
-                buryInfo = result.getBuryInfo();
+                burialRecord = result.getBuryRecord();
                 deadInfo = result.getDeadInfo();
                 tombPosition = result.getTombPosition();
                 initData();
@@ -240,6 +243,7 @@ public class BurialActivity extends BaseActivity {
 
     private void saveBurialData(final String fileUrl) {
         HpSaveBurialDataParams params = new HpSaveBurialDataParams();
+        params.setBuryRecordId(buryRecordId);
         params.setRemark(mETRemark.getData());
         params.setOrderId(orderId);
         params.setSignFileIds(fileUrl);

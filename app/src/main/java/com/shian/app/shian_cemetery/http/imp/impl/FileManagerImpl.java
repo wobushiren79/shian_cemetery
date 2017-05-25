@@ -7,9 +7,8 @@ import android.util.Log;
 
 
 import com.shian.app.shian_cemetery.activity.LoginActivity;
-import com.shian.app.shian_cemetery.base.BaseAppliction;
+import com.shian.app.shian_cemetery.base.BaseApplication;
 import com.shian.app.shian_cemetery.http.base.FileHttpResponseHandler;
-import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.FileManager;
 import com.shian.app.shian_cemetery.http.result.HrUploadFile;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
@@ -27,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
-import okhttp3.MediaType;
 import okhttp3.Request;
 
 public class FileManagerImpl implements FileManager {
@@ -124,7 +122,7 @@ public class FileManagerImpl implements FileManager {
                     }
                 } else if ("1009".equals(code)) {
                     if (context instanceof Activity) {
-                        BaseAppliction.getApplication().exitAPP();
+                        BaseApplication.getApplication().exitAPP();
                     }
                     Intent in = new Intent(context, LoginActivity.class);
                     context.startActivity(in);

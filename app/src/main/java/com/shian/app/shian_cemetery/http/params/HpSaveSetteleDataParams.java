@@ -8,7 +8,7 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 
 public class HpSaveSetteleDataParams extends BaseHttpParams {
     private long orderId;
-    private String buriedFileIds;
+    private String stonePicIds;
     private String stoneRemark;
 
     public long getOrderId() {
@@ -19,13 +19,15 @@ public class HpSaveSetteleDataParams extends BaseHttpParams {
         this.orderId = orderId;
     }
 
-    public String getBuriedFileIds() {
-        return buriedFileIds;
+    public String getStonePicIds() {
+        return stonePicIds;
     }
 
-    public void setBuriedFileIds(String buriedFileIds) {
-        this.buriedFileIds = buriedFileIds;
+    public void setStonePicIds(String stonePicIds) {
+        this.stonePicIds = stonePicIds;
     }
+
+
 
     public String getStoneRemark() {
         return stoneRemark;

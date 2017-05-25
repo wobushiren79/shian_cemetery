@@ -15,6 +15,7 @@ public class BurialInfoModel {
     private int isMultiBurial;//是否以后合葬(0否1是)
 
 
+
     /**
      * 墓穴证号
      */

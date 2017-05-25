@@ -47,13 +47,10 @@ public class FindFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_find, null, false);
         listDatas.clear();
         initView();
-
-
         return view;
     }
 
     private void initView() {
-
         mListView = (PullToRefreshListView) view.findViewById(R.id.pull_listview);
         mIVCollection = (ImageView) view.findViewById(R.id.iv_collection);
 
