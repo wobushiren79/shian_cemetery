@@ -4,10 +4,12 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
+import com.shian.app.shian_cemetery.appenum.BurialOrderStateEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.fragment.OrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
@@ -44,6 +46,7 @@ public class BurialActivity extends BaseActivity {
     SpinnerLayout mSPBurialOdds;
     SpinnerLayout mSPBurialState;
     EditLayout mETRemark;
+    LinearLayout mLLBurialodds;
 
     ImageView mIVSign;
     TextView mTVSubmit;
@@ -79,6 +82,7 @@ public class BurialActivity extends BaseActivity {
         mSPBurialState = (SpinnerLayout) findViewById(R.id.spinner_burialstate);
         mETRemark = (EditLayout) findViewById(R.id.et_remark);
         mTVSubmit = (TextView) findViewById(R.id.tv_submit);
+        mLLBurialodds = (LinearLayout) findViewById(R.id.ll_burialodds);
 
         mIVSign.setOnClickListener(onClickListener);
         mTVSubmit.setOnClickListener(onClickListener);
@@ -102,6 +106,13 @@ public class BurialActivity extends BaseActivity {
             mTRLocation.setData(location.toString());
         }
         if (burialRecord != null) {
+
+            if (burialRecord.getBuryType() == BurialOrderStateEnum.singleburial.getCode()) {
+                mLLBurialodds.setVisibility(View.VISIBLE);
+            } else {
+                mLLBurialodds.setVisibility(View.GONE);
+            }
+
             if (burialRecord.getBuryDatePre() != 0)
                 mTRBurialTime.setData(TimeUtils.formatTime(burialRecord.getBuryDatePre()));
 
@@ -247,8 +258,14 @@ public class BurialActivity extends BaseActivity {
         params.setRemark(mETRemark.getData());
         params.setOrderId(orderId);
         params.setSignFileIds(fileUrl);
-        params.setBuryRate(mSPBurialOdds.getData());
+
         params.setDetail(mSPBurialState.getData());
+
+        if (burialRecord.getBuryType() == BurialOrderStateEnum.singleburial.getCode()) {
+            params.setBuryRate(mSPBurialOdds.getData());
+        } else {
+
+        }
 //        if (mTRBurialCardId.getData().equals(""))
 //            params.setBuryCardNo(mTRBurialCardId.getData());
         MHttpManagerFactory.getAccountManager().saveBurialData(BurialActivity.this, params, new HttpResponseHandler<Object>() {

@@ -16,6 +16,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.burial.BurialActivity;
 import com.shian.app.shian_cemetery.activity.burial.SetteleActivity;
 import com.shian.app.shian_cemetery.appenum.AppRolePermition;
+import com.shian.app.shian_cemetery.appenum.BurialOrderStateEnum;
 import com.shian.app.shian_cemetery.appenum.BurialStateEnum;
 import com.shian.app.shian_cemetery.appenum.SetteleStateEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialDateBean;
@@ -219,14 +220,24 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         holder.tvLocation2.setText(data.getTombPosition().getParkName());
         holder.tvLocation3.setText(data.getTombPosition().getRow() + "排");
         holder.tvLocation4.setText(data.getTombPosition().getNum() + "号");
+
+        String burialOrderState;
+        if (data.getBuryRecord().getBuryType() == BurialOrderStateEnum.singleburial.getCode()) {
+            burialOrderState = BurialOrderStateEnum.singleburial.getName();
+            holder.tvBurial.setText(BurialOrderStateEnum.singleburial.getName());
+        } else {
+            burialOrderState = BurialOrderStateEnum.multiburial.getName();
+            holder.tvBurial.setText(BurialOrderStateEnum.multiburial.getName());
+        }
+
         //立碑显示判定
         if (data.getBuryRecord().getBuryInfo().getStoneStatus() == SetteleStateEnum.NOT.getCode()) {
-            holder.tvSetteleState.setText("(未安碑)");
+            holder.tvSetteleState.setText("(未安碑|" + burialOrderState + ")");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_4));
             holder.tvSettele.setVisibility(View.VISIBLE);
             holder.tvSettele.setTag(false);
         } else {
-            holder.tvSetteleState.setText("(已安碑)");
+            holder.tvSetteleState.setText("(已安碑|" + burialOrderState + ")");
             holder.tvSetteleState.setTextColor(context.getResources().getColor(R.color.zhy_text_color_6));
             holder.tvSettele.setVisibility(View.GONE);
             holder.tvSettele.setTag(true);

@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 public abstract class BaseCemeteryOrderList extends LinearLayout {
 
-
     public BaseCemeteryOrderList(Context context) {
         super(context);
     }
@@ -20,4 +19,5 @@ public abstract class BaseCemeteryOrderList extends LinearLayout {
     }
 
     public abstract void refesh();
+
 }

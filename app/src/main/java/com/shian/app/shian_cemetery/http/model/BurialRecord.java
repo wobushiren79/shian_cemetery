@@ -26,6 +26,7 @@ public class BurialRecord {
      * updatedAt : 1495423119000
      * updatedBy : 12
      */
+    private int buryType;//安葬状态  0安葬   1合葬
     private long buryRecordId;
     private int ashesCarry;
     private long ashesDate;
@@ -55,6 +56,15 @@ public class BurialRecord {
      * 客户签名文件id
      */
     private String signFileId;
+
+
+    public int getBuryType() {
+        return buryType;
+    }
+
+    public void setBuryType(int buryType) {
+        this.buryType = buryType;
+    }
 
     public long getBuryRecordId() {
         return buryRecordId;
@@ -232,14 +242,14 @@ public class BurialRecord {
         /**
          * 安葬率 1表示墓穴不再合墓 0.5表示会合墓
          */
-        private String  buryRate;
+        private String buryRate;
         private String detail;
         /**
          * 是否以后合葬(0否1是)
          */
         private int isMultiBurial;
         /**
-         *立碑状态 值：0未立碑、1已立碑
+         * 立碑状态 值：0未立碑、1已立碑
          */
         private int stoneStatus;
         /**
@@ -266,9 +276,9 @@ public class BurialRecord {
          */
         private long stoneDateReal;
         /**
-         *墓位ID
+         * 墓位ID
          */
-        private Long    tombPositionId;
+        private Long tombPositionId;
 
         public Long getTombPositionId() {
             return tombPositionId;

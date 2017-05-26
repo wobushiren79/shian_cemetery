@@ -81,19 +81,27 @@
                 android:layout_marginLeft="@dimen/dimen_32dp"
                 android:background="@color/zhy_line_7" />
 
-            <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
-                android:id="@+id/spinner_burialodds"
+            <LinearLayout
+                android:id="@+id/ll_burialodds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                DataReadAttr:hintContent="1表示墓穴不再合墓\n0.5表示墓穴会合墓"
-                DataReadAttr:isShowHint="true"
-                DataReadAttr:titleName="安葬率"></com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout>
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:layout_marginLeft="@dimen/dimen_32dp"
-                android:background="@color/zhy_line_7" />
+                <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
+                    android:id="@+id/spinner_burialodds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    DataReadAttr:hintContent="1表示墓穴不再合墓\n0.5表示墓穴会合墓"
+                    DataReadAttr:isShowHint="true"
+                    DataReadAttr:titleName="安葬率"></com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_7" />
+            </LinearLayout>
+
 
             <com.shian.app.shian_cemetery.view.dataview.burial.SpinnerLayout
                 android:id="@+id/spinner_burialstate"

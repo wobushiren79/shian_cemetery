@@ -13,7 +13,7 @@
         android:textSize="@dimen/dimen_24dp" />
 
     <TextView
-        android:layout_marginLeft="@dimen/dimen_75dp"
+        android:layout_marginLeft="@dimen/dimen_50dp"
         android:id="@+id/tv_content"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_weight="1"
@@ -24,7 +24,6 @@
     <TextView
         android:id="@+id/tv_top"
         android:text="【置顶】"
-        android:layout_marginRight="@dimen/dimen_32dp"
         android:textColor="@color/zhy_text_color_7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
