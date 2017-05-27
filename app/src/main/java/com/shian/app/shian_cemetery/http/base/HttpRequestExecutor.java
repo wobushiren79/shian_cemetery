@@ -301,6 +301,11 @@ public class HttpRequestExecutor {
      */
     private <T> void onErrorCallBack(HttpResponseHandler<T> response, String error,
                                      Context context) {
+        if (error.contains("503")) {
+            Intent intent = new Intent(context, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
         if (response != null && ((context instanceof Activity) && !((Activity) context)
                 .isFinishing()) && error != null) {
             if (showToast(context, error)) {
