@@ -68,6 +68,7 @@ public class SettingsActivity extends BaseActivity {
         mDialog.setTopButton("是", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 MHttpManagerFactory.getAccountManager().loginOut(
                         getBaseContext(), new HttpResponseHandler<Object>() {
 
@@ -79,11 +80,7 @@ public class SettingsActivity extends BaseActivity {
                             @Override
                             public void onSuccess(Object result) {
                                 // TODO Auto-generated method stub
-                                SharePerfrenceUtils.setShareAutoLogin(SettingsActivity.this, false);
-                                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+
                             }
 
 
@@ -93,7 +90,13 @@ public class SettingsActivity extends BaseActivity {
 
                             }
                         });
+                SharePerfrenceUtils.setShareAutoLogin(SettingsActivity.this, false);
+                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             }
+
         });
         mDialog.setBottomButton("否", new DialogInterface.OnClickListener() {
             @Override

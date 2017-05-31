@@ -26,6 +26,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     TextView mTVIsImportant;
     TextView mTVTitleName;
     TextView mTVMask;
+    TextView mTVMask2;
     Spinner mSpinner;
 
     private String dictCode;
@@ -58,6 +59,7 @@ public class SpinnerViewNormal extends BaseWriteView {
         mTVTitleName = (TextView) view.findViewById(R.id.tv_titlename);
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
         mTVMask = (TextView) view.findViewById(R.id.tv_mask);
+        mTVMask2 = (TextView) view.findViewById(R.id.tv_mask2);
     }
 
     private void initData() {
@@ -286,4 +288,13 @@ public class SpinnerViewNormal extends BaseWriteView {
         mSpinner.performClick();
     }
 
+    public void setDisable(Boolean isDisable) {
+        mTVMask2.setVisibility(VISIBLE);
+        mTVMask2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
 }

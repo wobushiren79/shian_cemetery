@@ -14,6 +14,7 @@
 
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_ordernum"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="app自编号"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>

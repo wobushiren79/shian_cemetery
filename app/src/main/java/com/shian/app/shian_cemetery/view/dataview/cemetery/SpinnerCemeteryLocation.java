@@ -2,16 +2,20 @@ package com.shian.app.shian_cemetery.view.dataview.cemetery;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.CemeteryLocationEnum;
+import com.shian.app.shian_cemetery.common.view.TouchImageView;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessContract;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.view.dialog.TipsDialog;
 
 import okhttp3.Request;
 
@@ -26,6 +30,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
     SpinnerViewNormal mWriteLocationArea;
     SpinnerViewNormal mWriteLocationRow;
     SpinnerViewNormal mWriteLocationNum;
+    ImageView mDetails;
 
     HrGetCemeteryStructure resultCemeteryName;
     HrGetCemeteryStructure resultLocationGarden;
@@ -34,7 +39,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
     HrGetCemeteryStructure resultLocationNum;
 
     CallBack callBack;
-
+    String remark = null;
 
     public SpinnerCemeteryLocation(Context context) {
         this(context, null);
@@ -57,6 +62,9 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
         mWriteLocationArea = (SpinnerViewNormal) view.findViewById(R.id.write_location_area);
         mWriteLocationRow = (SpinnerViewNormal) view.findViewById(R.id.write_location_row);
         mWriteLocationNum = (SpinnerViewNormal) view.findViewById(R.id.write_location_num);
+        mDetails = (ImageView) view.findViewById(R.id.iv_details);
+        mDetails.setOnClickListener(onDetailsCheck);
+
     }
 
     private void initData() {
@@ -72,9 +80,22 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
         mWriteLocationNum.setSpinnerCallBack(spinnerCallBack);
     }
 
+
+    OnClickListener onDetailsCheck = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (remark == null || remark.equals("")) {
+                ToastUtils.showShortToast(getContext(), "无墓位详情");
+                return;
+            }
+            TipsDialog dialog = new TipsDialog(getContext());
+            dialog.setTop("墓位详情");
+            dialog.setTitle(remark);
+            dialog.show();
+        }
+    };
+
     SpinnerViewNormal.SpinnerCallBack spinnerCallBack = new SpinnerViewNormal.SpinnerCallBack() {
-
-
         @Override
         public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
             if (viewNormal.hasData) {
@@ -85,6 +106,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
             if (viewNormal == mWriteLocationNum) {
                 if (callBack != null)
                     callBack.changePrice(resultLocationNum.getItems().get(position).getTombSalePrice() + "");
+                remark = resultLocationNum.getItems().get(position).getRemark();
                 return;
             }
 
@@ -319,5 +341,13 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
 
     public interface CallBack {
         void changePrice(String price);
+    }
+
+    public void setDisable(boolean isDisable) {
+        mWriteCemeteryName.setDisable(isDisable);
+        mWriteLocationGarden.setDisable(isDisable);
+        mWriteLocationArea.setDisable(isDisable);
+        mWriteLocationRow.setDisable(isDisable);
+        mWriteLocationNum.setDisable(isDisable);
     }
 }

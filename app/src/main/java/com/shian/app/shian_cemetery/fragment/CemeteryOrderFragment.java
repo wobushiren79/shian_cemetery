@@ -71,7 +71,6 @@ public class CemeteryOrderFragment extends BaseFragment {
         //确认洽谈权限
         if (CheckUtils.checkPermition(AppRolePermition.TALKER.getCode(), AppData.UserLoginResult.getPermitionCodes()))
             tabData.add(CemeteryTabEnum.TALKORDER);
-
     }
 
     @Override
@@ -87,7 +86,6 @@ public class CemeteryOrderFragment extends BaseFragment {
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mPopupButton = (PopupButton) view.findViewById(R.id.popupbutton);
         mTitleTabChange.setCallBack(tabCallBack);
-
     }
 
     /**
