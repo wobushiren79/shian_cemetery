@@ -9,6 +9,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.adapter.baseadapter.FindAdapter;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.FindEnum;
+import com.shian.app.shian_cemetery.appenum.SystemTypeEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -38,7 +39,7 @@ public class MyCollectionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_collection);
 
-        setTitle("我的收藏",BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+        setTitle("我的收藏", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         initView();
         // 开始就呈现下拉状态
         new Handler().postDelayed(new Runnable() {
@@ -80,6 +81,7 @@ public class MyCollectionActivity extends BaseActivity {
         params.setUserid(AppData.UserLoginResult.getUserId());
         params.setNumber(number);
         params.setPagerNumber(pagerNumber);
+        params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().getSiftListData(MyCollectionActivity.this, params, new HttpResponseHandler<PHPHrGetSiftListData>() {
 
 

@@ -12,6 +12,15 @@ public class HpFindSaveParams extends BaseHttpParams {
     private int type;
     private long userid;
     private int siftid;
+    private int userType;
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
 
     public int getType() {
         return type;

@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.appenum.SystemTypeEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -198,6 +199,7 @@ public class WebActivity extends BaseActivity {
         params.setSiftid(siftID);
         params.setType(type);
         params.setUserid(AppData.UserLoginResult.getUserId());
+        params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(WebActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart(Request request, int id) {

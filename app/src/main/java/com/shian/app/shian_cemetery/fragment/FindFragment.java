@@ -14,6 +14,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.php.MyCollectionActivity;
 import com.shian.app.shian_cemetery.adapter.baseadapter.FindAdapter;
 import com.shian.app.shian_cemetery.appenum.FindEnum;
+import com.shian.app.shian_cemetery.appenum.SystemTypeEnum;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -109,6 +110,7 @@ public class FindFragment extends BaseFragment {
         params.setUserid(AppData.UserLoginResult.getUserId());
         params.setNumber(number);
         params.setPagerNumber(pagerNumber);
+        params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().getSiftListData(getContext(), params, new HttpResponseHandler<PHPHrGetSiftListData>() {
 
 

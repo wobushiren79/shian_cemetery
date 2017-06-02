@@ -10,6 +10,15 @@ public class HpIdeaFeedBackSaveParams extends BaseHttpParams {
     private String user;
     private String tel;
     private String content;
+    private int userType;
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
 
     public String getUser() {
         return user;

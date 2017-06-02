@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.WebActivity;
+import com.shian.app.shian_cemetery.appenum.SystemTypeEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.phpmodel.SiftListData;
@@ -143,6 +144,7 @@ public class FindAdapter extends BaseAdapter {
         params.setType(type);
         params.setUserid(AppData.UserLoginResult.getUserId());
         params.setSiftid(siftID);
+        params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(context, params, new HttpResponseHandler<Object>() {
 
 

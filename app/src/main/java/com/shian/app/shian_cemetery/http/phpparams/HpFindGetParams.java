@@ -11,6 +11,15 @@ public class HpFindGetParams extends BaseHttpParams {
     private long userid;
     private int number;
     private int pagerNumber;
+    private int userType;
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
 
     public int getType() {
         return type;

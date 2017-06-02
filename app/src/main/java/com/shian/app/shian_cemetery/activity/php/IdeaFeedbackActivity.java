@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
+import com.shian.app.shian_cemetery.appenum.SystemTypeEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -32,7 +33,7 @@ public class IdeaFeedbackActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_feedback);
         UserInfo = getIntent().getStringArrayExtra(IntentName.INTENT_FRAGMENT_USERINFO);
-        setTitle("意见反馈",BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+        setTitle("意见反馈", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         initView();
     }
 
@@ -90,6 +91,7 @@ public class IdeaFeedbackActivity extends BaseActivity {
         params.setUser(UserInfo[0]);
         params.setTel(UserInfo[1]);
         params.setContent(mEditText.getText().toString());
+        params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().setOpinion(IdeaFeedbackActivity.this, params, new HttpResponseHandler<Object>() {
 
 
