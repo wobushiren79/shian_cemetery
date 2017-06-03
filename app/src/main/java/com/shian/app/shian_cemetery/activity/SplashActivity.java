@@ -10,52 +10,57 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Request;
 
 public class SplashActivity extends BaseActivity {
 
     private int SLEEPTIME = 3000;//屏幕休眠时间
+    private Timer timerIntent;//定时跳转
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        sleepActivity();
-
+        initData();
     }
 
     /**
-     * 休眠3秒
+     * 休眠2秒
      */
-    private void sleepActivity() {
-        new Thread() {
+    private void sleepActivity(final int type) {
+        timerIntent = new Timer();
+        timerIntent.schedule(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(SLEEPTIME);
-                    initData();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                jumpActivity(type);
             }
-        }.start();
+        }, SLEEPTIME);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timerIntent != null)
+            timerIntent.cancel();
     }
 
     /**
      * 初始化数据
      */
     private void initData() {
-        //自定登陆
+        //自动登陆
         SharePerfrenceUtils.ShareLogin shareLogin = SharePerfrenceUtils.getLoginShare(SplashActivity.this);
         if (shareLogin.isAutoLogin()) {
             login(shareLogin.getUsername(), shareLogin.getPassword(), shareLogin.getOrderUser());
         } else {
-            jumpLogin();
+            sleepActivity(1);
         }
     }
 
@@ -77,10 +82,9 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onSuccess(HrLoginResult result) {
-                ToastUtils.showShortToast(getBaseContext(), "登陆成功");
                 AppData.UserLoginResult = result;
                 SharePerfrenceUtils.setSessionShare(SplashActivity.this, result.getSessionId());
-                jumpMain();
+                sleepActivity(0);
             }
 
 
@@ -88,26 +92,24 @@ public class SplashActivity extends BaseActivity {
             public void onError(String message) {
                 ToastUtils.showShortToast(getBaseContext(), "登陆失败");
                 SharePerfrenceUtils.setLoginShare(SplashActivity.this, username, password, true, false, orderUser);
-                jumpLogin();
+                jumpActivity(1);
             }
         });
     }
 
     /**
-     * 跳转登陆界面
+     * 跳转界面
      */
-    private void jumpLogin() {
-        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+    private void jumpActivity(int type) {
+        Intent intent = new Intent(SplashActivity.this, LoginAdvertActivity.class);
+        if (type == 0) {
+            intent.putExtra(IntentName.INTENT_ADEVERT, LoginAdvertActivity.MAIN);
+        } else {
+            intent.putExtra(IntentName.INTENT_ADEVERT, LoginAdvertActivity.LOGIN);
+        }
         startActivity(intent);
         finish();
     }
 
-    /**
-     * 跳转主界面
-     */
-    private void jumpMain() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 }

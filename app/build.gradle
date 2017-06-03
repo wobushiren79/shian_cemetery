@@ -45,28 +45,28 @@ dependencies {
     compile project(':ImageSelector')
     compile project(':PullToRefresh')
     compile project(':dateTimer')
-    compile 'com.android.support:appcompat-v7:25.2.0'
     //OKhttp
     //okhttp
+    //gson
+    //imageloader
+    //圆形头像
+    //侧滑item
+    //jackson
+    //图片下载缓存
+    //滑动开关
+    //rxjava
+    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    //gson
     compile 'com.google.code.gson:gson:2.6.2'
-    //imageloader
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
-    //圆形头像
     compile 'com.makeramen:roundedimageview:2.2.1'
-    //侧滑item
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'com.android.support:recyclerview-v7:25.2.0'
-    //jackson
     compile 'org.codehaus.jackson:jackson-core-asl:1.9.11'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
-    //图片下载缓存
     compile 'com.squareup.picasso:picasso:2.5.2'
-    //滑动开关
     compile 'com.github.zcweng:switch-button:0.0.2@aar'
-    //rxjava
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

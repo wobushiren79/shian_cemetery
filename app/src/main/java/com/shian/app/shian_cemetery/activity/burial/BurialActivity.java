@@ -208,12 +208,13 @@ public class BurialActivity extends BaseActivity {
      * 保存数据
      */
     private void saveData() {
+        if (mTRBurialCardId.getData() == null || mTRBurialCardId.getData().equals("")) {
+            ToastUtils.showShortToast(BurialActivity.this, "没有安葬卡编号，请联系财务");
+            return;
+        }
         if (bitmapName == null) {
             ToastUtils.showShortToast(BurialActivity.this, "还没有签名");
             return;
-        }
-        if (mTRBurialCardId.getData().equals("")) {
-            ToastUtils.showShortToast(BurialActivity.this, "没有安葬卡编号，请联系财务");
         }
         String path = Utils.savePic(bitmapName);
         uploadFile(mIVSign, fileName, path);

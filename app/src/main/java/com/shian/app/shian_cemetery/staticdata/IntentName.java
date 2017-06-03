@@ -22,4 +22,6 @@ public class IntentName {
     public static String INTENT_LOCATION_NUMVIEW="INTENT_LOCATION_NUMVIEW";
 
     public static String INTENT_URL="INTENT_URL";//URL
+
+    public static String INTENT_ADEVERT="INTENT_ADEVERT";//廣告跳轉
 }
