@@ -126,7 +126,7 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
         params.setDeadmanOneSex(mUserSex1.getData());
         params.setDeadmanTwoSex(mUserSex2.getData());
         params.setDeadmanOneState(mUserState1.getData());
-        params.setDeadmanTwoState(mUserState1.getData());
+        params.setDeadmanTwoState(mUserState2.getData());
         params.setDeadmanOneCardId(mUserCardId1.getData());
         params.setDeadmanTwoCardId(mUserCardId2.getData());
         params.setDeadmanOneDeadTime(mUserDeadTime1.getData());

@@ -170,8 +170,7 @@ public class BaseActivity extends FragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_PHOTO) {
             if (resultCode == RESULT_OK) {
-                ArrayList<String> result = data
-                        .getStringArrayListExtra(ImageSelectorActivity.REQUEST_OUTPUT);
+                ArrayList<String> result = data.getStringArrayListExtra(ImageSelectorActivity.REQUEST_OUTPUT);
                 if (mOnPhotoPickerListener != null) {
                     mOnPhotoPickerListener.onPhoto(result);
                 }
