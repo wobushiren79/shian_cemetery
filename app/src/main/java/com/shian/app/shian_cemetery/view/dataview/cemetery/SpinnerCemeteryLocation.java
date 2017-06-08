@@ -143,6 +143,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
         public void check(SpinnerViewNormal view) {
             long locationId = 0;
             long parkIdTemp = 0;
+            String rowTemp;
             if (view == mWriteCemeteryName) {
                 getDataInfo(CemeteryLocationEnum.CEMETERYNAME.getCode(), locationId, parkIdTemp, mWriteCemeteryName);
             } else if (view == mWriteLocationGarden) {
@@ -173,11 +174,10 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
                 }
                 locationId = resultLocationRow.getItems().get(mWriteLocationRow.getSelectPosition()).getId();
                 parkIdTemp = resultLocationArea.getItems().get(mWriteLocationArea.getSelectPosition()).getId();
-                getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), locationId, parkIdTemp, mWriteLocationNum);
+                rowTemp = resultLocationRow.getItems().get(mWriteLocationRow.getSelectPosition()).getName();
+                getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), locationId, parkIdTemp, rowTemp, mWriteLocationNum);
             }
         }
-
-
     };
 
     /**
@@ -189,12 +189,17 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
      * @param spinnerViewNormal
      */
     private void getDataInfo(int itemType, long locationId, long parkIdTemp, final SpinnerViewNormal spinnerViewNormal) {
+        getDataInfo(itemType, locationId, parkIdTemp, null, spinnerViewNormal);
+    }
+
+    private void getDataInfo(int itemType, long locationId, long parkIdTemp, String rowTemp, final SpinnerViewNormal spinnerViewNormal) {
         HpCemeteryStructureParams params = new HpCemeteryStructureParams();
         params.setItemId(locationId);
         params.setItemType(itemType);
         //查号的时候传区ID
         if (itemType == CemeteryLocationEnum.LOCATIONNUM.getCode()) {
             params.setParkIdTemp(parkIdTemp);
+            params.setRowTemp(rowTemp);
         }
         MHttpManagerFactory.getAccountManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
             @Override

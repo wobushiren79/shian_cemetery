@@ -221,7 +221,8 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 CemeteryBeSpeakStateEnum.accepted,
                 CemeteryBeSpeakStateEnum.talkFail,
                 CemeteryBeSpeakStateEnum.talkSuccess,
-                CemeteryBeSpeakStateEnum.serviceOver
+                CemeteryBeSpeakStateEnum.serviceOver,
+                CemeteryBeSpeakStateEnum.ready
         };
         for (CemeteryBeSpeakStateEnum state : beSpeakState) {
             if (data.getBespeakStatus() == state.getCode()) {
