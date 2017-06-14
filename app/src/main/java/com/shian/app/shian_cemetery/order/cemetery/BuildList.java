@@ -119,7 +119,7 @@ public class BuildList extends BaseCemeteryOrderList {
                     listData.addAll(result.getList());
                 } else {
                     if (result.getPages() < page) {
-                        page = result.getPages();
+                        page--;
                     } else {
                         listData.addAll(result.getList());
                     }

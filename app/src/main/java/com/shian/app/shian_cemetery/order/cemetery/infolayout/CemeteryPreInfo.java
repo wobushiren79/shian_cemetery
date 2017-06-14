@@ -122,7 +122,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         long locationAreaId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONAREA.getCode());
         long locationRowId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONROW.getCode());
         long locationNumId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONNUM.getCode());
-
+        String locationRowName = mWriteLocationDetails.getRowName();
         if (cemeteryNameId == 0) {
             ToastUtils.showShortToast(getContext(), "还没有选择公墓");
             return;
@@ -135,7 +135,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
             ToastUtils.showShortToast(getContext(), "还没有选择区");
             return;
         }
-        if (locationRowId == 0) {
+        if (locationRowName == null) {
             ToastUtils.showShortToast(getContext(), "还没有选择排");
             return;
         }
@@ -155,7 +155,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         params.setCemeteryId(cemeteryNameId);
         params.setTombId(locationGardenId);
         params.setParkId(locationAreaId);
-        params.setRowNumber(locationRowId);
+        params.setRowNumber(locationRowName);
         params.setTombPositionId(locationNumId);
 
         params.setOrderNum(mWriteOrderNum.getData());

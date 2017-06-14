@@ -7,6 +7,7 @@ import com.shian.app.shian_cemetery.http.base.HttpManager;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
 import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
+import com.shian.app.shian_cemetery.http.params.HpCarBuildOrder;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
@@ -200,4 +201,15 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler);
+
+
+    /**
+     * 保存派车单信息
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void saveCarBuildData(Context context, HpCarBuildOrder params,HttpResponseHandler<Object> handler);
+
+
 }

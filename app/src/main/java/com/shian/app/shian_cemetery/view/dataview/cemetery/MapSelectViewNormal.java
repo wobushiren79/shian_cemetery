@@ -42,6 +42,9 @@ public class MapSelectViewNormal extends BaseWriteView {
     private int numView = 0;
     public static String THE_ACTION = "MapLocationData";
 
+    private String longitude = "";
+    private String latitude = "";
+
     public MapSelectViewNormal(Context context) {
         this(context, null);
     }
@@ -97,6 +100,14 @@ public class MapSelectViewNormal extends BaseWriteView {
         return mAutoTextView.getText().toString();
     }
 
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
     public void setData(String location) {
         mAutoTextView.setText(location);
     }
@@ -116,7 +127,7 @@ public class MapSelectViewNormal extends BaseWriteView {
     private void mapCheck() {
         boolean isPermission = CheckUtils.getPermissionToReadUserContacts
                 (getContext(),
-                        new String[]{ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE},
+                        new String[]{ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE},
                         "获取地址需要权限",
                         BaseActivity.READ_LOCATION);
         if (isPermission) {
@@ -132,6 +143,8 @@ public class MapSelectViewNormal extends BaseWriteView {
             int num = intent.getIntExtra(IntentName.INTENT_LOCATION_NUMVIEW, 0);
             if (num == numView) {
                 String location = intent.getStringExtra("location");
+                longitude = intent.getStringExtra("longitude");
+                latitude = intent.getStringExtra("latitude");
                 mAutoTextView.setText(location);
             }
         }

@@ -1,10 +1,12 @@
 package com.shian.app.shian_cemetery.http.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/1/18.
  */
 
-public class CemeteryOrderModel {
+public class CemeteryOrderModel implements Serializable {
     private long bespeakId;//	咨询ID
     private long orderId;//订单ID
     private Integer bespeakStatus;//咨询状态:1：未接单，2：已接单，3：洽谈失败（未购墓），4：洽谈成功（购墓），5，服务结束

@@ -290,7 +290,7 @@ public class BurialListLayout extends LinearLayout {
                     mBurialListPullAdapter.setData(result);
                 } else {
                     if (result.getPages() < pageNum) {
-                        pageNum = result.getPageNum();
+                        pageNum--;
                     } else {
                         mBurialListPullAdapter.addData(result);
                     }

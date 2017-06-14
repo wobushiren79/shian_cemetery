@@ -2,6 +2,7 @@ package com.shian.app.shian_cemetery.adapter.baseadapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.activity.car.CarOrderActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.InfoDetailsActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkFailActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkSuccessActivity;
@@ -83,6 +85,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
                     holder.tvSource = (TextView) convertView.findViewById(R.id.tv_source);
                     holder.tvSalesConsultant = (TextView) convertView.findViewById(R.id.tv_cemeteryconsultant);
+                    holder.tvCar = (TextView) convertView.findViewById(R.id.tv_car);
                     break;
                 case 1:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_2, null);
@@ -99,6 +102,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.tvState = (TextView) convertView.findViewById(R.id.tv_state);
                     holder.tvSource = (TextView) convertView.findViewById(R.id.tv_source);
                     holder.tvSalesConsultant = (TextView) convertView.findViewById(R.id.tv_cemeteryconsultant);
+                    holder.tvCar = (TextView) convertView.findViewById(R.id.tv_car);
                     break;
                 case 2:
                     convertView = LayoutInflater.from(context).inflate(R.layout.item_cemetery_talk_list_3, null);
@@ -112,6 +116,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                     holder.ivPhone = (ImageView) convertView.findViewById(R.id.iv_phone);
                     holder.tvSource = (TextView) convertView.findViewById(R.id.tv_source);
                     holder.tvSalesConsultant = (TextView) convertView.findViewById(R.id.tv_cemeteryconsultant);
+                    holder.tvCar = (TextView) convertView.findViewById(R.id.tv_car);
                     break;
             }
 
@@ -174,6 +179,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvAccept.setOnClickListener(onClickListener);
                 holder.tvReject.setOnClickListener(onClickListener);
                 makePhone(holder.ivPhone, data);
+                takeCar(holder.tvCar, data);
                 break;
 
             case 1:
@@ -189,6 +195,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvTalkSuccess.setOnClickListener(onClickListener);
                 holder.tvTalkFail.setOnClickListener(onClickListener);
                 makePhone(holder.ivPhone, data);
+                takeCar(holder.tvCar, data);
                 break;
             case 2:
                 holder.tvAgentManName.setText(data.getAgentmanName());
@@ -200,6 +207,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
                 holder.tvSalesConsultant.setText(data.getSalesConsultant());
                 holder.tvDetails.setOnClickListener(onClickListener);
                 makePhone(holder.ivPhone, data);
+                takeCar(holder.tvCar, data);
                 break;
         }
         //-------------------------------------------------------------------------------------------
@@ -232,6 +240,18 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         }
     }
 
+    private void takeCar(TextView tvCar, final CemeteryOrderModel data) {
+        tvCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CarOrderActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentName.INTENT_DATA, data);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+    }
 
     @Override
     public int getViewTypeCount() {
@@ -276,7 +296,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
         TextView tvDeadManName;
         TextView tvCemeteryName;
         TextView tvLocationName;
-
+        TextView tvCar;
         ImageView ivPhone;
 
         TextView tvAccept;

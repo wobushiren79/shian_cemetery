@@ -206,7 +206,12 @@
                 android:layout_width="@dimen/dimen_132dp"
                 android:layout_height="@dimen/dimen_66dp"
                 android:text="订单详情" />
-
+            <TextView
+                android:id="@+id/tv_car"
+                style="@style/ListItemButton_1"
+                android:layout_width="@dimen/dimen_132dp"
+                android:layout_height="@dimen/dimen_66dp"
+                android:text="申请用车" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

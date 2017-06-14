@@ -8,6 +8,7 @@ import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.MAccountManager;
 import com.shian.app.shian_cemetery.http.params.HpBurialDataListParams;
 import com.shian.app.shian_cemetery.http.params.HpBurialIdParams;
+import com.shian.app.shian_cemetery.http.params.HpCarBuildOrder;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryIdParams;
 import com.shian.app.shian_cemetery.http.params.HpCemeteryStructureParams;
 import com.shian.app.shian_cemetery.http.params.HpCetemeryAcceptParams;
@@ -176,6 +177,12 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/bespeak/build/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "cars/apply/using", Object.class, params,
                 handler);
     }
 
