@@ -35,6 +35,16 @@ public class CemeteryOrderModel implements Serializable {
 
     private String salesConsultant;//购墓顾问
 
+    private int isSentCar;//0未申请过派车 1申请过派车
+
+    public int getIsSentCar() {
+        return isSentCar;
+    }
+
+    public void setIsSentCar(int isSentCar) {
+        this.isSentCar = isSentCar;
+    }
+
     public String getSourceClassText() {
         return sourceClassText;
     }

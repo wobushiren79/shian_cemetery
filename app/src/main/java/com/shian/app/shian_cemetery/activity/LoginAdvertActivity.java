@@ -114,11 +114,13 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v == btJump) {
-            timerIntent.cancel();
+            if (timerIntent != null)
+                timerIntent.cancel();
             isForceOver = true;
             checkAndJump();
         } else if (v == ivContent) {
-            timerIntent.cancel();
+            if (timerIntent != null)
+                timerIntent.cancel();
             isForceOver = true;
             checkAndJump();
             Intent intent = new Intent(this, WebActivity.class);

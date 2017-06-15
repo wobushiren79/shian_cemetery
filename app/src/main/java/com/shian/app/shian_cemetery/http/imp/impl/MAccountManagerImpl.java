@@ -160,30 +160,28 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void getBurialDetails(Context context, HpBurialIdParams params, HttpResponseHandler<HrGetBurialDetails> handler) {
         excutor.requestGet(context, "marketing/bury/getOrderDetail", HrGetBurialDetails.class, params,
-                handler,true);
+                handler, true);
     }
 
     @Override
     public void saveSetteleData(Context context, HpSaveSetteleDataParams params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "marketing/bury/updateBuriedPic", Object.class, params,
-                handler,true);
+                handler, true);
     }
 
     @Override
     public void saveBurialData(Context context, HpSaveBurialDataParams params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context,"marketing/bury/updateSignFile", Object.class, params,handler,true);
+        excutor.requestPost(context, "marketing/bury/updateSignFile", Object.class, params, handler, true);
     }
 
     @Override
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "marketing/bespeak/build/save", Object.class, params,
-                handler);
+        excutor.requestPost(context, "marketing/bespeak/build/save", Object.class, params, handler, true);
     }
 
     @Override
     public void saveCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cars/apply/using", Object.class, params,
-                handler);
+        excutor.requestPost(context, "cars/apply/using", Object.class, params, handler, true);
     }
 
 

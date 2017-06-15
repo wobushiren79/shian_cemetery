@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
+import com.shian.app.shian_cemetery.appenum.CarBusiTypeEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
@@ -115,7 +116,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
             ToastUtils.showShortToast(this, "用车人电话不能为空");
             return;
         }
-        if (CheckUtils.isPhoneNumber(mUsePersonPhone.getData())) {
+        if (!CheckUtils.isPhoneNumber(mUsePersonPhone.getData())) {
             ToastUtils.showShortToast(this, "用车人电话格式错误");
             return;
         }
@@ -137,7 +138,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         }
 
         HpCarBuildOrder params = new HpCarBuildOrder();
-        params.setBusiType("cemetery_bespeak_id");
+        params.setBusiType(CarBusiTypeEnum.cemetery_bespeakid.getText());
         params.setBusiId(data.getBespeakId());
         params.setProposerId(AppData.UserLoginResult.getUserId());
         params.setProposerName(mSubmitPerson.getData());
@@ -147,8 +148,13 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         params.setPurpose(mUseReason.getData());
         params.setSeats(mPersonNum.getData());
         params.setSource(mGetLocation.getData());
+        params.setSourceLongitude(mGetLocation.getLongitude());
+        params.setSourceLatitude(mGetLocation.getLatitude());
         params.setTarget(mArriveLocation.getData());
-
+        params.setTargetLongitude(mArriveLocation.getLongitude());
+        params.setTargetLatitude(mArriveLocation.getLatitude());
+        params.setAppointmentTime(mUseTime.getData()+":00");
+        params.setRemark(mRemark.getData());
         MHttpManagerFactory.getAccountManager().saveCarBuildData(this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart(Request request, int id) {
@@ -157,12 +163,13 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onSuccess(Object result) {
-
+                ToastUtils.showShortToast(CarOrderActivity.this, "申请成功");
+                finish();
             }
 
             @Override
             public void onError(String message) {
-
+                ToastUtils.showShortToast(CarOrderActivity.this, "申请失败");
             }
         });
     }

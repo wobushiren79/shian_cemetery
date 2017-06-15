@@ -241,16 +241,27 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
     }
 
     private void takeCar(TextView tvCar, final CemeteryOrderModel data) {
-        tvCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, CarOrderActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentName.INTENT_DATA, data);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
+        if (data.getIsSentCar() == 0) {
+            tvCar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, CarOrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(IntentName.INTENT_DATA, data);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
+        } else {
+            tvCar.setText("用车记录");
+            tvCar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+
     }
 
     @Override
