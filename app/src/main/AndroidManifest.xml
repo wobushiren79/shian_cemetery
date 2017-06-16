@@ -152,6 +152,11 @@
         <activity
             android:name=".activity.car.CarOrderActivity"
             android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.car.CarOrderDetailsActivity"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
 
         <service android:name=".service.UpDataService" />
@@ -159,7 +164,6 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-
 
     </application>
 

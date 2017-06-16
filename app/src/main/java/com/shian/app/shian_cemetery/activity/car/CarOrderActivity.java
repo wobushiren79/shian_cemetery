@@ -51,6 +51,10 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
     private void initData() {
         data = (CemeteryOrderModel) getIntent().getSerializableExtra(IntentName.INTENT_DATA);
         setTitle("申请用车", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
+        if (data != null) {
+            mUsePerson.setData(data.getCustomerName());
+            mUsePerson.setData(data.getCustomerMobile());
+        }
     }
 
     private void initView() {
@@ -74,6 +78,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
 
         mGetLocation.setNumView(0);
         mArriveLocation.setNumView(1);
+
     }
 
 
@@ -153,7 +158,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         params.setTarget(mArriveLocation.getData());
         params.setTargetLongitude(mArriveLocation.getLongitude());
         params.setTargetLatitude(mArriveLocation.getLatitude());
-        params.setAppointmentTime(mUseTime.getData()+":00");
+        params.setAppointmentTime(mUseTime.getData() + ":00");
         params.setRemark(mRemark.getData());
         MHttpManagerFactory.getAccountManager().saveCarBuildData(this, params, new HttpResponseHandler<Object>() {
             @Override

@@ -24,6 +24,7 @@ import com.shian.app.shian_cemetery.http.params.HpSaveSetteleDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialNumber;
+import com.shian.app.shian_cemetery.http.result.HrGetCarDetails;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessContract;
@@ -211,5 +212,11 @@ public interface MAccountManager extends HttpManager {
      */
     void saveCarBuildData(Context context, HpCarBuildOrder params,HttpResponseHandler<Object> handler);
 
-
+    /**
+     * 获取订单详情
+     * @param context
+     * @param params
+     * @param handler
+     */
+   void getCarBuildData(Context context,HpCarBuildOrder params,HttpResponseHandler<HrGetCarDetails> handler);
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.activity.car.CarOrderActivity;
+import com.shian.app.shian_cemetery.activity.car.CarOrderDetailsActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.InfoDetailsActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkFailActivity;
 import com.shian.app.shian_cemetery.activity.cemetery.TalkSuccessActivity;
@@ -242,22 +243,30 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
 
     private void takeCar(TextView tvCar, final CemeteryOrderModel data) {
         if (data.getIsSentCar() == 0) {
-            tvCar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, CarOrderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(IntentName.INTENT_DATA, data);
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }
-            });
+            tvCar.setVisibility(View.GONE);
+//            tvCar.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, CarOrderActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable(IntentName.INTENT_DATA, data);
+//                    intent.putExtras(bundle);
+//                    context.startActivity(intent);
+//                    if (callBack != null)
+//                        callBack.refresh();
+//                }
+//            });
         } else {
+            tvCar.setVisibility(View.VISIBLE);
             tvCar.setText("用车记录");
             tvCar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(context, CarOrderDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(IntentName.INTENT_DATA, data);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
                 }
             });
         }

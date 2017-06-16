@@ -25,6 +25,7 @@ import com.shian.app.shian_cemetery.http.params.HpSaveSetteleDataParams;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialDetails;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialListData;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialNumber;
+import com.shian.app.shian_cemetery.http.result.HrGetCarDetails;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryStructure;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkData;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryTalkSuccessContract;
@@ -182,6 +183,11 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void saveCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "cars/apply/using", Object.class, params, handler, true);
+    }
+
+    @Override
+    public void getCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<HrGetCarDetails> handler) {
+        excutor.requestPost(context, "cars/apply/handle/info", HrGetCarDetails.class, params, handler, true);
     }
 
 
