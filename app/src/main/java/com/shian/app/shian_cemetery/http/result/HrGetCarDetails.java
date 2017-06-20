@@ -157,6 +157,18 @@ public class HrGetCarDetails {
          * 申请人电话
          */
         private String proposerMobile;
+        /**
+         * 取消订单原因
+         */
+        private String cancelReason;
+
+        public String getCancelReason() {
+            return cancelReason;
+        }
+
+        public void setCancelReason(String cancelReason) {
+            this.cancelReason = cancelReason;
+        }
 
         public String getOrderNo() {
             return orderNo;

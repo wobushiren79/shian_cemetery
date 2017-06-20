@@ -101,5 +101,7 @@ public class EditTextViewNormal extends BaseWriteView {
         mETInput.setEnabled(isD);
     }
 
-
+    public void setTextColor(int color) {
+        mETInput.setTextColor(color);
+    }
 }
