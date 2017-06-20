@@ -85,8 +85,11 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
 
 
     private void initMap() {
+        longitude = AppData.LOCAL_latitude + "";
+        latitude = AppData.LOCAL_longitude + "";
 
         setCenter(AppData.LOCAL_latitude, AppData.LOCAL_longitude);
+
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(poiListener);
 
