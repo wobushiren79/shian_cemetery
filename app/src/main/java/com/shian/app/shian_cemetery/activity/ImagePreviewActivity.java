@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shian.app.shian_cemetery.R;
+import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.common.view.PinchImageView;
 import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
@@ -44,7 +45,6 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnLongCli
                         mImageView.setImageBitmap(bmp);
                     }
 //                    mImageView.setImageBitmap(bitmap);
-
                     mImageView.setVisibility(View.VISIBLE);
                     break;
                 case 1:
@@ -70,7 +70,7 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnLongCli
 //        mImageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mFLContent.setBackgroundColor(getResources().getColor(R.color.main_blackground));
         setContentView(mImageView);
-        setTitle("查看图片");
+        setTitle("查看图片", BaseTitleEnum.BACKNORMALTITLE.getTitleType());
         url = getIntent().getStringExtra("url");
         mHandlerThread = new HandlerThread(getClass().getSimpleName());
         mHandlerThread.start();
