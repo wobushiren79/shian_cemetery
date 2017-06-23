@@ -15,6 +15,7 @@ import com.shian.app.shian_cemetery.http.base.BaseHttpParams;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.result.HrGetBurialNumber;
 import com.shian.app.shian_cemetery.http.result.HrUserInfo;
+import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.TimeUtils;
 
@@ -58,6 +59,10 @@ public class BurialInfoLayout extends LinearLayout {
         mTVMonthReadyNum = (TextView) view.findViewById(R.id.tv_month_ready_num);
         mLLNumber = (LinearLayout) view.findViewById(R.id.ll_burial_num);
 
+        if (AppData.UserLoginResult.getUserData() != null) {
+            mTVName.setText(AppData.UserLoginResult.getUserData().getLoginName());
+        }
+
     }
 
     private void initData() {
@@ -74,12 +79,12 @@ public class BurialInfoLayout extends LinearLayout {
 
             @Override
             public void onSuccess(HrGetBurialNumber result) {
-                Long beriedThisMonth=result.getBeriedThisMonth();
-                Long unberyThisMonth=result.getUnberyThisMonth();
-                Long unberyToday=result.getUnberyToday();
-                mTVTodayNum.setText(unberyToday+"");
-                mTVMonthWaitNum.setText(unberyThisMonth+"");
-                mTVMonthReadyNum.setText(beriedThisMonth+"");
+                Long beriedThisMonth = result.getBeriedThisMonth();
+                Long unberyThisMonth = result.getUnberyThisMonth();
+                Long unberyToday = result.getUnberyToday();
+                mTVTodayNum.setText(unberyToday + "");
+                mTVMonthWaitNum.setText(unberyThisMonth + "");
+                mTVMonthReadyNum.setText(beriedThisMonth + "");
             }
 
             @Override

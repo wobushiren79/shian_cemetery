@@ -127,36 +127,42 @@ public class MyFragment extends BaseFragment {
 
 
     private void getUserInfo() {
-        MHttpManagerFactory.getAccountManager().getUserInfo(getActivity(), new HttpResponseHandler<HrUserInfo>() {
+//        MHttpManagerFactory.getAccountManager().getUserInfo(getActivity(), new HttpResponseHandler<HrUserInfo>() {
+//
+//
+//            @Override
+//            public void onStart(Request request, int id) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(final HrUserInfo result) {
+//                mHrUserInfo = result;
+//                if (!result.getHeadImg().equals(""))
+//                    ImageLoader.getInstance().displayImage(BaseURL.OSSURL + result.getHeadImg(), mIVIcon);
+//                mTVName.setText(result.getName());
+//                mTVPhone.setText(result.getMobile());
+////                mLLEdit.setOnClickListener(new View.OnClickListener() {
+////                    @Override
+////                    public void onClick(View v) {
+////                        Intent in = new Intent(getActivity(), UserInfoActivity.class);
+////                        in.putExtra("data", JSONUtil.writeEntityToJSONString(result));
+////                        getActivity().startActivity(in);
+////                    }
+////                });
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//
+//            }
+//        });
+        if (AppData.UserLoginResult.getUserData() != null) {
+            mTVName.setText(AppData.UserLoginResult.getUserData().getName());
+            mTVPhone.setText(AppData.UserLoginResult.getUserData().getMobile());
+        }
 
 
-            @Override
-            public void onStart(Request request, int id) {
-
-            }
-
-            @Override
-            public void onSuccess(final HrUserInfo result) {
-                mHrUserInfo = result;
-                if (!result.getHeadImg().equals(""))
-                    ImageLoader.getInstance().displayImage(BaseURL.OSSURL + result.getHeadImg(), mIVIcon);
-                mTVName.setText(result.getName());
-                mTVPhone.setText(result.getMobile());
-//                mLLEdit.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent in = new Intent(getActivity(), UserInfoActivity.class);
-//                        in.putExtra("data", JSONUtil.writeEntityToJSONString(result));
-//                        getActivity().startActivity(in);
-//                    }
-//                });
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -213,6 +219,6 @@ public class MyFragment extends BaseFragment {
      */
     private void setting() {
         Intent in = new Intent(getContext(), SettingsActivity.class);
-        startActivityForResult(in,1001);
+        startActivityForResult(in, 1001);
     }
 }

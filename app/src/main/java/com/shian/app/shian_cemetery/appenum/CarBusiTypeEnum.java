@@ -4,7 +4,7 @@ package com.shian.app.shian_cemetery.appenum;
  * Created by zm
  */
 public enum CarBusiTypeEnum {
-    cemetery_bespeakid(1, "cemetery_bespeakid");
+    cemetery_bespeakid(1, "cemetery_bespeak");
     private Integer code;
     private String text;
 
