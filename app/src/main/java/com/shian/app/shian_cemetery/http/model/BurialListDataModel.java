@@ -8,9 +8,18 @@ public class BurialListDataModel {
     private long id;//訂單ID
 //    private BurialInfoModel buryInfo;//安葬信息
     private BurialRecord buryRecord;//安葬信息
-    private BurialDeadInfoModel deadInfo;//死者信息
+//    private BurialDeadInfoModel deadInfo;//死者信息
+    private String deadNames;
     private BurialLocationModel tombPosition;//安葬墓位
     private BurialOrderModel order;
+
+    public String getDeadNames() {
+        return deadNames;
+    }
+
+    public void setDeadNames(String deadNames) {
+        this.deadNames = deadNames;
+    }
 
     public BurialOrderModel getOrder() {
         return order;
@@ -36,13 +45,13 @@ public class BurialListDataModel {
         this.buryRecord = buryRecord;
     }
 
-    public BurialDeadInfoModel getDeadInfo() {
-        return deadInfo;
-    }
-
-    public void setDeadInfo(BurialDeadInfoModel deadInfo) {
-        this.deadInfo = deadInfo;
-    }
+//    public BurialDeadInfoModel getDeadInfo() {
+//        return deadInfo;
+//    }
+//
+//    public void setDeadInfo(BurialDeadInfoModel deadInfo) {
+//        this.deadInfo = deadInfo;
+//    }
 
     public BurialLocationModel getTombPosition() {
         return tombPosition;

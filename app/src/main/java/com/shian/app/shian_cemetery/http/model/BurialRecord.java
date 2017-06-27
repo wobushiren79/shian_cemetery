@@ -29,10 +29,10 @@ public class BurialRecord {
     private int buryType;//安葬状态  0安葬   1合葬
     private long buryRecordId;
     private int ashesCarry;
-    private long ashesDate;
+    private String ashesDate;
     private String ashesLocation;
     private String buryCardNo;
-    private long buryDatePre;
+    private String buryDatePre;
     private BuryInfoBean buryInfo;
     private String buryName;
     private int buryStatus;
@@ -44,19 +44,59 @@ public class BurialRecord {
     private String familyMemberSign;
     private String remark;
     private int stoneCarveStatus;
-    private long stoneFileFinishDate;
+    private String stoneFileFinishDate;
     /**
      * 立碑照片
      */
     private String stoneFileIds;
-    private long stoneFileSetDate;
-    private long updatedAt;
+    private String stoneFileSetDate;
+    private String updatedAt;
     private int updatedBy;
     /**
      * 客户签名文件id
      */
     private String signFileId;
 
+
+    public String getAshesDate() {
+        return ashesDate;
+    }
+
+    public void setAshesDate(String ashesDate) {
+        this.ashesDate = ashesDate;
+    }
+
+    public String getBuryDatePre() {
+        return buryDatePre;
+    }
+
+    public void setBuryDatePre(String buryDatePre) {
+        this.buryDatePre = buryDatePre;
+    }
+
+    public String getStoneFileFinishDate() {
+        return stoneFileFinishDate;
+    }
+
+    public void setStoneFileFinishDate(String stoneFileFinishDate) {
+        this.stoneFileFinishDate = stoneFileFinishDate;
+    }
+
+    public String getStoneFileSetDate() {
+        return stoneFileSetDate;
+    }
+
+    public void setStoneFileSetDate(String stoneFileSetDate) {
+        this.stoneFileSetDate = stoneFileSetDate;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public int getBuryType() {
         return buryType;
@@ -90,13 +130,7 @@ public class BurialRecord {
         this.ashesCarry = ashesCarry;
     }
 
-    public long getAshesDate() {
-        return ashesDate;
-    }
 
-    public void setAshesDate(long ashesDate) {
-        this.ashesDate = ashesDate;
-    }
 
     public String getAshesLocation() {
         return ashesLocation;
@@ -114,13 +148,7 @@ public class BurialRecord {
         this.buryCardNo = buryCardNo;
     }
 
-    public long getBuryDatePre() {
-        return buryDatePre;
-    }
 
-    public void setBuryDatePre(long buryDatePre) {
-        this.buryDatePre = buryDatePre;
-    }
 
     public BuryInfoBean getBuryInfo() {
         return buryInfo;
@@ -186,13 +214,7 @@ public class BurialRecord {
         this.stoneCarveStatus = stoneCarveStatus;
     }
 
-    public long getStoneFileFinishDate() {
-        return stoneFileFinishDate;
-    }
 
-    public void setStoneFileFinishDate(long stoneFileFinishDate) {
-        this.stoneFileFinishDate = stoneFileFinishDate;
-    }
 
     public String getStoneFileIds() {
         return stoneFileIds;
@@ -202,21 +224,8 @@ public class BurialRecord {
         this.stoneFileIds = stoneFileIds;
     }
 
-    public long getStoneFileSetDate() {
-        return stoneFileSetDate;
-    }
 
-    public void setStoneFileSetDate(long stoneFileSetDate) {
-        this.stoneFileSetDate = stoneFileSetDate;
-    }
 
-    public long getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(long updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public int getUpdatedBy() {
         return updatedBy;
@@ -255,12 +264,12 @@ public class BurialRecord {
         /**
          * 墓穴证办理日期
          */
-        private long tombCertificateHandleAt;
+        private String tombCertificateHandleAt;
         /**
          * 墓穴证号
          */
         private String tombCertificateNo;
-        private long updatedAt;
+        private String updatedAt;
         private int updatedBy;
         /**
          * 立碑备注
@@ -270,11 +279,11 @@ public class BurialRecord {
         /**
          * 预计立碑时间
          */
-        private long stoneDatePre;
+        private String stoneDatePre;
         /**
          * 实际立碑时间
          */
-        private long stoneDateReal;
+        private String stoneDateReal;
         /**
          * 墓位ID
          */
@@ -296,20 +305,36 @@ public class BurialRecord {
             this.buryRate = buryRate;
         }
 
-        public long getStoneDateReal() {
-            return stoneDateReal;
+        public String getTombCertificateHandleAt() {
+            return tombCertificateHandleAt;
         }
 
-        public void setStoneDateReal(long stoneDateReal) {
-            this.stoneDateReal = stoneDateReal;
+        public void setTombCertificateHandleAt(String tombCertificateHandleAt) {
+            this.tombCertificateHandleAt = tombCertificateHandleAt;
         }
 
-        public long getStoneDatePre() {
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+        public String getStoneDatePre() {
             return stoneDatePre;
         }
 
-        public void setStoneDatePre(long stoneDatePre) {
+        public void setStoneDatePre(String stoneDatePre) {
             this.stoneDatePre = stoneDatePre;
+        }
+
+        public String getStoneDateReal() {
+            return stoneDateReal;
+        }
+
+        public void setStoneDateReal(String stoneDateReal) {
+            this.stoneDateReal = stoneDateReal;
         }
 
         public String getStoneRemark() {
@@ -352,13 +377,6 @@ public class BurialRecord {
             this.stoneStatus = stoneStatus;
         }
 
-        public long getTombCertificateHandleAt() {
-            return tombCertificateHandleAt;
-        }
-
-        public void setTombCertificateHandleAt(long tombCertificateHandleAt) {
-            this.tombCertificateHandleAt = tombCertificateHandleAt;
-        }
 
         public String getTombCertificateNo() {
             return tombCertificateNo;
@@ -368,13 +386,6 @@ public class BurialRecord {
             this.tombCertificateNo = tombCertificateNo;
         }
 
-        public long getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(long updatedAt) {
-            this.updatedAt = updatedAt;
-        }
 
         public int getUpdatedBy() {
             return updatedBy;

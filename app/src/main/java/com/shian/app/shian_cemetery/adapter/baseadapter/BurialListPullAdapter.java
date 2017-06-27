@@ -28,7 +28,9 @@ import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.CheckUtils;
 import com.shian.app.shian_cemetery.tools.TimeUtils;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,7 +80,16 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
     public void dealTime() {
         List<Integer> dayTemp = new ArrayList<>();
         for (BurialListDataModel data : listData) {
-            int day = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "dd"));
+            Long date = null;
+            int day = 0;
+            try {
+                date = TimeUtils.stringToLong(data.getBuryRecord().getBuryDatePre(), "yyyy-MM-dd HH:mm");
+                day = Integer.valueOf(TimeUtils.formatTime(date, "dd"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+//            int day = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "dd"));
             if (!dayTemp.contains(day)) {
                 dayTemp.add(day);
             }
@@ -88,8 +99,17 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             List<BurialListDataModel> orderTemp = new ArrayList<>();
             int month = 0;
             for (BurialListDataModel data : listData) {
-                int dayC = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "dd"));
-                month = Integer.valueOf(TimeUtils.formatTime(data.getBuryRecord().getBuryDatePre(), "MM"));
+
+                Long date = null;
+                int dayC = 0;
+                try {
+                    date = TimeUtils.stringToLong(data.getBuryRecord().getBuryDatePre(), "yyyy-MM-dd HH:mm");
+                    dayC = Integer.valueOf(TimeUtils.formatTime(date, "dd"));
+                    month = Integer.valueOf(TimeUtils.formatTime(date, "MM"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 if (dayF == dayC) {
                     dayListTemp.add(dayC);
                     orderTemp.add(data);

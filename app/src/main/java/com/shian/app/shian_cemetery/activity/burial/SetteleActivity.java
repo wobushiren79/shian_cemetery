@@ -121,13 +121,13 @@ public class SetteleActivity extends BaseActivity {
                 finish();
                 return;
             }
-            if (burialRecord.getBuryInfo().getStoneDatePre() != 0) {
-                mTRSetteleTime.setData(TimeUtils.formatTime(burialRecord.getBuryInfo().getStoneDatePre()));
+            if (burialRecord.getBuryInfo().getStoneDatePre() != null) {
+                mTRSetteleTime.setData(burialRecord.getBuryInfo().getStoneDatePre());
             } else {
                 mTRSetteleTime.setData("无详细日期");
             }
-            if (burialRecord.getStoneFileSetDate() != 0) {
-                mTRBuildTime.setData(TimeUtils.formatTime(burialRecord.getStoneFileSetDate()));
+            if (burialRecord.getStoneFileSetDate() != null) {
+                mTRBuildTime.setData(burialRecord.getStoneFileSetDate());
             } else {
                 mTRBuildTime.setData("无详细日期");
             }

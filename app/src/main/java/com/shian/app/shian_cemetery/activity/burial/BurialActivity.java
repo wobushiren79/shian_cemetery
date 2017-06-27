@@ -113,8 +113,8 @@ public class BurialActivity extends BaseActivity {
                 mLLBurialodds.setVisibility(View.GONE);
             }
 
-            if (burialRecord.getBuryDatePre() != 0)
-                mTRBurialTime.setData(TimeUtils.formatTime(burialRecord.getBuryDatePre()));
+            if (burialRecord.getBuryDatePre() != null)
+                mTRBurialTime.setData(burialRecord.getBuryDatePre());
 
             if (burialRecord.getBuryStatus() == 1) {
                 ToastUtils.showLongToast(BurialActivity.this, "此订单已被操作");
