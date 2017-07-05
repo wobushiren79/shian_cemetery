@@ -14,6 +14,7 @@ import com.shian.app.shian_cemetery.http.result.HrUploadFile;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.tools.LogUtils;
 import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
+import com.shian.app.shian_cemetery.tools.PicUtils;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -52,6 +53,7 @@ public class FileManagerImpl implements FileManager {
     public void upLoadFile(final Context context, String fileName, String path,
                            final FileHttpResponseHandler<HrUploadFile> responseHandler) {
         File file = new File(path);
+        file = PicUtils.scaledFile(file);
         String session = SharePerfrenceUtils.getSessionShare(context);
         setCookie(session);
         OkHttpUtils
