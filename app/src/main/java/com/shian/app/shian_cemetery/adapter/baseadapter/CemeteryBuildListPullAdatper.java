@@ -164,7 +164,7 @@ public class CemeteryBuildListPullAdatper extends BaseAdapter {
                 holder.tvMeetTime.setText(data.getPromiseTime());
                 holder.tvCemeteryLocation.setText(data.getPlanCemeteryLocation());
                 holder.tvTraffic.setText(data.getTrafficWay());
-                holder.tvRemark.setText(data.getRemark());
+                holder.tvRemark.setText(data.getRemarks());
                 holder.tvSource.setText(data.getSourceClassText());
                 holder.tvSalesConsultant.setText(data.getSalesConsultant());
 

@@ -17,7 +17,7 @@ public class CemeteryOrderModel implements Serializable {
     private String customerLocation;//	客户地址
     private String customerMobile;//客户联系电话
     private String trafficWay;//交通方式
-    private String remark;//备注
+    private String remarks;//备注
 
     private String agentmanName;//经办人姓名
     private String agentmanMoblie;//经办人电话
@@ -200,12 +200,12 @@ public class CemeteryOrderModel implements Serializable {
         this.trafficWay = trafficWay;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public Integer getInfoStatus() {

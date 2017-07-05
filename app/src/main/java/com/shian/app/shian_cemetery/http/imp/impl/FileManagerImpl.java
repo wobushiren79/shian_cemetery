@@ -56,7 +56,7 @@ public class FileManagerImpl implements FileManager {
         setCookie(session);
         OkHttpUtils
                 .post()
-                .addFile(fileName, fileName, file)
+                .addFile(fileName, path, file)
                 .addHeader("Cookie", "sid=" + session)
                 .addHeader("systemType", "2")
                 .url(BaseURL.FILE_UPDATA)

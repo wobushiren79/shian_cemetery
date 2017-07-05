@@ -27,11 +27,13 @@
 
         <com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal
             android:id="@+id/write_ordernumber"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="订单编号"></com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal>
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_1dp"
             android:layout_marginLeft="@dimen/dimen_32dp"
