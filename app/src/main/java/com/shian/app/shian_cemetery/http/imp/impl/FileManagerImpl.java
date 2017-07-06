@@ -53,7 +53,7 @@ public class FileManagerImpl implements FileManager {
     public void upLoadFile(final Context context, String fileName, String path,
                            final FileHttpResponseHandler<HrUploadFile> responseHandler) {
         File file = new File(path);
-        file = PicUtils.scaledFile(file);
+//        file = PicUtils.scaledFile(file);
         String session = SharePerfrenceUtils.getSessionShare(context);
         setCookie(session);
         OkHttpUtils

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class PicUtils {
 
-    public static final int picMax = 20000000;//图片最大大小
+    public static final int picMax = 10000000;//图片最大大小
     public static final float scaledPic = 2;//图片缩小大小
 
     public static File scaledFile(File file) {
