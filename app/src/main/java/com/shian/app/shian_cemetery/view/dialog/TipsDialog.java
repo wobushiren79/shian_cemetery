@@ -45,8 +45,12 @@ public class TipsDialog extends Dialog {
 
         if (isBtn1V)
             tv_btn1.setVisibility(View.VISIBLE);
+        else
+            tv_btn1.setVisibility(View.GONE);
         if (isBtn2V)
             tv_btn2.setVisibility(View.VISIBLE);
+        else
+            tv_btn2.setVisibility(View.GONE);
         tv_top.setText(top);
         tv_title.setText(title);
         tv_btn1.setText(btn1Text);

@@ -40,7 +40,7 @@ public class PhotoUpDataLayout extends BaseDataLayout {
     public boolean isFirstLoad = true;
     public boolean isLoading = false;
     public String fileUrl;
-    private String fileName = "photoName";
+    private String fileName = "originFileName";
 
     public PhotoUpDataLayout(Context context) {
         this(context, null);

@@ -21,6 +21,7 @@ import com.shian.app.shian_cemetery.activity.php.AllAppActivity;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class MainAPPItems extends LinearLayout {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         if (url.equals("")) {
-
+                            ToastUtils.showShortToast(getContext(),"敬请期待！");
                         } else if (url.contains("all")) {
                             Intent intent = new Intent(getContext(), AllAppActivity.class);
                             getContext().startActivity(intent);
@@ -105,7 +106,6 @@ public class MainAPPItems extends LinearLayout {
             }
         }
     };
-
 
     /**
      * 打开计算机

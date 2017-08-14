@@ -9,8 +9,8 @@ public class BurialLocationModel {
     private String cemeteryName;//111
     private String tombName;//  苑名称
     private String parkName;//区名臣
-    private long row;//排
-    private long num;//號
+    private String row;//排
+    private String num;//號
     private long stauts;//
 
     public long getCemeteryId() {
@@ -45,19 +45,19 @@ public class BurialLocationModel {
         this.parkName = parkName;
     }
 
-    public long getRow() {
+    public String getRow() {
         return row;
     }
 
-    public void setRow(long row) {
+    public void setRow(String row) {
         this.row = row;
     }
 
-    public long getNum() {
+    public String getNum() {
         return num;
     }
 
-    public void setNum(long num) {
+    public void setNum(String num) {
         this.num = num;
     }
 

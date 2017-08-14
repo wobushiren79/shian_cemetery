@@ -6,7 +6,8 @@ package com.shian.app.shian_cemetery.staticdata;
 
 public class BaseURL {
 //    public static final String JAVA_URL = "http://192.168.0.49:8080/advisor";
-    public static final String JAVA_URL = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
+//    public static final String JAVA_URL = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
+    public static final String JAVA_URL = "http://192.168.0.200:8000/shianlife-advisor-cemetery-1.0-SNAPSHOT";
 //    public static final String JAVA_URL = "http://192.168.0.37:8088/app";
 //    public static final String JAVA_URL = "http://192.168.0.35:8100/advisor";
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
