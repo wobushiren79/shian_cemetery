@@ -206,19 +206,22 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                long secondTime = System.currentTimeMillis();
-                if (secondTime - firstTime > 2000) {
-                    //如果两次按键时间间隔大于2秒，则不退出
-                    ToastUtils.showShortToast(this, "再按一次退出程序");
-                    firstTime = secondTime;//更新firstTime
-                    return true;
-                } else {
-                    //两次按键小于2秒时，退出应用
-                    System.exit(0);
-                }
-                break;
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                //如果两次按键时间间隔大于2秒，则不退出
+                ToastUtils.showShortToast(this, "再按一次退出程序");
+                firstTime = secondTime;//更新firstTime
+                return true;
+            } else {
+                //两次按键小于2秒时，退出应用
+//                    System.exit(0);
+                Intent home = new Intent(Intent.ACTION_MAIN);
+                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                home.addCategory(Intent.CATEGORY_HOME);
+                startActivity(home);
+                return true;
+            }
         }
         return super.onKeyUp(keyCode, event);
     }
