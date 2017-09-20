@@ -134,10 +134,10 @@
                 android:layout_gravity="center"></com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton>
 
             <RadioGroup
+                android:id="@+id/rg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/rg"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:orientation="horizontal">
 
@@ -177,7 +177,8 @@
                 android:layout_marginTop="@dimen/dimen_24dp"
                 android:text="手机账号快速登录>"
                 android:textColor="@color/gray_main_rb_bg_f"
-                android:textSize="@dimen/dimen_24dp" />
+                android:textSize="@dimen/dimen_24dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <ImageView
