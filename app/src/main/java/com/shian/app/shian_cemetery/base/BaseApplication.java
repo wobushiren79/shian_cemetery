@@ -170,8 +170,8 @@ public class BaseApplication extends Application {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        OkHttpClient okHttpClient = builder.connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+        OkHttpClient okHttpClient = builder.connectTimeout(60000L, TimeUnit.MILLISECONDS)
+                .readTimeout(60000L, TimeUnit.MILLISECONDS)
                 //其他配置
                 .build();
         OkHttpUtils.initClient(okHttpClient);

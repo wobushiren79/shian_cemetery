@@ -60,6 +60,7 @@
             android:layout_marginTop="@dimen/dimen_20dp"
             android:background="@drawable/zhy_button_state_3"
             android:text="跳转"
+            android:textSize="@dimen/dimen_28dp"
             android:textColor="@color/black" />
     </RelativeLayout>
 </RelativeLayout>

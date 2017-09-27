@@ -24,6 +24,7 @@ import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton;
 
 import okhttp3.Request;
@@ -52,6 +53,8 @@ public class LoginActivity extends BaseActivity {
         initView();
         initData();
         startAnim();
+        //检测更新
+        Utils.checkUpData(this, false);
     }
 
     private void initView() {
