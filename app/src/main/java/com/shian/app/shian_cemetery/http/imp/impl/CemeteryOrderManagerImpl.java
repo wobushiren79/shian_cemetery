@@ -2,26 +2,28 @@ package com.shian.app.shian_cemetery.http.imp.impl;
 
 import android.content.Context;
 
+import com.shian.app.shian_cemetery.http.base.BaseManagerImpl;
 import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.imp.CemeteryOrderManager;
 import com.shian.app.shian_cemetery.http.params.HpGetOrderListParams;
 import com.shian.app.shian_cemetery.http.result.HrGetCemeteryListData;
+import com.shian.app.shian_cemetery.staticdata.BaseURL;
 
 
 /**
  * Created by Administrator on 2017/1/18.
  */
 
-public class CemeteryOrderManagerImpl implements CemeteryOrderManager {
+public class CemeteryOrderManagerImpl extends BaseManagerImpl implements CemeteryOrderManager {
 
     private static volatile CemeteryOrderManagerImpl manager;
 
-    private HttpRequestExecutor excutor;
     private String[] getOrderListMethod = {"marketing/talks/overall/list", "cemetery/ordered/list/afterMarket", "cemetery/ordered/list/afterMarket"};
 
     private CemeteryOrderManagerImpl() {
-        excutor = new HttpRequestExecutor();
+        super();
+        baseUrl = BaseURL.Cemetery_BaseUrl;
     }
 
     public static CemeteryOrderManagerImpl getInstance() {
@@ -42,6 +44,6 @@ public class CemeteryOrderManagerImpl implements CemeteryOrderManager {
     @Override
     public void getOrderList(Context context, HpGetOrderListParams params, int orderType,
                              HttpResponseHandler<HrGetCemeteryListData> response) {
-        excutor.requestPost(context, getOrderListMethod[orderType], HrGetCemeteryListData.class, params, response);
+        requestPost(context, getOrderListMethod[orderType], HrGetCemeteryListData.class, params, response);
     }
 }

@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.shian.app.shian_cemetery.activity.LoginActivity;
 import com.shian.app.shian_cemetery.appenum.APPTypeEnum;
 import com.shian.app.shian_cemetery.appenum.UpDataImportantEnum;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
@@ -272,5 +273,13 @@ public class Utils {
             }
         }, isToast);
     }
-
+    /**
+     * 跳转到登陆界面
+     * @param context
+     */
+    public static void jumpLogin(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 }

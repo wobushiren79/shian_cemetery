@@ -1,6 +1,12 @@
 package com.shian.app.shian_cemetery.staticdata;
 
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
+import com.shian.app.shian_cemetery.mvp.login.bean.SystemLoginResultBean;
+
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Cookie;
 
 /**
  * Created by Administrator on 2017/4/7.
@@ -8,7 +14,12 @@ import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 
 public class AppData {
     public static HrLoginResult UserLoginResult;
-
+    //平台用户数据
+    public static SystemLoginResultBean systemLoginInfo;
+    //登陆系统KEY
+    public static String System_Ki4so_Client_Ec;
+    //cookie保存
+    public static final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
     public static String LocalString;
     public static String LOCAL_PROVINCE = "";
     public static String LOCAL_CITY = "";

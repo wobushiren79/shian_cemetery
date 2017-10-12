@@ -14,6 +14,7 @@ import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.dialog.TipsDialog;
 
 import okhttp3.Request;
@@ -90,11 +91,8 @@ public class SettingsActivity extends BaseActivity {
 
                             }
                         });
-                SharePerfrenceUtils.setShareAutoLogin(SettingsActivity.this, false);
-                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
+                SharePerfrenceUtils.setShareAutoLogin(getApplicationContext(), false);
+                Utils.jumpLogin(SettingsActivity.this);
             }
 
         });

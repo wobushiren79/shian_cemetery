@@ -7,24 +7,33 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.shian.app.shian_cemetery.activity.LoginActivity;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
+import com.shian.app.shian_cemetery.tools.CheckUtils;
+import com.shian.app.shian_cemetery.tools.GsonTools;
 import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.view.dialog.CustomDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
 
 import org.codehaus.jackson.JsonNode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.MediaType;
 import okhttp3.Request;
 
 /**
@@ -33,106 +42,10 @@ import okhttp3.Request;
 
 public class HttpRequestExecutor {
 
-    Map<String, String> header = new HashMap<>();
-    CustomDialog dialog;
 
-    public HttpRequestExecutor() {
-        header.put("systemType", "2");
-        header.put("Content-Type", "application/json");
-    }
-
-    public void setCookie(String cookie) {
-        header.put("Cookie", "sid=" + cookie);
-    }
-
-    /**
-     * post请求
-     *
-     * @param context
-     * @param method
-     * @param data
-     * @param params
-     * @param responseHandler
-     * @param <T>
-     */
-    public <T> void requestPost(final Context context,
-                                final String method,
-                                final Class<T> data,
-                                final BaseHttpParams params,
-                                final HttpResponseHandler<T> responseHandler) {
-        if (!isNetworkConnected(context)) {
-            onErrorCallBack(responseHandler, "网络未连接", context);
-            return;
-        }
-        if (!method.contains("doLogin")) {
-            String session = SharePerfrenceUtils.getSessionShare(context);
-            setCookie(session);
-        }
-
-        PostStringBuilder getBuilder = OkHttpUtils.postString();
-        getBuilder.url(BaseURL.JAVA_URL + "/" + method);
-        getBuilder.headers(header);
-        getBuilder.content(params.getContentJson());
-        Log.i("tag", BaseURL.JAVA_URL + "/" + method);
-        Log.e("tag", params.getContentJson());
-        RequestCall requestCall = getBuilder.build();
-        requestCall.execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                String errorMessage = e.getMessage();
-                if (errorMessage != null) {
-                    Log.e("tag", errorMessage);
-                }
-                onErrorCallBack(responseHandler, errorMessage, context);
-                if (dialog != null)
-                    dialog.cancel();
-                dialog = null;
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.i("tag", response);
-                dataToJson(context, response, data, responseHandler);
-                if (dialog != null)
-                    dialog.cancel();
-                dialog = null;
-            }
-
-
-            @Override
-            public void onBefore(Request request, int id) {
-                super.onBefore(request, id);
-                if (responseHandler != null) {
-                    responseHandler.onStart(request, id);
-                }
-            }
-        });
-    }
-
-
-    /**
-     * POST请求
-     *
-     * @param context
-     * @param method
-     * @param data
-     * @param params
-     * @param responseHandler
-     * @param isShowDialog
-     * @param <T>
-     */
-    public <T> void requestPost(final Context context,
-                                final String method,
-                                final Class<T> data,
-                                final BaseHttpParams params,
-                                final HttpResponseHandler<T> responseHandler,
-                                final boolean isShowDialog) {
-        if (isShowDialog && dialog == null) {
-            dialog = new CustomDialog(context);
-            dialog.show();
-        }
-        requestPost(context, method, data, params, responseHandler);
-    }
+    private CustomDialog dialog;
+    public static final int Response_Type_List = 0;  //返回参数为list
+    public static final int Response_Type_Obj = 1;   //返回参数为对象
 
     /**
      * get请求
@@ -148,105 +61,138 @@ public class HttpRequestExecutor {
                                final String method,
                                final Class<T> data,
                                final BaseHttpParams params,
-                               final HttpResponseHandler<T> responseHandler) {
-        if (!isNetworkConnected(context)) {
-            onErrorCallBack(responseHandler, "网络未连接", context);
-            return;
-        }
-        if (!method.contains("doLogin")) {
-            String session = SharePerfrenceUtils.getSessionShare(context);
-            setCookie(session);
-        }
-        GetBuilder getBuilder = OkHttpUtils.get();
-        getBuilder.url(BaseURL.JAVA_URL + "/" + method);
-        getBuilder.headers(header);
-        getBuilder.params(params.getMapParams());
-        Log.i("tag", BaseURL.JAVA_URL + "/" + method);
-        Log.e("tag", params.getContentJson());
-        RequestCall requestCall = getBuilder.build();
-        requestCall.execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                String errorMessage = e.getMessage();
-                if (errorMessage != null) {
-                    Log.e("tag", errorMessage);
-                }
-                onErrorCallBack(responseHandler, errorMessage, context);
-                if (dialog != null)
-                    dialog.cancel();
-                dialog = null;
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.i("tag", response);
-                dataToJson(context, response, data, responseHandler);
-                if (dialog != null)
-                    dialog.cancel();
-                dialog = null;
-            }
-
-
-            @Override
-            public void onBefore(Request request, int id) {
-                super.onBefore(request, id);
-                if (responseHandler != null) {
-                    responseHandler.onStart(request, id);
-                }
-            }
-        });
-    }
-
-    public <T> void requestGet(final Context context,
-                               final String method,
-                               final Class<T> data,
-                               final BaseHttpParams params,
                                final HttpResponseHandler<T> responseHandler,
-                               final boolean isShowDialog) {
-        if (isShowDialog && dialog == null) {
-            dialog = new CustomDialog(context);
-            dialog.show();
-        }
-        requestGet(context, method, data, params, responseHandler);
+                               final boolean isShowDialog,
+                               final String baseUrl,
+                               final Map<String, String> header,
+                               final String dataName,
+                               final int responseType) {
+        if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
+
+        Log.v("tag", baseUrl + "/" + method);
+        Log.v("tag", params.getContentJson());
+
+        GetBuilder getBuilder = OkHttpUtils.get();
+        getBuilder.url(baseUrl + "/" + method);
+        getBuilder.addHeader("client-Type", "wechatapp");
+        getBuilder.addHeader("systemType", "2");
+        if (header != null)
+            getBuilder.headers(header);
+        getBuilder.params(params.getMapParams());
+        RequestCall requestCall = getBuilder.build();
+        startExecute(context, data, responseHandler, dataName, responseType, requestCall);
     }
 
 
     /**
-     * PHPget请求
+     * POST请求
      *
      * @param context
      * @param method
      * @param data
      * @param params
      * @param responseHandler
+     * @param <T>
      */
-    public <T> void requestPHPGet(final Context context,
-                                  final String method,
-                                  final Class<T> data,
-                                  final BaseHttpParams params,
-                                  final HttpResponseHandler<T> responseHandler, final boolean isShowDialog) {
-        if (!isNetworkConnected(context)) {
-            onErrorCallBack(responseHandler, "网络未连接", context);
-            return;
-        }
-        if (isShowDialog && dialog == null) {
-            dialog = new CustomDialog(context);
-            dialog.show();
-        }
-        GetBuilder getBuilder = OkHttpUtils.get();
-        getBuilder.url(BaseURL.PHPURL + "/" + method);
-        getBuilder.headers(header);
-        getBuilder.params(params.getMapParams());
-        Log.i("tag", BaseURL.PHPURL + "/" + method);
-        Log.e("tag", params.getContentJson());
+    public <T, E> void requestPost(final Context context,
+                                   final String method,
+                                   final Class<T> data,
+                                   final BaseHttpParams params,
+                                   final HttpResponseHandler<E> responseHandler,
+                                   final boolean isShowDialog,
+                                   final String baseUrl,
+                                   final Map<String, String> header,
+                                   final String dataName,
+                                   boolean hasConentParams,
+                                   final int responseType) {
+        if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
+
+        Log.v("tag", baseUrl + "/" + method);
+
+        PostStringBuilder getBuilder = OkHttpUtils.postString();
+        getBuilder.url(baseUrl + "/" + method);
+        if (header != null)
+            getBuilder.headers(header);
+        getBuilder.mediaType(MediaType.parse("application/json; charset=utf-8"));
+        //判断请求参数是否需要套上content
+        if (params != null)
+            if (hasConentParams) {
+                Log.e("tag", params.getContentJson());
+                getBuilder.content(params.getContentJson());
+            } else {
+                Log.e("tag", params.getJsonParams());
+                getBuilder.content(params.getJsonParams());
+            }
+        else
+            getBuilder.content("");
+        getBuilder.addHeader("client-Type", "wechatapp");
+        getBuilder.addHeader("systemType", "2");
         RequestCall requestCall = getBuilder.build();
+        startExecute(context, data, responseHandler, dataName, responseType, requestCall);
+    }
+
+    /**
+     * POST请求
+     *
+     * @param context
+     * @param method
+     * @param data
+     * @param params
+     * @param responseHandler
+     * @param <T>
+     */
+    public <T, E> void requestPostForm(final Context context,
+                                       final String method,
+                                       final Class<T> data,
+                                       final BaseHttpParams params,
+                                       final HttpResponseHandler<E> responseHandler,
+                                       final boolean isShowDialog,
+                                       final String baseUrl,
+                                       final Map<String, String> header,
+                                       final String dataName,
+                                       final int responseType) {
+        if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
+
+        Log.v("tag", baseUrl + "/" + method);
+        Log.v("tag", "Params:" + params.getJsonParams());
+
+        PostFormBuilder getBuilder = OkHttpUtils.post();
+        getBuilder.url(baseUrl + "/" + method);
+        if (header != null)
+            getBuilder.headers(header);
+        //裝上form
+        try {
+            params.setFormParams(getBuilder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            onErrorCallBack(responseHandler, "参数错误", context);
+        }
+
+        getBuilder.addHeader("client-Type", "wechatapp");
+        getBuilder.addHeader("systemType", "2");
+        RequestCall requestCall = getBuilder.build();
+        startExecute(context, data, responseHandler, dataName, responseType, requestCall);
+
+    }
+
+    private <T, E> void startExecute(final Context context,
+                                     final Class<T> data,
+                                     final HttpResponseHandler<E> responseHandler,
+                                     final String dataName,
+                                     final int responseType,
+                                     RequestCall requestCall) {
         requestCall.execute(new StringCallback() {
+            @Override
+            public void onBefore(Request request, int id) {
+                super.onBefore(request, id);
+                if (responseHandler != null) {
+                    responseHandler.onStart(request, id);
+                }
+            }
+
             @Override
             public void onError(Call call, Exception e, int id) {
                 String errorMessage = e.getMessage();
-                if (errorMessage != null) {
-                    Log.e("tag", errorMessage);
-                }
                 onErrorCallBack(responseHandler, errorMessage, context);
                 if (dialog != null)
                     dialog.cancel();
@@ -255,39 +201,33 @@ public class HttpRequestExecutor {
 
             @Override
             public void onResponse(String response, int id) {
-                Log.i("tag", response);
-                dataToJson(context, response, data, responseHandler);
+                Log.v("tag", response);
+                dataToJson(context, response, data, responseHandler, dataName, responseType);
                 if (dialog != null)
                     dialog.cancel();
                 dialog = null;
             }
 
-
-            @Override
-            public void onBefore(Request request, int id) {
-                super.onBefore(request, id);
-                if (responseHandler != null) {
-                    responseHandler.onStart(request, id);
-                }
-            }
         });
     }
 
     /**
-     * 判断是否有网络
+     * 检测网络和弹窗
      *
      * @param context
+     * @param responseHandler
+     * @param isShowDialog
+     * @param <T>
      * @return
      */
-    private boolean isNetworkConnected(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
-                    .getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mNetworkInfo = mConnectivityManager
-                    .getActiveNetworkInfo();
-            if (mNetworkInfo != null) {
-                return mNetworkInfo.isAvailable();
-            }
+    private <T> boolean checkNetWorkAndDialog(Context context, HttpResponseHandler<T> responseHandler, boolean isShowDialog) {
+        if (!CheckUtils.isNetworkConnected(context)) {
+            onErrorCallBack(responseHandler, "网络未连接", context);
+            return true;
+        }
+        if (isShowDialog && dialog == null) {
+            dialog = new CustomDialog(context);
+            dialog.show();
         }
         return false;
     }
@@ -301,32 +241,23 @@ public class HttpRequestExecutor {
      */
     private <T> void onErrorCallBack(HttpResponseHandler<T> response, String error,
                                      Context context) {
-        if (error.contains("503")) {
-            Intent intent = new Intent(context, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
-        if (response != null && ((context instanceof Activity) && !((Activity) context)
-                .isFinishing()) && error != null) {
-            if (showToast(context, error)) {
-                response.onError(error);
+        if (response != null && error != null) {
+//            if (showToast(context, error)) {
+            response.onError(error);
+            if (error.contains("405") || error.contains("503")) {
+//                jumpLogin(context);
+                ToastUtils.showShortToast(context, "没有使用该功能权限");
             }
+//            }
         }
     }
 
-    /**
-     * 错误提示
-     *
-     * @param ctx
-     * @param msg
-     * @return
-     */
-    private boolean showToast(Context ctx, String msg) {
-        boolean flag = true;
-        if (!"".equals(msg))
-            ToastUtils.showShortToast(ctx, msg);
-        return flag;
+    private void jumpLogin(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
+
 
     /**
      * 数据处理
@@ -337,32 +268,48 @@ public class HttpRequestExecutor {
      * @param responseHandler
      * @param <T>
      */
-    private <T> void dataToJson(Context context, String response, final Class<T> data, HttpResponseHandler<T> responseHandler) {
+    private <T, E> void dataToJson(Context context, String response, final Class<T> data, HttpResponseHandler<E> responseHandler, String dataName, int responseType) {
         if (response != null) {
             try {
-                JsonNode node = ObjectMapperFactory.getInstance().readTree(new String(response));
-                String code = node.findValue("code").toString();
-                String errorMsg = node.findValue("message").toString();
-                if ("1000".equals(code)) {
-                    JsonNode jn = node.findValue("content");
-                    if (jn == null)
-                        responseHandler.onSuccess(null);
-                    else {
-                        T result = ObjectMapperFactory.getInstance().readValue(
-                                jn, data);
-                        responseHandler.onSuccess(result);
-                    }
-                } else if ("1009".equals(code)) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                } else {
-                    onErrorCallBack(responseHandler, errorMsg, context);
+                Gson gson = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement jsonElement = parser.parse(response);
+                Map<String, Object> map = gson.fromJson(jsonElement, Map.class);
+
+                //会话失效判断
+                if (map.get("code") == null) {
+                    onErrorCallBack(responseHandler, "会话失效，请重新登陆", context);
+                    jumpLogin(context);
+                    return;
                 }
+
+                double code = (double) map.get("code");
+                int codeInt = (int) code;
+                if (codeInt == 1000) {
+                    if (responseType == Response_Type_List) {
+                        List<T> result = GsonTools.getListByMapKey(dataName, map, data.newInstance());
+                        if (result == null) {
+                            result = new ArrayList<>();
+                        }
+                        responseHandler.onSuccess((E) result);
+                    } else if (responseType == Response_Type_Obj) {
+                        T result = GsonTools.getObjectByMapKey(dataName, map, data.newInstance());
+                        if (result == null) {
+                            responseHandler.onSuccess(null);
+                        } else {
+                            responseHandler.onSuccess((E) result);
+                        }
+                    }
+                } else if ("1009".equals(codeInt)) {
+                    jumpLogin(context);
+                } else {
+                    String msg = (String) map.get("message");
+                    onErrorCallBack(responseHandler, msg, context);
+                }
+
             } catch (Exception e) {
-                onErrorCallBack(responseHandler, "", context);
+                onErrorCallBack(responseHandler, "数据解析异常", context);
             }
         }
     }
-
 }

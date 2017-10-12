@@ -15,10 +15,10 @@ import com.shian.app.shian_cemetery.fragment.OrderFragment;
 public enum MainChangeItemEnum {
 
     MAIN("首页", R.drawable.ic_bar_home_press_2, R.drawable.ic_bar_home_default_2, 1),
-    ORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 2),
+    ORDER("安葬", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 2),
     FIND("发现", R.drawable.ic_bar_find_press_2, R.drawable.ic_bar_find_default_2, 3),
     MY("我", R.drawable.ic_bar_my_press_2, R.drawable.ic_bar_my_default_2, 4),
-    CEMETERYORDER("订单", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 5);
+    CEMETERYORDER("洽谈", R.drawable.ic_bar_order_press_2, R.drawable.ic_bar_order_default_2, 5);
 
     private String title;
     private int unCheckIconId;

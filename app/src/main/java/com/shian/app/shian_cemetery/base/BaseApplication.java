@@ -20,6 +20,8 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.shian.app.shian_cemetery.common.local.LocationService;
 
 import com.shian.app.shian_cemetery.http.base.SSLSocketFactoryCompat;
+import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
@@ -33,6 +35,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 /**
@@ -170,11 +175,56 @@ public class BaseApplication extends Application {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+//        CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
         OkHttpClient okHttpClient = builder.connectTimeout(60000L, TimeUnit.MILLISECONDS)
                 .readTimeout(60000L, TimeUnit.MILLISECONDS)
                 //其他配置
+                .followRedirects(true)
+                .followSslRedirects(true)
+                .cookieJar(new LocalCookieJar())
                 .build();
         OkHttpUtils.initClient(okHttpClient);
+    }
+
+    //CookieJar是用于保存Cookie的
+    class LocalCookieJar implements CookieJar {
+        @Override
+        public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+            String tempUrl = getBaseUrl(url.toString());
+            AppData.cookieStore.put(tempUrl, cookies);
+            //新增添加子系统KEY
+            if (tempUrl.contains(BaseURL.Login_BaseUrl) && cookies.size() >= 2) {
+                String setCookies = cookies.get(1).toString();
+                String[] cookiesList = setCookies.split(";");
+                for (String cookie : cookiesList) {
+                    if (cookie.contains("KI4SO_SERVER_EC")) {
+                        AppData.System_Ki4so_Client_Ec = cookie;
+                    }
+                }
+            }
+        }
+
+        @Override
+        public List<Cookie> loadForRequest(HttpUrl url) {
+            String tempUrl = getBaseUrl(url.toString());
+            List<Cookie> cookies = AppData.cookieStore.get(tempUrl);
+            return cookies != null ? cookies : new ArrayList<Cookie>();
+        }
+
+        private String getBaseUrl(String url) {
+            String temp = "";
+            if (url.contains("https") || url.contains("http://prd")) {
+                int hostLocation = url.indexOf("/", 8);
+                temp = url.substring(0, hostLocation);
+            } else {
+                int hostLocation = url.indexOf("/", 8);
+                int urlLocation = url.indexOf("/", hostLocation + 1);
+                if (urlLocation != -1)
+                    temp = url.substring(0, urlLocation);
+            }
+            return temp;
+        }
     }
 
     /**

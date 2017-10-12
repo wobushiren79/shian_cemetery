@@ -222,7 +222,8 @@
         android:layout_below="@+id/ll_settting"
         android:layout_marginTop="@dimen/dimen_16dp"
         android:background="@drawable/zhy_button_state_ll_white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_change"

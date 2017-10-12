@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +22,10 @@ import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
 import com.shian.app.shian_cemetery.http.params.HpLoginParams;
 import com.shian.app.shian_cemetery.http.result.HrLoginResult;
+import com.shian.app.shian_cemetery.mvp.login.bean.SystemLoginResultBean;
+import com.shian.app.shian_cemetery.mvp.login.presenter.IUserLoginPresenter;
+import com.shian.app.shian_cemetery.mvp.login.presenter.impl.UserLoginPresenterImpl;
+import com.shian.app.shian_cemetery.mvp.login.view.IUserLoginView;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
@@ -29,7 +34,7 @@ import com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButto
 
 import okhttp3.Request;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements IUserLoginView {
     LoadingButton mLoadingButton;
     EditText mETUserName;
     EditText mETPassWord;
@@ -39,11 +44,8 @@ public class LoginActivity extends BaseActivity {
 
     TextView mTVPhoneLoading;
 
-    RadioGroup mRG;
-    RadioButton mRBBurial;
-    RadioButton mRBCemeteryTalk;
-
     RelativeLayout mRLContent;
+    private IUserLoginPresenter userLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +66,6 @@ public class LoginActivity extends BaseActivity {
         mCBKeep = (CheckBox) findViewById(R.id.cb_login_re);
         mCBAuto = (CheckBox) findViewById(R.id.cb_login_auto);
         mTVPhoneLoading = (TextView) findViewById(R.id.btn_login_web);
-        mRBBurial = (RadioButton) findViewById(R.id.rb_state1);
-        mRBCemeteryTalk = (RadioButton) findViewById(R.id.rb_state2);
-        mRG = (RadioGroup) findViewById(R.id.rg);
         mRLContent = (RelativeLayout) findViewById(R.id.rl_content);
 
         mLoadingButton.setOnClickListener(onClickListener);
@@ -74,20 +73,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initData() {
-        SharePerfrenceUtils.ShareLogin shareLogin = SharePerfrenceUtils.getLoginShare(LoginActivity.this);
-        if (shareLogin.isRemeberPassword()) {
-            mETUserName.setText(shareLogin.getUsername());
-            mETPassWord.setText(shareLogin.getPassword());
-            mCBKeep.setChecked(true);
-        }
-        if (shareLogin.isAutoLogin()) {
-            mCBAuto.setChecked(true);
-        }
-        if (shareLogin.getOrderUser() == OrderUserEnum.Burial.getCode()) {
-            mRBBurial.setChecked(true);
-        } else if (shareLogin.getOrderUser() == OrderUserEnum.Cemetery.getCode()) {
-            mRBCemeteryTalk.setChecked(true);
-        }
+        userLoginPresenter = new UserLoginPresenterImpl(this, null);
+        userLoginPresenter.getLoginConfig();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -113,49 +100,10 @@ public class LoginActivity extends BaseActivity {
             ToastUtils.showLongToast(LoginActivity.this, "密码还未填写");
             return;
         }
-        login(mETUserName.getText().toString(), mETPassWord.getText().toString());
-    }
-
-
-    /**
-     * 登陆
-     */
-    private void login(final String username, final String password) {
-        //登录状态为公墓类型
         mLoadingButton.setLoading();
-        HpLoginParams params = new HpLoginParams();
-        params.setPassword(mETPassWord.getText().toString());
-        params.setUsername(mETUserName.getText().toString());
-        params.setSystemType("0");
-//        params.setChannelId("0");
-        MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
-            @Override
-            public void onStart(Request request, int id) {
-
-            }
-
-            @Override
-            public void onSuccess(HrLoginResult result) {
-                AppData.UserLoginResult = result;
-                mLoadingButton.setComplete();
-                SharePerfrenceUtils.setSessionShare(LoginActivity.this, AppData.UserLoginResult.getSessionId());
-                int orderUser = -1;
-                if (mRBBurial.isChecked()) {
-                    orderUser = OrderUserEnum.Burial.getCode();
-                } else if (mRBCemeteryTalk.isChecked()) {
-                    orderUser = OrderUserEnum.Cemetery.getCode();
-                }
-                SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, mCBKeep.isChecked(), mCBAuto.isChecked(), orderUser);
-                ToastUtils.showShortToast(getBaseContext(), "登陆成功");
-                jumpMain();
-            }
-
-            @Override
-            public void onError(String message) {
-                mLoadingButton.setNormal();
-            }
-        });
+        userLoginPresenter.loginSystem();
     }
+
 
     /**
      * 跳转主界面
@@ -184,5 +132,63 @@ public class LoginActivity extends BaseActivity {
         translateAnimation.setDuration(1000);
         mRLContent.setAnimation(translateAnimation);
         translateAnimation.start();
+    }
+
+    @Override
+    public String getUserName() {
+        return mETUserName.getText().toString();
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        mETUserName.setText(userName);
+    }
+
+    @Override
+    public String getPassWord() {
+        return mETPassWord.getText().toString();
+    }
+
+    @Override
+    public void setPassWord(String passWord) {
+        mETPassWord.setText(passWord);
+    }
+
+    @Override
+    public boolean getIsAutoLogin() {
+        return mCBAuto.isChecked();
+    }
+
+    @Override
+    public void setIsAutoLogin(boolean isAutoLogin) {
+        mCBAuto.setChecked(isAutoLogin);
+    }
+
+    @Override
+    public boolean getIsKeepAccount() {
+        return mCBKeep.isChecked();
+    }
+
+    @Override
+    public void setIsKeepAccount(boolean isKeepAccount) {
+        mCBKeep.setChecked(isKeepAccount);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void loginSystemSuccess(SystemLoginResultBean result) {
+        userLoginPresenter.saveLoginConfig();
+        mLoadingButton.setComplete();
+        jumpMain();
+    }
+
+    @Override
+    public void loginSystemFail(String message) {
+        mLoadingButton.setNormal();
+        ToastUtils.showShortToast(this, message);
     }
 }

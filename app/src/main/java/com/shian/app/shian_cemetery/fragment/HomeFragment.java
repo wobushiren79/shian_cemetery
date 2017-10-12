@@ -13,13 +13,17 @@ import android.widget.LinearLayout;
 import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.MainChangeItemEnum;
 import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
+import com.shian.app.shian_cemetery.appenum.RoleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseFragment;
+import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.view.customlayout.burialinfo.BurialInfoLayout;
 import com.shian.app.shian_cemetery.view.customlayout.mainadvertisement.MainAdvertisementLayout;
 import com.shian.app.shian_cemetery.view.customlayout.mainapp.MainAPP;
 import com.shian.app.shian_cemetery.view.customlayout.maindynamic.MainDynamic;
+
+import java.util.List;
 
 import static com.shian.app.shian_cemetery.tools.CheckUtils.checkPermition;
 
@@ -51,13 +55,16 @@ public class HomeFragment extends BaseFragment {
 
 
         //权限判定
-        int orderUser = SharePerfrenceUtils.getOrderUser(getContext());
-        if (orderUser == OrderUserEnum.Burial.getCode() && checkPermition(OrderUserEnum.Burial.getCode())) {
-            mBurialInfo = new BurialInfoLayout(getContext());
-            mLLContet.addView(mBurialInfo, 0);
-        } else if (orderUser == OrderUserEnum.Cemetery.getCode() && checkPermition(OrderUserEnum.Cemetery.getCode())) {
-
+        if (AppData.systemLoginInfo != null && AppData.systemLoginInfo.getResourceCodes() != null) {
+            List<String> listRole = AppData.systemLoginInfo.getResourceCodes();
+            boolean hasBurierBury = RoleEnum.checkHasRole(listRole, RoleEnum.Cemetery_Burier_Bury);
+            boolean hasBurierStone = RoleEnum.checkHasRole(listRole, RoleEnum.Cemetery_Burier_Stone);
+            if (hasBurierBury || hasBurierStone) {
+                mBurialInfo = new BurialInfoLayout(getContext());
+                mLLContet.addView(mBurialInfo, 0);
+            }
         }
+
 
         mMainAdvertisementLayout = (MainAdvertisementLayout) view.findViewById(R.id.mainadvertisement_layout);
         mMainDynamicLayout = (MainDynamic) view.findViewById(R.id.maindynamic_layout);

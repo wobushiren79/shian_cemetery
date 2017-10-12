@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import com.shian.app.shian_cemetery.R;
 import com.shian.app.shian_cemetery.appenum.BaseTitleEnum;
 import com.shian.app.shian_cemetery.appenum.MainChangeItemEnum;
 import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
+import com.shian.app.shian_cemetery.appenum.RoleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseApplication;
 import com.shian.app.shian_cemetery.base.BaseFragment;
@@ -23,6 +25,9 @@ import com.shian.app.shian_cemetery.fragment.MyFragment;
 import com.shian.app.shian_cemetery.fragment.OrderFragment;
 import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
 import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
+import com.shian.app.shian_cemetery.mvp.login.presenter.ISubSystemLoginPresenter;
+import com.shian.app.shian_cemetery.mvp.login.presenter.impl.SubSystemLoginPresenterImpl;
+import com.shian.app.shian_cemetery.mvp.login.view.ISubSystemLoginView;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
@@ -34,9 +39,8 @@ import java.util.List;
 
 import okhttp3.Request;
 
-import static com.shian.app.shian_cemetery.tools.CheckUtils.checkPermition;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ISubSystemLoginView {
 
     MainChangeLayout mMainChangeLayout;
 
@@ -44,6 +48,8 @@ public class MainActivity extends BaseActivity {
     private FragmentManager mFragmentManager;
     private FragmentTransaction mTranscation;
     private LocationService locationService;
+
+    private ISubSystemLoginPresenter subSystemLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +105,9 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
+        subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
+        subSystemLoginPresenter.loginCemeterySystem();
+
         mFragmentManager = getSupportFragmentManager();
     }
 
@@ -174,12 +183,16 @@ public class MainActivity extends BaseActivity {
         mMainChangeLayout.clearData();
         List<MainChangeItemEnum> mainChangeData = new ArrayList<>();
         mainChangeData.add(MainChangeItemEnum.MAIN);
-        int orderUser = SharePerfrenceUtils.getOrderUser(this);
 
-        if (orderUser == OrderUserEnum.Burial.getCode() && checkPermition(OrderUserEnum.Burial.getCode())) {
-            mainChangeData.add(MainChangeItemEnum.ORDER);
-        } else if (orderUser == OrderUserEnum.Cemetery.getCode() && checkPermition(OrderUserEnum.Cemetery.getCode())) {
-            mainChangeData.add(MainChangeItemEnum.CEMETERYORDER);
+        if (AppData.systemLoginInfo != null && AppData.systemLoginInfo.getResourceCodes() != null) {
+            List<String> listRole = AppData.systemLoginInfo.getResourceCodes();
+            boolean hasBurierBury = RoleEnum.checkHasRole(listRole, RoleEnum.Cemetery_Burier_Bury);
+            boolean hasBurierStone = RoleEnum.checkHasRole(listRole, RoleEnum.Cemetery_Burier_Stone);
+            if (hasBurierBury || hasBurierStone)
+                mainChangeData.add(MainChangeItemEnum.ORDER);
+            boolean hasTalker = RoleEnum.checkHasRole(listRole, RoleEnum.Cemetery_Talker);
+            if (hasTalker)
+                mainChangeData.add(MainChangeItemEnum.CEMETERYORDER);
         }
 
         mainChangeData.add(MainChangeItemEnum.FIND);
@@ -224,5 +237,10 @@ public class MainActivity extends BaseActivity {
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

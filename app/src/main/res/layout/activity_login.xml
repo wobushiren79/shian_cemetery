@@ -133,41 +133,41 @@
                 android:layout_height="@dimen/dimen_80dp"
                 android:layout_gravity="center"></com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton>
 
-            <RadioGroup
-                android:id="@+id/rg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dimen_16dp"
-                android:orientation="horizontal">
+            <!--<RadioGroup-->
+                <!--android:id="@+id/rg"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="@dimen/dimen_16dp"-->
+                <!--android:orientation="horizontal">-->
 
-                <RadioButton
-                    android:id="@+id/rb_state1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/dimen_20dp"
-                    android:button="@null"
-                    android:checked="true"
-                    android:drawableLeft="@drawable/zhy_login_rb_1"
-                    android:drawablePadding="@dimen/dimen_10dp"
-                    android:text="安葬工"
-                    android:textColor="@color/zhy_text_color_2"
-                    android:textSize="@dimen/dimen_24dp" />
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rb_state1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginRight="@dimen/dimen_20dp"-->
+                    <!--android:button="@null"-->
+                    <!--android:checked="true"-->
+                    <!--android:drawableLeft="@drawable/zhy_login_rb_1"-->
+                    <!--android:drawablePadding="@dimen/dimen_10dp"-->
+                    <!--android:text="安葬工"-->
+                    <!--android:textColor="@color/zhy_text_color_2"-->
+                    <!--android:textSize="@dimen/dimen_24dp" />-->
 
-                <RadioButton
-                    android:id="@+id/rb_state2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/zhy_login_rb_1"
-                    android:drawablePadding="@dimen/dimen_10dp"
-                    android:text="公墓"
-                    android:textColor="@color/zhy_text_color_2"
-                    android:textSize="@dimen/dimen_24dp" />
-            </RadioGroup>
+                <!--<RadioButton-->
+                    <!--android:id="@+id/rb_state2"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginLeft="@dimen/dimen_20dp"-->
+                    <!--android:button="@null"-->
+                    <!--android:drawableLeft="@drawable/zhy_login_rb_1"-->
+                    <!--android:drawablePadding="@dimen/dimen_10dp"-->
+                    <!--android:text="公墓"-->
+                    <!--android:textColor="@color/zhy_text_color_2"-->
+                    <!--android:textSize="@dimen/dimen_24dp" />-->
+            <!--</RadioGroup>-->
 
             <TextView
                 android:id="@+id/btn_login_web"

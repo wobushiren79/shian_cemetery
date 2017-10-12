@@ -3,6 +3,8 @@ package com.shian.app.shian_cemetery.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.shian.app.shian_cemetery.mvp.login.bean.UserLoginConfig;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -63,13 +65,12 @@ public class SharePerfrenceUtils {
      * @param isRemeber
      * @param isAuto
      */
-    public static void setLoginShare(Context context, String username, String password, boolean isRemeber, boolean isAuto, int orderUser) {
+    public static void setLoginShare(Context context, String username, String password, boolean isRemeber, boolean isAuto) {
         SharedPreferences.Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
         editor.putString(C_sShareLogin_username, username);
         editor.putString(C_sShareLogin_password, password);
         editor.putBoolean(C_sShareLogin_isRemeberPassword, isRemeber);
         editor.putBoolean(C_sShareLogin_isAutoLogin, isAuto);
-        editor.putInt(C_sShareLogin_orderUser, orderUser);
         editor.commit();
     }
 
@@ -96,7 +97,26 @@ public class SharePerfrenceUtils {
         loginS.setOrderUser(orderUser);
         return loginS;
     }
-
+    /**
+     * 获取账号信息
+     *
+     * @param content
+     * @return
+     */
+    public static UserLoginConfig getLoginShareSys(Context content) {
+        SharedPreferences share = content.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
+        String username = share.getString(C_sShareLogin_username, "");
+        String password = share.getString(C_sShareLogin_password, "");
+        boolean isRember = share.getBoolean(C_sShareLogin_isRemeberPassword,
+                false);
+        boolean isAuto = share.getBoolean(C_sShareLogin_isAutoLogin, false);
+        UserLoginConfig loginS = new UserLoginConfig();
+        loginS.setUserName(username);
+        loginS.setPassWord(password);
+        loginS.setKeepAccount(isRember);
+        loginS.setAutoLogin(isAuto);
+        return loginS;
+    }
     /**
      * 获取账号登陆模块
      *
