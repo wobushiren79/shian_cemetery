@@ -59,8 +59,8 @@ public class BurialInfoLayout extends LinearLayout {
         mTVMonthReadyNum = (TextView) view.findViewById(R.id.tv_month_ready_num);
         mLLNumber = (LinearLayout) view.findViewById(R.id.ll_burial_num);
 
-        if (AppData.UserLoginResult.getUserData() != null) {
-            mTVName.setText(AppData.UserLoginResult.getUserData().getLoginName());
+        if (AppData.systemLoginInfo != null && AppData.systemLoginInfo.getUserObj() != null) {
+            mTVName.setText(AppData.systemLoginInfo.getUserObj().getName());
         }
 
     }

@@ -17,6 +17,8 @@ import com.shian.app.shian_cemetery.http.phpmodel.SiftListData;
 import com.shian.app.shian_cemetery.http.phpparams.HpFindGetParams;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetSiftListData;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 
 
 import java.util.ArrayList;
@@ -76,9 +78,14 @@ public class MyCollectionActivity extends BaseActivity {
     };
 
     private void getData(final boolean isClean) {
+        if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
+            ToastUtils.showShortToast(this, "还未登录,请重新登陆");
+            Utils.jumpLogin(this);
+            return;
+        }
         HpFindGetParams params = new HpFindGetParams();
         params.setType(FindEnum.COLLECTIONFIND.getCode());
-        params.setUserid(AppData.UserLoginResult.getUserId());
+        params.setUserid(AppData.systemLoginInfo.getUserId());
         params.setNumber(number);
         params.setPagerNumber(pagerNumber);
         params.setUserType(SystemTypeEnum.cemetery.getCode());

@@ -13,7 +13,7 @@ import okhttp3.Cookie;
  */
 
 public class AppData {
-    public static HrLoginResult UserLoginResult;
+//    public static HrLoginResult UserLoginResult;
     //平台用户数据
     public static SystemLoginResultBean systemLoginInfo;
     //登陆系统KEY

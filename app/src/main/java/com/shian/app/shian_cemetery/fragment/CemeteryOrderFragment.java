@@ -12,6 +12,7 @@ import com.shian.app.shian_cemetery.adapter.pageradapter.CemeteryListViewPagerAd
 import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.BuildOrderEnum;
 import com.shian.app.shian_cemetery.appenum.CemeteryTabEnum;
+import com.shian.app.shian_cemetery.appenum.RoleEnum;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.order.cemetery.BaseCemeteryOrderList;
 import com.shian.app.shian_cemetery.order.cemetery.BuildList;
@@ -69,8 +70,9 @@ public class CemeteryOrderFragment extends BaseFragment {
 //            tabData.add(CemeteryTabEnum.BUILD);
 //        }
         //确认洽谈权限
-        if (CheckUtils.checkPermition(AppRolePermition.TALKER.getCode(), AppData.UserLoginResult.getPermitionCodes()))
-            tabData.add(CemeteryTabEnum.TALKORDER);
+        if (AppData.systemLoginInfo != null && AppData.systemLoginInfo.getResourceCodes() != null)
+            if (RoleEnum.checkHasRole(AppData.systemLoginInfo.getResourceCodes(), RoleEnum.Cemetery_Talker))
+                tabData.add(CemeteryTabEnum.TALKORDER);
     }
 
     @Override

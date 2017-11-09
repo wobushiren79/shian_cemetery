@@ -17,7 +17,6 @@ import com.shian.app.shian_cemetery.appenum.RoleEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
 import com.shian.app.shian_cemetery.base.BaseFragment;
 import com.shian.app.shian_cemetery.staticdata.AppData;
-import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.view.customlayout.burialinfo.BurialInfoLayout;
 import com.shian.app.shian_cemetery.view.customlayout.mainadvertisement.MainAdvertisementLayout;
 import com.shian.app.shian_cemetery.view.customlayout.mainapp.MainAPP;
@@ -25,7 +24,6 @@ import com.shian.app.shian_cemetery.view.customlayout.maindynamic.MainDynamic;
 
 import java.util.List;
 
-import static com.shian.app.shian_cemetery.tools.CheckUtils.checkPermition;
 
 public class HomeFragment extends BaseFragment {
     View view;

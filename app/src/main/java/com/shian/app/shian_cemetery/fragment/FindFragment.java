@@ -22,6 +22,8 @@ import com.shian.app.shian_cemetery.http.phpmodel.SiftListData;
 import com.shian.app.shian_cemetery.http.phpparams.HpFindGetParams;
 import com.shian.app.shian_cemetery.http.phpresult.PHPHrGetSiftListData;
 import com.shian.app.shian_cemetery.staticdata.AppData;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,9 +107,14 @@ public class FindFragment extends BaseFragment {
     };
 
     private void getData(final boolean isClean) {
+        if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
+            ToastUtils.showShortToast(getContext(), "数据错误，请重新登陆");
+            Utils.jumpLogin(getContext());
+            return;
+        }
         HpFindGetParams params = new HpFindGetParams();
         params.setType(FindEnum.DEFAULTFIND.getCode());
-        params.setUserid(AppData.UserLoginResult.getUserId());
+        params.setUserid(AppData.systemLoginInfo.getUserId());
         params.setNumber(number);
         params.setPagerNumber(pagerNumber);
         params.setUserType(SystemTypeEnum.cemetery.getCode());

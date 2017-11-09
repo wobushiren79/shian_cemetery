@@ -5,7 +5,7 @@ def releaseTime() {
 }
 //设置发布的名称
 def getAppName() {
-    return "圆满公墓"
+    return "Cemetery"
 }
 android {
     compileSdkVersion 25

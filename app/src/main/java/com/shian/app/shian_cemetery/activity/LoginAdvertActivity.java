@@ -119,6 +119,8 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
             isForceOver = true;
             checkAndJump();
         } else if (v == ivContent) {
+            if (advertData == null)
+                return;
             if (timerIntent != null)
                 timerIntent.cancel();
             isForceOver = true;

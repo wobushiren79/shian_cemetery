@@ -1,6 +1,5 @@
 package com.shian.app.shian_cemetery.activity.car;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.staticdata.SelectDictCode;
 import com.shian.app.shian_cemetery.tools.CheckUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.EditTextViewNormal;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.MapSelectViewNormal;
 import com.shian.app.shian_cemetery.view.dataview.cemetery.SpinnerViewNormal;
@@ -55,9 +55,9 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
             mUsePerson.setData(data.getCustomerName());
             mUsePerson.setData(data.getCustomerMobile());
         }
-        if (AppData.UserLoginResult.getUserData() != null) {
-            mSubmitPerson.setData(AppData.UserLoginResult.getUserData().getName());
-            mSubmitPersonPhone.setData(AppData.UserLoginResult.getUserData().getMobile());
+        if (AppData.systemLoginInfo != null && AppData.systemLoginInfo.getUserObj() != null) {
+            mSubmitPerson.setData(AppData.systemLoginInfo.getUserObj().getName());
+            mSubmitPersonPhone.setData(AppData.systemLoginInfo.getUserObj().getPhone());
         }
     }
 
@@ -97,6 +97,10 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
      * 提交
      */
     private void submit() {
+        if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
+            Utils.jumpLogin(this);
+            ToastUtils.showShortToast(this, "数据错误请重新登陆");
+        }
         if (data == null) {
             ToastUtils.showShortToast(this, "数据错误请重新登陆");
             return;
@@ -149,7 +153,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         HpCarBuildOrder params = new HpCarBuildOrder();
         params.setBusiType(CarBusiTypeEnum.cemetery_bespeakid.getText());
         params.setBusiId(data.getBespeakId());
-        params.setProposerId(AppData.UserLoginResult.getUserId());
+        params.setProposerId(AppData.systemLoginInfo.getUserId());
         params.setProposerName(mSubmitPerson.getData());
         params.setProposerMobile(mSubmitPersonPhone.getData());
         params.setConnecterName(mUsePerson.getData());

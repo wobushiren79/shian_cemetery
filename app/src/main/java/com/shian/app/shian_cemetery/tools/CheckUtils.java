@@ -71,42 +71,6 @@ public class CheckUtils {
         return isPermition;
     }
 
-
-    /**
-     * 检测是否有相应权限的模块
-     *
-     * @param orderUser
-     * @return
-     */
-    public static boolean checkPermition(int orderUser) {
-        List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
-        boolean isPermition = false;
-        if (orderUser == OrderUserEnum.Burial.getCode()) {
-            for (String permition : listPermition) {
-                if (permition.equals(AppRolePermition.BURIERBUILD.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-                if (permition.equals(AppRolePermition.BURIERBURYING.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-            }
-        } else if (orderUser == OrderUserEnum.Cemetery.getCode()) {
-            for (String permition : listPermition) {
-//                if (permition.equals(AppRolePermition.ADVISOR.getCode())) {
-//                    isPermition = true;
-//                    return true;
-//                }
-                if (permition.equals(AppRolePermition.TALKER.getCode())) {
-                    isPermition = true;
-                    return true;
-                }
-            }
-        }
-        return isPermition;
-    }
-
     /**
      * 权限检测
      */

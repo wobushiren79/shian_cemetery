@@ -21,6 +21,8 @@ import com.shian.app.shian_cemetery.http.phpparams.HpFindSaveParams;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.BaseURL;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
+import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 
 import java.util.List;
 
@@ -140,9 +142,14 @@ public class FindAdapter extends BaseAdapter {
      * @param type （1.为点赞   2.为收藏）
      */
     private void setData(int type, int siftID) {
+        if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
+            ToastUtils.showShortToast(context, "数据错误，请重新登陆");
+            Utils.jumpLogin(context);
+            return;
+        }
         HpFindSaveParams params = new HpFindSaveParams();
         params.setType(type);
-        params.setUserid(AppData.UserLoginResult.getUserId());
+        params.setUserid(AppData.systemLoginInfo.getUserId());
         params.setSiftid(siftID);
         params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(context, params, new HttpResponseHandler<Object>() {

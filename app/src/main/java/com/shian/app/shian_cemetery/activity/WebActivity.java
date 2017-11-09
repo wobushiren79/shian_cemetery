@@ -29,6 +29,7 @@ import com.shian.app.shian_cemetery.http.phpparams.HpFindSaveParams;
 import com.shian.app.shian_cemetery.staticdata.AppData;
 import com.shian.app.shian_cemetery.staticdata.IntentName;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.shian.app.shian_cemetery.tools.Utils;
 
 import okhttp3.Request;
 
@@ -68,7 +69,7 @@ public class WebActivity extends BaseActivity {
         webSettings.setGeolocationEnabled(true);
         webSettings.setDomStorageEnabled(true);//允许DCOM
         //允许视频播放
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
         url = getIntent().getStringExtra(IntentName.INTENT_URL);
@@ -92,7 +93,6 @@ public class WebActivity extends BaseActivity {
                 super.onReceivedTitle(view, title);
                 mTVTitle.setText(title);
             }
-
 
 
             @Override
@@ -192,13 +192,18 @@ public class WebActivity extends BaseActivity {
      * @param type （1.为点赞   2.为收藏）
      */
     private void setData(int type, int siftID) {
+        if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
+            ToastUtils.showShortToast(this, "数据错误，请重新登陆");
+            Utils.jumpLogin(this);
+            return;
+        }
         mIVCollection.setImageResource(R.drawable.zhy_find_collection_2);
         mIVCollection.setClickable(false);
         ToastUtils.showShortToast(WebActivity.this, "收藏成功");
         HpFindSaveParams params = new HpFindSaveParams();
         params.setSiftid(siftID);
         params.setType(type);
-        params.setUserid(AppData.UserLoginResult.getUserId());
+        params.setUserid(AppData.systemLoginInfo.getUserId());
         params.setUserType(SystemTypeEnum.cemetery.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(WebActivity.this, params, new HttpResponseHandler<Object>() {
             @Override

@@ -157,9 +157,9 @@ public class MyFragment extends BaseFragment {
 //
 //            }
 //        });
-        if (AppData.UserLoginResult.getUserData() != null) {
-            mTVName.setText(AppData.UserLoginResult.getUserData().getName());
-            mTVPhone.setText(AppData.UserLoginResult.getUserData().getMobile());
+        if (AppData.systemLoginInfo != null && AppData.systemLoginInfo.getUserObj() != null) {
+            mTVName.setText(AppData.systemLoginInfo.getUserObj().getName());
+            mTVPhone.setText(AppData.systemLoginInfo.getUserObj().getPhone());
         }
 
 

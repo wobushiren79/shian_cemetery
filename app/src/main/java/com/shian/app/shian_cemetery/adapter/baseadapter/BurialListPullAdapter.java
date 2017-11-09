@@ -18,6 +18,7 @@ import com.shian.app.shian_cemetery.activity.burial.SetteleActivity;
 import com.shian.app.shian_cemetery.appenum.AppRolePermition;
 import com.shian.app.shian_cemetery.appenum.BurialOrderStateEnum;
 import com.shian.app.shian_cemetery.appenum.BurialStateEnum;
+import com.shian.app.shian_cemetery.appenum.RoleEnum;
 import com.shian.app.shian_cemetery.appenum.SetteleStateEnum;
 import com.shian.app.shian_cemetery.common.bean.BurialDateBean;
 import com.shian.app.shian_cemetery.common.local.Utils;
@@ -275,24 +276,26 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
             holder.ivShadow.setVisibility(View.GONE);
         }
         //权限显示判定
-        List<String> listPermition = AppData.UserLoginResult.getPermitionCodes();
-        if (CheckUtils.checkPermition(AppRolePermition.BURIERBUILD.getCode(), listPermition)) {
-            if (!(Boolean) holder.tvSettele.getTag()) {
-                holder.tvSettele.setVisibility(View.VISIBLE);
+        if(AppData.systemLoginInfo!=null&&AppData.systemLoginInfo.getResourceCodes()!=null){
+            if(RoleEnum.checkHasRole(AppData.systemLoginInfo.getResourceCodes(),RoleEnum.Cemetery_Burier_Stone)){
+                if (!(Boolean) holder.tvSettele.getTag()) {
+                    holder.tvSettele.setVisibility(View.VISIBLE);
+                } else {
+                    holder.tvSettele.setVisibility(View.GONE);
+                }
             } else {
                 holder.tvSettele.setVisibility(View.GONE);
             }
-        } else {
-            holder.tvSettele.setVisibility(View.GONE);
-        }
-        if (CheckUtils.checkPermition(AppRolePermition.BURIERBURYING.getCode(), listPermition)) {
-            if (!(Boolean) holder.tvBurial.getTag()) {
-                holder.tvBurial.setVisibility(View.VISIBLE);
-            } else {
+
+            if(RoleEnum.checkHasRole(AppData.systemLoginInfo.getResourceCodes(),RoleEnum.Cemetery_Burier_Bury)){
+                if (!(Boolean) holder.tvBurial.getTag()) {
+                    holder.tvBurial.setVisibility(View.VISIBLE);
+                } else {
+                    holder.tvBurial.setVisibility(View.GONE);
+                }
+            }else {
                 holder.tvBurial.setVisibility(View.GONE);
             }
-        } else {
-            holder.tvBurial.setVisibility(View.GONE);
         }
         //名字设置
         StringBuilder deadManNames = new StringBuilder();
@@ -325,8 +328,6 @@ public class BurialListPullAdapter extends BaseExpandableListAdapter {
         //布局2控件------------------------
         TextView tvTime;
         TextView tvNum;
-
-
     }
 
 

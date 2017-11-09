@@ -339,11 +339,16 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
      * 接单
      */
     private void acceptedOrder(CemeteryOrderModel model) {
+        if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
+            ToastUtils.showShortToast(context, "数据错误，请重新登陆");
+            Utils.jumpLogin(context);
+            return;
+        }
         HpCetemeryAcceptParams params = new HpCetemeryAcceptParams();
         params.setBespeakAssignId(model.getBespeakAssignId());
         params.setBespeakId(model.getBespeakId());
         params.setCemeteryId(model.getCemeteryId());
-        params.setUserId(AppData.UserLoginResult.getUserId());
+        params.setUserId(AppData.systemLoginInfo.getUserId());
         MHttpManagerFactory.getAccountManager().acceptCemetery(context,
                 params, new HttpResponseHandler<Object>() {
 
