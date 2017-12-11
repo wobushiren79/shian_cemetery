@@ -182,13 +182,17 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
         userLoginPresenter.saveLoginConfig();
-        mLoadingButton.setComplete();
-        jumpMain();
     }
 
     @Override
     public void loginSystemFail(String message) {
         mLoadingButton.setNormal();
         ToastUtils.showShortToast(this, message);
+    }
+
+    @Override
+    public void loginSubSystemSuccess() {
+        mLoadingButton.setComplete();
+        jumpMain();
     }
 }

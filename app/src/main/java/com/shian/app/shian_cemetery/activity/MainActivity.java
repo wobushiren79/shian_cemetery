@@ -40,7 +40,7 @@ import java.util.List;
 import okhttp3.Request;
 
 
-public class MainActivity extends BaseActivity implements ISubSystemLoginView {
+public class MainActivity extends BaseActivity  {
 
     MainChangeLayout mMainChangeLayout;
 
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements ISubSystemLoginView {
     private FragmentTransaction mTranscation;
     private LocationService locationService;
 
-    private ISubSystemLoginPresenter subSystemLoginPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +105,6 @@ public class MainActivity extends BaseActivity implements ISubSystemLoginView {
     }
 
     private void initData() {
-        subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
-        subSystemLoginPresenter.loginCemeterySystem();
 
         mFragmentManager = getSupportFragmentManager();
     }
@@ -237,10 +235,5 @@ public class MainActivity extends BaseActivity implements ISubSystemLoginView {
             }
         }
         return super.onKeyUp(keyCode, event);
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
     }
 }

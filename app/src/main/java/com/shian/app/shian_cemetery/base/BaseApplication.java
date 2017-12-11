@@ -194,7 +194,7 @@ public class BaseApplication extends Application {
             String tempUrl = getBaseUrl(url.toString());
             AppData.cookieStore.put(tempUrl, cookies);
             //新增添加子系统KEY
-            if (tempUrl.contains(BaseURL.Login_BaseUrl) && cookies.size() >= 2) {
+            if (BaseURL.Login_BaseUrl.contains(tempUrl) && cookies.size() >= 2) {
                 String setCookies = cookies.get(1).toString();
                 String[] cookiesList = setCookies.split(";");
                 for (String cookie : cookiesList) {
@@ -214,15 +214,15 @@ public class BaseApplication extends Application {
 
         private String getBaseUrl(String url) {
             String temp = "";
-            if (url.contains("https") || url.contains("http://prd")) {
-                int hostLocation = url.indexOf("/", 8);
-                temp = url.substring(0, hostLocation);
-            } else {
-                int hostLocation = url.indexOf("/", 8);
-                int urlLocation = url.indexOf("/", hostLocation + 1);
-                if (urlLocation != -1)
-                    temp = url.substring(0, urlLocation);
-            }
+//            if (url.contains("https") || url.contains("http://prd")) {
+            int hostLocation = url.indexOf("/", 8);
+            temp = url.substring(0, hostLocation);
+//            } else {
+//                int hostLocation = url.indexOf("/", 8);
+//                int urlLocation = url.indexOf("/", hostLocation + 1);
+//                if (urlLocation != -1)
+//                    temp = url.substring(0, urlLocation);
+//            }
             return temp;
         }
     }

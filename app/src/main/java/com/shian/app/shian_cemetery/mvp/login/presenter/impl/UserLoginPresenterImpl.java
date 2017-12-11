@@ -1,6 +1,8 @@
 package com.shian.app.shian_cemetery.mvp.login.presenter.impl;
 
 
+import android.content.Context;
+
 import com.shian.app.shian_cemetery.mvp.base.OnGetDataListener;
 import com.shian.app.shian_cemetery.mvp.login.bean.SystemLoginBean;
 import com.shian.app.shian_cemetery.mvp.login.bean.SystemLoginOutBean;
@@ -9,7 +11,9 @@ import com.shian.app.shian_cemetery.mvp.login.bean.SystemLoginResultBean;
 import com.shian.app.shian_cemetery.mvp.login.bean.UserLoginConfig;
 import com.shian.app.shian_cemetery.mvp.login.model.IUserLoginModel;
 import com.shian.app.shian_cemetery.mvp.login.model.impl.UserLoginModelImpl;
+import com.shian.app.shian_cemetery.mvp.login.presenter.ISubSystemLoginPresenter;
 import com.shian.app.shian_cemetery.mvp.login.presenter.IUserLoginPresenter;
+import com.shian.app.shian_cemetery.mvp.login.view.ISubSystemLoginView;
 import com.shian.app.shian_cemetery.mvp.login.view.IUserLoginOutView;
 import com.shian.app.shian_cemetery.mvp.login.view.IUserLoginView;
 import com.shian.app.shian_cemetery.staticdata.AppData;
@@ -18,15 +22,19 @@ import com.shian.app.shian_cemetery.staticdata.AppData;
  * Created by zm.
  */
 
-public class UserLoginPresenterImpl implements IUserLoginPresenter {
+public class UserLoginPresenterImpl implements IUserLoginPresenter, ISubSystemLoginView {
     IUserLoginView userLoginView;
     IUserLoginOutView userLoginOutView;
     IUserLoginModel userLoginModel;
+
+    private ISubSystemLoginPresenter subSystemLoginPresenter;
 
     public UserLoginPresenterImpl(IUserLoginView userLoginView, IUserLoginOutView userLoginOutView) {
         this.userLoginView = userLoginView;
         this.userLoginOutView = userLoginOutView;
         userLoginModel = new UserLoginModelImpl();
+
+        subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
     }
 
     @Override
@@ -39,6 +47,7 @@ public class UserLoginPresenterImpl implements IUserLoginPresenter {
             @Override
             public void getDataSuccess(SystemLoginResultBean result) {
                 AppData.systemLoginInfo = result;
+                subSystemLoginPresenter.loginCemeterySystem();
                 userLoginView.loginSystemSuccess(result);
             }
 
@@ -84,4 +93,20 @@ public class UserLoginPresenterImpl implements IUserLoginPresenter {
         userLoginView.setIsKeepAccount(loginConfig.isKeepAccount());
         userLoginView.setIsAutoLogin(loginConfig.isAutoLogin());
     }
+
+    @Override
+    public Context getContext() {
+        return userLoginView.getContext();
+    }
+
+    @Override
+    public void loginSubCemeterySuccess() {
+        this.userLoginView.loginSubSystemSuccess();
+    }
+
+    @Override
+    public void loginSubCemeteryFail() {
+        this.userLoginView.loginSubSystemSuccess();
+    }
+
 }
