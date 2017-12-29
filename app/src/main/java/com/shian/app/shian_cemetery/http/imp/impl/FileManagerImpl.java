@@ -3,6 +3,7 @@ package com.shian.app.shian_cemetery.http.imp.impl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.util.Log;
 
 
@@ -17,12 +18,15 @@ import com.shian.app.shian_cemetery.tools.ObjectMapperFactory;
 import com.shian.app.shian_cemetery.tools.PicUtils;
 import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
+import com.squareup.picasso.OkHttpDownloader;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.codehaus.jackson.JsonNode;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,10 +94,35 @@ public class FileManagerImpl implements FileManager {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         String errorMessage = e.getMessage();
-                        Log.e("tag", errorMessage+"");
+                        Log.e("tag", errorMessage + "");
                         if (responseHandler != null) {
                             responseHandler.onError(errorMessage);
                         }
+                    }
+                });
+    }
+
+    @Override
+    public void downloadFile(Context context, String downloadUrl, final FileHttpResponseHandler<File> responseHandler) {
+        OkHttpUtils
+                .get()
+                .url(downloadUrl)
+                .build()
+                .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "test") {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        responseHandler.onError(call.toString());
+                    }
+
+                    @Override
+                    public void onResponse(File response, int id) {
+                        responseHandler.onSuccess(response);
+                    }
+
+                    @Override
+                    public void inProgress(float progress, long total, int id) {
+                        Log.v("this","inProgress progress:"+progress+" total:"+total);
+                        responseHandler.onProgress(total,progress);
                     }
                 });
     }
@@ -122,7 +151,7 @@ public class FileManagerImpl implements FileManager {
                                 jn, data);
                         responseHandler.onSuccess(result);
                     }
-                } else if ("1009".equals(code)) {
+                } else if ("1009".equals(code)||"9999".equals(code)) {
                     if (context instanceof Activity) {
                         BaseApplication.getApplication().exitAPP();
                     }

@@ -22,19 +22,16 @@ import com.shian.app.shian_cemetery.staticdata.AppData;
  * Created by zm.
  */
 
-public class UserLoginPresenterImpl implements IUserLoginPresenter, ISubSystemLoginView {
+public class UserLoginPresenterImpl implements IUserLoginPresenter {
     IUserLoginView userLoginView;
     IUserLoginOutView userLoginOutView;
     IUserLoginModel userLoginModel;
-
-    private ISubSystemLoginPresenter subSystemLoginPresenter;
 
     public UserLoginPresenterImpl(IUserLoginView userLoginView, IUserLoginOutView userLoginOutView) {
         this.userLoginView = userLoginView;
         this.userLoginOutView = userLoginOutView;
         userLoginModel = new UserLoginModelImpl();
 
-        subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
     }
 
     @Override
@@ -47,7 +44,6 @@ public class UserLoginPresenterImpl implements IUserLoginPresenter, ISubSystemLo
             @Override
             public void getDataSuccess(SystemLoginResultBean result) {
                 AppData.systemLoginInfo = result;
-                subSystemLoginPresenter.loginCemeterySystem();
                 userLoginView.loginSystemSuccess(result);
             }
 
@@ -94,19 +90,6 @@ public class UserLoginPresenterImpl implements IUserLoginPresenter, ISubSystemLo
         userLoginView.setIsAutoLogin(loginConfig.isAutoLogin());
     }
 
-    @Override
-    public Context getContext() {
-        return userLoginView.getContext();
-    }
 
-    @Override
-    public void loginSubCemeterySuccess() {
-        this.userLoginView.loginSubSystemSuccess();
-    }
-
-    @Override
-    public void loginSubCemeteryFail() {
-        this.userLoginView.loginSubSystemSuccess();
-    }
 
 }

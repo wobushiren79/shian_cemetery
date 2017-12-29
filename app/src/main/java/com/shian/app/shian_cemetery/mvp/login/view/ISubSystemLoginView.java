@@ -10,7 +10,15 @@ public interface ISubSystemLoginView {
 
     Context getContext();
 
-    void loginSubCemeterySuccess();
+    void loginCemeterySuccess();
 
-    void loginSubCemeteryFail();
+    void loginCemeteryFail();
+
+    void loginGoodsSuccess();
+
+    void loginGoodsFail();
+
+    void loginOrderCenterSuccess();
+
+    void loginOrderCenterFail();
 }

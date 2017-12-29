@@ -88,8 +88,5 @@ public interface IUserLoginView {
      */
     void loginSystemFail(String message);
 
-    /**
-     * 登陆子系统成功
-     */
-    void loginSubSystemSuccess();
+
 }

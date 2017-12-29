@@ -66,9 +66,7 @@ public class MAccountManagerImpl extends BaseManagerImpl implements MAccountMana
 
     @Override
     public void loginOut(Context context, HttpResponseHandler<Object> handler) {
-        // TODO Auto-generated method stub
-        requestPost(context, "doLogout", Object.class,
-                new BaseHttpParams(), handler);
+        requestPost(context, "doLogout", Object.class, new BaseHttpParams(), handler);
     }
 
     @Override

@@ -27,12 +27,27 @@ public class SubSystemLoginPresenterImpl implements ISubSystemLoginPresenter {
         subSystemLoginModel.subSystemStoreLogin(subSystemLoginView.getContext(), AppData.System_Ki4so_Client_Ec, new OnGetDataListener() {
             @Override
             public void getDataSuccess(Object result) {
-
+                subSystemLoginView.loginGoodsSuccess();
             }
 
             @Override
             public void getDataFail(String msg) {
+                subSystemLoginView.loginGoodsFail();
+            }
+        });
+    }
 
+    @Override
+    public void loginOrderCenterSystem() {
+        subSystemLoginModel.subSystemOrderCenterLogin(subSystemLoginView.getContext(), AppData.System_Ki4so_Client_Ec, new OnGetDataListener() {
+            @Override
+            public void getDataSuccess(Object result) {
+                subSystemLoginView.loginOrderCenterSuccess();
+            }
+
+            @Override
+            public void getDataFail(String msg) {
+                subSystemLoginView.loginOrderCenterFail();
             }
         });
     }
@@ -42,12 +57,12 @@ public class SubSystemLoginPresenterImpl implements ISubSystemLoginPresenter {
         subSystemLoginModel.subSystemCemeteryLogin(subSystemLoginView.getContext(), AppData.System_Ki4so_Client_Ec, new OnGetDataListener() {
             @Override
             public void getDataSuccess(Object result) {
-                subSystemLoginView.loginSubCemeterySuccess();
+                subSystemLoginView.loginCemeterySuccess();
             }
 
             @Override
             public void getDataFail(String msg) {
-                subSystemLoginView.loginSubCemeteryFail();
+                subSystemLoginView.loginCemeteryFail();
             }
         });
     }

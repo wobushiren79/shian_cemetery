@@ -11,5 +11,7 @@ import com.shian.app.shian_cemetery.mvp.base.OnGetDataListener;
 public interface ISubSystemLoginModel {
     void subSystemStoreLogin(Context context, String loginKey, OnGetDataListener listener);
 
+    void subSystemOrderCenterLogin(Context context, String loginKey, OnGetDataListener listener);
+
     void subSystemCemeteryLogin(Context context, String loginKey, OnGetDataListener listener);
 }

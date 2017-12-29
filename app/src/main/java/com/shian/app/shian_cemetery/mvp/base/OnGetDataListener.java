@@ -18,4 +18,6 @@ public interface OnGetDataListener<T> {
      * @param msg
      */
     void getDataFail(String msg);
+
+
 }

@@ -136,7 +136,7 @@ public class SplashActivity extends BaseActivity implements IUserLoginView {
 
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
-
+        sleepActivity(0);
     }
 
     @Override
@@ -145,8 +145,4 @@ public class SplashActivity extends BaseActivity implements IUserLoginView {
         jumpActivity(1);
     }
 
-    @Override
-    public void loginSubSystemSuccess() {
-        sleepActivity(0);
-    }
 }

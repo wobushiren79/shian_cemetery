@@ -31,6 +31,7 @@ import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton;
+import com.shian.app.shian_cemetery.view.dialog.DownLoadDialog;
 
 import okhttp3.Request;
 
@@ -182,6 +183,8 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
         userLoginPresenter.saveLoginConfig();
+        mLoadingButton.setComplete();
+        jumpMain();
     }
 
     @Override
@@ -190,9 +193,4 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
         ToastUtils.showShortToast(this, message);
     }
 
-    @Override
-    public void loginSubSystemSuccess() {
-        mLoadingButton.setComplete();
-        jumpMain();
-    }
 }
