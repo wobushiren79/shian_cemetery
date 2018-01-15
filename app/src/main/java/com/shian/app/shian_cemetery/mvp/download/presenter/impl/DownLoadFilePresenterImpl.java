@@ -1,5 +1,6 @@
 package com.shian.app.shian_cemetery.mvp.download.presenter.impl;
 
+
 import com.shian.app.shian_cemetery.mvp.base.OnDownLoadDataListener;
 import com.shian.app.shian_cemetery.mvp.download.bean.DownLoadFileBean;
 import com.shian.app.shian_cemetery.mvp.download.bean.DownLoadFileResultBean;
@@ -7,6 +8,7 @@ import com.shian.app.shian_cemetery.mvp.download.model.IDownLoadFileModel;
 import com.shian.app.shian_cemetery.mvp.download.model.impl.DownLoadFileModelImpl;
 import com.shian.app.shian_cemetery.mvp.download.presenter.IDownLoadFilePresenter;
 import com.shian.app.shian_cemetery.mvp.download.view.IDownLoadFileView;
+import com.zhy.http.okhttp.request.RequestCall;
 
 /**
  * Created by zm.
@@ -18,26 +20,30 @@ public class DownLoadFilePresenterImpl implements IDownLoadFilePresenter {
 
     public DownLoadFilePresenterImpl(IDownLoadFileView downLoadFileView) {
         this.downLoadFileView = downLoadFileView;
-        downLoadFileModel=new DownLoadFileModelImpl();
+        downLoadFileModel = new DownLoadFileModelImpl();
     }
 
     @Override
-    public void startDownLoad() {
-        if(downLoadFileView.getContext()==null){
+    public RequestCall startDownLoad() {
+        if (downLoadFileView.getContext() == null) {
             downLoadFileView.showToast("没有上下文对象");
-            return;
+            return null;
         }
-        if(downLoadFileView.getDownLoadFileUrl()==null){
+        if (downLoadFileView.getDownLoadFileUrl() == null) {
             downLoadFileView.showToast("没有文件下载地址");
-            return;
+            return null;
         }
-        DownLoadFileBean params=new DownLoadFileBean();
+        if (downLoadFileView.getDownLoadFileName() == null) {
+            downLoadFileView.showToast("没有文件下载名称");
+            return null;
+        }
+        DownLoadFileBean params = new DownLoadFileBean();
         params.setDownloadUrl(downLoadFileView.getDownLoadFileUrl());
-
-        downLoadFileModel.startDownLoadFile(downLoadFileView.getContext(), params, new OnDownLoadDataListener<DownLoadFileResultBean>() {
+        params.setFileName(downLoadFileView.getDownLoadFileName());
+        RequestCall call = downLoadFileModel.startDownLoadFile(downLoadFileView.getContext(), params, new OnDownLoadDataListener<DownLoadFileResultBean>() {
             @Override
             public void downloadInProgress(long total, float progress) {
-                downLoadFileView.downloadInProgress(total,progress);
+                downLoadFileView.downloadInProgress(total, progress);
             }
 
 
@@ -52,5 +58,6 @@ public class DownLoadFilePresenterImpl implements IDownLoadFilePresenter {
                 downLoadFileView.downloadFail(msg);
             }
         });
+        return call;
     }
 }

@@ -25,7 +25,7 @@ public class PHPManagerImpl extends BaseManagerImpl implements PHPManager {
 
     private PHPManagerImpl() {
         super();
-        baseUrl = BaseURL.PHPURL;
+        baseUrl = BaseURL.PHP_BaseUrl;
     }
     
 

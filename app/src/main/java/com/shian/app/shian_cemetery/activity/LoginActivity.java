@@ -2,38 +2,27 @@ package com.shian.app.shian_cemetery.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shian.app.shian_cemetery.R;
-import com.shian.app.shian_cemetery.appenum.OrderUserEnum;
 import com.shian.app.shian_cemetery.base.BaseActivity;
-import com.shian.app.shian_cemetery.http.MHttpManagerFactory;
-import com.shian.app.shian_cemetery.http.base.HttpRequestExecutor;
-import com.shian.app.shian_cemetery.http.base.HttpResponseHandler;
-import com.shian.app.shian_cemetery.http.params.HpLoginParams;
-import com.shian.app.shian_cemetery.http.result.HrLoginResult;
 import com.shian.app.shian_cemetery.mvp.login.bean.SystemLoginResultBean;
 import com.shian.app.shian_cemetery.mvp.login.presenter.IUserLoginPresenter;
 import com.shian.app.shian_cemetery.mvp.login.presenter.impl.UserLoginPresenterImpl;
 import com.shian.app.shian_cemetery.mvp.login.view.IUserLoginView;
-import com.shian.app.shian_cemetery.staticdata.AppData;
-import com.shian.app.shian_cemetery.tools.SharePerfrenceUtils;
 import com.shian.app.shian_cemetery.tools.ToastUtils;
 import com.shian.app.shian_cemetery.tools.Utils;
 import com.shian.app.shian_cemetery.view.customlayout.loadingbutton.LoadingButton;
-import com.shian.app.shian_cemetery.view.dialog.DownLoadDialog;
 
-import okhttp3.Request;
+
+
 
 public class LoginActivity extends BaseActivity implements IUserLoginView {
     LoadingButton mLoadingButton;

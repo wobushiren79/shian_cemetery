@@ -81,7 +81,7 @@ public class FindAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final SiftListData data = listDatas.get(position);
-        ImageLoader.getInstance().displayImage(BaseURL.PHPURL + data.getImg(), holder.ivPic);
+        ImageLoader.getInstance().displayImage(BaseURL.PHP_BaseUrl + data.getImg(), holder.ivPic);
         holder.tvTitle.setText(data.getTitle());
         holder.tvTime.setText(data.getTime());
         holder.tvCollection.setText(data.getCollectionNum() + "");

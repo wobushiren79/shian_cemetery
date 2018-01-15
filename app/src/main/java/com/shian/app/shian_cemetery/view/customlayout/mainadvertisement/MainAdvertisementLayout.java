@@ -74,7 +74,7 @@ public class MainAdvertisementLayout extends LinearLayout {
                 MainAdvertisementLayout.this.result = result;
                 mBTCancel.setOnClickListener(onClickListener);
                 mIVConent.setOnClickListener(onClickListener);
-                ImageLoader.getInstance().displayImage(BaseURL.PHPURL + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
+                ImageLoader.getInstance().displayImage(BaseURL.PHP_BaseUrl + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
 

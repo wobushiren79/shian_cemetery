@@ -33,16 +33,16 @@ public static final String OrderCenter_BaseUrl = "https://order.shianlife.cn";
     public static final String Login_Cemetery_Url = Cemetery_BaseUrl + "/login_subsystem_api";
 
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
-    public static final String PHPURL = "http://app.e-funeral.cn";
+    public static final String PHP_BaseUrl = "http://app.e-funeral.cn";
 
     /**
      * 图片上传
      */
     public static final String FILE_UPDATA = Login_BaseUrl + "/file/upload";
 
-    public static final String siftsPHPURL = PHPURL + "/home/index/sifts";//精选
-    public static final String helpsPHPURL = PHPURL + "/home/index/helps";//帮助
-    public static final String dynamicsPHPURL = PHPURL + "/home/index/dynamics";//动态
-    public static final String phonePHPURL = PHPURL + "/home/index/phone";//通讯宝
+    public static final String siftsPHPURL = PHP_BaseUrl + "/home/index/sifts";//精选
+    public static final String helpsPHPURL = PHP_BaseUrl + "/home/index/helps";//帮助
+    public static final String dynamicsPHPURL = PHP_BaseUrl + "/home/index/dynamics";//动态
+    public static final String phonePHPURL = PHP_BaseUrl + "/home/index/phone";//通讯宝
     public static final String DiDichannel = "55455";//滴滴渠道号
 }

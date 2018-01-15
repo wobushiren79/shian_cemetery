@@ -81,7 +81,7 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
                 if (result.getItems() != null && result.getItems().size() > 0) {
                     rlContent.setVisibility(View.VISIBLE);
                     advertData = result.getItems().get(0);
-                    ImageLoader.getInstance().displayImage(BaseURL.PHPURL + result.getItems().get(0).getBanner(), ivContent);
+                    ImageLoader.getInstance().displayImage(BaseURL.PHP_BaseUrl + result.getItems().get(0).getBanner(), ivContent);
                     startThread();
 
                 } else {

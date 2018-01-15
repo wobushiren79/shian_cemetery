@@ -22,6 +22,7 @@ import com.squareup.picasso.OkHttpDownloader;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.RequestCall;
 
 import org.codehaus.jackson.JsonNode;
 
@@ -103,30 +104,31 @@ public class FileManagerImpl implements FileManager {
     }
 
     @Override
-    public void downloadFile(Context context, String downloadUrl, final FileHttpResponseHandler<File> responseHandler) {
-        OkHttpUtils
+    public RequestCall downloadFile(Context context, String downloadUrl, String fileName, final FileHttpResponseHandler<File> responseHandler) {
+        RequestCall call = OkHttpUtils
                 .get()
                 .url(downloadUrl)
-                .build()
-                .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "test") {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        responseHandler.onError(call.toString());
-                    }
+                .addHeader("Accept-Encoding", "identity")
+                .build();
+        call.execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), fileName) {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                responseHandler.onError(call.toString());
+            }
 
-                    @Override
-                    public void onResponse(File response, int id) {
-                        responseHandler.onSuccess(response);
-                    }
+            @Override
+            public void onResponse(File response, int id) {
+                responseHandler.onSuccess(response);
+            }
 
-                    @Override
-                    public void inProgress(float progress, long total, int id) {
-                        Log.v("this","inProgress progress:"+progress+" total:"+total);
-                        responseHandler.onProgress(total,progress);
-                    }
-                });
+            @Override
+            public void inProgress(float progress, long total, int id) {
+                responseHandler.onProgress(total, progress);
+            }
+
+        });
+        return call;
     }
-
     /**
      * 数据处理
      *
