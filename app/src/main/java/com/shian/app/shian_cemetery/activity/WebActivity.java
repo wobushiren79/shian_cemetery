@@ -193,7 +193,7 @@ public class WebActivity extends BaseActivity {
      */
     private void setData(int type, int siftID) {
         if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
-            ToastUtils.showShortToast(this, "数据错误，请重新登陆");
+            ToastUtils.showShortToast(this, "数据错误，请重新登录");
             Utils.jumpLogin(this);
             return;
         }

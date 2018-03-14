@@ -118,7 +118,7 @@ public class SharePerfrenceUtils {
         return loginS;
     }
     /**
-     * 获取账号登陆模块
+     * 获取账号登录模块
      *
      * @param content
      * @return
@@ -130,7 +130,7 @@ public class SharePerfrenceUtils {
     }
 
     /**
-     * 设置账号登陆模块
+     * 设置账号登录模块
      *
      * @param content
      * @return

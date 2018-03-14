@@ -284,7 +284,7 @@ public class Utils {
         }, isToast);
     }
     /**
-     * 跳转到登陆界面
+     * 跳转到登录界面
      * @param context
      */
     public static void jumpLogin(Context context) {

@@ -108,7 +108,7 @@ public class FindFragment extends BaseFragment {
 
     private void getData(final boolean isClean) {
         if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
-            ToastUtils.showShortToast(getContext(), "数据错误，请重新登陆");
+            ToastUtils.showShortToast(getContext(), "数据错误，请重新登录");
             Utils.jumpLogin(getContext());
             return;
         }

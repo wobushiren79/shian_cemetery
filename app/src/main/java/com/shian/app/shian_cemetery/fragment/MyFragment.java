@@ -190,7 +190,7 @@ public class MyFragment extends BaseFragment {
      */
     private void idea() {
         if (mHrUserInfo == null) {
-            ToastUtils.showShortToast(getContext(), "数据异常，请重新登陆");
+            ToastUtils.showShortToast(getContext(), "数据异常，请重新登录");
         } else {
             Intent intent = new Intent(getContext(), IdeaFeedbackActivity.class);
             intent.putExtra(IntentName.INTENT_FRAGMENT_USERINFO, new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});

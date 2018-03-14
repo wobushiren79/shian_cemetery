@@ -99,10 +99,10 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
     private void submit() {
         if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
             Utils.jumpLogin(this);
-            ToastUtils.showShortToast(this, "数据错误请重新登陆");
+            ToastUtils.showShortToast(this, "数据错误请重新登录");
         }
         if (data == null) {
-            ToastUtils.showShortToast(this, "数据错误请重新登陆");
+            ToastUtils.showShortToast(this, "数据错误请重新登录");
             return;
         }
         if (mUseTime.getData().isEmpty()) {

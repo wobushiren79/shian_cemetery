@@ -79,7 +79,7 @@ public class MyCollectionActivity extends BaseActivity {
 
     private void getData(final boolean isClean) {
         if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
-            ToastUtils.showShortToast(this, "还未登录,请重新登陆");
+            ToastUtils.showShortToast(this, "还未登录,请重新登录");
             Utils.jumpLogin(this);
             return;
         }

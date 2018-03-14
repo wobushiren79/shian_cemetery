@@ -143,7 +143,7 @@ public class FindAdapter extends BaseAdapter {
      */
     private void setData(int type, int siftID) {
         if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
-            ToastUtils.showShortToast(context, "数据错误，请重新登陆");
+            ToastUtils.showShortToast(context, "数据错误，请重新登录");
             Utils.jumpLogin(context);
             return;
         }

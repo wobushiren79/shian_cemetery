@@ -141,7 +141,7 @@ public class SplashActivity extends BaseActivity implements IUserLoginView {
 
     @Override
     public void loginSystemFail(String message) {
-        ToastUtils.showShortToast(getBaseContext(), "登陆失败");
+        ToastUtils.showShortToast(getBaseContext(), "登录失败");
         jumpActivity(1);
     }
 

@@ -16,7 +16,7 @@ public class AppData {
 //    public static HrLoginResult UserLoginResult;
     //平台用户数据
     public static SystemLoginResultBean systemLoginInfo;
-    //登陆系统KEY
+    //登录系统KEY
     public static String System_Ki4so_Client_Ec;
     //cookie保存
     public static final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();

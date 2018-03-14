@@ -105,7 +105,7 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     }
 
     /**
-     * 手机登陆
+     * 手机登录
      */
     private void jumpPhoneLoading() {
         Intent intent = new Intent(LoginActivity.this, LoginPhoneActivity.class);

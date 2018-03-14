@@ -41,7 +41,7 @@ import com.shian.app.shian_cemetery.http.result.HrUserInfo;
 
 public interface MAccountManager extends HttpManager {
     /**
-     * 公墓系统登陆
+     * 公墓系统登录
      *
      * @param context
      * @param params
@@ -51,7 +51,7 @@ public interface MAccountManager extends HttpManager {
                        HttpResponseHandler<HrLoginResult> handler);
 
     /**
-     * 退出登陆
+     * 退出登录
      *
      * @param context
      * @param handler

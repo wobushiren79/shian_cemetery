@@ -340,7 +340,7 @@ public class CemeteryTalkListPullAdatper extends BaseAdapter {
      */
     private void acceptedOrder(CemeteryOrderModel model) {
         if (AppData.systemLoginInfo == null || AppData.systemLoginInfo.getUserId() == null) {
-            ToastUtils.showShortToast(context, "数据错误，请重新登陆");
+            ToastUtils.showShortToast(context, "数据错误，请重新登录");
             Utils.jumpLogin(context);
             return;
         }
